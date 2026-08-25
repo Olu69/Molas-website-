@@ -1,0 +1,563 @@
+/* =========================================================
+   MOLAS — ADMISSIONS PAGE
+   Separate Admissions Page Styling
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.admissions-page {
+    min-height: 70vh;
+    padding: 80px 24px 100px;
+}
+
+
+/* =========================================================
+   HERO / INTRO
+========================================================= */
+
+.admissions-hero {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0 55px;
+}
+
+.admissions-hero .small-label {
+    display: inline-block;
+    margin-bottom: 14px;
+}
+
+.admissions-hero h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+}
+
+.admissions-hero p {
+    width: min(100%, 720px);
+    margin: 20px auto 0;
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.72;
+}
+
+
+/* =========================================================
+   CONTENT WRAPPER
+========================================================= */
+
+.admissions-content {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.admission-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 38px;
+}
+
+.admission-filters button {
+    appearance: none;
+    border: 1px solid rgba(17, 17, 17, 0.12);
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--text, #111);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.admission-filters button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(17, 17, 17, 0.22);
+}
+
+.admission-filters button.active {
+    background: var(--text, #111);
+    color: #fff;
+    border-color: var(--text, #111);
+}
+
+
+/* =========================================================
+   ADMISSIONS LIST
+========================================================= */
+
+.admissions-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+
+/* =========================================================
+   ADMISSION CARD
+========================================================= */
+
+.admission-list-card {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    min-height: 245px;
+
+    overflow: hidden;
+
+    background: var(--surface, #faf8f3);
+
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(17, 17, 17, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.admission-list-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(17, 17, 17, 0.1);
+
+    border-color: rgba(17, 17, 17, 0.13);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.admission-list-image {
+    position: relative;
+    min-height: 245px;
+    overflow: hidden;
+    background: var(--bg-soft, #ede8de);
+}
+
+.admission-list-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.45s ease;
+}
+
+.admission-list-card:hover
+.admission-list-image img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+========================================================= */
+
+.admission-card-placeholder {
+    width: 100%;
+    height: 100%;
+
+    min-height: 245px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg-soft, #ede8de),
+            var(--surface, #faf8f3)
+        );
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.admission-list-content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 24px 22px;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.admission-list-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+.admission-status,
+.admission-type {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.admission-status {
+    background: rgba(222, 120, 34, 0.12);
+    color: #b45e16;
+}
+
+.admission-type {
+    background: rgba(17, 17, 17, 0.06);
+    color: var(--text, #111);
+}
+
+
+/* =========================================================
+   UNIVERSITY
+========================================================= */
+
+.admission-list-university {
+    margin-bottom: 7px;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    opacity: 0.55;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.admission-list-content h2 {
+    margin: 0;
+
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+}
+
+.admission-list-content p {
+    margin: 12px 0 0;
+
+    font-size: 0.9rem;
+    line-height: 1.65;
+
+    opacity: 0.68;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.admission-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.admission-list-deadline {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #b45e16;
+}
+
+.admission-list-date {
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+
+/* =========================================================
+   VIEW ADMISSION
+========================================================= */
+
+.admission-list-link {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-top: 16px;
+
+    color: var(--text, #111);
+
+    font-size: 0.84rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        gap 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.admission-list-link:hover {
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admissions-list .news-loading {
+    grid-column: 1 / -1;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    opacity: 0.6;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.admissions-empty {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    background: var(--surface, #faf8f3);
+
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 22px;
+}
+
+.admissions-empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.admissions-empty h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admissions-empty p {
+    margin: 8px 0 0;
+    opacity: 0.6;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.admissions-error {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    background: var(--surface, #faf8f3);
+
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 22px;
+}
+
+.admissions-error-icon {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+}
+
+.admissions-error h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admissions-error p {
+    margin: 10px auto 20px;
+    max-width: 500px;
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .admissions-page {
+        padding: 65px 20px 80px;
+    }
+
+    .admissions-list {
+        grid-template-columns: 1fr;
+    }
+
+    .admission-list-card {
+        grid-template-columns: 230px minmax(0, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+    .admissions-page {
+        padding: 48px 16px 65px;
+    }
+
+    .admissions-hero {
+        padding-bottom: 38px;
+    }
+
+    .admissions-hero h1 {
+        font-size: 2rem;
+    }
+
+    .admissions-hero p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    .admission-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+
+        padding-bottom: 6px;
+
+        scrollbar-width: none;
+    }
+
+    .admission-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .admission-filters button {
+        flex: 0 0 auto;
+        padding: 9px 15px;
+        font-size: 0.8rem;
+    }
+
+    .admission-list-card {
+        display: block;
+        min-height: 0;
+
+        border-radius: 18px;
+    }
+
+    .admission-list-image {
+        height: 190px;
+        min-height: 190px;
+    }
+
+    .admission-card-placeholder {
+        min-height: 190px;
+    }
+
+    .admission-list-content {
+        padding: 20px;
+    }
+
+    .admission-list-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .admission-list-content p {
+        font-size: 0.86rem;
+    }
+
+    .admission-list-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) {
+
+    .admissions-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .admissions-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .admission-list-content {
+        padding: 18px;
+    }
+
+    .admission-list-image {
+        height: 170px;
+        min-height: 170px;
+    }
+
+    .admission-card-placeholder {
+        min-height: 170px;
+    }
+
+}

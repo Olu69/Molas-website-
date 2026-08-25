@@ -1,0 +1,414 @@
+/* =========================================================
+   MOLAS — SINGLE ADMISSION PAGE
+   admission.html
+========================================================= */
+/* Hide elements when JavaScript sets the hidden attribute */
+[hidden] {
+    display: none !important;
+}
+
+.admission-detail-page {
+    width: min(100% - 32px, 1000px);
+    margin: 0 auto;
+    padding: 70px 0 90px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admission-loading {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.admission-loading-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.admission-loading p {
+    margin: 0;
+    color: #666;
+}
+
+
+/* =========================================================
+   ARTICLE
+========================================================= */
+
+.admission-article {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   FEATURE IMAGE
+========================================================= */
+
+.admission-detail-image {
+    width: 100%;
+    height: 430px;
+    background: #eee9df;
+    overflow: hidden;
+}
+
+.admission-detail-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.admission-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+}
+
+
+/* =========================================================
+   ARTICLE HEADER
+========================================================= */
+
+.admission-article-header {
+    padding: 42px 52px 20px;
+}
+
+.admission-detail-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.admission-status,
+.admission-type {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.admission-status {
+    background: #fff1df;
+    color: #c66a16;
+}
+
+.admission-type {
+    background: #f1eee8;
+    color: #555;
+}
+
+.admission-university {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #b76719;
+}
+
+.admission-article-header h1 {
+    margin: 0;
+    max-width: 850px;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: #111;
+}
+
+.admission-published {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* =========================================================
+   DEADLINE
+========================================================= */
+
+.admission-deadline {
+    margin: 12px 52px 30px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-left: 4px solid #d9781d;
+    border-radius: 10px;
+    background: #fff7ed;
+}
+
+.admission-deadline strong {
+    font-size: 14px;
+    color: #9c5517;
+}
+
+.admission-deadline span {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+}
+
+
+/* =========================================================
+   EXCERPT
+========================================================= */
+
+.admission-excerpt {
+    margin: 0 52px 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e8e4dc;
+    font-size: 19px;
+    line-height: 1.7;
+    color: #555;
+}
+
+
+/* =========================================================
+   FULL CONTENT
+========================================================= */
+
+.admission-content {
+    padding: 0 52px 35px;
+}
+
+.admission-content p {
+    margin: 0 0 22px;
+    font-size: 17px;
+    line-height: 1.85;
+    color: #292929;
+}
+
+.admission-content p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   SOURCE
+========================================================= */
+
+.admission-source {
+    margin: 0 52px;
+    padding: 22px 0;
+    border-top: 1px solid #e8e4dc;
+    font-size: 14px;
+    color: #777;
+}
+
+.admission-source a {
+    color: #b76719;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admission-source a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.admission-back-wrapper {
+    padding: 25px 52px 40px;
+}
+
+.admission-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admission-back:hover {
+    color: #b76719;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.admission-error {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.admission-error-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.admission-error h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.admission-error p {
+    margin: 0 0 25px;
+    max-width: 500px;
+    color: #666;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .admission-detail-page {
+        width: min(100% - 24px, 1000px);
+        padding: 45px 0 60px;
+    }
+
+    .admission-article {
+        border-radius: 18px;
+    }
+
+    .admission-detail-image {
+        height: 300px;
+    }
+
+    .admission-article-header {
+        padding: 32px 28px 18px;
+    }
+
+    .admission-article-header h1 {
+        font-size: 36px;
+    }
+
+    .admission-deadline {
+        margin-left: 28px;
+        margin-right: 28px;
+    }
+
+    .admission-excerpt {
+        margin-left: 28px;
+        margin-right: 28px;
+        font-size: 17px;
+    }
+
+    .admission-content {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+
+    .admission-source {
+        margin-left: 28px;
+        margin-right: 28px;
+    }
+
+    .admission-back-wrapper {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .admission-detail-page {
+        width: min(100% - 16px, 1000px);
+        padding: 28px 0 45px;
+    }
+
+    .admission-article {
+        border-radius: 14px;
+    }
+
+    .admission-detail-image {
+        height: 220px;
+    }
+
+    .admission-article-header {
+        padding: 25px 20px 15px;
+    }
+
+    .admission-detail-meta {
+        gap: 7px;
+    }
+
+    .admission-status,
+    .admission-type {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    .admission-university {
+        font-size: 13px;
+    }
+
+    .admission-article-header h1 {
+        font-size: 29px;
+        line-height: 1.12;
+    }
+
+    .admission-published {
+        font-size: 13px;
+    }
+
+    .admission-deadline {
+        margin: 10px 20px 25px;
+        padding: 15px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .admission-excerpt {
+        margin: 0 20px 25px;
+        padding-bottom: 25px;
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .admission-content {
+        padding: 0 20px 25px;
+    }
+
+    .admission-content p {
+        font-size: 16px;
+        line-height: 1.75;
+    }
+
+    .admission-source {
+        margin: 0 20px;
+        line-height: 1.6;
+    }
+
+    .admission-back-wrapper {
+        padding: 20px 20px 30px;
+    }
+
+}

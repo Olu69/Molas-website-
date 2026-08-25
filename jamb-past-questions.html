@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        JAMB Past Questions Archive — MOLAS
+    </title>
+
+    <meta
+        name="description"
+        content="Practise JAMB past questions by subject and year with MOLAS Educational Consults."
+    >
+
+    <link
+        rel="stylesheet"
+        href="jamb-past-questions.css"
+    >
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="past-header">
+
+    <div class="past-header-inner">
+
+        <a
+            href="jamb.html"
+            class="past-brand"
+        >
+
+            <span class="past-brand-main">
+                MOLAS
+            </span>
+
+            <span class="past-brand-sub">
+                JAMB PREPARATION HUB
+            </span>
+
+        </a>
+
+
+        <a
+            href="jamb-resources.html"
+            class="past-back"
+        >
+            ← Back to JAMB Hub
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="past-main">
+
+
+<!-- =====================================================
+     INTRO
+====================================================== -->
+
+<section class="past-intro">
+
+    <span class="past-eyebrow">
+        JAMB PRACTICE
+    </span>
+
+    <h1>
+        Past Questions
+        <span>Archive.</span>
+    </h1>
+
+    <p>
+        Practise JAMB questions by subject and year,
+        test your understanding and see your result
+        when you're done.
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     SELECTION PANEL
+====================================================== -->
+
+<section
+    class="past-selection"
+    id="selection-panel"
+>
+
+    <div class="selection-heading">
+
+        <span>
+            STEP 01
+        </span>
+
+        <h2>
+            Choose your practice set.
+        </h2>
+
+        <p>
+            Select a subject and examination year
+            to begin.
+        </p>
+
+    </div>
+
+
+    <div class="selection-fields">
+
+
+        <!-- SUBJECT -->
+
+        <div class="selection-field">
+
+            <label for="subject-select">
+                Subject
+            </label>
+
+            <select id="subject-select">
+
+                <option value="">
+                    Select subject
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- YEAR -->
+
+        <div class="selection-field">
+
+            <label for="year-select">
+                Year
+            </label>
+
+            <select id="year-select">
+
+                <option value="">
+                    Select year
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        id="start-button"
+        class="past-start-button"
+        disabled
+    >
+        Start Practice →
+    </button>
+
+
+    <p
+        id="selection-message"
+        class="selection-message"
+    ></p>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUESTION AREA
+====================================================== -->
+
+<section
+    class="question-section hidden"
+    id="question-section"
+>
+
+
+    <div class="question-top">
+
+
+        <div>
+
+            <span
+                class="question-subject"
+                id="question-subject"
+            >
+                Physics
+            </span>
+
+            <h2>
+                Past Questions
+            </h2>
+
+        </div>
+
+
+        <div class="question-progress">
+
+            <span>
+                QUESTION
+            </span>
+
+            <strong id="question-number">
+                1 / 1
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PROGRESS BAR -->
+
+    <div class="question-progress-bar">
+
+        <div
+            id="progress-fill"
+            class="question-progress-fill"
+        ></div>
+
+    </div>
+
+
+
+    <!-- QUESTION CARD -->
+
+    <div class="question-card">
+
+
+        <div
+            class="question-text"
+            id="question-text"
+        >
+            Loading question...
+        </div>
+
+
+        <div
+            class="options-container"
+            id="options-container"
+        >
+
+        </div>
+
+
+        <div
+            class="answer-feedback"
+            id="answer-feedback"
+        ></div>
+
+
+    </div>
+
+
+
+    <!-- QUESTION CONTROLS -->
+
+    <div class="question-controls">
+
+
+        <button
+            type="button"
+            id="previous-button"
+            class="question-button secondary"
+        >
+            ← Previous
+        </button>
+
+
+        <button
+            type="button"
+            id="next-button"
+            class="question-button"
+        >
+            Next →
+        </button>
+
+
+        <button
+            type="button"
+            id="submit-button"
+            class="question-button submit hidden"
+        >
+            Submit Test
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESULT AREA
+====================================================== -->
+
+<section
+    class="result-section hidden"
+    id="result-section"
+>
+
+
+    <div class="result-card">
+
+
+        <span class="result-eyebrow">
+            TEST COMPLETE
+        </span>
+
+
+        <h2>
+            Your Result
+        </h2>
+
+
+        <p class="result-message">
+            Well done. Here's how you performed.
+        </p>
+
+
+
+        <div class="result-score">
+
+            <strong id="result-score">
+                0 / 0
+            </strong>
+
+            <span>
+                SCORE
+            </span>
+
+        </div>
+
+
+
+        <div class="result-details">
+
+
+            <div class="result-detail">
+
+                <span>
+                    Percentage
+                </span>
+
+                <strong id="result-percentage">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="result-detail">
+
+                <span>
+                    Grade
+                </span>
+
+                <strong id="result-grade">
+                    —
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="result-actions">
+
+            <button
+                type="button"
+                id="review-button"
+                class="result-button"
+            >
+                Review Answers
+            </button>
+
+
+            <button
+                type="button"
+                id="restart-button"
+                class="result-button secondary"
+            >
+                Try Another Set
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REVIEW AREA
+====================================================== -->
+
+<section
+    class="review-section hidden"
+    id="review-section"
+>
+
+    <div class="review-heading">
+
+        <span>
+            ANSWER REVIEW
+        </span>
+
+        <h2>
+            Review your answers.
+        </h2>
+
+    </div>
+
+
+    <div
+        id="review-container"
+        class="review-container"
+    >
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LOADING
+====================================================== -->
+
+<div
+    id="loading-message"
+    class="page-message hidden"
+>
+
+    Loading...
+
+</div>
+
+
+
+<!-- =====================================================
+     ERROR
+====================================================== -->
+
+<div
+    id="error-message"
+    class="page-message error hidden"
+>
+
+    Something went wrong. Please try again.
+
+</div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="past-footer">
+
+    <div class="past-footer-inner">
+
+        <div>
+
+            <strong>
+                MOLAS
+            </strong>
+
+            <p>
+                Educational Consults &amp;
+                Global Limited
+            </p>
+
+        </div>
+
+
+        <a href="jamb.html">
+            ← Back to JAMB Hub
+        </a>
+
+    </div>
+
+
+    <div class="past-footer-bottom">
+
+        © 2026 MOLAS Educational Consults &
+        Global Limited. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     SUPABASE
+====================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+<!-- =====================================================
+     PAGE JAVASCRIPT
+====================================================== -->
+
+<script src="jamb-past-questions.js"></script>
+
+
+</body>
+
+</html>

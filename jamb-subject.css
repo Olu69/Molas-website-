@@ -1,0 +1,1467 @@
+/* =========================================================
+   MOLAS — JAMB SUBJECT SYLLABUS
+   Full Subject Page CSS
+   Same MOLAS + JAMB identity as jamb-syllabus.css
+========================================================= */
+
+:root {
+    --molas-bg: #f3efe7;
+    --molas-bg-soft: #ebe5d9;
+    --molas-surface: #faf8f3;
+    --molas-text: #171717;
+    --molas-muted: #756f67;
+    --molas-brown: #5a4638;
+    --molas-green: #596b50;
+    --molas-border: #e3ddd1;
+
+    --jamb-green: #1d8f52;
+    --jamb-green-dark: #126b3c;
+    --jamb-green-soft: #e3f1e8;
+
+    --container: 1180px;
+
+    --radius-large: 26px;
+    --radius-medium: 18px;
+
+    --shadow-card:
+        0 4px 18px rgba(44, 38, 30, 0.055);
+
+    --shadow-soft:
+        0 10px 35px rgba(44, 38, 30, 0.08);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--molas-bg);
+    color: var(--molas-text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Inter,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.subject-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(250, 248, 243, 0.94);
+    border-bottom: 1px solid var(--molas-border);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.subject-header-inner {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    min-height: 72px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.subject-brand {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.subject-brand-main {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+}
+
+.subject-brand-sub {
+    margin-top: 5px;
+
+    color: var(--molas-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.subject-back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid var(--molas-border);
+    border-radius: 999px;
+
+    background: var(--molas-surface);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.subject-back-link:hover {
+    transform: translateY(-1px);
+    border-color: #cfc7b9;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.subject-hero {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 0 auto;
+
+    padding: 58px 0 38px;
+}
+
+.subject-hero-inner {
+    position: relative;
+
+    padding: 40px;
+
+    border: 1px solid var(--molas-border);
+    border-radius: var(--radius-large);
+
+    background: var(--molas-surface);
+
+    box-shadow: var(--shadow-card);
+
+    overflow: hidden;
+}
+
+.subject-hero-inner::after {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    right: -65px;
+    top: -75px;
+
+    border-radius: 50%;
+
+    background: var(--jamb-green-soft);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO BADGE
+========================================================= */
+
+.subject-badge {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: var(--jamb-green-soft);
+    color: var(--jamb-green-dark);
+
+    font-size: 10px;
+    font-weight: 850;
+
+    letter-spacing: 0.1em;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.subject-hero h1 {
+    position: relative;
+    z-index: 1;
+
+    max-width: 800px;
+
+    margin-top: 17px;
+
+    font-size: clamp(
+        44px,
+        5vw,
+        68px
+    );
+
+    line-height: 0.98;
+
+    letter-spacing: -0.065em;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.subject-description {
+    position: relative;
+    z-index: 1;
+
+    max-width: 680px;
+
+    margin-top: 20px;
+
+    color: var(--molas-muted);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   QUICK INFO
+========================================================= */
+
+.subject-quick-info {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    max-width: 760px;
+}
+
+.subject-info-item {
+    padding: 15px 17px;
+
+    border: 1px solid var(--molas-border);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.subject-info-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--jamb-green-dark);
+
+    font-size: 9px;
+    font-weight: 850;
+
+    letter-spacing: 0.12em;
+}
+
+.subject-info-item strong {
+    font-size: 13px;
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   MAIN SYLLABUS SECTION
+========================================================= */
+
+.subject-syllabus-section {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 15px auto 0;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.subject-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 24px;
+}
+
+.section-eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--jamb-green-dark);
+
+    font-size: 10px;
+    font-weight: 850;
+
+    letter-spacing: 0.14em;
+}
+
+.subject-section-heading h2 {
+    font-size: clamp(
+        30px,
+        3.5vw,
+        42px
+    );
+
+    line-height: 1;
+
+    letter-spacing: -0.055em;
+}
+
+.subject-section-heading > p {
+    max-width: 360px;
+
+    color: var(--molas-muted);
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   SYLLABUS CONTENT
+========================================================= */
+
+.syllabus-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   SYLLABUS SECTION CARD
+========================================================= */
+
+.syllabus-section {
+    border: 1px solid var(--molas-border);
+
+    border-radius: var(--radius-large);
+
+    background: var(--molas-surface);
+
+    box-shadow: var(--shadow-card);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.syllabus-section-header {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 23px 24px;
+
+    border-bottom: 1px solid var(--molas-border);
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf8f3 0%,
+            #f5f1e8 100%
+        );
+}
+
+.syllabus-section-number {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: var(--jamb-green-soft);
+
+    color: var(--jamb-green-dark);
+
+    font-size: 13px;
+    font-weight: 850;
+}
+
+.syllabus-section-header h2 {
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.035em;
+}
+
+
+/* =========================================================
+   TOPICS
+========================================================= */
+
+.syllabus-topics {
+    padding: 12px;
+}
+
+
+/* =========================================================
+   TOPIC CARD
+========================================================= */
+
+.syllabus-topic {
+    border: 1px solid transparent;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.syllabus-topic + .syllabus-topic {
+    margin-top: 7px;
+}
+
+.syllabus-topic.is-open {
+    border-color: var(--molas-border);
+
+    background: #fffdfa;
+}
+
+
+/* =========================================================
+   TOPIC HEADER
+========================================================= */
+
+.syllabus-topic-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        background 0.2s ease;
+}
+
+.syllabus-topic-header:hover {
+    background: rgba(227, 241, 232, 0.35);
+}
+
+.syllabus-topic-number {
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    background: var(--molas-bg-soft);
+
+    color: var(--molas-muted);
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.syllabus-topic-title {
+    min-width: 0;
+}
+
+.syllabus-topic-title > span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--jamb-green);
+
+    font-size: 8px;
+    font-weight: 850;
+
+    letter-spacing: 0.12em;
+}
+
+.syllabus-topic-title h3 {
+    font-size: 17px;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.025em;
+}
+
+
+/* =========================================================
+   TOPIC BODY
+========================================================= */
+
+./* =========================================================
+   TOPIC BODY
+========================================================= */
+
+.syllabus-topic-body {
+    display: none;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    padding:
+        0
+        12px
+        14px
+        55px;
+}
+
+.syllabus-topic.is-open .syllabus-topic-body {
+    display: grid;
+}
+
+
+
+/* =========================================================
+   TOPIC COLUMN
+========================================================= */
+
+.syllabus-topic-column {
+    padding: 16px;
+
+    border: 1px solid var(--molas-border);
+
+    border-radius: 14px;
+
+    background: var(--molas-surface);
+}
+
+.syllabus-column-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--jamb-green-dark);
+
+    font-size: 9px;
+    font-weight: 850;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.syllabus-topic-column ul {
+    padding-left: 17px;
+}
+
+.syllabus-topic-column li {
+    margin-bottom: 7px;
+
+    color: var(--molas-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.syllabus-topic-column li:last-child {
+    margin-bottom: 0;
+}
+
+.syllabus-topic-column li::marker {
+    color: var(--jamb-green);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.syllabus-loading {
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 1px solid var(--molas-border);
+
+    border-radius: var(--radius-medium);
+
+    background: var(--molas-surface);
+
+    box-shadow: var(--shadow-card);
+}
+
+.syllabus-loading p {
+    color: var(--molas-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+
+    border: 3px solid var(--jamb-green-soft);
+
+    border-top-color: var(--jamb-green);
+
+    border-radius: 50%;
+
+    animation:
+        syllabus-spin 0.8s linear infinite;
+}
+
+@keyframes syllabus-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   ERROR / EMPTY
+========================================================= */
+
+.syllabus-no-results {
+    padding: 32px 25px;
+
+    border: 1px solid var(--molas-border);
+
+    border-radius: var(--radius-medium);
+
+    background: var(--molas-surface);
+
+    text-align: center;
+
+    box-shadow: var(--shadow-card);
+}
+
+.syllabus-no-results strong {
+    display: block;
+
+    font-size: 17px;
+}
+
+.syllabus-no-results p {
+    margin-top: 6px;
+
+    color: var(--molas-muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   STUDY SMART
+========================================================= */
+
+.subject-study-note {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 65px auto 0;
+
+    padding: 25px 28px;
+
+    border: 1px solid var(--molas-border);
+
+    border-radius: var(--radius-medium);
+
+    background: var(--molas-bg-soft);
+
+    box-shadow: none;
+}
+
+.subject-study-note-inner {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 17px;
+}
+
+.study-note-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: var(--jamb-green);
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.study-note-content {
+    min-width: 0;
+}
+
+.study-note-content h2 {
+    font-size: 25px;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.045em;
+}
+
+.study-note-content p {
+    max-width: 720px;
+
+    margin-top: 7px;
+
+    color: var(--molas-muted);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   STUDY ACTIONS
+========================================================= */
+
+.study-note-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 16px;
+}
+
+.study-note-button,
+.study-note-secondary {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.study-note-button {
+    background: var(--jamb-green);
+
+    color: white;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.study-note-button:hover {
+    transform: translateY(-1px);
+
+    background: var(--jamb-green-dark);
+}
+
+.study-note-secondary {
+    border: 1px solid var(--molas-border);
+
+    background: var(--molas-surface);
+
+    color: var(--molas-text);
+}
+
+
+/* =========================================================
+   SUBJECT NAVIGATION
+========================================================= */
+
+.subject-navigation {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 55px auto 0;
+
+    padding: 35px;
+
+    border: 1px solid var(--molas-border);
+
+    border-radius: var(--radius-large);
+
+    background: var(--molas-surface);
+}
+
+.subject-navigation-inner {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.subject-navigation h2 {
+    font-size: 28px;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.045em;
+}
+
+.subject-navigation p {
+    margin-top: 7px;
+
+    color: var(--molas-muted);
+
+    font-size: 12px;
+}
+
+.subject-navigation-button {
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding: 0 17px;
+
+    border-radius: 999px;
+
+    background: var(--jamb-green);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.subject-navigation-button:hover {
+    transform: translateY(-1px);
+
+    background: var(--jamb-green-dark);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.subject-footer {
+    margin-top: 75px;
+
+    padding-top: 50px;
+
+    background: var(--molas-bg-soft);
+
+    border-top: 1px solid var(--molas-border);
+}
+
+.subject-footer-inner {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.6fr 0.8fr 0.8fr 0.8fr;
+
+    gap: 45px;
+
+    padding-bottom: 40px;
+}
+
+.subject-footer-brand p {
+    margin-top: 17px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.subject-footer-brand > span:last-child {
+    display: block;
+
+    max-width: 270px;
+
+    margin-top: 8px;
+
+    color: var(--molas-muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.subject-footer-column {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.subject-footer-column h3 {
+    margin-bottom: 4px;
+
+    font-size: 9px;
+    font-weight: 850;
+
+    letter-spacing: 0.12em;
+}
+
+.subject-footer-column a {
+    width: fit-content;
+
+    color: var(--molas-muted);
+
+    font-size: 11px;
+
+    transition:
+        color 0.2s ease;
+}
+
+.subject-footer-column a:hover {
+    color: var(--molas-text);
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.subject-footer-bottom {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin: 0 auto;
+
+    padding: 18px 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top: 1px solid var(--molas-border);
+}
+
+.subject-footer-bottom p,
+.subject-footer-bottom a {
+    color: var(--molas-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .subject-header-inner,
+    .subject-hero,
+    .subject-syllabus-section,
+    .subject-study-note,
+    .subject-navigation,
+    .subject-footer-inner,
+    .subject-footer-bottom {
+        width:
+            min(
+                calc(100% - 36px),
+                var(--container)
+            );
+    }
+
+
+    .subject-quick-info {
+        max-width: none;
+    }
+
+
+    .syllabus-topic-body {
+        grid-template-columns: 1fr;
+    }
+
+
+    .subject-footer-inner {
+        grid-template-columns:
+            1.5fr 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* HEADER */
+
+    .subject-header-inner {
+        width: calc(100% - 28px);
+
+        min-height: 65px;
+    }
+
+    .subject-brand-main {
+        font-size: 20px;
+    }
+
+    .subject-brand-sub {
+        font-size: 7px;
+    }
+
+    .subject-back-link {
+        padding: 9px 12px;
+
+        font-size: 10px;
+    }
+
+
+    /* HERO */
+
+    .subject-hero {
+        width: calc(100% - 28px);
+
+        padding: 34px 0 24px;
+    }
+
+    .subject-hero-inner {
+        padding: 27px 20px;
+
+        border-radius: 21px;
+    }
+
+    .subject-badge {
+        font-size: 9px;
+
+        padding: 7px 10px;
+    }
+
+    .subject-hero h1 {
+        font-size: 42px;
+
+        margin-top: 17px;
+    }
+
+    .subject-description {
+        font-size: 14px;
+
+        line-height: 1.65;
+    }
+
+
+    /* QUICK INFO */
+
+    .subject-quick-info {
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+
+        margin-top: 22px;
+    }
+
+    .subject-info-item {
+        padding: 12px 14px;
+
+        border-radius: 13px;
+    }
+
+
+    /* MAIN */
+
+    .subject-syllabus-section {
+        width: calc(100% - 28px);
+
+        margin-top: 10px;
+    }
+
+
+    .subject-section-heading {
+        display: block;
+
+        margin-bottom: 18px;
+    }
+
+    .section-eyebrow {
+        font-size: 9px;
+
+        margin-bottom: 8px;
+    }
+
+    .subject-section-heading h2 {
+        font-size: 32px;
+    }
+
+    .subject-section-heading > p {
+        margin-top: 9px;
+
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    /* SYLLABUS */
+
+    .syllabus-content {
+        gap: 10px;
+    }
+
+    .syllabus-section {
+        border-radius: 19px;
+    }
+
+    .syllabus-section-header {
+        padding: 18px 16px;
+
+        gap: 12px;
+    }
+
+    .syllabus-section-number {
+        width: 38px;
+        height: 38px;
+
+        border-radius: 11px;
+
+        font-size: 11px;
+    }
+
+    .syllabus-section-header h2 {
+        font-size: 18px;
+    }
+
+
+    /* TOPICS */
+
+    .syllabus-topics {
+        padding: 8px;
+    }
+
+    .syllabus-topic {
+        border-radius: 14px;
+    }
+
+    .syllabus-topic-header {
+        padding: 14px;
+
+        gap: 11px;
+    }
+
+    .syllabus-topic-number {
+        width: 32px;
+        height: 32px;
+
+        border-radius: 9px;
+
+        font-size: 9px;
+    }
+
+    .syllabus-topic-title > span {
+        font-size: 7px;
+    }
+
+    .syllabus-topic-title h3 {
+        font-size: 15px;
+    }
+
+
+    /* TOPIC BODY */
+
+    .syllabus-topic-body {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        padding:
+            0
+            12px
+            14px
+            55px;
+    }
+
+    .syllabus-topic-column {
+        padding: 13px;
+
+        border-radius: 12px;
+    }
+
+    .syllabus-column-label {
+        font-size: 8px;
+
+        margin-bottom: 8px;
+    }
+
+    .syllabus-topic-column ul {
+        padding-left: 15px;
+    }
+
+    .syllabus-topic-column li {
+        font-size: 11px;
+
+        line-height: 1.55;
+
+        margin-bottom: 6px;
+    }
+
+
+    /* STUDY NOTE */
+
+    .subject-study-note {
+        width: calc(100% - 28px);
+
+        margin-top: 50px;
+
+        padding: 19px;
+
+        border-radius: 18px;
+    }
+
+    .subject-study-note-inner {
+        gap: 12px;
+    }
+
+    .study-note-icon {
+        width: 35px;
+        height: 35px;
+
+        border-radius: 10px;
+
+        font-size: 13px;
+    }
+
+    .study-note-content h2 {
+        font-size: 23px;
+    }
+
+    .study-note-content p {
+        font-size: 11px;
+
+        line-height: 1.6;
+    }
+
+
+    /* STUDY BUTTONS */
+
+    .study-note-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 7px;
+    }
+
+    .study-note-button,
+    .study-note-secondary {
+        width: 100%;
+    }
+
+
+    /* NAVIGATION */
+
+    .subject-navigation {
+        width: calc(100% - 28px);
+
+        margin-top: 40px;
+
+        padding: 23px 19px;
+
+        border-radius: 19px;
+    }
+
+    .subject-navigation-inner {
+        display: block;
+    }
+
+    .subject-navigation h2 {
+        font-size: 24px;
+    }
+
+    .subject-navigation p {
+        font-size: 11px;
+    }
+
+    .subject-navigation-button {
+        width: 100%;
+
+        margin-top: 17px;
+    }
+
+
+    /* FOOTER */
+
+    .subject-footer {
+        margin-top: 55px;
+    }
+
+    .subject-footer-inner {
+        width: calc(100% - 28px);
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 30px 22px;
+    }
+
+    .subject-footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .subject-footer-column {
+        gap: 9px;
+    }
+
+    .subject-footer-column h3 {
+        font-size: 9px;
+    }
+
+    .subject-footer-column a {
+        font-size: 10px;
+    }
+
+    .subject-footer-bottom {
+        width: calc(100% - 28px);
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 16px 0;
+    }
+
+    .subject-footer-bottom p,
+    .subject-footer-bottom a {
+        font-size: 9px;
+    }
+
+}
