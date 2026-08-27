@@ -16,12 +16,15 @@
         name="description"
         content="Read the latest Nigerian education news and admission updates from MOLAS Education."
     >
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="article.css">
 
 </head>
 
+
 <body>
+
 
     <!-- =====================================================
          HEADER
@@ -156,7 +159,10 @@
                 </a>
 
 
-                <a href="#" class="services-link">
+                <a
+                    href="#"
+                    class="services-link"
+                >
                     MOLAS Services
                 </a>
 
@@ -176,6 +182,7 @@
     </header>
 
 
+
     <!-- =====================================================
          ARTICLE
     ====================================================== -->
@@ -189,6 +196,7 @@
             </div>
 
         </div>
+
 
 
         <!-- =================================================
@@ -224,6 +232,7 @@
     </main>
 
 
+
     <!-- =====================================================
          BACK TO TOP
     ====================================================== -->
@@ -237,6 +246,7 @@
     </button>
 
 
+
     <!-- =====================================================
          FOOTER
     ====================================================== -->
@@ -245,8 +255,6 @@
 
         <div class="footer-inner">
 
-
-            <!-- FOOTER BRAND -->
 
             <div class="footer-brand">
 
@@ -266,7 +274,6 @@
             </div>
 
 
-            <!-- EXPLORE -->
 
             <div class="footer-column">
 
@@ -297,7 +304,6 @@
             </div>
 
 
-            <!-- SERVICES -->
 
             <div class="footer-column">
 
@@ -328,7 +334,6 @@
             </div>
 
 
-            <!-- CONTACT -->
 
             <div class="footer-column">
 
@@ -353,6 +358,7 @@
         </div>
 
 
+
         <div class="footer-bottom">
 
             <p>
@@ -365,8 +371,9 @@
     </footer>
 
 
+
     <!-- =====================================================
-         ARTICLE DATA / SUPABASE
+         SUPABASE / ARTICLE JAVASCRIPT
     ====================================================== -->
 
     <script type="module">
@@ -376,6 +383,10 @@
         } from
         "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
+
+        /* =====================================================
+           SUPABASE
+        ====================================================== */
 
         const SUPABASE_URL =
             "https://eidnzebqyxcpxbykybch.supabase.co";
@@ -390,6 +401,7 @@
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
+
 
 
         /* =====================================================
@@ -424,8 +436,15 @@
             );
 
 
+
         /* =====================================================
            ESCAPE HTML
+           
+           Used only for normal database fields such as:
+           title, category, source, etc.
+           
+           NOT used for article CONTENT because article
+           content is already stored as HTML.
         ====================================================== */
 
         function escapeHTML(value) {
@@ -447,6 +466,7 @@
         }
 
 
+
         /* =====================================================
            DATE
         ====================================================== */
@@ -457,6 +477,7 @@
                 return "";
             }
 
+
             const date =
                 new Date(value);
 
@@ -466,7 +487,9 @@
                     date.getTime()
                 )
             ) {
+
                 return value;
+
             }
 
 
@@ -482,46 +505,60 @@
         }
 
 
+
         /* =====================================================
-           CONTENT
+           ARTICLE CONTENT
+           
+           IMPORTANT:
+           
+           Supabase already contains HTML such as:
+           
+           <h2>...</h2>
+           <p>...</p>
+           <strong>...</strong>
+           
+           Therefore we DO NOT escape or convert the content.
         ====================================================== */
 
-        function formatContent(rawContent) {
+        function getArticleContent(
+            content,
+            excerpt
+        ) {
 
-            if (!rawContent) {
-                return "";
+            if (
+                content &&
+                String(content).trim()
+            ) {
+
+                return String(content).trim();
+
             }
 
 
-            const escaped =
-                escapeHTML(rawContent);
+            if (
+                excerpt &&
+                String(excerpt).trim()
+            ) {
+
+                return `
+                    <p>
+                        ${escapeHTML(
+                            String(excerpt).trim()
+                        )}
+                    </p>
+                `;
+
+            }
 
 
-            return escaped
-
-                .split(/\n\s*\n/)
-
-                .map(paragraph => {
-
-                    if (!paragraph.trim()) {
-                        return "";
-                    }
-
-
-                    return `
-                        <p>
-                            ${paragraph.replace(
-                                /\n/g,
-                                "<br>"
-                            )}
-                        </p>
-                    `;
-
-                })
-
-                .join("");
+            return `
+                <p>
+                    No article content is available yet.
+                </p>
+            `;
 
         }
+
 
 
         /* =====================================================
@@ -576,12 +613,16 @@
 
 
                 if (!articles.length) {
+
                     return;
+
                 }
 
 
                 relatedGrid.innerHTML =
-                    articles.map(article => {
+                    articles
+                    .map(article => {
+
 
                         const image =
                             article.image_url
@@ -630,6 +671,7 @@
                                         )}
                                     </h3>
 
+
                                     <span
                                         class="related-date"
                                     >
@@ -645,7 +687,8 @@
 
                         `;
 
-                    }).join("");
+                    })
+                    .join("");
 
 
                 relatedSection.style.display =
@@ -664,11 +707,17 @@
         }
 
 
+
         /* =====================================================
            LOAD ARTICLE
         ====================================================== */
 
         async function loadArticle() {
+
+
+            /* =================================================
+               NO ARTICLE ID
+            ================================================== */
 
             if (!articleId) {
 
@@ -684,15 +733,29 @@
                             No article was selected.
                         </p>
 
+                        <a
+                            href="index.html"
+                            class="back-news"
+                        >
+                            ← Return to News
+                        </a>
+
                     </div>
 
                 `;
 
                 return;
+
             }
 
 
+
             try {
+
+
+                /* =================================================
+                   GET ARTICLE
+                ================================================== */
 
                 const {
                     data,
@@ -725,16 +788,21 @@
                     .single();
 
 
+
                 if (error) {
                     throw error;
                 }
 
 
+
                 if (!data) {
+
                     throw new Error(
                         "Article not found"
                     );
+
                 }
+
 
 
                 /* =================================================
@@ -745,8 +813,9 @@
                     `${data.title} — MOLAS Education`;
 
 
+
                 /* =================================================
-                   DATA
+                   BASIC DATA
                 ================================================== */
 
                 const category =
@@ -775,6 +844,7 @@
                         data.published_at ||
                         data.created_at
                     );
+
 
 
                 /* =================================================
@@ -812,16 +882,21 @@
                 }
 
 
+
                 /* =================================================
                    CONTENT
+                   
+                   THIS IS THE IMPORTANT PART.
+                   
+                   Your Supabase content is already HTML.
                 ================================================== */
 
                 const contentHTML =
-                    formatContent(
-                        data.content ||
-                        data.excerpt ||
-                        "No article content is available yet."
+                    getArticleContent(
+                        data.content,
+                        data.excerpt
                     );
+
 
 
                 /* =================================================
@@ -876,6 +951,7 @@
                 }
 
 
+
                 /* =================================================
                    DISPLAY ARTICLE
                 ================================================== */
@@ -906,9 +982,11 @@
                                 ${source}
                             </span>
 
+
                             <span class="meta-dot">
                                 •
                             </span>
+
 
                             <time>
                                 ${date}
@@ -919,7 +997,9 @@
                     </div>
 
 
+
                     ${imageHTML}
+
 
 
                     <article
@@ -928,6 +1008,7 @@
 
                         ${contentHTML}
 
+
                         ${sourceHTML}
 
                     </article>
@@ -935,12 +1016,18 @@
                 `;
 
 
+
+                /* =================================================
+                   RELATED NEWS
+                ================================================== */
+
                 await loadRelatedNews(
                     data
                 );
 
 
             } catch (error) {
+
 
                 console.error(
                     "MOLAS ARTICLE ERROR:",
@@ -958,10 +1045,12 @@
                             Unable to load article
                         </h2>
 
+
                         <p>
                             This article could not
                             be found right now.
                         </p>
+
 
                         <a
                             href="index.html"
@@ -979,6 +1068,7 @@
         }
 
 
+
         /* =====================================================
            BACK TO TOP
         ====================================================== */
@@ -991,9 +1081,11 @@
 
         if (topButton) {
 
+
             window.addEventListener(
                 "scroll",
                 () => {
+
 
                     if (
                         window.scrollY > 500
@@ -1033,8 +1125,9 @@
         }
 
 
+
         /* =====================================================
-           START ARTICLE
+           START
         ====================================================== */
 
         loadArticle();
@@ -1042,12 +1135,13 @@
     </script>
 
 
+
     <!-- =====================================================
          SHARED MOLAS JAVASCRIPT
-         This controls the mobile navigation/menu.
     ====================================================== -->
 
     <script src="script.js"></script>
+
 
 </body>
 

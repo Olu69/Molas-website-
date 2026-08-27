@@ -220,23 +220,12 @@ const {
             `${data.title || "Admission Update"} — MOLAS Education`;
     }
 
-
-    function formatContent(text) {
-
-        if (!text) return "";
-
-        return escapeHTML(text)
-            .split(/\n\s*\n/)
-            .map(paragraph => `
-                <p>
-                    ${paragraph.replace(
-                        /\n/g,
-                        "<br>"
-                    )}
-                </p>
-            `)
-            .join("");
-    }
+function formatContent(text) {
+    
+    if (!text) return "";
+    
+    return String(text).trim();
+}
 
 
     function formatDate(value) {

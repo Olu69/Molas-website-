@@ -1,15 +1,16 @@
 /* =========================================================
    MOLAS EDUCATIONAL CONSULTS
    COMPLETE RESPONSIVE DESIGN SYSTEM
+   CLEAN • CONSOLIDATED • RESPONSIVE
    Desktop • Tablet • Mobile
-   CLEANED + CONSOLIDATED
+========================================================= */
+
+
+/* =========================================================
+   ROOT VARIABLES
 ========================================================= */
 
 :root {
-    /* =====================================================
-       COLORS
-    ===================================================== */
-
     --bg: #F3EFE7;
     --bg-soft: #EDE8DE;
 
@@ -38,17 +39,9 @@
     --border: #DED8CE;
     --border-soft: #E8E2D8;
 
-    /* =====================================================
-       SHADOWS
-    ===================================================== */
-
     --shadow-sm: 0 2px 8px rgba(17, 17, 17, 0.05);
     --shadow-md: 0 8px 24px rgba(17, 17, 17, 0.08);
     --shadow-lg: 0 16px 40px rgba(17, 17, 17, 0.10);
-
-    /* =====================================================
-       RADIUS
-    ===================================================== */
 
     --radius-sm: 10px;
     --radius-md: 16px;
@@ -56,16 +49,8 @@
     --radius-xl: 28px;
     --radius-apple: 30px;
 
-    /* =====================================================
-       LAYOUT
-    ===================================================== */
-
     --container: 1180px;
     --page-padding: 28px;
-
-    /* =====================================================
-       FONT
-    ===================================================== */
 
     --font:
         -apple-system,
@@ -153,10 +138,13 @@ button {
 
 .site-header {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 100;
+
     background: rgba(250, 248, 243, 0.96);
+
     border-bottom: 1px solid var(--border-soft);
+
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 }
@@ -210,7 +198,7 @@ button {
 
 
 /* =========================================================
-   NAVIGATION
+   MAIN NAVIGATION
 ========================================================= */
 
 .main-nav {
@@ -246,139 +234,81 @@ button {
 }
 
 
-
-  
-
-/* =====================================================
-   MOLAS NAV DROPDOWN
-===================================================== */
+/* =========================================================
+   NAV DROPDOWN
+========================================================= */
 
 .nav-dropdown {
     position: relative;
+
     display: inline-flex;
     align-items: center;
 }
 
-.nav-dropdown>a {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+.nav-dropdown > a {
     white-space: nowrap;
 }
 
 
-/* =====================================================
-   DROPDOWN PANEL
-===================================================== */
+/* =========================================================
+   DROPDOWN MENU — DESKTOP
+========================================================= */
 
 .dropdown-menu {
     position: absolute;
-    
+
     top: calc(100% + 10px);
     left: 0;
-    
+
     min-width: 190px;
-    
+
     display: none;
     flex-direction: column;
-    
+
     padding: 8px 0;
-    
-    background: var(--surface, #fff);
-    
+
+    background: var(--surface);
+
     border: 1px solid rgba(50, 35, 25, 0.08);
     border-radius: 12px;
-    
+
     box-shadow:
         0 16px 35px rgba(40, 30, 20, 0.12);
-    
+
     z-index: 9999;
 }
 
-
-/* DESKTOP */
 .nav-dropdown:hover .dropdown-menu {
     display: flex;
 }
 
-
-/* =====================================================
-   DROPDOWN LINKS
-===================================================== */
-
 .dropdown-menu a {
     display: block;
-    
+
     width: 100%;
-    box-sizing: border-box;
-    
+
     padding: 10px 16px;
-    
-    color: var(--text, #111);
-    
+
+    color: var(--text);
+
     font-size: 13px;
     font-weight: 500;
-    
-    text-decoration: none;
-    
+
     white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .dropdown-menu a:hover {
-    background: var(--bg-soft, #ede8de);
-    color: var(--accent, #075c3a);
+    background: var(--bg-soft);
+    color: var(--accent);
 }
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 800px) {
-    
-    .nav-dropdown {
-        display: block;
-        width: 100%;
-    }
-    
-    .nav-dropdown>a {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-    }
-    
-    .dropdown-menu {
-        position: static;
-        
-        width: 100%;
-        min-width: 0;
-        
-        margin: 6px 0 8px 0;
-        padding: 4px 0;
-        
-        box-shadow: none;
-        border: none;
-        border-radius: 0;
-        
-        display: none;
-    }
-    
-    .nav-dropdown.open .dropdown-menu {
-        display: flex;
-    }
-    
-    .dropdown-menu a {
-        width: 100%;
-        padding: 9px 0 9px 20px;
-    }
-    
-}
-
-
 
 
 /* =========================================================
-   MOBILE MENU
+   MOBILE MENU BUTTON
 ========================================================= */
 
 .mobile-menu-btn {
@@ -396,70 +326,107 @@ button {
     font-size: 21px;
 }
 
-
 /* =========================================================
-   BREAKING BAR
+   BREAKING NEWS BAR
 ========================================================= */
 
 .breaking-bar {
     display: flex;
     align-items: center;
+
     min-height: 42px;
+
+    overflow: hidden;
+
     background: var(--black);
     color: var(--white);
 }
 
 .breaking-label {
+    position: relative;
+    z-index: 5;
+
     display: flex;
     align-items: center;
+
     flex-shrink: 0;
+
     gap: 8px;
+
     padding-left: max(
         var(--page-padding),
         calc((100vw - var(--container)) / 2)
     );
 
     padding-right: 20px;
+
+    background: var(--black);
+
     font-size: 10px;
     font-weight: 850;
+
     letter-spacing: 0.1em;
 }
 
 .breaking-dot {
     width: 7px;
     height: 7px;
+
     flex-shrink: 0;
+
     border-radius: 50%;
+
     background: var(--accent);
 }
 
 .ticker-wrapper {
+    position: relative;
+
     min-width: 0;
     flex: 1;
+
     overflow: hidden;
+
     padding-right: var(--page-padding);
 }
 
 .ticker-content {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+
     width: max-content;
-    gap: 60px;
+
+    gap: 70px;
+
     white-space: nowrap;
-    color: #D8D2C8;
-    font-size: 12px;
-    
-    animation: tickerMove 25s linear infinite;
+
+    animation: molasTicker 25s linear infinite;
+
+    will-change: transform;
 }
 
-@keyframes tickerMove {
+.ticker-content span {
+    flex-shrink: 0;
+}
+
+@keyframes molasTicker {
     from {
         transform: translateX(100%);
     }
-    
+
     to {
         transform: translateX(-100%);
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 /* =========================================================
@@ -477,7 +444,6 @@ button {
 }
 
 .section-heading.centered {
-    display: flex;
     flex-direction: column;
     align-items: center;
 
@@ -586,6 +552,7 @@ button {
 
 .hero-content h1 span {
     display: block;
+
     color: var(--accent);
 }
 
@@ -602,7 +569,7 @@ button {
 
 
 /* =========================================================
-   SEARCH
+   SEARCH BOX
 ========================================================= */
 
 .search-box {
@@ -679,12 +646,13 @@ button {
 
 .search-box button:hover {
     background: var(--accent);
+
     transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   QUICK FILTERS
+   HERO QUICK FILTERS / PILLS
 ========================================================= */
 
 .quick-filters {
@@ -696,12 +664,19 @@ button {
     margin-top: 18px;
 }
 
-.quick-filters button {
-    min-height: 34px;
+.quick-filter,
+.quick-filters .quick-filter {
+    display: inline-flex;
 
-    padding: 7px 14px;
+    align-items: center;
+    justify-content: center;
+
+    height: 36px;
+
+    padding: 0 16px;
 
     border: 1px solid var(--border);
+
     border-radius: 999px;
 
     background: transparent;
@@ -711,6 +686,12 @@ button {
     font-size: 12px;
     font-weight: 650;
 
+    line-height: 1;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
@@ -718,7 +699,8 @@ button {
         transform 0.2s ease;
 }
 
-.quick-filters button:hover {
+.quick-filter:hover,
+.quick-filters .quick-filter:hover {
     background: var(--surface);
 
     border-color: var(--text);
@@ -730,7 +712,7 @@ button {
 
 
 /* =========================================================
-   MAIN CONTENT
+   MAIN NEWS CONTENT
 ========================================================= */
 
 .main-content {
@@ -924,12 +906,6 @@ button {
     font-weight: 800;
 
     letter-spacing: -0.025em;
-
-    transition: color 0.2s ease;
-}
-
-.news-card:hover .news-content h3 {
-    color: var(--accent);
 }
 
 .news-content p {
@@ -967,6 +943,7 @@ button {
 .read-more:hover,
 .view-all:hover {
     color: var(--accent);
+
     transform: translateX(3px);
 }
 
@@ -976,7 +953,7 @@ button {
 
 
 /* =========================================================
-   ALERTS
+   ADMISSION / TRENDING SIDEBAR
 ========================================================= */
 
 .alerts-column {
@@ -1014,6 +991,33 @@ button {
     font-weight: 850;
 }
 
+.trending-fire {
+    display: inline-block;
+
+    transform-origin: center bottom;
+
+    animation: trendingFire 1s ease-in-out infinite;
+}
+
+@keyframes trendingFire {
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.18) rotate(-8deg);
+    }
+
+    50% {
+        transform: scale(1.28) rotate(8deg);
+    }
+
+    75% {
+        transform: scale(1.15) rotate(-5deg);
+    }
+}
+
 #admission-alerts-list {
     display: flex;
     flex-direction: column;
@@ -1035,6 +1039,7 @@ button {
 
 #admission-alerts-list > *:hover {
     background: var(--bg-soft);
+
     padding-left: 27px;
 }
 
@@ -1048,7 +1053,7 @@ button {
 
 
 /* =========================================================
-   STATUS BOX
+   ADMISSION STATUS BOX
 ========================================================= */
 
 .status-box {
@@ -1058,6 +1063,7 @@ button {
     background: var(--surface);
 
     border: 1px solid var(--border-soft);
+
     border-radius: var(--radius-apple);
 
     box-shadow: var(--shadow-sm);
@@ -1081,17 +1087,30 @@ button {
 }
 
 .status-icon {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     flex-shrink: 0;
 
-    display: grid;
-    place-items: center;
+    border-radius: 16px;
+}
 
-    border-radius: 14px;
+.status-icon span {
+    display: inline-block;
 
-    font-size: 13px;
+    font-size: 20px;
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 3px 5px rgba(0, 0, 0, 0.18)
+        );
+
+    transform-origin: center;
 }
 
 .ongoing-icon {
@@ -1109,115 +1128,13 @@ button {
     color: var(--brown);
 }
 
-.status-content {
-    display: flex;
-    flex-direction: column;
-
-    gap: 2px;
-
-    min-width: 0;
-}
-
-.status-label {
-    font-size: 9px;
-    font-weight: 850;
-
-    letter-spacing: 0.1em;
-}
-
-.ongoing-label {
-    color: var(--accent);
-}
-
-.in-label {
-    color: var(--green-dark);
-}
-
-.deadline-label {
-    color: var(--brown);
-}
-
-.status-text {
-    display: block;
-    margin-top: 4px;
-    
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Text",
-        "SF Pro Display",
-        Inter,
-        "Segoe UI",
-        sans-serif;
-    
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    
-    color: var(--text);
-    
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-}
-/* =========================================================
-   MOLAS — ADMISSION STATUS
-   OBVIOUS • FUN • STABLE
-========================================================= */
-
-.status-item {
-    transition: background-color 0.2s ease;
-}
-
-.status-item:hover {
-    background: var(--bg-soft);
-    transform: none;
-}
-
-
-/* =========================================================
-   ICON
-========================================================= */
-
-.status-icon {
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 16px;
-
-    transform: none;
-}
-
-.status-icon span {
-    display: inline-block;
-
-    font-size: 20px;
-    line-height: 1;
-
-    filter: drop-shadow(
-        0 3px 5px rgba(0, 0, 0, 0.18)
-    );
-
-    transform-origin: center;
-}
-
-
-/* =========================================================
-   ONGOING — HOURGLASS
-========================================================= */
-
 .ongoing-icon span {
     animation: hourglassFun 1.15s ease-in-out infinite;
 }
 
 @keyframes hourglassFun {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1) rotate(0deg);
     }
 
@@ -1238,17 +1155,13 @@ button {
     }
 }
 
-
-/* =========================================================
-   OUT — MEGAPHONE
-========================================================= */
-
 .in-icon span {
     animation: megaphoneFun 1s ease-in-out infinite;
 }
 
 @keyframes megaphoneFun {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1) rotate(0deg);
     }
 
@@ -1265,17 +1178,13 @@ button {
     }
 }
 
-
-/* =========================================================
-   DEADLINE — CLOCK
-========================================================= */
-
 .deadline-icon span {
     animation: clockFun 1.05s ease-in-out infinite;
 }
 
 @keyframes clockFun {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1) rotate(0deg);
     }
 
@@ -1296,36 +1205,50 @@ button {
     }
 }
 
+.status-content {
+    display: flex;
+    flex-direction: column;
 
-/* =========================================================
-   STRONGER STATUS TEXT
-========================================================= */
+    gap: 2px;
 
-.status-text {
-    font-size: 15px;
-    font-weight: 650;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
-    color: var(--text);
+    min-width: 0;
 }
 
 .status-label {
     font-size: 11px;
     font-weight: 800;
+
     letter-spacing: 0.045em;
 }
 
-
-/* =========================================================
-   ACCESSIBILITY
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-    .status-icon span {
-        animation: none !important;
-    }
+.ongoing-label {
+    color: var(--accent);
 }
-  
+
+.in-label {
+    color: var(--green-dark);
+}
+
+.deadline-label {
+    color: var(--brown);
+}
+
+.status-text {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text);
+
+    font-size: 15px;
+    font-weight: 650;
+
+    line-height: 1.35;
+
+    letter-spacing: -0.015em;
+}
+
+
 /* =========================================================
    UNIVERSITY HUB
 ========================================================= */
@@ -1343,23 +1266,31 @@ button {
 }
 
 .university-filters {
+    width: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     flex-wrap: wrap;
 
-    gap: 8px;
+    gap: 10px;
 
+    margin-inline: auto;
     margin-bottom: 34px;
+
+    text-align: center;
 }
 
 .university-filters button {
+    flex: 0 0 auto;
+
     min-height: 38px;
 
     padding: 0 17px;
 
     border: 1px solid var(--border);
+
     border-radius: 999px;
 
     background: transparent;
@@ -1388,6 +1319,7 @@ button {
 
 .university-filters button.active {
     background: var(--black);
+
     border-color: var(--black);
 
     color: var(--white);
@@ -1454,14 +1386,15 @@ button {
 .university-card-body {
     min-height: 200px;
 
-    padding: 23px 21px 20px;
-
     display: flex;
     flex-direction: column;
+
+    padding: 23px 21px 20px;
 }
 
 .university-type {
     display: inline-flex;
+
     width: fit-content;
 
     color: var(--muted);
@@ -1470,6 +1403,21 @@ button {
     font-weight: 850;
 
     letter-spacing: 0.11em;
+}
+
+.university-logo {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    font-weight: 500;
+
+    letter-spacing: -0.045em;
 }
 
 .university-card h3 {
@@ -1536,28 +1484,36 @@ button {
 
 .university-card-body > a:hover {
     color: var(--accent);
+
     transform: translateX(3px);
 }
+
+
+/* =========================================================
+   LOAD MORE UNIVERSITIES
+========================================================= */
+
 .load-more-universities {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     width: fit-content;
     min-height: 46px;
-    
+
     margin: 30px auto 0;
     padding: 0 22px;
-    
+
     border: 1px solid var(--border);
+
     border-radius: 14px;
-    
+
     background: var(--surface);
     color: var(--text);
-    
+
     font-size: 12px;
     font-weight: 800;
-    
+
     transition:
         background 0.2s ease,
         color 0.2s ease,
@@ -1566,57 +1522,23 @@ button {
         box-shadow 0.2s ease;
 }
 
-
-/* Desktop hover only */
 @media (hover: hover) and (pointer: fine) {
-    
     .load-more-universities:hover {
         background: var(--black);
+
         border-color: var(--black);
+
         color: var(--white);
-        
+
         transform: translateY(-2px);
-        
-        box-shadow:
-            var(--shadow-sm);
+
+        box-shadow: var(--shadow-sm);
     }
-    
 }
 
-
-/* Touch / click */
 .load-more-universities:active {
     transform: translateY(0);
 }
-
-
-/* Mobile */
-@media (max-width: 600px) {
-    
-    .load-more-universities {
-        width: 100%;
-        min-height: 45px;
-        margin-top: 22px;
-    }
-    
-}
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* =========================================================
@@ -1658,6 +1580,7 @@ button {
     padding: 26px 24px;
 
     border: 1px solid var(--border-soft);
+
     border-radius: var(--radius-apple);
 
     box-shadow: var(--shadow-sm);
@@ -1707,9 +1630,9 @@ button {
 }
 
 .service-card::before {
-    position: absolute;
-
     content: "";
+
+    position: absolute;
 
     top: -22px;
     right: 8px;
@@ -1848,6 +1771,7 @@ button {
 
 .service-card > a:hover {
     color: var(--accent);
+
     transform: translateX(4px);
 }
 
@@ -1925,17 +1849,25 @@ button {
 .primary-button {
     position: relative;
     z-index: 2;
+
     flex-shrink: 0;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     min-height: 45px;
+
     padding: 0 21px;
+
     border-radius: 13px;
+
     background: var(--accent);
     color: var(--white);
+
     font-size: 12px;
     font-weight: 800;
+
     transition:
         transform 0.2s ease,
         background 0.2s ease;
@@ -1943,6 +1875,7 @@ button {
 
 .primary-button:hover {
     background: var(--accent-dark);
+
     transform: translateY(-2px);
 }
 
@@ -1966,16 +1899,16 @@ button {
 
 .resource-deck {
     position: relative;
-    width: min(100%, 700px);
 
-    /*
-       Taller than before so the card contents
-       have proper breathing room.
-    */
+    width: min(100%, 700px);
     height: 390px;
+
     margin: 0 auto;
+
     perspective: 1400px;
+
     isolation: isolate;
+
     overflow: visible;
 }
 
@@ -1986,25 +1919,38 @@ button {
 
 .resource-card {
     position: absolute;
+
     top: 0;
     left: 2%;
+
     width: 96%;
     height: 92%;
+
     overflow: hidden;
+
     background: var(--surface);
+
     border: 1px solid var(--border-soft);
+
     border-radius: var(--radius-apple);
+
     box-shadow: var(--shadow-lg);
+
     transform-origin: center center;
+
     will-change: transform, opacity;
+
     transition:
         transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
         opacity 0.65s ease,
         box-shadow 0.6s ease,
         filter 0.6s ease;
+
     user-select: none;
     -webkit-user-select: none;
+
     touch-action: pan-y;
+
     cursor: grab;
 }
 
@@ -2012,61 +1958,53 @@ button {
     cursor: grabbing;
 }
 
-
-/* =========================================================
-   ACTIVE RESOURCE CARD
-========================================================= */
-
 .resource-deck .resource-card.resource-active {
     z-index: 10;
+
     transform:
         translateX(0)
         translateZ(0)
         rotateY(0deg)
         scale(1);
+
     opacity: 1;
+
     filter: brightness(1);
+
     pointer-events: auto;
 }
 
-
-/* =========================================================
-   NEXT RESOURCE CARD
-========================================================= */
-
 .resource-deck .resource-card.resource-next-card {
     z-index: 5;
+
     transform:
         translateX(0)
         translateZ(-55px)
         rotateY(-7deg)
         scale(0.96);
+
     opacity: 0.45;
+
     filter: brightness(0.94);
+
     pointer-events: none;
 }
 
-
-/* =========================================================
-   PREVIOUS RESOURCE CARD
-========================================================= */
-
 .resource-deck .resource-card.resource-prev-card {
     z-index: 4;
+
     transform:
         translateX(0)
         translateZ(-80px)
         rotateY(7deg)
         scale(0.93);
+
     opacity: 0.28;
+
     filter: brightness(0.88);
+
     pointer-events: none;
 }
-
-
-/* =========================================================
-   HIDDEN RESOURCE CARDS
-========================================================= */
 
 .resource-deck .resource-card:not(
     .resource-active,
@@ -2179,11 +2117,6 @@ button {
 
     padding-top: 22px;
 }
-
-
-/* =========================================================
-   RESOURCE INFORMATION
-========================================================= */
 
 .resource-information {
     min-width: 0;
@@ -2386,28 +2319,30 @@ button {
 
     transform: rotate(-5deg);
 }
+
+
 /* =========================================================
-   RESOURCE VISUAL CARD — INDIVIDUAL COLORS
+   RESOURCE VISUAL CARD COLORS
 ========================================================= */
 
 .resource-card:nth-child(1) .resource-visual-card {
-    background: #3F7D4A; /* JAMB — light Green */
+    background: #3F7D4A;
 }
 
 .resource-card:nth-child(2) .resource-visual-card {
-    background: #3F6FA3; /* WAEC — Blue */
+    background: #3F6FA3;
 }
 
 .resource-card:nth-child(3) .resource-visual-card {
-    background: #A8322D; /* NECO — Reddish */
+    background: #A8322D;
 }
 
 .resource-card:nth-child(4) .resource-visual-card {
-    background: #6D4C41; /* University Admissions — Brown */
+    background: #6D4C41;
 }
 
 .resource-card:nth-child(5) .resource-visual-card {
-    background: #5E548E; /* Scholarships — Purple */
+    background: #5E548E;
 }
 
 .resource-visual-icon {
@@ -2697,11 +2632,8 @@ button {
 
     .resource-deck {
         width: min(100%, 700px);
-        height: 560px;
-    }
 
-    .resource-card {
-        width: 96%;
+        height: 560px;
     }
 
     .resource-card-body {
@@ -2740,9 +2672,8 @@ button {
         --page-padding: 18px;
     }
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+
+    /* HEADER */
 
     .header-inner {
         min-height: 68px;
@@ -2756,6 +2687,11 @@ button {
         font-size: 7px;
     }
 
+    .mobile-menu-btn {
+        display: grid;
+        place-items: center;
+    }
+
     .main-nav {
         position: absolute;
 
@@ -2764,6 +2700,7 @@ button {
         right: var(--page-padding);
 
         display: none;
+
         flex-direction: column;
         align-items: stretch;
 
@@ -2780,7 +2717,8 @@ button {
         box-shadow: var(--shadow-lg);
     }
 
-    .main-nav.open {
+    .main-nav.open,
+    .main-nav.show {
         display: flex;
     }
 
@@ -2806,6 +2744,8 @@ button {
     }
 
     .nav-dropdown {
+        display: block;
+
         width: 100%;
     }
 
@@ -2813,13 +2753,9 @@ button {
         position: static;
 
         width: 100%;
+        min-width: 0;
 
         display: none;
-
-        opacity: 1;
-        visibility: visible;
-
-        transform: none;
 
         padding: 0 0 4px;
 
@@ -2836,7 +2772,7 @@ button {
     }
 
     .nav-dropdown.open .dropdown-menu {
-        display: block;
+        display: flex;
     }
 
     .dropdown-menu a {
@@ -2845,15 +2781,8 @@ button {
         font-size: 12px;
     }
 
-    .mobile-menu-btn {
-        display: grid;
-        place-items: center;
-    }
 
-
-    /* =====================================================
-       BREAKING BAR
-    ===================================================== */
+    /* BREAKING BAR */
 
     .breaking-bar {
         min-height: 38px;
@@ -2875,15 +2804,16 @@ button {
         padding-right: 0;
     }
 
-    .ticker-content {
-        gap: 38px;
-        font-size: 11px;
-    }
+   .ticker-content {
+    gap: 45px;
+    
+    font-size: 11px;
+    
+    animation-duration: 25s;
+}
 
 
-    /* =====================================================
-       HERO
-    ===================================================== */
+    /* HERO */
 
     .hero-section {
         padding: 62px 0 58px;
@@ -2947,21 +2877,21 @@ button {
 
     .quick-filters {
         gap: 7px;
+
         margin-top: 15px;
     }
 
-    .quick-filters button {
-        min-height: 32px;
+    .quick-filter,
+    .quick-filters .quick-filter {
+        height: 32px;
 
-        padding: 6px 11px;
+        padding: 0 11px;
 
         font-size: 10px;
     }
 
 
-    /* =====================================================
-       MAIN NEWS
-    ===================================================== */
+    /* MAIN NEWS */
 
     .main-content {
         padding-top: 60px;
@@ -2982,6 +2912,7 @@ button {
 
     .small-label {
         margin-bottom: 6px;
+
         font-size: 9px;
     }
 
@@ -3002,9 +2933,7 @@ button {
     }
 
 
-    /* =====================================================
-       NEWS CARD
-    ===================================================== */
+    /* NEWS CARD */
 
     .news-card {
         display: block;
@@ -3027,31 +2956,34 @@ button {
 
     .news-meta {
         margin-bottom: 8px;
+
         font-size: 9px;
     }
 
     .news-content h3 {
         font-size: 18px;
+
         line-height: 1.2;
     }
 
     .news-content p {
         margin-top: 9px;
+
         font-size: 12px;
     }
 
     .read-more {
         margin-top: 14px;
+
         font-size: 11px;
     }
 
 
-    /* =====================================================
-       ALERTS
-    ===================================================== */
+    /* ALERTS */
 
     .alerts-column {
         position: static;
+
         margin-top: 55px;
     }
 
@@ -3065,9 +2997,7 @@ button {
     }
 
 
-    /* =====================================================
-       UNIVERSITY HUB
-    ===================================================== */
+    /* UNIVERSITY */
 
     .universities-section {
         padding: 72px 0 80px;
@@ -3075,6 +3005,7 @@ button {
 
     .universities-section .section-heading {
         align-items: center;
+
         text-align: center;
     }
 
@@ -3083,24 +3014,14 @@ button {
     }
 
     .university-filters {
-        justify-content: flex-start;
+        justify-content: center;
 
-        overflow-x: auto;
-        flex-wrap: nowrap;
+        padding: 0 12px;
 
-        padding-bottom: 4px;
         margin-bottom: 22px;
-
-        scrollbar-width: none;
-    }
-
-    .university-filters::-webkit-scrollbar {
-        display: none;
     }
 
     .university-filters button {
-        flex-shrink: 0;
-
         min-height: 35px;
 
         padding: 0 14px;
@@ -3110,28 +3031,38 @@ button {
 
     .university-grid {
         grid-template-columns: 1fr;
+
         gap: 12px;
     }
 
     .university-card {
         min-height: 190px;
+
         border-radius: 22px;
     }
 
     .university-card-body {
         min-height: 185px;
+
         padding: 20px;
     }
 
     .university-card h3 {
         max-width: 100%;
+
         font-size: 20px;
     }
 
+    .load-more-universities {
+        width: 100%;
 
-    /* =====================================================
-       SERVICES
-    ===================================================== */
+        min-height: 45px;
+
+        margin-top: 22px;
+    }
+
+
+    /* SERVICES */
 
     .services-section {
         padding: 72px 0 80px;
@@ -3139,11 +3070,13 @@ button {
 
     .services-section .section-heading {
         align-items: center;
+
         text-align: center;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
+
         gap: 12px;
     }
 
@@ -3192,9 +3125,7 @@ button {
     }
 
 
-    /* =====================================================
-       STUDENT RESOURCES
-    ===================================================== */
+    /* RESOURCES */
 
     .resources-section {
         padding: 72px 0 80px;
@@ -3212,18 +3143,15 @@ button {
         max-width: 100%;
     }
 
-
-    /* =====================================================
-       RESOURCE DECK MOBILE
-    ===================================================== */
-
     .resource-deck {
         width: 100%;
+
         height: 540px;
     }
 
     .resource-card {
         left: 1.5%;
+
         width: 97%;
 
         border-radius: 25px;
@@ -3251,6 +3179,7 @@ button {
 
     .resource-card-body {
         display: flex;
+
         flex-direction: column;
 
         align-items: stretch;
@@ -3261,17 +3190,15 @@ button {
         padding-top: 18px;
     }
 
-    .resource-information {
-        min-height: 0;
-    }
-
     .resource-eyebrow {
         margin-bottom: 7px;
+
         font-size: 8px;
     }
 
     .resource-information h3 {
         font-size: 30px;
+
         line-height: 1.04;
     }
 
@@ -3279,11 +3206,13 @@ button {
         margin-top: 10px;
 
         font-size: 12px;
+
         line-height: 1.55;
     }
 
     .resource-links {
         gap: 6px;
+
         margin-top: 15px;
     }
 
@@ -3297,6 +3226,7 @@ button {
 
     .resource-cta {
         margin-top: 16px;
+
         font-size: 11px;
     }
 
@@ -3305,8 +3235,6 @@ button {
         height: 135px;
 
         align-self: center;
-
-        flex-shrink: 0;
     }
 
     .resource-visual-card {
@@ -3328,13 +3256,9 @@ button {
         font-size: 7px;
     }
 
-
-    /* =====================================================
-       RESOURCE CONTROLS
-    ===================================================== */
-
     .resource-deck-controls {
         gap: 17px;
+
         margin-top: 28px;
     }
 
@@ -3359,9 +3283,7 @@ button {
     }
 
 
-    /* =====================================================
-       FOOTER
-    ===================================================== */
+    /* FOOTER */
 
     .footer-inner {
         grid-template-columns: 1fr 1fr;
@@ -3374,6 +3296,7 @@ button {
 
     .footer-brand {
         grid-column: 1 / -1;
+
         max-width: 100%;
     }
 
@@ -3387,6 +3310,7 @@ button {
 
     .footer-bottom p {
         padding: 18px var(--page-padding);
+
         font-size: 9px;
     }
 }
@@ -3463,11 +3387,6 @@ button {
         padding: 21px 19px;
     }
 
-
-    /* =====================================================
-       RESOURCE — SMALL PHONE
-    ===================================================== */
-
     .resource-deck {
         height: 520px;
     }
@@ -3496,6 +3415,7 @@ button {
 
     .footer-inner {
         grid-template-columns: 1fr;
+
         gap: 30px;
     }
 
@@ -3518,11 +3438,13 @@ button {
 
     .search-box input {
         padding-left: 8px;
+
         font-size: 10px;
     }
 
     .search-box button {
         padding: 0 11px;
+
         font-size: 10px;
     }
 
@@ -3553,9 +3475,7 @@ button {
     orientation: landscape
 ) {
 
-    /* =====================================================
-       NEWS
-    ===================================================== */
+    /* NEWS */
 
     .news-feed {
         display: grid;
@@ -3587,6 +3507,7 @@ button {
 
     .news-content h3 {
         font-size: 16px;
+
         line-height: 1.18;
     }
 
@@ -3595,9 +3516,13 @@ button {
     }
 
 
-    /* =====================================================
-       UNIVERSITY
-    ===================================================== */
+    /* UNIVERSITY */
+
+    .university-filters {
+        justify-content: center;
+
+        padding-inline: 16px;
+    }
 
     .university-grid {
         grid-template-columns:
@@ -3608,11 +3533,13 @@ button {
 
     .university-card {
         min-height: 180px;
+
         border-radius: 20px;
     }
 
     .university-card-body {
         min-height: 175px;
+
         padding: 18px;
     }
 
@@ -3621,9 +3548,7 @@ button {
     }
 
 
-    /* =====================================================
-       SERVICES
-    ===================================================== */
+    /* SERVICES */
 
     .services-grid {
         grid-template-columns:
@@ -3651,9 +3576,7 @@ button {
     }
 
 
-    /* =====================================================
-       RESOURCE DECK
-    ===================================================== */
+    /* RESOURCES */
 
     .resource-deck {
         width: min(100%, 600px);
@@ -3663,6 +3586,7 @@ button {
 
     .resource-card {
         left: 1.5%;
+
         width: 97%;
     }
 
@@ -3703,9 +3627,7 @@ button {
     }
 
 
-    /* =====================================================
-       TRENDING / ADMISSION ALERTS
-    ===================================================== */
+    /* TRENDING / ALERTS */
 
     #admission-alerts-list > * {
         padding: 9px 14px;
@@ -3713,11 +3635,13 @@ button {
 
     #admission-alerts-list > * h3 {
         font-size: 13px;
+
         line-height: 1.25;
     }
 
     #admission-alerts-list > * p {
         font-size: 10px;
+
         line-height: 1.35;
     }
 
@@ -3728,317 +3652,32 @@ button {
 
 
 /* =========================================================
-   ACCESSIBILITY
+   ACCESSIBILITY / REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
-
         transition-duration: 0.01ms !important;
+
         animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
     }
-}
 
-/* =========================================================
-   UNIVERSITY FILTERS — MOBILE CENTERING FIX
-========================================================= */
-
-.university-filters {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.university-filters button {
-    flex: 0 0 auto;
-}
-
-
-/* =========================
-   PHONE
-========================= */
-
-@media (max-width: 600px) {
-    
-    .university-filters {
-        width: 100%;
-        max-width: 100%;
-        justify-content: center;
-        align-items: center;
-        padding: 0 12px;
-        box-sizing: border-box;
-    }
-    
-    .university-filters button {
-        margin: 0;
-    }
-}
-
-
-/* =========================
-   PHONE LANDSCAPE
-========================= */
-
-@media (max-width: 900px) and (orientation: landscape) {
-    
-    .university-filters {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        margin-inline: auto;
-        padding-inline: 16px;
-        box-sizing: border-box;
-    }
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media (min-width: 601px) and (max-width: 1024px) {
-    
-    .university-filters {
-        justify-content: center;
-        margin-inline: auto;
-    }
-    
-}
-
-
-/* =====================================================
-   MOLAS MOBILE NAVIGATION FIX
-   Does NOT affect desktop or homepage design
-===================================================== */
-
-@media (max-width: 800px) {
-    
-    .main-nav {
-        display: none;
-    }
-    
-    .main-nav.show {
-        display: flex;
-        flex-direction: column;
-    }
-    
-}
-
-/* =========================================================
-   MOLAS HOMEPAGE
-   PREVENT NEWS TITLES FROM TURNING RED ON TOUCH
-========================================================= */
-
-.news-card h3 {
-    color: var(--text) !important;
-}
-
-/* Desktop hover remains normal */
-@media (hover: hover) and (pointer: fine) {
-    
-    .news-card:hover h3 {
-        color: var(--text) !important;
-    }
-    
-}
-
-/* Phones / touchscreens */
-@media (hover: none) and (pointer: coarse) {
-    
-    .news-card:hover h3,
-    .news-card:active h3,
-    .news-card:focus h3,
-    .news-card:focus-visible h3 {
-        color: var(--text) !important;
-    }
-    
-}
-
- /* =========================================================
-   UNIVERSITY HUB — APPLE-STYLE UNIVERSITY INITIALS
-========================================================= */
-
-.university-logo {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-    
-    font-weight: 500;
-    letter-spacing: -0.045em;
-}
-
-
-.trending-fire {
-    display: inline-block;
-    transform-origin: center bottom;
-    animation: trendingFire 1s ease-in-out infinite;
-}
-
-@keyframes trendingFire {
-    0%, 100% {
-        transform: scale(1) rotate(0deg);
+    .ticker-content {
+        animation: none;
+        transform: translateX(0);
     }
 
-    25% {
-        transform: scale(1.18) rotate(-8deg);
-    }
-
-    50% {
-        transform: scale(1.28) rotate(8deg);
-    }
-
-    75% {
-        transform: scale(1.15) rotate(-5deg);
+    .status-icon span,
+    .trending-fire {
+        animation: none !important;
     }
 }
-
-/* =====================================================
-   BREAKING NEWS TICKER
-===================================================== */
-
-.breaking-bar {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.breaking-label {
-    flex-shrink: 0;
-    position: relative;
-    z-index: 5;
-}
-
-.ticker-wrapper {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    position: relative;
-}
-
-.ticker-content {
-    display: flex;
-    width: max-content;
-    gap: 70px;
-    white-space: nowrap;
-    animation: molasTicker 24s linear infinite;
-}
-
-.ticker-content span {
-    flex-shrink: 0;
-}
-
-/* Text moves from RIGHT → LEFT */
-@keyframes molasTicker {
-    from {
-        transform: translateX(100%);
-    }
-    
-    to {
-        transform: translateX(-100%);
-    }
-}
-   
-
-/* =========================================================
-  +
-
-  
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-  
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-
-
-
-  
-
-
-
- 
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-  
-
-
-  
-
-  
-
-
-
-  
-
-
-
-   
-
