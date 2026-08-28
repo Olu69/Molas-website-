@@ -1491,3 +1491,767 @@ img {
         padding-top: 40px;
     }
 }
+
+
+/* =========================================================
+   JAMB HERO — LIVING / FLOATING ANIMATIONS
+   Subtle • Premium • Always Moving
+========================================================= */
+
+/* ---------------------------------------------------------
+   MAIN DASHBOARD
+--------------------------------------------------------- */
+
+.jamb-dashboard {
+    animation: jambDashboardFloat 6s ease-in-out infinite;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+@keyframes jambDashboardFloat {
+    
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    
+    25% {
+        transform: translate3d(0, -5px, 0) rotate(-0.35deg);
+    }
+    
+    50% {
+        transform: translate3d(0, -9px, 0) rotate(0.35deg);
+    }
+    
+    75% {
+        transform: translate3d(0, -4px, 0) rotate(-0.2deg);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   FLOATING CARD — STUDY
+--------------------------------------------------------- */
+
+.floating-study {
+    animation: jambStudyFloat 5s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes jambStudyFloat {
+    
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(-1deg);
+    }
+    
+    25% {
+        transform: translate3d(-3px, -7px, 0) rotate(0.5deg);
+    }
+    
+    50% {
+        transform: translate3d(2px, -12px, 0) rotate(1.2deg);
+    }
+    
+    75% {
+        transform: translate3d(4px, -5px, 0) rotate(0deg);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   FLOATING CARD — PRACTICE
+--------------------------------------------------------- */
+
+.floating-practice {
+    animation: jambPracticeFloat 5.8s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes jambPracticeFloat {
+    
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(1deg);
+    }
+    
+    25% {
+        transform: translate3d(3px, -5px, 0) rotate(-0.5deg);
+    }
+    
+    50% {
+        transform: translate3d(-2px, -11px, 0) rotate(-1.2deg);
+    }
+    
+    75% {
+        transform: translate3d(-4px, -4px, 0) rotate(0deg);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   FLOATING CARD HOVER
+   Animation continues, but hover gives it extra life.
+--------------------------------------------------------- */
+
+.jamb-floating-card {
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.jamb-floating-card:hover {
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 20px 42px rgba(50, 43, 33, 0.17);
+}
+
+
+/* ---------------------------------------------------------
+   DASHBOARD ICON
+   Very subtle breathing effect
+--------------------------------------------------------- */
+
+.dashboard-icon {
+    animation: dashboardIconPulse 4s ease-in-out infinite;
+}
+
+@keyframes dashboardIconPulse {
+    
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    
+    50% {
+        transform: scale(1.045);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   DASHBOARD STATUS
+   Tiny breathing effect
+--------------------------------------------------------- */
+
+.dashboard-status {
+    animation: dashboardStatusFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes dashboardStatusFloat {
+    
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   FLOATING CARD ICONS
+--------------------------------------------------------- */
+
+.floating-card-icon {
+    animation: floatingIconBreath 3.8s ease-in-out infinite;
+}
+
+@keyframes floatingIconBreath {
+    
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    
+    50% {
+        transform: translateY(-2px) rotate(2deg);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   DIFFERENT ANIMATION DELAYS
+   Makes everything feel organic instead of synchronized.
+--------------------------------------------------------- */
+
+.floating-study .floating-card-icon {
+    animation-delay: -1s;
+}
+
+.floating-practice .floating-card-icon {
+    animation-delay: -2.2s;
+}
+
+.dashboard-icon {
+    animation-delay: -1.5s;
+}
+
+.dashboard-status {
+    animation-delay: -0.8s;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   Slightly calmer movement on smaller screens.
+--------------------------------------------------------- */
+
+@media (max-width: 600px) {
+    
+    .jamb-dashboard {
+        animation-duration: 7s;
+    }
+    
+    .floating-study {
+        animation-duration: 5.8s;
+    }
+    
+    .floating-practice {
+        animation-duration: 6.4s;
+    }
+    
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   Respect reduced-motion preferences.
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    
+    .jamb-dashboard,
+    .floating-study,
+    .floating-practice,
+    .dashboard-icon,
+    .dashboard-status,
+    .floating-card-icon {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   MOLAS JAMB HUB
+   OBVIOUS / LIVELY SECONDARY ANIMATIONS
+   DASHBOARD IS NOT TOUCHED
+========================================================= */
+
+
+/* =========================================================
+   FLOATING HERO CARDS
+========================================================= */
+
+.jamb-floating-card {
+    will-change: transform;
+}
+
+.floating-study {
+    animation: studyFloat 4s ease-in-out infinite;
+}
+
+.floating-practice {
+    animation: practiceFloat 4.7s ease-in-out infinite;
+}
+
+
+@keyframes studyFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(-2deg);
+    }
+
+    25% {
+        transform: translate(-7px, -13px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-12px, -20px) rotate(3deg);
+    }
+
+    75% {
+        transform: translate(-6px, -9px) rotate(0deg);
+    }
+}
+
+
+@keyframes practiceFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(2deg);
+    }
+
+    25% {
+        transform: translate(7px, -11px) rotate(-1deg);
+    }
+
+    50% {
+        transform: translate(12px, -19px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translate(6px, -8px) rotate(0deg);
+    }
+}
+
+
+/* =========================================================
+   QUICK RESOURCES
+========================================================= */
+
+.quick-resource {
+    animation: quickFloat 5s ease-in-out infinite;
+    will-change: transform;
+}
+
+.quick-resource:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.quick-resource:nth-child(2) {
+    animation-delay: -1.25s;
+}
+
+.quick-resource:nth-child(3) {
+    animation-delay: -2.5s;
+}
+
+.quick-resource:nth-child(4) {
+    animation-delay: -3.75s;
+}
+
+
+@keyframes quickFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* =========================================================
+   STUDY LIBRARY
+========================================================= */
+
+.library-card {
+    animation: libraryFloat 5.8s ease-in-out infinite;
+    will-change: transform;
+}
+
+.library-card:nth-child(1) {
+    animation-delay: -0.8s;
+}
+
+.library-card:nth-child(2) {
+    animation-delay: -2.7s;
+}
+
+.library-card:nth-child(3) {
+    animation-delay: -4.6s;
+}
+
+
+@keyframes libraryFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    30% {
+        transform: translateY(-5px) rotate(0.25deg);
+    }
+
+    60% {
+        transform: translateY(-9px) rotate(-0.35deg);
+    }
+
+    80% {
+        transform: translateY(-3px) rotate(0.15deg);
+    }
+}
+
+
+/* =========================================================
+   LIBRARY HOVER
+========================================================= */
+
+.library-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-11px) scale(1.01);
+    box-shadow: 0 20px 42px rgba(44, 38, 30, 0.12);
+}
+
+
+/* =========================================================
+   LIBRARY ICONS
+========================================================= */
+
+.library-card-icon {
+    transition:
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.library-card:hover .library-card-icon {
+    transform: translateY(-5px) rotate(-8deg) scale(1.05);
+}
+
+.library-card-link {
+    transition:
+        transform 0.35s ease;
+}
+
+.library-card:hover .library-card-link {
+    transform: translateX(6px);
+}
+
+
+/* =========================================================
+   SUBJECT CARDS
+========================================================= */
+
+.subject-card {
+    animation: subjectBreath 4.8s ease-in-out infinite;
+    will-change: transform;
+}
+
+.subject-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.subject-card:nth-child(2) {
+    animation-delay: -0.45s;
+}
+
+.subject-card:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+.subject-card:nth-child(4) {
+    animation-delay: -1.35s;
+}
+
+.subject-card:nth-child(5) {
+    animation-delay: -1.8s;
+}
+
+.subject-card:nth-child(6) {
+    animation-delay: -2.25s;
+}
+
+.subject-card:nth-child(7) {
+    animation-delay: -2.7s;
+}
+
+.subject-card:nth-child(8) {
+    animation-delay: -3.15s;
+}
+
+.subject-card:nth-child(9) {
+    animation-delay: -3.6s;
+}
+
+.subject-card:nth-child(10) {
+    animation-delay: -4.05s;
+}
+
+
+@keyframes subjectBreath {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   SUBJECT HOVER
+========================================================= */
+
+.subject-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 13px 28px rgba(44, 38, 30, 0.09);
+}
+
+.subject-icon {
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subject-card:hover .subject-icon {
+    transform: translateY(-4px) rotate(-9deg) scale(1.08);
+}
+
+.subject-arrow {
+    transition:
+        transform 0.3s ease;
+}
+
+.subject-card:hover .subject-arrow {
+    transform: translateX(6px);
+}
+
+
+/* =========================================================
+   SERVICE CARDS
+========================================================= */
+
+.service-card {
+    animation: serviceFloat 5.6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.service-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.service-card:nth-child(2) {
+    animation-delay: -0.7s;
+}
+
+.service-card:nth-child(3) {
+    animation-delay: -1.4s;
+}
+
+.service-card:nth-child(4) {
+    animation-delay: -2.1s;
+}
+
+.service-card:nth-child(5) {
+    animation-delay: -2.8s;
+}
+
+.service-card:nth-child(6) {
+    animation-delay: -3.5s;
+}
+
+.service-card:nth-child(7) {
+    animation-delay: -4.2s;
+}
+
+.service-card:nth-child(8) {
+    animation-delay: -4.9s;
+}
+
+
+@keyframes serviceFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(0.35deg);
+    }
+}
+
+
+/* =========================================================
+   SERVICE HOVER
+========================================================= */
+
+.service-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-9px) scale(1.01);
+    box-shadow: 0 19px 38px rgba(44, 38, 30, 0.14);
+}
+
+.service-icon {
+    transition:
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover .service-icon {
+    transform: translateY(-4px) rotate(-9deg) scale(1.07);
+}
+
+.service-arrow {
+    transition:
+        transform 0.3s ease;
+}
+
+.service-card:hover .service-arrow {
+    transform: translateX(6px);
+}
+
+
+/* =========================================================
+   NEWS BANNER
+========================================================= */
+
+.jamb-news-banner {
+    animation: newsBannerFloat 5s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes newsBannerFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   NEWS LIVE DOT
+========================================================= */
+
+.news-live span {
+    animation: newsPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes newsPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.65);
+        opacity: 0.5;
+    }
+}
+
+
+/* =========================================================
+   PREPARATION ITEMS
+========================================================= */
+
+.preparation-item {
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        padding-left 0.35s ease;
+}
+
+.preparation-item:hover {
+    transform: translateX(8px);
+    padding-left: 5px;
+}
+
+.preparation-item > span {
+    transition:
+        transform 0.35s ease;
+}
+
+.preparation-item:hover > span {
+    transform: translateX(4px) scale(1.08);
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.jamb-final-cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.jamb-final-cta::after {
+    content: "";
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -90px;
+    top: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    pointer-events: none;
+
+    animation: ctaOrb 7s ease-in-out infinite;
+}
+
+
+@keyframes ctaOrb {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-35px, 28px) rotate(12deg);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .floating-study {
+        animation-duration: 4.5s;
+    }
+
+    .floating-practice {
+        animation-duration: 5s;
+    }
+
+    .quick-resource {
+        animation-duration: 5.8s;
+    }
+
+    .library-card {
+        animation-duration: 6.2s;
+    }
+
+    .subject-card {
+        animation-duration: 5.2s;
+    }
+
+    .service-card {
+        animation-duration: 6s;
+    }
+
+    .jamb-news-banner {
+        animation-duration: 5.5s;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .jamb-floating-card,
+    .quick-resource,
+    .library-card,
+    .subject-card,
+    .service-card,
+    .jamb-news-banner,
+    .news-live span,
+    .jamb-final-cta::after {
+        animation: none !important;
+    }
+}

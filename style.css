@@ -122,7 +122,8 @@ button {
 .universities-section,
 .services-section,
 .resources-section,
-.footer-inner {
+.footer-inner,
+.jamb-news-section {
     width: min(
         calc(100% - (var(--page-padding) * 2)),
         var(--container)
@@ -139,7 +140,7 @@ button {
 .site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 
     background: rgba(250, 248, 243, 0.96);
 
@@ -150,6 +151,8 @@ button {
 }
 
 .header-inner {
+    position: relative;
+
     min-height: 76px;
 
     display: flex;
@@ -161,7 +164,7 @@ button {
 
 
 /* =========================================================
-   BRAND
+   BRAND / LOGO
 ========================================================= */
 
 .brand {
@@ -170,7 +173,7 @@ button {
 
     flex-shrink: 0;
 
-    gap: 2px;
+    gap: 4px;
 }
 
 .brand-main {
@@ -251,7 +254,7 @@ button {
 
 
 /* =========================================================
-   DROPDOWN MENU — DESKTOP
+   DROPDOWN — DESKTOP
 ========================================================= */
 
 .dropdown-menu {
@@ -272,8 +275,7 @@ button {
     border: 1px solid rgba(50, 35, 25, 0.08);
     border-radius: 12px;
 
-    box-shadow:
-        0 16px 35px rgba(40, 30, 20, 0.12);
+    box-shadow: 0 16px 35px rgba(40, 30, 20, 0.12);
 
     z-index: 9999;
 }
@@ -317,6 +319,9 @@ button {
     width: 42px;
     height: 42px;
 
+    align-items: center;
+    justify-content: center;
+
     border: 1px solid var(--border);
     border-radius: 12px;
 
@@ -325,6 +330,7 @@ button {
 
     font-size: 21px;
 }
+
 
 /* =========================================================
    BREAKING NEWS BAR
@@ -418,15 +424,6 @@ button {
         transform: translateX(-100%);
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 /* =========================================================
@@ -589,8 +586,7 @@ button {
 
     border-radius: 18px;
 
-    box-shadow:
-        0 5px 22px rgba(17, 17, 17, 0.055);
+    box-shadow: 0 5px 22px rgba(17, 17, 17, 0.055);
 
     transition:
         border-color 0.2s ease,
@@ -646,13 +642,12 @@ button {
 
 .search-box button:hover {
     background: var(--accent);
-
     transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   HERO QUICK FILTERS / PILLS
+   QUICK FILTERS
 ========================================================= */
 
 .quick-filters {
@@ -664,10 +659,8 @@ button {
     margin-top: 18px;
 }
 
-.quick-filter,
-.quick-filters .quick-filter {
+.quick-filter {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
@@ -699,8 +692,7 @@ button {
         transform 0.2s ease;
 }
 
-.quick-filter:hover,
-.quick-filters .quick-filter:hover {
+.quick-filter:hover {
     background: var(--surface);
 
     border-color: var(--text);
@@ -745,7 +737,7 @@ button {
 
 
 /* =========================================================
-   NEWS CARD
+   HOME NEWS CARD
 ========================================================= */
 
 .news-card {
@@ -807,7 +799,6 @@ button {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
@@ -860,7 +851,6 @@ button {
 .news-meta {
     display: flex;
     align-items: center;
-
     flex-wrap: wrap;
 
     gap: 10px;
@@ -943,7 +933,6 @@ button {
 .read-more:hover,
 .view-all:hover {
     color: var(--accent);
-
     transform: translateX(3px);
 }
 
@@ -953,12 +942,12 @@ button {
 
 
 /* =========================================================
-   ADMISSION / TRENDING SIDEBAR
+   TRENDING / ADMISSION SIDEBAR
 ========================================================= */
 
 .alerts-column {
     position: sticky;
-    top: 25px;
+    top: 95px;
 
     min-width: 0;
 }
@@ -1039,11 +1028,11 @@ button {
 
 #admission-alerts-list > *:hover {
     background: var(--bg-soft);
-
     padding-left: 27px;
 }
 
-.news-loading {
+.news-loading,
+.jamb-news-loading {
     color: var(--muted);
 
     font-size: 13px;
@@ -1105,10 +1094,9 @@ button {
     font-size: 20px;
     line-height: 1;
 
-    filter:
-        drop-shadow(
-            0 3px 5px rgba(0, 0, 0, 0.18)
-        );
+    filter: drop-shadow(
+        0 3px 5px rgba(0, 0, 0, 0.18)
+    );
 
     transform-origin: center;
 }
@@ -1271,7 +1259,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-
     flex-wrap: wrap;
 
     gap: 10px;
@@ -1484,7 +1471,6 @@ button {
 
 .university-card-body > a:hover {
     color: var(--accent);
-
     transform: translateX(3px);
 }
 
@@ -1522,6 +1508,10 @@ button {
         box-shadow 0.2s ease;
 }
 
+.load-more-universities:active {
+    transform: translateY(0);
+}
+
 @media (hover: hover) and (pointer: fine) {
     .load-more-universities:hover {
         background: var(--black);
@@ -1534,10 +1524,6 @@ button {
 
         box-shadow: var(--shadow-sm);
     }
-}
-
-.load-more-universities:active {
-    transform: translateY(0);
 }
 
 
@@ -1771,7 +1757,6 @@ button {
 
 .service-card > a:hover {
     color: var(--accent);
-
     transform: translateX(4px);
 }
 
@@ -1800,8 +1785,7 @@ button {
 
     color: var(--white);
 
-    box-shadow:
-        0 10px 30px rgba(17, 17, 17, 0.08);
+    box-shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
 }
 
 .services-cta::after {
@@ -1875,7 +1859,6 @@ button {
 
 .primary-button:hover {
     background: var(--accent-dark);
-
     transform: translateY(-2px);
 }
 
@@ -1911,11 +1894,6 @@ button {
 
     overflow: visible;
 }
-
-
-/* =========================================================
-   RESOURCE CARD
-========================================================= */
 
 .resource-card {
     position: absolute;
@@ -2230,7 +2208,6 @@ button {
 
 .resource-cta:hover {
     color: var(--accent);
-
     transform: translateX(3px);
 }
 
@@ -2314,8 +2291,7 @@ button {
 
     color: var(--white);
 
-    box-shadow:
-        0 18px 35px rgba(17, 17, 17, 0.15);
+    box-shadow: 0 18px 35px rgba(17, 17, 17, 0.15);
 
     transform: rotate(-5deg);
 }
@@ -2549,7 +2525,6 @@ button {
 
 .footer-column a:hover {
     color: var(--white);
-
     transform: translateX(2px);
 }
 
@@ -2576,6 +2551,265 @@ button {
 
 
 /* =========================================================
+   SECTION DIVIDER
+========================================================= */
+
+.section-divider {
+   border-top: 1px solid var(--border);
+   margin: 32px 0 40px;
+}
+
+
+
+/* =========================================================
+   JAMB & UTME NEWS
+========================================================= */
+
+.jamb-news-section {
+    padding: 0 0 90px;
+}
+
+.jamb-news-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   JAMB NEWS CARD
+========================================================= */
+
+.jamb-news-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-soft);
+
+    border-radius: var(--radius-apple);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.jamb-news-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--border);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   JAMB IMAGE
+========================================================= */
+
+.jamb-news-image {
+    position: relative;
+
+    width: 100%;
+    height: 205px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--brown-soft),
+            var(--accent-soft)
+        );
+}
+
+.jamb-news-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.6s cubic-bezier(.16, 1, .3, 1);
+}
+
+.jamb-news-card:hover .jamb-news-image img {
+    transform: scale(1.04);
+}
+
+.jamb-news-image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(17, 17, 17, 0.55),
+            rgba(17, 17, 17, 0.03) 65%
+        );
+
+    pointer-events: none;
+}
+
+.jamb-news-image span {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 14px;
+    left: 14px;
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 27px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(250, 248, 243, 0.94);
+
+    color: var(--text);
+
+    font-size: 9px;
+    font-weight: 850;
+
+    letter-spacing: 0.09em;
+}
+
+
+/* =========================================================
+   JAMB CONTENT
+========================================================= */
+
+.jamb-news-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 22px;
+}
+
+.jamb-news-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.jamb-news-meta span {
+    color: var(--accent);
+}
+
+.jamb-news-meta time {
+    color: var(--muted);
+
+    font-weight: 550;
+
+    text-transform: none;
+}
+
+.jamb-news-meta time::before {
+    content: "•";
+
+    margin-right: 10px;
+
+    color: var(--border);
+}
+
+.jamb-news-content h3 {
+    color: var(--text);
+
+    font-size: 19px;
+
+    line-height: 1.22;
+
+    font-weight: 800;
+
+    letter-spacing: -0.025em;
+}
+
+.jamb-news-content p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+.jamb-news-read {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-top: auto;
+    padding-top: 17px;
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.jamb-news-read:hover {
+    color: var(--accent);
+
+    transform: translateX(3px);
+}
+
+.jamb-news-loading {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+}
+
+
+/* =========================================================
    TABLET
    769px — 1050px
 ========================================================= */
@@ -2586,6 +2820,8 @@ button {
         --page-padding: 22px;
     }
 
+    /* HEADER */
+
     .main-nav {
         gap: 16px;
     }
@@ -2594,6 +2830,9 @@ button {
     .nav-dropdown > a {
         font-size: 13px;
     }
+
+
+    /* NEWS */
 
     .content-grid {
         grid-template-columns:
@@ -2616,10 +2855,16 @@ button {
         font-size: 19px;
     }
 
+
+    /* UNIVERSITY */
+
     .university-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
+
+
+    /* SERVICES */
 
     .services-grid {
         grid-template-columns:
@@ -2629,6 +2874,9 @@ button {
     .service-card:nth-child(n) {
         grid-column: span 1;
     }
+
+
+    /* RESOURCES */
 
     .resource-deck {
         width: min(100%, 700px);
@@ -2649,6 +2897,9 @@ button {
         height: 170px;
     }
 
+
+    /* FOOTER */
+
     .footer-inner {
         grid-template-columns:
             1.5fr
@@ -2657,6 +2908,14 @@ button {
             1fr;
 
         gap: 30px;
+    }
+
+
+    /* JAMB */
+
+    .jamb-news-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -2673,7 +2932,9 @@ button {
     }
 
 
-    /* HEADER */
+    /* =====================================================
+       HEADER
+    ===================================================== */
 
     .header-inner {
         min-height: 68px;
@@ -2688,16 +2949,15 @@ button {
     }
 
     .mobile-menu-btn {
-        display: grid;
-        place-items: center;
+        display: flex;
     }
 
     .main-nav {
         position: absolute;
 
         top: calc(100% + 1px);
-        left: var(--page-padding);
-        right: var(--page-padding);
+        left: 0;
+        right: 0;
 
         display: none;
 
@@ -2749,6 +3009,11 @@ button {
         width: 100%;
     }
 
+
+    /* =====================================================
+       MOBILE DROPDOWN
+    ===================================================== */
+
     .dropdown-menu {
         position: static;
 
@@ -2782,7 +3047,9 @@ button {
     }
 
 
-    /* BREAKING BAR */
+    /* =====================================================
+       BREAKING BAR
+    ===================================================== */
 
     .breaking-bar {
         min-height: 38px;
@@ -2804,16 +3071,18 @@ button {
         padding-right: 0;
     }
 
-   .ticker-content {
-    gap: 45px;
-    
-    font-size: 11px;
-    
-    animation-duration: 25s;
-}
+    .ticker-content {
+        gap: 45px;
+
+        font-size: 11px;
+
+        animation-duration: 25s;
+    }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero-section {
         padding: 62px 0 58px;
@@ -2832,12 +3101,11 @@ button {
     .hero-content h1 {
         max-width: 100%;
 
-        font-size:
-            clamp(
-                40px,
-                12vw,
-                57px
-            );
+        font-size: clamp(
+            40px,
+            12vw,
+            57px
+        );
 
         line-height: 0.99;
     }
@@ -2881,8 +3149,7 @@ button {
         margin-top: 15px;
     }
 
-    .quick-filter,
-    .quick-filters .quick-filter {
+    .quick-filter {
         height: 32px;
 
         padding: 0 11px;
@@ -2891,7 +3158,9 @@ button {
     }
 
 
-    /* MAIN NEWS */
+    /* =====================================================
+       MAIN NEWS
+    ===================================================== */
 
     .main-content {
         padding-top: 60px;
@@ -2933,7 +3202,9 @@ button {
     }
 
 
-    /* NEWS CARD */
+    /* =====================================================
+       HOME NEWS CARD
+    ===================================================== */
 
     .news-card {
         display: block;
@@ -2979,7 +3250,9 @@ button {
     }
 
 
-    /* ALERTS */
+    /* =====================================================
+       ALERTS
+    ===================================================== */
 
     .alerts-column {
         position: static;
@@ -2993,11 +3266,13 @@ button {
     }
 
     .status-box {
-        width: 80%;
+        width: 100%;
     }
 
 
-    /* UNIVERSITY */
+    /* =====================================================
+       UNIVERSITY
+    ===================================================== */
 
     .universities-section {
         padding: 72px 0 80px;
@@ -3062,7 +3337,9 @@ button {
     }
 
 
-    /* SERVICES */
+    /* =====================================================
+       SERVICES
+    ===================================================== */
 
     .services-section {
         padding: 72px 0 80px;
@@ -3125,7 +3402,9 @@ button {
     }
 
 
-    /* RESOURCES */
+    /* =====================================================
+       RESOURCES
+    ===================================================== */
 
     .resources-section {
         padding: 72px 0 80px;
@@ -3283,7 +3562,9 @@ button {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     .footer-inner {
         grid-template-columns: 1fr 1fr;
@@ -3312,6 +3593,49 @@ button {
         padding: 18px var(--page-padding);
 
         font-size: 9px;
+    }
+
+
+    /* =====================================================
+       JAMB NEWS
+    ===================================================== */
+
+    .jamb-news-section {
+        padding-bottom: 70px;
+    }
+
+    .jamb-news-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .jamb-news-card {
+        border-radius: 22px;
+    }
+
+    .jamb-news-image {
+        height: 190px;
+    }
+
+    .jamb-news-content {
+        padding: 20px;
+    }
+
+    .jamb-news-meta {
+        font-size: 9px;
+    }
+
+    .jamb-news-content h3 {
+        font-size: 18px;
+    }
+
+    .jamb-news-content p {
+        font-size: 12px;
+    }
+
+    .jamb-news-read {
+        font-size: 11px;
     }
 }
 
@@ -3422,6 +3746,25 @@ button {
     .footer-brand {
         grid-column: auto;
     }
+
+
+    /* JAMB */
+
+    .jamb-news-section {
+        padding-bottom: 60px;
+    }
+
+    .jamb-news-image {
+        height: 175px;
+    }
+
+    .jamb-news-content {
+        padding: 18px;
+    }
+
+    .jamb-news-content h3 {
+        font-size: 17px;
+    }
 }
 
 
@@ -3475,7 +3818,9 @@ button {
     orientation: landscape
 ) {
 
-    /* NEWS */
+    /* =====================================================
+       NEWS
+    ===================================================== */
 
     .news-feed {
         display: grid;
@@ -3516,7 +3861,9 @@ button {
     }
 
 
-    /* UNIVERSITY */
+    /* =====================================================
+       UNIVERSITY
+    ===================================================== */
 
     .university-filters {
         justify-content: center;
@@ -3548,7 +3895,9 @@ button {
     }
 
 
-    /* SERVICES */
+    /* =====================================================
+       SERVICES
+    ===================================================== */
 
     .services-grid {
         grid-template-columns:
@@ -3576,7 +3925,9 @@ button {
     }
 
 
-    /* RESOURCES */
+    /* =====================================================
+       RESOURCES
+    ===================================================== */
 
     .resource-deck {
         width: min(100%, 600px);
@@ -3627,7 +3978,9 @@ button {
     }
 
 
-    /* TRENDING / ALERTS */
+    /* =====================================================
+       TRENDING / ALERTS
+    ===================================================== */
 
     #admission-alerts-list > * {
         padding: 9px 14px;
@@ -3647,6 +4000,38 @@ button {
 
     #admission-alerts-list > * span {
         font-size: 9px;
+    }
+
+
+    /* =====================================================
+       JAMB
+    ===================================================== */
+
+    .jamb-news-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .jamb-news-card {
+        border-radius: 20px;
+    }
+
+    .jamb-news-image {
+        height: 145px;
+    }
+
+    .jamb-news-content {
+        padding: 16px;
+    }
+
+    .jamb-news-content h3 {
+        font-size: 16px;
+    }
+
+    .jamb-news-content p {
+        font-size: 11px;
     }
 }
 
@@ -3680,4 +4065,113 @@ button {
     .trending-fire {
         animation: none !important;
     }
+}
+
+/* =========================================================
+   RESOURCE VISUAL CARD COLORS + ANIMATION
+========================================================= */
+
+.resource-card:nth-child(1) .resource-visual-card {
+    background: #3F7D4A;
+}
+
+.resource-card:nth-child(2) .resource-visual-card {
+    background: #3F6FA3;
+}
+
+.resource-card:nth-child(3) .resource-visual-card {
+    background: #A8322D;
+}
+
+.resource-card:nth-child(4) .resource-visual-card {
+    background: #6D4C41;
+}
+
+.resource-card:nth-child(5) .resource-visual-card {
+    background: #5E548E;
+}
+
+
+/* =========================================================
+   ORBIT — CONTINUOUS ROTATION
+========================================================= */
+
+.resource-visual-orbit {
+    animation: resourceOrbitSpin 9s linear infinite;
+}
+
+@keyframes resourceOrbitSpin {
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(340deg);
+    }
+}
+
+
+/* =========================================================
+   MINI RESOURCE CARD — FLOAT + SLIGHT ROTATION
+========================================================= */
+
+.resource-visual-card {
+    animation: resourceCardFloat 4s ease-in-out infinite;
+}
+
+@keyframes resourceCardFloat {
+    0%,
+    100% {
+        transform: rotate(-5deg) translateY(0);
+    }
+
+    25% {
+        transform: rotate(-2deg) translateY(-6px);
+    }
+
+    50% {
+        transform: rotate(2deg) translateY(-9px);
+    }
+
+    75% {
+        transform: rotate(-1deg) translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   DIFFERENT RHYTHMS
+========================================================= */
+
+.resource-card:nth-child(2) .resource-visual-orbit {
+    animation-duration: 10s;
+}
+
+.resource-card:nth-child(3) .resource-visual-orbit {
+    animation-duration: 8s;
+}
+
+.resource-card:nth-child(4) .resource-visual-orbit {
+    animation-duration: 11s;
+}
+
+.resource-card:nth-child(5) .resource-visual-orbit {
+    animation-duration: 9.5s;
+}
+
+
+.resource-card:nth-child(2) .resource-visual-card {
+    animation-delay: -0.8s;
+}
+
+.resource-card:nth-child(3) .resource-visual-card {
+    animation-delay: -1.5s;
+}
+
+.resource-card:nth-child(4) .resource-visual-card {
+    animation-delay: -2.2s;
+}
+
+.resource-card:nth-child(5) .resource-visual-card {
+    animation-delay: -2.9s;
 }

@@ -1089,7 +1089,258 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
     }
+/* =====================================================
+   HOMEPAGE JAMB NEWS
+===================================================== */
 
+const jambNewsGrid =
+    document.querySelector("#jamb-news-grid");
+
+
+function createJambNewsCard(article) {
+    
+    const card =
+        document.createElement("article");
+    
+    card.className =
+        "jamb-news-card";
+    
+    
+    const title =
+        escapeHTML(
+            article.title
+        );
+    
+    
+    const excerpt =
+        escapeHTML(
+            article.excerpt ||
+            article.content ||
+            ""
+        );
+    
+    
+    const date =
+        formatDate(
+            article.published_at ||
+            article.created_at
+        );
+    
+    
+    const image =
+        article.image_url ?
+        String(article.image_url).trim() :
+        "";
+    
+    
+    card.innerHTML = `
+
+        ${
+            image
+                ? `
+                    <div class="jamb-news-image">
+
+                        <img
+                            src="${escapeHTML(image)}"
+                            alt="${title}"
+                            loading="lazy"
+                        >
+
+                        <span>
+                            JAMB
+                        </span>
+
+                    </div>
+                `
+                : `
+                    <div class="jamb-news-image">
+
+                        <span>
+                            JAMB
+                        </span>
+
+                    </div>
+                `
+        }
+
+
+        <div class="jamb-news-content">
+
+            <div class="jamb-news-meta">
+
+                <span>
+                    JAMB
+                </span>
+
+                <time>
+                    ${date}
+                </time>
+
+            </div>
+
+
+            <h3>
+                ${title}
+            </h3>
+
+
+            <p>
+                ${excerpt}
+            </p>
+
+
+            <a
+                href="jamb-news-article.html?id=${encodeURIComponent(article.id)}"
+                class="jamb-news-read"
+            >
+                Read JAMB Update →
+            </a>
+
+        </div>
+
+    `;
+    
+    
+    return card;
+    
+}
+
+
+async function loadHomepageJambNews() {
+    
+    if (
+        !supabase ||
+        !jambNewsGrid
+    ) {
+        
+        return;
+        
+    }
+    
+    
+    jambNewsGrid.innerHTML = `
+
+        <div class="jamb-news-loading">
+
+            Loading latest JAMB updates...
+
+        </div>
+
+    `;
+    
+    
+    try {
+        
+        const {
+            data,
+            error
+        } = await supabase
+            
+            .from("jamb_news")
+            
+            .select(`
+                id,
+                created_at,
+                title,
+                excerpt,
+                content,
+                image_url,
+                source,
+                source_url,
+                published_at,
+                featured,
+                breaking,
+                status
+            `)
+            
+            .order(
+                "published_at",
+                {
+                    ascending: false,
+                    nullsFirst: false
+                }
+            )
+            
+            .limit(3);
+        
+        
+        if (error) {
+            throw error;
+        }
+        
+        
+        const jambNews =
+            (data || [])
+            .filter(article => {
+                
+                const status =
+                    String(
+                        article.status || ""
+                    )
+                    .toLowerCase();
+                
+                
+                return (
+                    !status ||
+                    status === "published"
+                );
+                
+            });
+        
+        
+        if (!jambNews.length) {
+            
+            jambNewsGrid.innerHTML = `
+
+                <div class="jamb-news-loading">
+
+                    No JAMB updates available yet.
+
+                </div>
+
+            `;
+            
+            return;
+            
+        }
+        
+        
+        jambNewsGrid.innerHTML = "";
+        
+        
+        jambNews.forEach(article => {
+            
+            jambNewsGrid.appendChild(
+                createJambNewsCard(article)
+            );
+            
+        });
+        
+        
+        setupRevealAnimations();
+        
+        
+    } catch (error) {
+        
+        console.error(
+            "MOLAS HOMEPAGE JAMB NEWS ERROR:",
+            error
+        );
+        
+        
+        jambNewsGrid.innerHTML = `
+
+            <div class="jamb-news-loading">
+
+                Unable to load JAMB updates right now.
+
+            </div>
+
+        `;
+        
+    }
+    
+}
 
     /* =====================================================
        BREAKING NEWS
@@ -3603,10 +3854,14 @@ resourceDeck.addEventListener(
     ===================================================== */
 
     await loadNews();
+    
+    await loadHomepageJambNews();
 
     await loadAdmissionAlerts();
 
     await loadAdmissionStatus();
+    
+    
 
 
     /* =====================================================

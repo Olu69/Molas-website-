@@ -1,0 +1,3825 @@
+/* =========================================================
+   MOLAS WAEC PAGE
+   COMPLETE RESPONSIVE DESIGN SYSTEM
+   Desktop • Tablet • Mobile
+========================================================= */
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --waec-bg: #f3efe7;
+    --waec-bg-soft: #ebe6dc;
+
+    --waec-surface: #faf8f3;
+    --waec-white: #ffffff;
+
+    --waec-blue: #173f63;
+    --waec-blue-dark: #102f4a;
+    --waec-blue-soft: #e7eef4;
+
+    --waec-brown: #70452f;
+    --waec-brown-soft: #eee5de;
+
+    --waec-text: #211f1c;
+    --waec-muted: #746f68;
+
+    --waec-border: rgba(33, 31, 28, .11);
+    --waec-border-blue: rgba(23, 63, 99, .16);
+
+    --waec-radius-sm: 12px;
+    --waec-radius-md: 18px;
+    --waec-radius-lg: 26px;
+    --waec-radius-xl: 32px;
+
+    --waec-shadow:
+        0 15px 40px rgba(35, 30, 24, .07);
+
+    --waec-shadow-hover:
+        0 24px 55px rgba(35, 30, 24, .13);
+
+    --waec-container: 1180px;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    background:
+        var(--waec-bg);
+
+    color:
+        var(--waec-text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 16px;
+
+    line-height: 1.65;
+
+    overflow-x: hidden;
+
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.waec-container {
+
+    width:
+        min(
+            calc(100% - 48px),
+            var(--waec-container)
+        );
+
+    margin:
+        0 auto;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 9999;
+
+    width: 100%;
+
+    background:
+        rgba(250, 248, 243, .94);
+
+    border-bottom:
+        1px solid var(--waec-border);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+}
+
+
+.header-inner {
+
+    width:
+        min(
+            calc(100% - 48px),
+            var(--waec-container)
+        );
+
+    min-height: 82px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+/* =========================================================
+   MOLAS BRAND
+========================================================= */
+
+.brand {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    flex-shrink: 0;
+
+    padding-bottom: 5px;
+
+}
+
+
+.brand-main {
+
+    display: block;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing:
+        -1.5px;
+
+    color:
+        var(--waec-brown);
+
+}
+
+
+.brand-sub {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing:
+        .18em;
+
+    color:
+        var(--waec-muted);
+
+}
+
+
+.brand::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 1px;
+
+    background:
+        var(--waec-brown);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.main-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 7px;
+
+}
+
+
+.main-nav > a,
+.nav-dropdown > a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+        10px 13px;
+
+    border-radius:
+        10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color:
+        var(--waec-text);
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
+}
+
+
+.main-nav > a:hover,
+.nav-dropdown > a:hover {
+
+    background:
+        var(--waec-blue-soft);
+
+    color:
+        var(--waec-blue);
+
+}
+
+
+/* =========================================================
+   NAV DROPDOWN
+========================================================= */
+
+.nav-dropdown {
+
+    position: relative;
+
+}
+
+
+.nav-dropdown > a span {
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.nav-dropdown:hover > a span {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top:
+        calc(100% + 8px);
+
+    right: 0;
+
+    min-width: 190px;
+
+    padding: 8px;
+
+    background:
+        var(--waec-white);
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 18px 45px
+        rgba(30, 25, 20, .12);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(8px);
+
+    transition:
+        opacity .22s ease,
+        transform .22s ease,
+        visibility .22s ease;
+
+}
+
+
+.nav-dropdown:hover
+.dropdown-menu {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.dropdown-menu a {
+
+    display: block;
+
+    padding:
+        10px 12px;
+
+    border-radius:
+        9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.dropdown-menu a:hover {
+
+    background:
+        var(--waec-blue-soft);
+
+    color:
+        var(--waec-blue);
+
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.mobile-menu-btn {
+
+    display: none;
+
+    width: 44px;
+
+    height: 44px;
+
+    padding: 0;
+
+    border: 1px solid var(--waec-border);
+
+    border-radius: 12px;
+
+    background:
+        var(--waec-surface);
+
+    color:
+        var(--waec-text);
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.waec-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        90px 0 100px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3efe7 0%,
+            #eee9df 52%,
+            #e7eef4 100%
+        );
+
+    border-bottom:
+        1px solid var(--waec-border);
+
+}
+
+
+.waec-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 440px;
+
+    height: 440px;
+
+    right: -180px;
+
+    top: -200px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(23, 63, 99, .07);
+
+}
+
+
+.waec-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+
+    height: 260px;
+
+    left: -150px;
+
+    bottom: -150px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(112, 69, 47, .06);
+
+}
+
+
+.waec-hero-inner {
+
+    position: relative;
+
+    z-index: 2;
+
+    width:
+        min(
+            calc(100% - 48px),
+            var(--waec-container)
+        );
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(350px, .85fr);
+
+    align-items: center;
+
+    gap: 80px;
+
+}
+
+
+.waec-hero-content {
+
+    max-width: 720px;
+
+}
+
+
+.waec-eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    color:
+        var(--waec-blue);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+.waec-eyebrow::before {
+
+    content: "";
+
+    width: 30px;
+
+    height: 2px;
+
+    background:
+        var(--waec-blue);
+
+}
+
+
+.waec-hero h1 {
+
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(44px, 6vw, 76px);
+
+    line-height:
+        1.03;
+
+    letter-spacing:
+        -3px;
+
+    font-weight: 800;
+
+}
+
+
+.waec-hero h1 span {
+
+    display: block;
+
+    color:
+        var(--waec-blue);
+
+}
+
+
+.waec-hero p {
+
+    max-width: 650px;
+
+    margin:
+        28px 0 0;
+
+    color:
+        var(--waec-muted);
+
+    font-size:
+        clamp(16px, 1.5vw, 19px);
+
+    line-height:
+        1.75;
+
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.waec-hero-visual {
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+.waec-visual-card {
+
+    position: relative;
+
+    width: min(100%, 390px);
+
+    min-height: 330px;
+
+    padding: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(23, 63, 99, .16);
+
+    border-radius:
+        var(--waec-radius-xl);
+
+    background:
+        var(--waec-blue);
+
+    color:
+        #fff;
+
+    box-shadow:
+        0 30px 70px
+        rgba(23, 63, 99, .20);
+
+}
+
+
+.waec-visual-card::before {
+
+    content: "W";
+
+    position: absolute;
+
+    top: -35px;
+
+    right: 15px;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 260px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    color:
+        rgba(255,255,255,.06);
+
+}
+
+
+.waec-visual-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    right: -70px;
+
+    bottom: -80px;
+
+    border: 1px solid
+        rgba(255,255,255,.16);
+
+    border-radius: 50%;
+
+}
+
+
+.waec-visual-label {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: fit-content;
+
+    margin-bottom: 14px;
+
+    padding:
+        7px 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    border-radius: 100px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+.waec-visual-card strong {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 38px;
+
+    line-height: 1;
+
+    letter-spacing:
+        -1.5px;
+
+}
+
+
+.waec-visual-card small {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 13px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   SECTION COMMON
+========================================================= */
+
+.waec-hubs-section,
+.waec-resources-section,
+.waec-updates-section,
+.waec-info-section,
+.waec-cta-section {
+
+    padding:
+        100px 0;
+
+}
+
+
+.section-heading {
+
+    max-width: 700px;
+
+}
+
+
+.section-heading > span {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color:
+        var(--waec-blue);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .17em;
+
+}
+
+
+.section-heading h2 {
+
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(30px, 4vw, 46px);
+
+    line-height:
+        1.12;
+
+    letter-spacing:
+        -1.7px;
+
+}
+
+
+.section-heading p {
+
+    margin:
+        17px 0 0;
+
+    max-width: 680px;
+
+    color:
+        var(--waec-muted);
+
+    font-size: 16px;
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   EXAMINATION HUBS
+========================================================= */
+
+.waec-hubs-section {
+
+    background:
+        var(--waec-surface);
+
+}
+
+
+.waec-hub-grid {
+
+    margin-top: 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.waec-hub-card {
+
+    position: relative;
+
+    min-height: 190px;
+
+    padding: 30px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 22px;
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius:
+        var(--waec-radius-lg);
+
+    background:
+        var(--waec-bg);
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        box-shadow .4s ease,
+        border-color .3s ease;
+
+}
+
+
+.waec-hub-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        var(--waec-shadow-hover);
+
+    border-color:
+        var(--waec-border-blue);
+
+}
+
+
+.waec-hub-card.active {
+
+    background:
+        var(--waec-blue);
+
+    color:
+        #fff;
+
+    border-color:
+        var(--waec-blue);
+
+    box-shadow:
+        0 20px 45px
+        rgba(23, 63, 99, .16);
+
+}
+
+
+.waec-hub-icon {
+
+    flex:
+        0 0 58px;
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        var(--waec-blue-soft);
+
+    color:
+        var(--waec-blue);
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+}
+
+
+.waec-hub-card.active
+.waec-hub-icon {
+
+    background:
+        rgba(255,255,255,.12);
+
+    color:
+        #fff;
+
+}
+
+
+.waec-hub-content {
+
+    padding-right: 30px;
+
+}
+
+
+.waec-hub-content > span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .14em;
+
+    color:
+        var(--waec-blue);
+
+}
+
+
+.waec-hub-card.active
+.waec-hub-content > span {
+
+    color:
+        rgba(255,255,255,.62);
+
+}
+
+
+.waec-hub-content h3 {
+
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 27px;
+
+    line-height: 1.15;
+
+}
+
+
+.waec-hub-content p {
+
+    margin:
+        10px 0 0;
+
+    color:
+        var(--waec-muted);
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+}
+
+
+.waec-hub-card.active
+.waec-hub-content p {
+
+    color:
+        rgba(255,255,255,.72);
+
+}
+
+
+.waec-hub-arrow {
+
+    position: absolute;
+
+    right: 26px;
+
+    bottom: 25px;
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--waec-blue-soft);
+
+    color:
+        var(--waec-blue);
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.waec-hub-card:hover
+.waec-hub-arrow {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   RESOURCES
+========================================================= */
+
+.waec-resources-section {
+
+    background:
+        var(--waec-bg);
+
+}
+
+
+.waec-resource-grid {
+
+    margin-top: 48px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+
+}
+
+
+.waec-resource-card {
+
+    position: relative;
+
+    min-height: 310px;
+
+    padding: 31px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius:
+        var(--waec-radius-lg);
+
+    background:
+        var(--waec-surface);
+
+    box-shadow:
+        0 8px 25px
+        rgba(35,30,24,.025);
+
+    overflow: hidden;
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        box-shadow .4s ease,
+        border-color .3s ease;
+
+}
+
+
+.waec-resource-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        var(--waec-shadow-hover);
+
+    border-color:
+        var(--waec-border-blue);
+
+}
+
+
+.waec-resource-card:nth-child(1) {
+
+    background:
+        #f8f5ed;
+
+}
+
+
+.waec-resource-card:nth-child(2) {
+
+    background:
+        #edf2f5;
+
+}
+
+
+.waec-resource-card:nth-child(3) {
+
+    background:
+        #f3eee9;
+
+}
+
+
+.waec-resource-card:nth-child(4) {
+
+    background:
+        #eef1ec;
+
+}
+
+
+.resource-card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.resource-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--waec-white);
+
+    border:
+        1px solid var(--waec-border);
+
+    font-size: 21px;
+
+}
+
+
+.resource-tag {
+
+    padding:
+        6px 10px;
+
+    border-radius: 100px;
+
+    background:
+        var(--waec-blue-soft);
+
+    color:
+        var(--waec-blue);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+.waec-resource-card h3 {
+
+    margin:
+        30px 0 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    letter-spacing:
+        -.7px;
+
+}
+
+
+.waec-resource-card p {
+
+    margin:
+        13px 0 25px;
+
+    color:
+        var(--waec-muted);
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+    max-width: 520px;
+
+}
+
+
+.resource-link {
+
+    margin-top: auto;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: fit-content;
+
+    color:
+        var(--waec-blue);
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+.resource-link span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.resource-link:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================================
+   LATEST NEWS
+========================================================= */
+
+.waec-updates-section {
+
+    background:
+        var(--waec-surface);
+
+}
+
+
+.section-heading-row {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.view-all-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    padding:
+        11px 15px;
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius: 10px;
+
+    color:
+        var(--waec-blue);
+
+    background:
+        var(--waec-bg);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+
+}
+
+
+.view-all-link:hover {
+
+    background:
+        var(--waec-blue-soft);
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.waec-news-grid {
+
+    margin-top: 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+
+}
+
+
+/* =========================================================
+   NEWS CARDS
+========================================================= */
+
+.waec-news-card {
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius:
+        var(--waec-radius-lg);
+
+    background:
+        var(--waec-white);
+
+    box-shadow:
+        0 8px 25px
+        rgba(35,30,24,.035);
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        box-shadow .4s ease;
+
+}
+
+
+.waec-news-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        var(--waec-shadow-hover);
+
+}
+
+
+.waec-news-image {
+
+    position: relative;
+
+    height: 215px;
+
+    overflow: hidden;
+
+    background:
+        var(--waec-blue-soft);
+
+}
+
+
+.waec-news-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform .6s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.waec-news-card:hover
+.waec-news-image img {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+.waec-news-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(23,63,99,.15),
+            rgba(112,69,47,.10)
+        );
+
+    pointer-events: none;
+
+}
+
+
+.waec-news-image span {
+
+    position: absolute;
+
+    left: 15px;
+
+    bottom: 15px;
+
+    z-index: 2;
+
+    padding:
+        6px 10px;
+
+    border-radius: 100px;
+
+    background:
+        rgba(255,255,255,.92);
+
+    color:
+        var(--waec-blue);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .1em;
+
+}
+
+
+.waec-news-content {
+
+    padding: 24px;
+
+}
+
+
+.waec-news-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.waec-news-meta span {
+
+    color:
+        var(--waec-blue);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .1em;
+
+    text-transform: uppercase;
+
+}
+
+
+.waec-news-meta time {
+
+    color:
+        var(--waec-muted);
+
+    font-size: 10px;
+
+}
+
+
+.waec-news-content h3 {
+
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 20px;
+
+    line-height: 1.3;
+
+    letter-spacing:
+        -.45px;
+
+}
+
+
+.waec-news-content p {
+
+    margin:
+        12px 0 20px;
+
+    color:
+        var(--waec-muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+.waec-news-read {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color:
+        var(--waec-blue);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.waec-news-read:hover {
+
+    text-decoration:
+        underline;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.waec-loading {
+
+    grid-column:
+        1 / -1;
+
+    min-height: 150px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    border:
+        1px dashed var(--waec-border);
+
+    border-radius:
+        var(--waec-radius-md);
+
+    color:
+        var(--waec-muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   IMPORTANT INFORMATION
+========================================================= */
+
+.waec-info-section {
+
+    padding-top: 30px;
+
+    background:
+        var(--waec-surface);
+
+}
+
+
+.waec-info-box {
+
+    position: relative;
+
+    min-height: 280px;
+
+    padding:
+        50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 50px;
+
+    overflow: hidden;
+
+    border-radius:
+        var(--waec-radius-xl);
+
+    background:
+        var(--waec-brown);
+
+    color:
+        #fff;
+
+}
+
+
+.waec-info-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+
+    height: 360px;
+
+    right: -120px;
+
+    top: -180px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 50%;
+
+}
+
+
+.waec-info-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+
+    height: 190px;
+
+    right: 110px;
+
+    bottom: -150px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 50%;
+
+}
+
+
+.waec-info-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 720px;
+
+}
+
+
+.waec-info-label {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+.waec-info-content h2 {
+
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(32px, 4vw, 48px);
+
+    line-height: 1.1;
+
+    letter-spacing:
+        -1.7px;
+
+}
+
+
+.waec-info-content p {
+
+    max-width: 650px;
+
+    margin:
+        18px 0 0;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+}
+
+
+.waec-info-mark {
+
+    position: relative;
+
+    z-index: 2;
+
+    flex-shrink: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(55px, 8vw, 105px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing:
+        -5px;
+
+    color:
+        rgba(255,255,255,.10);
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.waec-cta-section {
+
+    background:
+        var(--waec-bg);
+
+}
+
+
+.waec-cta {
+
+    padding:
+        75px 30px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid var(--waec-border);
+
+    border-radius:
+        var(--waec-radius-xl);
+
+    background:
+        var(--waec-blue);
+
+    color:
+        #fff;
+
+    box-shadow:
+        0 25px 65px
+        rgba(23,63,99,.15);
+
+}
+
+
+.waec-cta > span {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color:
+        rgba(255,255,255,.62);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .17em;
+
+}
+
+
+.waec-cta h2 {
+
+    max-width: 720px;
+
+    margin:
+        0 auto;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(32px, 5vw, 55px);
+
+    line-height:
+        1.08;
+
+    letter-spacing:
+        -2px;
+
+}
+
+
+.waec-cta p {
+
+    max-width: 600px;
+
+    margin:
+        18px auto 30px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 15px;
+
+}
+
+
+.waec-primary-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding:
+        13px 19px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:
+        11px;
+
+    background:
+        #fff;
+
+    color:
+        var(--waec-blue);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.waec-primary-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(0,0,0,.14);
+
+}
+
+
+.waec-primary-btn span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.waec-primary-btn:hover span {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+
+    padding:
+        65px 0 0;
+
+    background:
+        #e9e3d9;
+
+    border-top:
+        1px solid var(--waec-border);
+
+}
+
+
+.footer-inner {
+
+    width:
+        min(
+            calc(100% - 48px),
+            var(--waec-container)
+        );
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.6fr
+        1fr
+        1fr;
+
+    gap: 60px;
+
+    padding-bottom:
+        55px;
+
+}
+
+
+.footer-brand .brand {
+
+    margin-bottom: 18px;
+
+}
+
+
+.footer-brand p {
+
+    max-width: 360px;
+
+    margin: 0;
+
+    color:
+        var(--waec-muted);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+}
+
+
+.footer-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+}
+
+
+.footer-links strong {
+
+    margin-bottom: 8px;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 13px;
+
+}
+
+
+.footer-links a {
+
+    color:
+        var(--waec-muted);
+
+    font-size: 12px;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.footer-links a:hover {
+
+    color:
+        var(--waec-blue);
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.footer-bottom {
+
+    min-height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        15px 24px;
+
+    border-top:
+        1px solid var(--waec-border);
+
+    color:
+        var(--waec-muted);
+
+    text-align:
+        center;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.molas-top {
+
+    position: fixed;
+
+    right: 22px;
+
+    bottom: 22px;
+
+    z-index: 99999;
+
+    width: 46px;
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        var(--waec-blue);
+
+    color:
+        #fff;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease,
+        transform .3s ease,
+        background .25s ease;
+
+}
+
+
+.molas-top.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.molas-top:hover {
+
+    background:
+        var(--waec-blue-dark);
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+.molas-top:focus {
+
+    outline: none;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .header-inner {
+
+        min-height: 74px;
+
+    }
+
+
+    .main-nav {
+
+        position: absolute;
+
+        top: 74px;
+
+        left: 24px;
+
+        right: 24px;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 4px;
+
+        padding: 12px;
+
+        border:
+            1px solid var(--waec-border);
+
+        border-radius: 16px;
+
+        background:
+            var(--waec-white);
+
+        box-shadow:
+            0 20px 45px
+            rgba(30,25,20,.13);
+
+    }
+
+
+    .main-nav.show {
+
+        display: flex;
+
+    }
+
+
+    .main-nav > a,
+    .nav-dropdown > a {
+
+        width: 100%;
+
+        justify-content: space-between;
+
+    }
+
+
+    .mobile-menu-btn {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+    }
+
+
+    .nav-dropdown:hover
+    .dropdown-menu {
+
+        opacity: 0;
+
+        visibility: hidden;
+
+    }
+
+
+    .nav-dropdown.open
+    .dropdown-menu {
+
+        position: static;
+
+        display: block;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+        margin:
+            2px 0 5px;
+
+        box-shadow: none;
+
+        border:
+            0;
+
+        border-top:
+            1px solid var(--waec-border);
+
+        border-radius: 0;
+
+    }
+
+
+    .waec-hero-inner {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 55px;
+
+    }
+
+
+    .waec-hero-content {
+
+        max-width: 800px;
+
+    }
+
+
+    .waec-hero-visual {
+
+        justify-content:
+            flex-start;
+
+    }
+
+
+    .waec-visual-card {
+
+        max-width: 430px;
+
+    }
+
+
+    .waec-news-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .waec-news-card:last-child {
+
+        grid-column:
+            1 / -1;
+
+        max-width: calc(50% - 11px);
+
+    }
+
+
+    .footer-inner {
+
+        grid-template-columns:
+            1.4fr 1fr 1fr;
+
+        gap: 35px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+    .waec-container,
+    .header-inner,
+    .waec-hero-inner,
+    .footer-inner {
+
+        width:
+            calc(100% - 32px);
+
+    }
+
+
+    .site-header {
+
+        position: sticky;
+
+    }
+
+
+    .header-inner {
+
+        min-height: 70px;
+
+    }
+
+
+    .main-nav {
+
+        top: 70px;
+
+        left: 16px;
+
+        right: 16px;
+
+    }
+
+
+    .brand-main {
+
+        font-size: 24px;
+
+    }
+
+
+    .brand-sub {
+
+        font-size: 7px;
+
+    }
+
+
+    .waec-hero {
+
+        padding:
+            65px 0 70px;
+
+    }
+
+
+    .waec-hero-inner {
+
+        gap: 45px;
+
+    }
+
+
+    .waec-eyebrow {
+
+        font-size: 9px;
+
+        letter-spacing:
+            .12em;
+
+    }
+
+
+    .waec-hero h1 {
+
+        font-size:
+            clamp(40px, 13vw, 58px);
+
+        letter-spacing:
+            -2.4px;
+
+    }
+
+
+    .waec-hero p {
+
+        margin-top: 20px;
+
+        font-size: 15px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .waec-visual-card {
+
+        width: 100%;
+
+        min-height: 260px;
+
+        padding: 30px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .waec-visual-card strong {
+
+        font-size: 31px;
+
+    }
+
+
+    .waec-hubs-section,
+    .waec-resources-section,
+    .waec-updates-section,
+    .waec-info-section,
+    .waec-cta-section {
+
+        padding:
+            70px 0;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size:
+            32px;
+
+        letter-spacing:
+            -1.2px;
+
+    }
+
+
+    .section-heading p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .waec-hub-grid {
+
+        grid-template-columns:
+            1fr;
+
+        margin-top:
+            32px;
+
+    }
+
+
+    .waec-hub-card {
+
+        min-height:
+            170px;
+
+        padding:
+            24px;
+
+        gap:
+            16px;
+
+    }
+
+
+    .waec-hub-icon {
+
+        flex-basis:
+            50px;
+
+        width:
+            50px;
+
+        height:
+            50px;
+
+    }
+
+
+    .waec-hub-content h3 {
+
+        font-size:
+            23px;
+
+    }
+
+
+    .waec-hub-content p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .waec-resource-grid {
+
+        grid-template-columns:
+            1fr;
+
+        margin-top:
+            32px;
+
+        gap:
+            16px;
+
+    }
+
+
+    .waec-resource-card {
+
+        min-height:
+            285px;
+
+        padding:
+            25px;
+
+    }
+
+
+    .waec-resource-card h3 {
+
+        margin-top:
+            24px;
+
+        font-size:
+            23px;
+
+    }
+
+
+    .section-heading-row {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            18px;
+
+    }
+
+
+    .view-all-link {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .waec-news-grid {
+
+        grid-template-columns:
+            1fr;
+
+        margin-top:
+            30px;
+
+        gap:
+            17px;
+
+    }
+
+
+    .waec-news-card:last-child {
+
+        grid-column:
+            auto;
+
+        max-width:
+            none;
+
+    }
+
+
+    .waec-news-image {
+
+        height:
+            205px;
+
+    }
+
+
+    .waec-news-content {
+
+        padding:
+            21px;
+
+    }
+
+
+    .waec-news-content h3 {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .waec-info-section {
+
+        padding-top:
+            0;
+
+    }
+
+
+    .waec-info-box {
+
+        min-height:
+            auto;
+
+        padding:
+            35px 26px;
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            25px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .waec-info-content h2 {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .waec-info-content p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .waec-info-mark {
+
+        font-size:
+            65px;
+
+        letter-spacing:
+            -3px;
+
+    }
+
+
+    .waec-cta {
+
+        padding:
+            50px 23px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .waec-cta h2 {
+
+        font-size:
+            34px;
+
+        letter-spacing:
+            -1.3px;
+
+    }
+
+
+    .waec-cta p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .footer-inner {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:
+            40px 25px;
+
+    }
+
+
+    .footer-brand {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+
+    .footer-bottom {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .molas-top {
+
+        right:
+            16px;
+
+        bottom:
+            calc(
+                16px +
+                env(safe-area-inset-bottom)
+            );
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        border-radius:
+            10px;
+
+        font-size:
+            18px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 390px) {
+
+    .waec-hero h1 {
+
+        font-size:
+            38px;
+
+    }
+
+
+    .waec-hero {
+
+        padding-top:
+            55px;
+
+    }
+
+
+    .waec-hub-card {
+
+        padding:
+            21px;
+
+    }
+
+
+    .waec-hub-content {
+
+        padding-right:
+            20px;
+
+    }
+
+
+    .waec-resource-card {
+
+        padding:
+            22px;
+
+    }
+
+
+    .waec-info-content h2,
+    .waec-cta h2 {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .footer-inner {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer-brand {
+
+        grid-column:
+            auto;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOLAS WAEC — CSS ONLY ANIMATION SYSTEM
+   No JavaScript required
+========================================================= */
+
+
+/* =========================================================
+   HERO — SOFT FLOATING MOVEMENT
+========================================================= */
+
+.waec-visual-card {
+    animation:
+        waecCardFloat 6s ease-in-out infinite;
+}
+
+
+@keyframes waecCardFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+}
+
+
+/* =========================================================
+   HERO BACKGROUND SHAPES
+========================================================= */
+
+.waec-hero::before {
+
+    animation:
+        waecOrbOne 10s ease-in-out infinite;
+
+}
+
+
+.waec-hero::after {
+
+    animation:
+        waecOrbTwo 13s ease-in-out infinite;
+
+}
+
+
+@keyframes waecOrbOne {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-18px, 15px);
+    }
+
+}
+
+
+@keyframes waecOrbTwo {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -14px);
+    }
+
+}
+
+
+/* =========================================================
+   LARGE "W" — VERY SLOW MOVEMENT
+========================================================= */
+
+.waec-visual-card::before {
+
+    animation:
+        waecWMove 9s ease-in-out infinite;
+
+}
+
+
+@keyframes waecWMove {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate(-8px, 8px)
+            rotate(-3deg);
+    }
+
+}
+
+
+/* =========================================================
+   HUB CARDS
+========================================================= */
+
+.waec-hub-card {
+
+    transition:
+        transform .45s cubic-bezier(.16,1,.3,1),
+        box-shadow .45s ease,
+        border-color .35s ease,
+        background .35s ease;
+
+}
+
+
+.waec-hub-card:hover {
+
+    transform:
+        translateY(-8px);
+
+}
+
+
+.waec-hub-icon {
+
+    transition:
+        transform .45s cubic-bezier(.16,1,.3,1),
+        background .35s ease,
+        color .35s ease;
+
+}
+
+
+.waec-hub-card:hover
+.waec-hub-icon {
+
+    transform:
+        rotate(-6deg)
+        scale(1.06);
+
+}
+
+
+.waec-hub-arrow {
+
+    transition:
+        transform .35s cubic-bezier(.16,1,.3,1),
+        background .3s ease;
+
+}
+
+
+.waec-hub-card:hover
+.waec-hub-arrow {
+
+    transform:
+        translate(5px, -3px);
+
+}
+
+
+/* =========================================================
+   RESOURCE CARDS
+========================================================= */
+
+.waec-resource-card {
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        box-shadow .45s ease,
+        border-color .35s ease;
+
+}
+
+
+.waec-resource-card:hover {
+
+    transform:
+        translateY(-9px);
+
+}
+
+
+.resource-icon {
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.waec-resource-card:hover
+.resource-icon {
+
+    transform:
+        translateY(-4px)
+        rotate(4deg);
+
+}
+
+
+.resource-link span {
+
+    display: inline-block;
+
+    transition:
+        transform .35s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.resource-link:hover span {
+
+    transform:
+        translateX(7px);
+
+}
+
+
+/* =========================================================
+   NEWS CARDS
+========================================================= */
+
+.waec-news-card {
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        box-shadow .45s ease;
+
+}
+
+
+.waec-news-card:hover {
+
+    transform:
+        translateY(-8px);
+
+}
+
+
+.waec-news-image img {
+
+    transition:
+        transform .8s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.waec-news-card:hover
+.waec-news-image img {
+
+    transform:
+        scale(1.07);
+
+}
+
+
+/* =========================================================
+   NEWS CATEGORY PILL
+========================================================= */
+
+.waec-news-image span {
+
+    transition:
+        transform .35s ease,
+        background .35s ease;
+
+}
+
+
+.waec-news-card:hover
+.waec-news-image span {
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================================================
+   SECTION HEADING — UNDERLINE MOTION
+========================================================= */
+
+.section-heading h2 {
+
+    position: relative;
+
+    width: fit-content;
+
+}
+
+
+.section-heading h2::after {
+
+    content: "";
+
+    display: block;
+
+    width: 42px;
+
+    height: 3px;
+
+    margin-top: 12px;
+
+    border-radius: 10px;
+
+    background:
+        var(--waec-blue);
+
+    transform-origin:
+        left center;
+
+    transition:
+        width .5s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.section-heading:hover
+h2::after {
+
+    width: 85px;
+
+}
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
+
+.waec-info-box {
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        box-shadow .5s ease;
+
+}
+
+
+.waec-info-box:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 30px 70px
+        rgba(112,69,47,.15);
+
+}
+
+
+/* =========================================================
+   INFO DECORATIVE RINGS
+========================================================= */
+
+.waec-info-box::before {
+
+    animation:
+        waecRingOne 11s ease-in-out infinite;
+
+}
+
+
+.waec-info-box::after {
+
+    animation:
+        waecRingTwo 8s ease-in-out infinite;
+
+}
+
+
+@keyframes waecRingOne {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate(-15px, 12px)
+            rotate(8deg);
+    }
+
+}
+
+
+@keyframes waecRingTwo {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0);
+    }
+
+    50% {
+        transform:
+            translate(12px, -10px);
+    }
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.waec-cta {
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        box-shadow .5s ease;
+
+}
+
+
+.waec-cta:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 32px 75px
+        rgba(23,63,99,.20);
+
+}
+
+
+.waec-primary-btn {
+
+    transition:
+        transform .35s cubic-bezier(.16,1,.3,1),
+        box-shadow .35s ease;
+
+}
+
+
+.waec-primary-btn:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.footer-links a {
+
+    transition:
+        transform .3s cubic-bezier(.16,1,.3,1),
+        color .25s ease;
+
+}
+
+
+.footer-links a:hover {
+
+    transform:
+        translateX(6px);
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.molas-top {
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease,
+        transform .4s cubic-bezier(.16,1,.3,1),
+        background .25s ease;
+
+}
+
+
+.molas-top:hover {
+
+    transform:
+        translateY(-6px);
+
+}
+
+
+/* =========================================================
+   MOBILE — KEEP MOTION SUBTLE
+========================================================= */
+
+@media (max-width: 640px) {
+
+    .waec-visual-card {
+
+        animation-duration:
+            7s;
+
+    }
+
+
+    .waec-hub-card:hover {
+
+        transform:
+            translateY(-5px);
+
+    }
+
+
+    .waec-resource-card:hover {
+
+        transform:
+            translateY(-6px);
+
+    }
+
+
+    .waec-news-card:hover {
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation:
+            none !important;
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+/* =========================================================
+   WAEC PAGE ANIMATIONS
+   SOFT REVEAL • STAGGER • FLOAT
+========================================================= */
+
+/* Initial state */
+
+.waec-hero-content,
+.waec-hero-visual,
+.section-heading,
+.waec-hub-card,
+.waec-resource-card,
+.waec-news-card,
+.waec-info-box,
+.waec-cta {
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+
+/* Visible state */
+
+.waec-hero-content.waec-visible,
+.waec-hero-visual.waec-visible,
+.section-heading.waec-visible,
+.waec-hub-card.waec-visible,
+.waec-resource-card.waec-visible,
+.waec-news-card.waec-visible,
+.waec-info-box.waec-visible,
+.waec-cta.waec-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity .7s ease,
+        transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.waec-hero-content.waec-visible {
+    transition-delay: .05s;
+}
+
+.waec-hero-visual.waec-visible {
+    transition-delay: .18s;
+}
+
+
+/* =========================================================
+   STAGGER HUB CARDS
+========================================================= */
+
+.waec-hub-card:nth-child(1).waec-visible {
+    transition-delay: .05s;
+}
+
+.waec-hub-card:nth-child(2).waec-visible {
+    transition-delay: .15s;
+}
+
+
+/* =========================================================
+   STAGGER RESOURCE CARDS
+========================================================= */
+
+.waec-resource-card:nth-child(1).waec-visible {
+    transition-delay: .05s;
+}
+
+.waec-resource-card:nth-child(2).waec-visible {
+    transition-delay: .12s;
+}
+
+.waec-resource-card:nth-child(3).waec-visible {
+    transition-delay: .19s;
+}
+
+.waec-resource-card:nth-child(4).waec-visible {
+    transition-delay: .26s;
+}
+
+
+/* =========================================================
+   NEWS CARDS
+========================================================= */
+
+.waec-news-card:nth-child(1).waec-visible {
+    transition-delay: .05s;
+}
+
+.waec-news-card:nth-child(2).waec-visible {
+    transition-delay: .12s;
+}
+
+.waec-news-card:nth-child(3).waec-visible {
+    transition-delay: .19s;
+}
+
+
+/* =========================================================
+   HERO VISUAL FLOAT
+========================================================= */
+
+.waec-visual-card {
+    animation:
+        waecFloat 5s ease-in-out infinite;
+}
+
+
+@keyframes waecFloat {
+    
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+    
+    50% {
+        transform:
+            translateY(-8px);
+    }
+    
+}
+
+
+/* =========================================================
+   DECORATIVE HERO CIRCLES
+========================================================= */
+
+.waec-hero::before {
+    
+    animation:
+        waecCircleDrift 12s ease-in-out infinite;
+    
+}
+
+
+.waec-hero::after {
+    
+    animation:
+        waecCircleDriftReverse 14s ease-in-out infinite;
+    
+}
+
+
+@keyframes waecCircleDrift {
+    
+    0%,
+    100% {
+        transform:
+            translate(0, 0);
+    }
+    
+    50% {
+        transform:
+            translate(-18px, 15px);
+    }
+    
+}
+
+
+@keyframes waecCircleDriftReverse {
+    
+    0%,
+    100% {
+        transform:
+            translate(0, 0);
+    }
+    
+    50% {
+        transform:
+            translate(15px, -12px);
+    }
+    
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    
+    .waec-hero-content,
+    .waec-hero-visual,
+    .section-heading,
+    .waec-hub-card,
+    .waec-resource-card,
+    .waec-news-card,
+    .waec-info-box,
+    .waec-cta {
+        
+        opacity: 1;
+        transform: none;
+    }
+    
+    .waec-visual-card,
+    .waec-hero::before,
+    .waec-hero::after {
+        
+        animation: none;
+    }
+    

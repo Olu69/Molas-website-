@@ -581,12 +581,6 @@ async function startPractice() {
         );
 
 
-        /*
-         * IMPORTANT:
-         * We use the selected year directly.
-         * We do not convert it with Number().
-         */
-
         const {
             data,
             error
@@ -678,18 +672,10 @@ async function startPractice() {
         hideLoading();
 
 
-        /*
-         * HIDE SELECTION
-         */
-
         selectionPanel.classList.add(
             "hidden"
         );
 
-
-        /*
-         * HIDE OTHER SECTIONS
-         */
 
         resultSection.classList.add(
             "hidden"
@@ -701,18 +687,10 @@ async function startPractice() {
         );
 
 
-        /*
-         * SHOW QUESTIONS
-         */
-
         questionSection.classList.remove(
             "hidden"
         );
 
-
-        /*
-         * SUBJECT NAME
-         */
 
         questionSubject.textContent =
             currentSubject
@@ -720,20 +698,12 @@ async function startPractice() {
                 : "JAMB";
 
 
-        /*
-         * RENDER FIRST QUESTION
-         */
-
         renderQuestion();
 
 
-        /*
-         * SCROLL TO TOP
-         */
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        questionSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
 
@@ -797,26 +767,14 @@ function renderQuestion() {
         currentQuestionIndex + 1;
 
 
-    /*
-     * QUESTION NUMBER
-     */
-
     questionNumber.textContent =
         `${number} / ${total}`;
 
-
-    /*
-     * QUESTION TEXT
-     */
 
     questionText.textContent =
         currentQuestion.question ||
         "";
 
-
-    /*
-     * CLEAR OPTIONS
-     */
 
     optionsContainer.innerHTML =
         "";
@@ -825,10 +783,6 @@ function renderQuestion() {
     answerFeedback.innerHTML =
         "";
 
-
-    /*
-     * OPTIONS
-     */
 
     const options = [
 
@@ -907,10 +861,6 @@ function renderQuestion() {
             `;
 
 
-            /*
-             * RESTORE SELECTED ANSWER
-             */
-
             if (
                 selectedAnswers[
                     currentQuestion.id
@@ -923,10 +873,6 @@ function renderQuestion() {
 
             }
 
-
-            /*
-             * CLICK
-             */
 
             button.addEventListener(
                 "click",
@@ -1028,9 +974,9 @@ previousButton.addEventListener(
         renderQuestion();
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        questionSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
     }
@@ -1061,9 +1007,9 @@ nextButton.addEventListener(
         renderQuestion();
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        questionSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
     }
@@ -1264,9 +1210,9 @@ function submitTest() {
     );
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    resultSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
     });
 
 }
@@ -1398,9 +1344,9 @@ reviewButton.addEventListener(
         );
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        reviewSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
     }
@@ -1506,10 +1452,6 @@ function renderReview() {
                         "review-option";
 
 
-                    /*
-                     * CORRECT OPTION
-                     */
-
                     if (
                         normalizeAnswer(
                             option.letter
@@ -1522,10 +1464,6 @@ function renderReview() {
 
                     }
 
-
-                    /*
-                     * WRONG USER ANSWER
-                     */
 
                     if (
                         normalizeAnswer(
@@ -1742,9 +1680,9 @@ function restartPage() {
     clearError();
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    selectionPanel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
     });
 
 }

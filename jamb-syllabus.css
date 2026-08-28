@@ -846,3 +846,317 @@ MOBILE
 }
 
 }
+/* =========================================================
+   MOLAS JAMB SYLLABUS
+   LIVING / FLOATING CARD ANIMATIONS
+========================================================= */
+
+
+/* =========================================================
+   SUBJECT CARDS
+========================================================= */
+
+.syllabus-subject-card {
+    position: relative;
+    will-change: transform;
+    animation: syllabusCardFloat 4.8s ease-in-out infinite;
+}
+
+
+/* Stagger the cards so they don't move together */
+
+.syllabus-subject-card:nth-child(1) {
+    animation-delay: -0.4s;
+}
+
+.syllabus-subject-card:nth-child(2) {
+    animation-delay: -1.1s;
+}
+
+.syllabus-subject-card:nth-child(3) {
+    animation-delay: -1.8s;
+}
+
+.syllabus-subject-card:nth-child(4) {
+    animation-delay: -2.5s;
+}
+
+.syllabus-subject-card:nth-child(5) {
+    animation-delay: -3.2s;
+}
+
+.syllabus-subject-card:nth-child(6) {
+    animation-delay: -3.9s;
+}
+
+.syllabus-subject-card:nth-child(7) {
+    animation-delay: -4.6s;
+}
+
+.syllabus-subject-card:nth-child(8) {
+    animation-delay: -5.3s;
+}
+
+.syllabus-subject-card:nth-child(9) {
+    animation-delay: -6s;
+}
+
+.syllabus-subject-card:nth-child(10) {
+    animation-delay: -6.7s;
+}
+
+
+/* Main floating motion */
+
+@keyframes syllabusCardFloat {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-7px) rotate(-0.35deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(0.45deg);
+    }
+
+    75% {
+        transform: translateY(-5px) rotate(-0.2deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+}
+
+
+/* =========================================================
+   HOVER
+   Pause floating and lift the selected card
+========================================================= */
+
+.syllabus-subject-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-11px) rotate(0deg);
+}
+
+
+/* =========================================================
+   SUBJECT ICONS
+========================================================= */
+
+.subject-card-icon {
+    animation: subjectIconFloat 3.2s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform;
+}
+
+
+/* Different icon timing */
+
+.syllabus-subject-card:nth-child(odd) .subject-card-icon {
+    animation-delay: -0.8s;
+}
+
+.syllabus-subject-card:nth-child(even) .subject-card-icon {
+    animation-delay: -1.7s;
+}
+
+
+@keyframes subjectIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    35% {
+        transform: translateY(-3px) rotate(-3deg);
+    }
+
+    65% {
+        transform: translateY(2px) rotate(3deg);
+    }
+
+}
+
+
+/* =========================================================
+   ARROWS
+========================================================= */
+
+.subject-card-arrow {
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.syllabus-subject-card:hover .subject-card-arrow {
+    transform: translateX(6px);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+   Very subtle breathing effect
+========================================================= */
+
+.syllabus-search {
+    animation: searchBreath 4s ease-in-out infinite;
+}
+
+
+@keyframes searchBreath {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+
+}
+
+
+.syllabus-search:focus-within {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   SEARCH ICON
+========================================================= */
+
+.syllabus-search-icon {
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.syllabus-search:focus-within .syllabus-search-icon {
+    transform: rotate(-8deg) scale(1.05);
+}
+
+
+/* =========================================================
+   HERO BADGE
+========================================================= */
+
+.syllabus-badge {
+    animation: badgeFloat 3.5s ease-in-out infinite;
+}
+
+
+@keyframes badgeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* =========================================================
+   STUDY SMART NOTE
+========================================================= */
+
+.syllabus-note {
+    animation: noteFloat 5.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+
+@keyframes noteFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(0.2deg);
+    }
+
+}
+
+
+.syllabus-note:hover {
+    animation-play-state: paused;
+    transform: translateY(-8px);
+}
+
+
+/* =========================================================
+   NOTE ICON
+========================================================= */
+
+.syllabus-note-icon {
+    animation: noteIconPulse 3s ease-in-out infinite;
+}
+
+
+@keyframes noteIconPulse {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.06) rotate(3deg);
+    }
+
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.syllabus-no-results {
+    animation: resultsAppear 0.35s ease both;
+}
+
+
+@keyframes resultsAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .syllabus-subject-card,
+    .subject-card-icon,
+    .syllabus-search,
+    .syllabus-badge,
+    .syllabus-note,
+    .syllabus-note-icon {
+        animation: none !important;
+    }
+
+}

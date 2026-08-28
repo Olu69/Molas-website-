@@ -1,6 +1,7 @@
 /* =========================================================
    MOLAS — JAMB PAST QUESTIONS
    JAMB HUB DESIGN SYSTEM
+   CLEAN • SMOOTH • RESPONSIVE
 ========================================================= */
 
 :root {
@@ -75,6 +76,45 @@ select {
 
 
 /* =========================================================
+   PAGE LOAD ANIMATION
+========================================================= */
+
+@keyframes pastFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pastFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pastScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
    HEADER
 ========================================================= */
 
@@ -92,7 +132,10 @@ select {
 }
 
 .past-header-inner {
-    width: min(calc(100% - 48px), var(--container));
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
 
     min-height: 72px;
 
@@ -103,6 +146,8 @@ select {
     justify-content: space-between;
 
     gap: 20px;
+
+    animation: pastFadeIn 0.55s ease both;
 }
 
 
@@ -116,6 +161,14 @@ select {
     flex-direction: column;
 
     line-height: 1;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.past-brand:hover {
+    opacity: 0.78;
 }
 
 .past-brand-main {
@@ -166,7 +219,8 @@ select {
     transition:
         transform 0.2s ease,
         border-color 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .past-back:hover {
@@ -175,6 +229,13 @@ select {
     border-color: #cfc7b9;
 
     background: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(44, 38, 30, 0.05);
+}
+
+.past-back:active {
+    transform: translateY(0);
 }
 
 
@@ -183,7 +244,10 @@ select {
 ========================================================= */
 
 .past-main {
-    width: min(calc(100% - 48px), var(--container));
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
 
     margin: 0 auto;
 
@@ -211,6 +275,9 @@ select {
     box-shadow: var(--shadow-card);
 
     overflow: hidden;
+
+    animation:
+        pastFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .past-intro::after {
@@ -229,6 +296,9 @@ select {
     background: var(--jamb-green-soft);
 
     pointer-events: none;
+
+    animation:
+        pastScaleIn 0.9s ease 0.15s both;
 }
 
 
@@ -258,6 +328,9 @@ select {
     font-weight: 850;
 
     letter-spacing: 0.1em;
+
+    animation:
+        pastFadeUp 0.55s ease 0.1s both;
 }
 
 
@@ -274,13 +347,20 @@ select {
 
     margin-top: 17px;
 
-    font-size: clamp(44px, 5vw, 68px);
+    font-size: clamp(
+        44px,
+        5vw,
+        68px
+    );
 
     line-height: 0.98;
 
     letter-spacing: -0.065em;
 
     font-weight: 800;
+
+    animation:
+        pastFadeUp 0.65s ease 0.16s both;
 }
 
 .past-intro h1 span {
@@ -306,6 +386,9 @@ select {
     font-size: 15px;
 
     line-height: 1.7;
+
+    animation:
+        pastFadeUp 0.65s ease 0.22s both;
 }
 
 
@@ -325,6 +408,9 @@ select {
     background: var(--molas-surface);
 
     box-shadow: var(--shadow-card);
+
+    animation:
+        pastFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 
@@ -347,7 +433,11 @@ select {
 }
 
 .selection-heading h2 {
-    font-size: clamp(30px, 3.5vw, 42px);
+    font-size: clamp(
+        30px,
+        3.5vw,
+        42px
+    );
 
     line-height: 1;
 
@@ -386,6 +476,17 @@ select {
     flex-direction: column;
 
     gap: 9px;
+
+    animation:
+        pastFadeUp 0.55s ease both;
+}
+
+.selection-field:first-child {
+    animation-delay: 0.18s;
+}
+
+.selection-field:last-child {
+    animation-delay: 0.25s;
 }
 
 .selection-field label {
@@ -400,7 +501,7 @@ select {
 
 
 /* =========================================================
-   LARGE SELECT BOXES
+   SELECT BOXES
 ========================================================= */
 
 .selection-field select {
@@ -439,6 +540,9 @@ select {
     border-color: #cfc7b9;
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(44, 38, 30, 0.055);
 }
 
 .selection-field select:focus {
@@ -446,6 +550,8 @@ select {
 
     box-shadow:
         0 0 0 3px rgba(29, 143, 82, 0.1);
+
+    transform: translateY(-1px);
 }
 
 
@@ -492,6 +598,10 @@ select {
         0 9px 20px rgba(29, 143, 82, 0.2);
 }
 
+.past-start-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
 .past-start-button:disabled {
     opacity: 0.45;
 
@@ -511,10 +621,22 @@ select {
     color: var(--molas-muted);
 
     font-size: 11px;
+
+    opacity: 0;
+
+    transform: translateY(-4px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
 .selection-message.visible {
     display: block;
+
+    opacity: 1;
+
+    transform: translateY(0);
 }
 
 
@@ -524,6 +646,9 @@ select {
 
 .question-section {
     margin-top: 45px;
+
+    animation:
+        pastFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hidden {
@@ -562,7 +687,11 @@ select {
 .question-top h2 {
     margin-top: 7px;
 
-    font-size: clamp(30px, 3.5vw, 42px);
+    font-size: clamp(
+        30px,
+        3.5vw,
+        42px
+    );
 
     line-height: 1;
 
@@ -638,7 +767,8 @@ select {
 
     background: var(--jamb-green);
 
-    transition: width 0.3s ease;
+    transition:
+        width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
@@ -656,6 +786,9 @@ select {
     background: var(--molas-surface);
 
     box-shadow: var(--shadow-card);
+
+    animation:
+        pastScaleIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 
@@ -673,6 +806,9 @@ select {
     font-weight: 700;
 
     letter-spacing: -0.02em;
+
+    animation:
+        pastFadeUp 0.4s ease 0.05s both;
 }
 
 
@@ -694,9 +830,6 @@ select {
 
 /* =========================================================
    ANSWER OPTION
-
-   IMPORTANT:
-   JavaScript uses .answer-option
 ========================================================= */
 
 .answer-option {
@@ -746,6 +879,32 @@ select {
 
 
 /* =========================================================
+   OPTION ENTRANCE
+========================================================= */
+
+.answer-option {
+    animation:
+        pastFadeUp 0.4s ease both;
+}
+
+.answer-option:nth-child(1) {
+    animation-delay: 0.08s;
+}
+
+.answer-option:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+.answer-option:nth-child(3) {
+    animation-delay: 0.20s;
+}
+
+.answer-option:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+
+/* =========================================================
    OPTION HOVER
 ========================================================= */
 
@@ -772,6 +931,9 @@ select {
 
     box-shadow:
         0 0 0 3px rgba(29, 143, 82, 0.1);
+
+    animation:
+        pastScaleIn 0.25s ease both;
 }
 
 
@@ -863,6 +1025,9 @@ select {
     font-size: 12px;
 
     font-weight: 700;
+
+    animation:
+        pastFadeUp 0.3s ease both;
 }
 
 
@@ -880,6 +1045,9 @@ select {
     gap: 12px;
 
     margin-top: 16px;
+
+    animation:
+        pastFadeUp 0.4s ease 0.18s both;
 }
 
 .question-button {
@@ -911,6 +1079,13 @@ select {
     transform: translateY(-1px);
 
     background: var(--jamb-green-dark);
+
+    box-shadow:
+        0 6px 15px rgba(29, 143, 82, 0.14);
+}
+
+.question-button:active:not(:disabled) {
+    transform: translateY(0);
 }
 
 .question-button:disabled {
@@ -942,6 +1117,9 @@ select {
 
 .result-section {
     margin-top: 45px;
+
+    animation:
+        pastFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .result-card {
@@ -964,6 +1142,9 @@ select {
     text-align: center;
 
     overflow: hidden;
+
+    animation:
+        pastScaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .result-card::after {
@@ -1058,6 +1239,9 @@ select {
 
     box-shadow:
         0 0 0 1px var(--molas-border);
+
+    animation:
+        pastScaleIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .result-score strong {
@@ -1108,6 +1292,17 @@ select {
     border-radius: 14px;
 
     background: #ffffff;
+
+    animation:
+        pastFadeUp 0.45s ease both;
+}
+
+.result-detail:first-child {
+    animation-delay: 0.22s;
+}
+
+.result-detail:last-child {
+    animation-delay: 0.29s;
 }
 
 .result-detail span {
@@ -1149,6 +1344,9 @@ select {
     gap: 10px;
 
     margin-top: 22px;
+
+    animation:
+        pastFadeUp 0.45s ease 0.34s both;
 }
 
 .result-button {
@@ -1172,13 +1370,21 @@ select {
 
     transition:
         transform 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .result-button:hover {
     transform: translateY(-1px);
 
     background: var(--jamb-green-dark);
+
+    box-shadow:
+        0 6px 15px rgba(29, 143, 82, 0.14);
+}
+
+.result-button:active {
+    transform: translateY(0);
 }
 
 .result-button.secondary {
@@ -1196,6 +1402,9 @@ select {
 
 .review-section {
     margin-top: 45px;
+
+    animation:
+        pastFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .review-heading {
@@ -1248,6 +1457,40 @@ select {
     background: var(--molas-surface);
 
     box-shadow: var(--shadow-card);
+
+    animation:
+        pastFadeUp 0.45s ease both;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.review-card:nth-child(1) {
+    animation-delay: 0.04s;
+}
+
+.review-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.review-card:nth-child(3) {
+    animation-delay: 0.12s;
+}
+
+.review-card:nth-child(4) {
+    animation-delay: 0.16s;
+}
+
+.review-card:nth-child(5) {
+    animation-delay: 0.20s;
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(44, 38, 30, 0.065);
 }
 
 .review-card.correct {
@@ -1346,6 +1589,15 @@ select {
     font-size: 12px;
 
     line-height: 1.4;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.review-option:hover {
+    transform: translateY(-1px);
 }
 
 .review-option .option-letter {
@@ -1436,6 +1688,9 @@ select {
     font-size: 12px;
 
     line-height: 1.6;
+
+    animation:
+        pastFadeUp 0.3s ease both;
 }
 
 .review-explanation strong {
@@ -1473,6 +1728,9 @@ select {
     color: var(--molas-muted);
 
     font-size: 13px;
+
+    animation:
+        pastFadeIn 0.35s ease both;
 }
 
 .page-message.error {
@@ -1499,7 +1757,10 @@ select {
 }
 
 .past-footer-inner {
-    width: min(calc(100% - 48px), var(--container));
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
 
     margin: 0 auto;
 
@@ -1536,10 +1797,23 @@ select {
     font-size: 11px;
 
     font-weight: 800;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.past-footer-inner a:hover {
+    opacity: 0.75;
+
+    transform: translateX(-2px);
 }
 
 .past-footer-bottom {
-    width: min(calc(100% - 48px), var(--container));
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
 
     margin: 0 auto;
 
@@ -1571,7 +1845,8 @@ select {
     }
 
     .options-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
     }
 
 }
@@ -1907,6 +2182,26 @@ select {
         height: 32px;
 
         min-width: 32px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
     }
 
 }
