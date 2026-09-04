@@ -3871,3 +3871,8 @@ resourceDeck.addEventListener(
     setupRevealAnimations();
 
 });
+
+
+
+
+
