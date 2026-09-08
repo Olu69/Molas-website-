@@ -3,107 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>MOLAS Education — Nigerian Education News & Admission Updates</title>
-
     <meta
         name="description"
         content="MOLAS Educational Consults — latest Nigerian education news, JAMB, WAEC, NECO, Post-UTME, admission updates and educational services."
     >
-
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 </head>
-
 <body>
-
     <!-- =====================================================
          STICKY TOP
     ====================================================== -->
-
     <div class="sticky-top">
-
-        <!-- =================================================
-             HEADER
-        ================================================== -->
-
+        <!-- HEADER -->
         <header class="site-header">
-
             <div class="header-inner">
-
                 <a href="index.html" class="brand">
-               <img src="molas.png" alt="Molas Educational Consult">    
+                    <img
+                        src="molas.png"
+                        alt="Molas Educational Consult"
+                    >
                 </a>
-
                 <nav class="main-nav">
-
                     <a href="index.html" class="active">
                         Home
                     </a>
-
                     <div class="nav-dropdown">
-
                         <a href="jamb-resources.html">
                             JAMB <span>⌄</span>
                         </a>
-
                         <div class="dropdown-menu">
-                            <a href="jamb-resources.html">UTME Updates</a>
-                            <a href="jamb-resources.html">JAMB CAPS</a>
-                            <a href="jamb-resources.html">Admission Status</a>
-                            <a href="jamb-resources.html">Cut-off Marks</a>
-                            <a href="jamb-resources.html">Change of Course</a>
+                            <a href="jamb-resources.html">
+                                UTME Updates
+                            </a>
+                            <a href="jamb-resources.html">
+                                JAMB CAPS
+                            </a>
+                            <a href="jamb-resources.html">
+                                Admission Status
+                            </a>
+                            <a href="jamb-resources.html">
+                                Cut-off Marks
+                            </a>
+                            <a href="jamb-resources.html">
+                                Change of Course
+                            </a>
                         </div>
-
                     </div>
-
                     <div class="nav-dropdown">
-
                         <a href="#">
                             Exams <span>⌄</span>
                         </a>
-
                         <div class="dropdown-menu">
-                            <a href="#">WAEC</a>
-                            <a href="#">NECO</a>
-                            <a href="#">NABTEB</a>
-                            <a href="#">GCE</a>
+                            <a href="#">
+                                WAEC
+                            </a>
+                            <a href="#">
+                                NECO
+                            </a>
+                            <a href="#">
+                                NABTEB
+                            </a>
+                            <a href="#">
+                                GCE
+                            </a>
                         </div>
-
                     </div>
-
                     <div class="nav-dropdown">
-
                         <a href="#">
                             Universities <span>⌄</span>
                         </a>
-
                         <div class="dropdown-menu">
-                            <a href="#">Federal Universities</a>
-                            <a href="#">State Universities</a>
-                            <a href="#">Private Universities</a>
-                            <a href="#">Polytechnics</a>
-                            <a href="#">Colleges of Education</a>
+                            <a href="#">
+                                Federal Universities
+                            </a>
+                            <a href="#">
+                                State Universities
+                            </a>
+                            <a href="#">
+                                Private Universities
+                            </a>
+                            <a href="#">
+                                Polytechnics
+                            </a>
+                            <a href="#">
+                                Colleges of Education
+                            </a>
                         </div>
-
                     </div>
-
                     <a href="#">
                         Admissions
                     </a>
-
                     <a href="#">
                         Resources
                     </a>
-
                     <a href="#" class="services-link">
                         MOLAS Services
                     </a>
-
                 </nav>
-
                 <button
                     type="button"
                     class="mobile-menu-btn"
@@ -111,1030 +114,777 @@
                 >
                     ☰
                 </button>
-
             </div>
-
         </header>
-
-
-        <!-- =================================================
-             BREAKING NEWS
-        ================================================== -->
-
+        <!-- BREAKING NEWS -->
         <section class="breaking-bar">
-
             <div class="breaking-label">
-
                 <span class="breaking-dot"></span>
-
                 BREAKING
-
             </div>
-
             <div class="ticker-wrapper">
-
-                <div class="ticker-content">
-
-                    <span>
-                        Latest JAMB admission updates
-                    </span>
-
-                    <span>
-                        WAEC 2026 examination updates
-                    </span>
-
-                    <span>
-                        Latest Post-UTME forms and screening information
-                    </span>
-
-                    <span>
-                        University admission lists and deadlines
-                    </span>
-
+                <div class="ticker-track">
+                    <div
+                        class="ticker-content"
+                        id="ticker-content"
+                    >
+                        <!-- BREAKING NEWS FROM SUPABASE -->
+                    </div>
                 </div>
-
             </div>
-
         </section>
-
     </div>
-
-
     <!-- =====================================================
          MAIN
     ====================================================== -->
-
     <main>
-
-
         <!-- =================================================
              HERO
         ================================================== -->
-
         <section class="hero-background">
+    <div class="hero-section">
 
-            <div class="hero-section">
+        <div class="hero-content">
 
-                <div class="hero-content">
+            <span class="hero-eyebrow">
+                MOLAS EDUCATION UPDATES
+            </span>
 
-                    <span class="hero-eyebrow">
-                        MOLAS EDUCATION UPDATES
-                    </span>
+            <!-- SEARCH -->
+            <form class="search-box">
+                <input
+                    type="search"
+                    placeholder="Search JAMB, WAEC, university, admission..."
+                    aria-label="Search education news"
+                >
 
-                    <h1>
-                        Find the Latest
-                        <span>Education Updates</span>
-                    </h1>
+                <button type="submit">
+                    Search
+                </button>
+            </form>
 
-                    <p>
-                        JAMB, WAEC, NECO, Post-UTME, admission lists,
-                        university updates and more — all in one place.
-                    </p>
+            <!-- QUICK FILTERS -->
+            <div class="quick-filters">
 
-                    <form class="search-box">
+                <a
+                    href="jamb-resources.html"
+                    class="quick-filter"
+                >
+                    JAMB UTME
+                </a>
 
-                        <input
-                            type="search"
-                            placeholder="Search JAMB, WAEC, university, admission..."
-                            aria-label="Search education news"
-                        >
+                <a
+                    href="post-utme.html"
+                    class="quick-filter"
+                >
+                    Post-UTME
+                </a>
 
-                        <button type="submit">
-                            Search
-                        </button>
+                <a
+                    href="waec.html"
+                    class="quick-filter"
+                >
+                    WAEC / NECO
+                </a>
 
-                    </form>
+                <a
+                    href="#"
+                    class="quick-filter"
+                >
+                    Education Updates
+                </a>
 
-                    <div class="quick-filters">
+                <a
+                    href="admission-lists.html"
+                    class="quick-filter"
+                >
+                    Admissions
+                </a>
 
-                        <a
-                            href="jamb-resources.html"
-                            class="quick-filter"
-                        >
-                            JAMB UTME
-                        </a>
+            </div>
 
-                        <a
-                            href="post-utme.html"
-                            class="quick-filter"
-                        >
-                            Post-UTME
-                        </a>
+            <!-- HERO CAROUSEL -->
+            <div
+                class="hero-carousel"
+                id="hero-carousel"
+            >
 
-                        <a
-                            href="waec.html"
-                            class="quick-filter"
-                        >
-                            WAEC / NECO
-                        </a>
+                <div
+                    class="hero-carousel-track"
+                    id="hero-carousel-track"
+                >
 
-                        <a
-                            href="direct-entry.html"
-                            class="quick-filter"
-                        >
-                            Direct Entry
-                        </a>
+                    <div class="hero-slide hero-slide-loading">
 
-                        <a
-                            href="admission-lists.html"
-                            class="quick-filter"
-                        >
-                            Admission Lists
-                        </a>
+                        <span class="hero-slide-category">
+                            MOLAS
+                        </span>
+
+                        <h2>
+                            Loading latest education updates...
+                        </h2>
+
+                        <p>
+                            Bringing you the latest Nigerian education
+                            and admission information.
+                        </p>
 
                     </div>
 
                 </div>
 
+                <div class="hero-carousel-controls">
+
+                    <button
+                        type="button"
+                        class="hero-carousel-arrow hero-prev"
+                        aria-label="Previous update"
+                    >
+                        ←
+                    </button>
+
+                    <div
+                        class="hero-carousel-dots"
+                        id="hero-carousel-dots"
+                    ></div>
+
+                    <button
+                        type="button"
+                        class="hero-carousel-arrow hero-next"
+                        aria-label="Next update"
+                    >
+                        →
+                    </button>
+
+                </div>
+
             </div>
 
-        </section>
+        </div>
+
+    </div>
+</section>
 
 
+                   
+                       
+                         
+                           
+                           
+                       
+                   
+                   
+                      
+                            
+                       
+                           
+                        
+                       
+                           
+                            
+                           
+                        
+                           
+                            
+                            
+
+                           
+                            
+                           
+                        
+                          
+                            
+
+                           
+                        
+                    
+
+        
         <!-- =================================================
              MAIN NEWS
         ================================================== -->
-
         <section class="main-content">
-
             <div class="content-grid">
-
-
-                <!-- NEWS -->
-
+                <!-- =================================================
+                     LATEST NEWS
+                ================================================== -->
                 <section class="news-column">
-
                     <div class="section-heading">
-
                         <div>
-
                             <span class="small-label">
                                 LATEST NEWS
                             </span>
-
                             <h2>
                                 Education Updates
                             </h2>
-
                         </div>
-
-                        <a href="#" class="view-all">
+                        <a
+                            href="news.html"
+                            class="view-all"
+                        >
                             View All →
                         </a>
-
                     </div>
-
-
+                    <!-- =================================================
+                         HORIZONTAL NEWS TRACK
+                    ================================================== -->
                     <div class="news-feed">
-
-
-                        <!-- NEWS 01 -->
-
-                        <article class="news-card">
-
-                            <div class="news-image">
-                                <span>ADMISSION</span>
-                            </div>
-
-                            <div class="news-content">
-
-                                <div class="news-meta">
-
+                        <div class="news-track">
+                            <!-- NEWS 01 -->
+                            <article class="news-card">
+                                <div class="news-image">
                                     <span>
-                                        IMSU
+                                        ADMISSION
                                     </span>
-
-                                    <time>
-                                        Aug 17, 2026
-                                    </time>
-
                                 </div>
-
-                                <h3>
-                                    IMSU Direct Entry Form 2026/2027
-                                </h3>
-
-                                <p>
-                                    Find out the eligibility requirements,
-                                    application process and important
-                                    information for prospective candidates.
-                                </p>
-
-                                <a href="#" class="read-more">
-                                    Read More →
-                                </a>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- NEWS 02 -->
-
-                        <article class="news-card">
-
-                            <div class="news-image">
-                                <span>JAMB</span>
-                            </div>
-
-                            <div class="news-content">
-
-                                <div class="news-meta">
-
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span>
+                                            IMSU
+                                        </span>
+                                        <time>
+                                            Aug 17, 2026
+                                        </time>
+                                    </div>
+                                    <h3>
+                                        IMSU Direct Entry Form 2026/2027
+                                    </h3>
+                                    <p>
+                                        Find out the eligibility requirements,
+                                        application process and important
+                                        information for prospective candidates.
+                                    </p>
+                                    <a
+                                        href="#"
+                                        class="read-more"
+                                    >
+                                        Read More →
+                                    </a>
+                                </div>
+                            </article>
+                            <!-- NEWS 02 -->
+                            <article class="news-card">
+                                <div class="news-image">
                                     <span>
                                         JAMB
                                     </span>
-
-                                    <time>
-                                        Aug 16, 2026
-                                    </time>
-
                                 </div>
-
-                                <h3>
-                                    JAMB Releases Important Admission Information
-                                </h3>
-
-                                <p>
-                                    Candidates are advised to stay updated
-                                    with the latest admission information
-                                    and check their admission status.
-                                </p>
-
-                                <a href="#" class="read-more">
-                                    Read More →
-                                </a>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- NEWS 03 -->
-
-                        <article class="news-card">
-
-                            <div class="news-image">
-                                <span>WAEC</span>
-                            </div>
-
-                            <div class="news-content">
-
-                                <div class="news-meta">
-
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span>
+                                            JAMB
+                                        </span>
+                                        <time>
+                                            Aug 16, 2026
+                                        </time>
+                                    </div>
+                                    <h3>
+                                        JAMB Releases Important Admission Information
+                                    </h3>
+                                    <p>
+                                        Candidates are advised to stay updated
+                                        with the latest admission information
+                                        and check their admission status.
+                                    </p>
+                                    <a
+                                        href="#"
+                                        class="read-more"
+                                    >
+                                        Read More →
+                                    </a>
+                                </div>
+                            </article>
+                            <!-- NEWS 03 -->
+                            <article class="news-card">
+                                <div class="news-image">
                                     <span>
                                         WAEC
                                     </span>
-
-                                    <time>
-                                        Aug 15, 2026
-                                    </time>
-
                                 </div>
-
-                                <h3>
-                                    WAEC 2026 Results: What Candidates Need to Know
-                                </h3>
-
-                                <p>
-                                    Important information for candidates
-                                    waiting for examination results and
-                                    checking updates.
-                                </p>
-
-                                <a href="#" class="read-more">
-                                    Read More →
-                                </a>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- NEWS 04 -->
-
-                        <article class="news-card">
-
-                            <div class="news-image">
-                                <span>POST-UTME</span>
-                            </div>
-
-                            <div class="news-content">
-
-                                <div class="news-meta">
-
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span>
+                                            WAEC
+                                        </span>
+                                        <time>
+                                            Aug 15, 2026
+                                        </time>
+                                    </div>
+                                    <h3>
+                                        WAEC 2026 Results: What Candidates Need to Know
+                                    </h3>
+                                    <p>
+                                        Important information for candidates
+                                        waiting for examination results and
+                                        checking updates.
+                                    </p>
+                                    <a
+                                        href="#"
+                                        class="read-more"
+                                    >
+                                        Read More →
+                                    </a>
+                                </div>
+                            </article>
+                            <!-- NEWS 04 -->
+                            <article class="news-card">
+                                <div class="news-image">
                                     <span>
-                                        UNIVERSITIES
+                                        POST-UTME
                                     </span>
-
-                                    <time>
-                                        Aug 14, 2026
-                                    </time>
-
                                 </div>
-
-                                <h3>
-                                    Universities Begin Release of 2026/2027 Post-UTME Forms
-                                </h3>
-
-                                <p>
-                                    See universities currently selling their
-                                    screening forms and important application
-                                    deadlines.
-                                </p>
-
-                                <a href="#" class="read-more">
-                                    Read More →
-                                </a>
-
-                            </div>
-
-                        </article>
-
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span>
+                                            UNIVERSITIES
+                                        </span>
+                                        <time>
+                                            Aug 14, 2026
+                                        </time>
+                                    </div>
+                                    <h3>
+                                        Universities Begin Release of 2026/2027 Post-UTME Forms
+                                    </h3>
+                                    <p>
+                                        See universities currently selling their
+                                        screening forms and important application
+                                        deadlines.
+                                    </p>
+                                    <a
+                                        href="#"
+                                        class="read-more"
+                                    >
+                                        Read More →
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-
                 </section>
-
-
-                <!-- ADMISSION ALERTS -->
-
+                <!-- =================================================
+                     ADMISSION ALERTS
+                ================================================== -->
                 <aside class="alerts-column">
-
                     <div class="section-heading">
-
                         <div>
-
                             <span class="small-label">
                                 QUICK UPDATES
                             </span>
-
                             <h2>
                                 Admission Alerts
                             </h2>
-
                         </div>
-
                         <a
                             href="admissions.html"
                             class="view-all"
                         >
                             View All Admissions →
                         </a>
-
                     </div>
-
-
                     <div class="alerts-boxes">
-
-
                         <!-- TRENDING -->
-
                         <div
                             class="trending-box"
                             id="admission-alerts-box"
                         >
-
                             <h3 class="box-title">
-
                                 <span class="trending-fire">
                                     🔥
                                 </span>
-
                                 Trending
-
                             </h3>
-
                             <div id="admission-alerts-list">
-
                                 <div class="news-loading">
                                     Loading admission alerts...
                                 </div>
-
                             </div>
-
                         </div>
-
-
                         <!-- ADMISSION STATUS -->
-
                         <div class="status-box">
-
-
-                            <!-- ONGOING -->
-
                             <div class="status-item">
-
                                 <div class="status-icon ongoing-icon">
                                     <span>⏳</span>
                                 </div>
-
                                 <div class="status-content">
-
                                     <span class="status-label ongoing-label">
                                         ONGOING
                                     </span>
-
                                     <span class="status-text">
                                         Post-UTME applications
                                     </span>
-
                                 </div>
-
                             </div>
-
-
-                            <!-- OUT -->
-
                             <div class="status-item">
-
                                 <div class="status-icon in-icon">
                                     <span>📢</span>
                                 </div>
-
                                 <div class="status-content">
-
                                     <span class="status-label in-label">
                                         OUT
                                     </span>
-
                                     <span class="status-text">
                                         Admission lists
                                     </span>
-
                                 </div>
-
                             </div>
-
-
-                            <!-- DEADLINE -->
-
                             <div class="status-item">
-
                                 <div class="status-icon deadline-icon">
                                     <span>⏰</span>
                                 </div>
-
                                 <div class="status-content">
-
                                     <span class="status-label deadline-label">
                                         DEADLINE
                                     </span>
-
                                     <span class="status-text">
                                         Application deadlines
                                     </span>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </aside>
-
             </div>
-
         </section>
-
-
         <hr class="section-divider">
-<!-- =================================================
-     JAMB & UTME NEWS
-================================================== -->
-
-<section class="jamb-news-section">
-
-    <div class="section-heading">
-
-        <div>
-
-            <span class="small-label">
-                JAMB & UTME
-            </span>
-
-            <h2>
-                Latest JAMB News
-            </h2>
-
-        </div>
-
-        <a
-            href="jamb-news.html"
-            class="view-all"
-        >
-            View All JAMB News →
-        </a>
-
-    </div>
-
-
-    <div
-        class="jamb-news-grid"
-        id="jamb-news-grid"
-    >
-
-        <!-- JAMB NEWS WILL LOAD HERE FROM SUPABASE -->
-
-        <div class="jamb-news-loading">
-            Loading latest JAMB updates...
-        </div>
-
-    </div>
-
-
-
-
-        
-           
-            
-           
-          
-
-
-</section>
-
-
-<hr class="section-divider">
-
+        <!-- =================================================
+             JAMB & UTME NEWS
+        ================================================== -->
+        <section class="jamb-news-section">
+            <div class="section-heading">
+                <div>
+                    <span class="small-label">
+                        JAMB & UTME
+                    </span>
+                    <h2>
+                        Latest JAMB News
+                    </h2>
+                </div>
+                <a
+                    href="jamb-news.html"
+                    class="view-all"
+                >
+                    View All JAMB News →
+                </a>
+            </div>
+            <div
+                class="jamb-news-grid"
+                id="jamb-news-grid"
+            >
+                <!-- JAMB NEWS WILL LOAD HERE FROM SUPABASE -->
+                <div class="jamb-news-loading">
+                    Loading latest JAMB updates...
+                </div>
+            </div>
+        </section>
+        <hr class="section-divider">
         <!-- =================================================
              UNIVERSITY HUB
         ================================================== -->
-
         <section class="universities-section">
-
             <div class="section-heading centered">
-
                 <span class="small-label">
                     UNIVERSITY HUB
                 </span>
-
                 <h2>
                     University Admission Updates
                 </h2>
-
                 <p>
                     Stay updated with admission news, screening forms,
                     cut-off marks and admission lists.
                 </p>
-
             </div>
-
-
             <div class="university-filters">
-
                 <button type="button" class="active">
                     All
                 </button>
-
                 <button type="button">
                     Federal
                 </button>
-
                 <button type="button">
                     State
                 </button>
-
                 <button type="button">
                     Private
                 </button>
-
             </div>
-
-
             <div class="university-grid">
-
-
-                <!-- UNIVERSITY 01 -->
-
                 <article class="university-card">
-
                     <div class="university-stripe"></div>
-
                     <div class="university-card-body">
-
                         <span class="university-type">
                             FEDERAL UNIVERSITY
                         </span>
-
                         <h3>
                             University of Lagos
                         </h3>
-
                         <div class="university-tags">
-
                             <span>
                                 Post-UTME
                             </span>
-
                             <span>
                                 Admission
                             </span>
-
                         </div>
-
                         <a href="#">
                             View Updates →
                         </a>
-
                     </div>
-
                 </article>
-
-
-                <!-- UNIVERSITY 02 -->
-
                 <article class="university-card">
-
                     <div class="university-stripe"></div>
-
                     <div class="university-card-body">
-
                         <span class="university-type">
                             FEDERAL UNIVERSITY
                         </span>
-
                         <h3>
                             Federal University Oye-Ekiti
                         </h3>
-
                         <div class="university-tags">
-
                             <span>
                                 Screening
                             </span>
-
                             <span>
                                 Admission
                             </span>
-
                         </div>
-
                         <a href="#">
                             View Updates →
                         </a>
-
                     </div>
-
                 </article>
-
-
-                <!-- UNIVERSITY 03 -->
-
                 <article class="university-card">
-
                     <div class="university-stripe"></div>
-
                     <div class="university-card-body">
-
                         <span class="university-type">
                             STATE UNIVERSITY
                         </span>
-
                         <h3>
                             Imo State University
                         </h3>
-
                         <div class="university-tags">
-
                             <span>
                                 Direct Entry
                             </span>
-
                             <span>
                                 Admission
                             </span>
-
                         </div>
-
                         <a href="university.html?id=3">
                             View Updates →
                         </a>
-
                     </div>
-
                 </article>
-
-
-                <!-- UNIVERSITY 04 -->
-
                 <article class="university-card">
-
                     <div class="university-stripe"></div>
-
                     <div class="university-card-body">
-
                         <span class="university-type">
                             PRIVATE UNIVERSITY
                         </span>
-
                         <h3>
                             University Admission Updates
                         </h3>
-
                         <div class="university-tags">
-
                             <span>
                                 Forms
                             </span>
-
                             <span>
                                 Screening
                             </span>
-
                         </div>
-
                         <a href="#">
                             View Updates →
                         </a>
-
                     </div>
-
                 </article>
-
             </div>
-
         </section>
-
-
         <!-- =================================================
              MOLAS SERVICES
         ================================================== -->
-
         <section class="services-section">
-
             <div class="section-heading centered">
-
                 <span class="small-label">
                     WHAT WE OFFER
                 </span>
-
                 <h2>
                     MOLAS Educational Services
                 </h2>
-
                 <p>
                     Need help with your academic journey?
                     MOLAS is here to help.
                 </p>
-
             </div>
-
-
             <div class="services-grid">
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         🎓
                     </div>
-
                     <h3>
                         Online Classes
                     </h3>
-
                     <p>
                         Learn from wherever you are with
                         our online educational support.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         🏫
                     </div>
-
                     <h3>
                         Physical Classes
                     </h3>
-
                     <p>
                         Get face-to-face academic support
                         and examination preparation.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         📝
                     </div>
-
                     <h3>
                         Exam Assistance
                     </h3>
-
                     <p>
                         Academic guidance and support for
                         major Nigerian examinations.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         🎯
                     </div>
-
                     <h3>
                         Admission Processing
                     </h3>
-
                     <p>
                         Get guidance throughout your
                         admission application process.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         📄
                     </div>
-
                     <h3>
                         JAMB Services
                     </h3>
-
                     <p>
                         JAMB results, admission letters,
                         O'Level uploads and related services.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
-
                 <article class="service-card">
-
                     <div class="service-icon">
                         🔎
                     </div>
-
                     <h3>
                         Result Checking
                     </h3>
-
                     <p>
                         Access result-checking services
                         through MOLAS.
                     </p>
-
                     <a href="#">
                         Learn More →
                     </a>
-
                 </article>
-
             </div>
-
-
             <div class="services-cta">
-
                 <div>
-
                     <h3>
                         Need Help With Your Admission?
                     </h3>
-
                     <p>
                         Speak with MOLAS and get the guidance
                         you need.
                     </p>
-
                 </div>
-
-                <a href="#" class="primary-button">
+                <a
+                    href="#"
+                    class="primary-button"
+                >
                     Talk to MOLAS →
                 </a>
-
             </div>
-
         </section>
-
-
         <!-- =================================================
              STUDENT RESOURCES
         ================================================== -->
-
         <section class="resources-section">
-
             <div class="section-heading centered">
-
                 <span class="small-label">
                     STUDENT RESOURCES
                 </span>
-
                 <h2>
                     Tools to Help You Study Smarter
                 </h2>
-
                 <p>
                     Useful guides, study materials and resources
                     for Nigerian students and admission seekers.
                 </p>
-
             </div>
-
-
             <div
                 class="resource-deck"
                 id="resource-deck"
             >
-
-
                 <!-- JAMB -->
-
                 <article
                     class="resource-card active"
                     data-resource="jamb"
                 >
-
                     <div class="resource-card-inner">
-
                         <div class="resource-card-header">
-
                             <span class="resource-number">
                                 01
                             </span>
-
                             <span class="resource-category">
                                 JAMB
                             </span>
-
                         </div>
-
-
                         <div class="resource-card-body">
-
                             <div class="resource-information">
-
                                 <span class="resource-eyebrow">
                                     UTME PREPARATION
                                 </span>
-
                                 <h3>
                                     JAMB Resources
                                 </h3>
-
                                 <p>
                                     Everything you need to prepare
                                     better for UTME — from syllabus
                                     to practice materials.
                                 </p>
-
-
                                 <div class="resource-links">
-
                                     <a href="jamb-syllabus.html">
                                         Syllabus
                                     </a>
-
                                     <a href="jamb-past-questions.html">
                                         Past Questions
                                     </a>
-
                                     <a href="cbt-practice.html">
                                         CBT Practice
                                     </a>
-
                                     <a href="jamb-guides.html">
                                         Exam Guides
                                     </a>
-
                                 </div>
-
-
                                 <a
                                     href="jamb-resources.html"
                                     class="resource-cta"
@@ -1142,105 +892,69 @@
                                     Explore Resources
                                     <span>→</span>
                                 </a>
-
                             </div>
-
-
                             <div class="resource-visual">
-
                                 <div class="resource-visual-orbit"></div>
-
                                 <a
                                     href="jamb-resources.html"
                                     class="resource-visual-card"
                                     aria-label="Open JAMB Resources"
                                 >
-
                                     <span class="resource-visual-icon">
                                         📚
                                     </span>
-
                                     <span class="resource-visual-label">
                                         JAMB
                                     </span>
-
                                     <span class="resource-visual-sub">
                                         UTME
                                     </span>
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </article>
-
-
                 <!-- WAEC -->
-
                 <article
                     class="resource-card"
                     data-resource="waec"
                 >
-
                     <div class="resource-card-inner">
-
                         <div class="resource-card-header">
-
                             <span class="resource-number">
                                 02
                             </span>
-
                             <span class="resource-category">
                                 WAEC
                             </span>
-
                         </div>
-
-
                         <div class="resource-card-body">
-
                             <div class="resource-information">
-
                                 <span class="resource-eyebrow">
                                     EXAM PREPARATION
                                 </span>
-
                                 <h3>
                                     WAEC Resources
                                 </h3>
-
                                 <p>
                                     Study materials, past questions
                                     and useful guides to help you
                                     prepare for WAEC.
                                 </p>
-
-
                                 <div class="resource-links">
-
                                     <a href="waec-past-questions.html">
                                         Past Questions
                                     </a>
-
                                     <a href="waec.html">
                                         Syllabus
                                     </a>
-
                                     <a href="waec.html">
                                         Exam Guides
                                     </a>
-
                                     <a href="waec.html">
                                         Results
                                     </a>
-
                                 </div>
-
-
                                 <a
                                     href="waec.html"
                                     class="resource-cta"
@@ -1248,105 +962,69 @@
                                     Explore Resources
                                     <span>→</span>
                                 </a>
-
                             </div>
-
-
                             <div class="resource-visual">
-
                                 <div class="resource-visual-orbit"></div>
-
                                 <a
                                     href="waec.html"
                                     class="resource-visual-card"
                                     aria-label="Open WAEC Resources"
                                 >
-
                                     <span class="resource-visual-icon">
                                         📖
                                     </span>
-
                                     <span class="resource-visual-label">
                                         WAEC
                                     </span>
-
                                     <span class="resource-visual-sub">
                                         EXAMS
                                     </span>
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </article>
-
-
                 <!-- POST-UTME -->
-
                 <article
                     class="resource-card"
                     data-resource="post-utme"
                 >
-
                     <div class="resource-card-inner">
-
                         <div class="resource-card-header">
-
                             <span class="resource-number">
                                 03
                             </span>
-
                             <span class="resource-category">
                                 POST-UTME
                             </span>
-
                         </div>
-
-
                         <div class="resource-card-body">
-
                             <div class="resource-information">
-
                                 <span class="resource-eyebrow">
                                     UNIVERSITY SCREENING
                                 </span>
-
                                 <h3>
                                     Post-UTME Guides
                                 </h3>
-
                                 <p>
                                     Find useful information to help
                                     you understand Post-UTME screening
                                     and application requirements.
                                 </p>
-
-
                                 <div class="resource-links">
-
                                     <a href="post-utme-forms.html">
                                         Screening Forms
                                     </a>
-
                                     <a href="post-utme-guides.html">
                                         Application Guides
                                     </a>
-
                                     <a href="post-utme-requirements.html">
                                         Requirements
                                     </a>
-
                                     <a href="post-utme-deadlines.html">
                                         Deadlines
                                     </a>
-
                                 </div>
-
-
                                 <a
                                     href="post-utme.html"
                                     class="resource-cta"
@@ -1354,105 +1032,69 @@
                                     Explore Resources
                                     <span>→</span>
                                 </a>
-
                             </div>
-
-
                             <div class="resource-visual">
-
                                 <div class="resource-visual-orbit"></div>
-
                                 <a
                                     href="post-utme.html"
                                     class="resource-visual-card"
                                     aria-label="Open Post-UTME Resources"
                                 >
-
                                     <span class="resource-visual-icon">
                                         🎯
                                     </span>
-
                                     <span class="resource-visual-label">
                                         POST-UTME
                                     </span>
-
                                     <span class="resource-visual-sub">
                                         SCREENING
                                     </span>
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </article>
-
-
                 <!-- ADMISSIONS -->
-
                 <article
                     class="resource-card"
                     data-resource="admissions"
                 >
-
                     <div class="resource-card-inner">
-
                         <div class="resource-card-header">
-
                             <span class="resource-number">
                                 04
                             </span>
-
                             <span class="resource-category">
                                 ADMISSIONS
                             </span>
-
                         </div>
-
-
                         <div class="resource-card-body">
-
                             <div class="resource-information">
-
                                 <span class="resource-eyebrow">
                                     ADMISSION SUPPORT
                                 </span>
-
                                 <h3>
                                     Admission Guides
                                 </h3>
-
                                 <p>
                                     Understand the Nigerian admission
                                     process and know what to do at
                                     every stage.
                                 </p>
-
-
                                 <div class="resource-links">
-
                                     <a href="jamb-caps.html">
                                         JAMB CAPS
                                     </a>
-
                                     <a href="admission-process.html">
                                         Admission Process
                                     </a>
-
                                     <a href="direct-entry-guides.html">
                                         Direct Entry
                                     </a>
-
                                     <a href="admission-lists.html">
                                         Admission Lists
                                     </a>
-
                                 </div>
-
-
                                 <a
                                     href="admission-guides.html"
                                     class="resource-cta"
@@ -1460,105 +1102,69 @@
                                     Explore Resources
                                     <span>→</span>
                                 </a>
-
                             </div>
-
-
                             <div class="resource-visual">
-
                                 <div class="resource-visual-orbit"></div>
-
                                 <a
                                     href="admission-guides.html"
                                     class="resource-visual-card"
                                     aria-label="Open Admission Guides"
                                 >
-
                                     <span class="resource-visual-icon">
                                         🎓
                                     </span>
-
                                     <span class="resource-visual-label">
                                         ADMISSION
                                     </span>
-
                                     <span class="resource-visual-sub">
                                         GUIDES
                                     </span>
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </article>
-
-
                 <!-- SCHOLARSHIPS -->
-
                 <article
                     class="resource-card"
                     data-resource="scholarships"
                 >
-
                     <div class="resource-card-inner">
-
                         <div class="resource-card-header">
-
                             <span class="resource-number">
                                 05
                             </span>
-
                             <span class="resource-category">
                                 SCHOLARSHIPS
                             </span>
-
                         </div>
-
-
                         <div class="resource-card-body">
-
                             <div class="resource-information">
-
                                 <span class="resource-eyebrow">
                                     FUNDING OPPORTUNITIES
                                 </span>
-
                                 <h3>
                                     Scholarship Opportunities
                                 </h3>
-
                                 <p>
                                     Discover scholarship opportunities
                                     and funding information available
                                     to students.
                                 </p>
-
-
                                 <div class="resource-links">
-
                                     <a href="undergraduate-scholarships.html">
                                         Undergraduate
                                     </a>
-
                                     <a href="postgraduate-scholarships.html">
                                         Postgraduate
                                     </a>
-
                                     <a href="nigerian-scholarships.html">
                                         Nigerian Scholarships
                                     </a>
-
                                     <a href="scholarship-guides.html">
                                         Application Guides
                                     </a>
-
                                 </div>
-
-
                                 <a
                                     href="scholarships.html"
                                     class="resource-cta"
@@ -1566,49 +1172,31 @@
                                     Explore Resources
                                     <span>→</span>
                                 </a>
-
                             </div>
-
-
                             <div class="resource-visual">
-
                                 <div class="resource-visual-orbit"></div>
-
                                 <a
                                     href="scholarships.html"
                                     class="resource-visual-card"
                                     aria-label="Open Scholarship Opportunities"
                                 >
-
                                     <span class="resource-visual-icon">
                                         🎓
                                     </span>
-
                                     <span class="resource-visual-label">
                                         SCHOLARSHIPS
                                     </span>
-
                                     <span class="resource-visual-sub">
                                         OPPORTUNITIES
                                     </span>
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </article>
-
             </div>
-
-
             <!-- RESOURCE CONTROLS -->
-
             <div class="resource-deck-controls">
-
                 <button
                     type="button"
                     class="resource-nav resource-prev"
@@ -1616,52 +1204,42 @@
                 >
                     ←
                 </button>
-
-
                 <div
                     class="resource-dots"
                     role="tablist"
                     aria-label="Student resources"
                 >
-
                     <button
                         type="button"
                         class="resource-dot active"
                         aria-label="JAMB Resources"
                         aria-selected="true"
                     ></button>
-
                     <button
                         type="button"
                         class="resource-dot"
                         aria-label="WAEC Resources"
                         aria-selected="false"
                     ></button>
-
                     <button
                         type="button"
                         class="resource-dot"
                         aria-label="Post-UTME Guides"
                         aria-selected="false"
                     ></button>
-
                     <button
                         type="button"
                         class="resource-dot"
                         aria-label="Admission Guides"
                         aria-selected="false"
                     ></button>
-
                     <button
                         type="button"
                         class="resource-dot"
                         aria-label="Scholarship Opportunities"
                         aria-selected="false"
                     ></button>
-
                 </div>
-
-
                 <button
                     type="button"
                     class="resource-nav resource-next"
@@ -1669,140 +1247,98 @@
                 >
                     →
                 </button>
-
             </div>
-
         </section>
-
     </main>
-
-
     <!-- =====================================================
          FOOTER
     ====================================================== -->
-
     <footer class="site-footer">
-
         <div class="footer-inner">
-
-
             <div class="footer-brand">
-
                 <span class="brand-main">
                     MOLAS
                 </span>
-
                 <p>
                     Educational Consults & Global Limited
                 </p>
-
                 <span>
                     Your source for Nigerian education news,
                     admissions and academic support.
                 </span>
-
             </div>
-
-
             <div class="footer-column">
-
                 <h3>
                     Explore
                 </h3>
-
-                <a href="#">
+                <a href="news.html">
                     Education News
                 </a>
-
                 <a href="jamb-resources.html">
                     JAMB
                 </a>
-
                 <a href="waec.html">
                     WAEC
                 </a>
-
                 <a href="#">
                     NECO
                 </a>
-
                 <a href="#">
                     Universities
                 </a>
-
             </div>
-
-
             <div class="footer-column">
-
                 <h3>
                     Services
                 </h3>
-
                 <a href="#">
                     Online Classes
                 </a>
-
                 <a href="#">
                     Admission Processing
                 </a>
-
                 <a href="#">
                     JAMB Services
                 </a>
-
                 <a href="#">
                     Result Checking
                 </a>
-
                 <a href="#">
                     Consultancy
                 </a>
-
             </div>
-
-
             <div class="footer-column">
-
                 <h3>
                     Contact
                 </h3>
-
                 <a href="#">
                     Contact MOLAS
                 </a>
-
                 <a href="#">
                     WhatsApp
                 </a>
-
                 <a href="#">
                     Email Us
                 </a>
-
             </div>
-
         </div>
-
-
         <div class="footer-bottom">
-
             <p>
                 © 2026 MOLAS Educational Consults & Global Limited.
                 All rights reserved.
             </p>
-
         </div>
-
     </footer>
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
+    <!-- JAVASCRIPT -->
     <script src="script.js"></script>
     <script src="universities.js"></script>
-
 </body>
 </html>
+
+
+
+
+
+
+
+

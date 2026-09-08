@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Education News — MOLAS</title>
+    <meta
+        name="description"
+        content="Latest Nigerian education news, JAMB updates, WAEC, NECO, university admissions and academic updates from MOLAS Education."
+    >
+    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="news.css">
+   
+
+         
+
+        
+       
+
+      
+
+
+          
+
+        
+
+          
+
+
+        
+        
+           
+
+        
+
+          
+
+       
+        
+   
+
+         
+        
+       
+        
+
+           
+        
+        
+       
+
+           
+
+          
+
+    
+</head>
+<body>
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a
+                href="index.html"
+                class="brand"
+            >
+                <img
+                    src="molas.png"
+                    alt="MOLAS Educational Consult"
+                >
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">
+                    Home
+                </a>
+                <div class="nav-dropdown">
+                    <a href="#">
+                        JAMB <span>⌄</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#">
+                            UTME Updates
+                        </a>
+                        <a href="#">
+                            JAMB CAPS
+                        </a>
+                        <a href="#">
+                            Admission Status
+                        </a>
+                        <a href="#">
+                            Cut-off Marks
+                        </a>
+                        <a href="#">
+                            Change of Course
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#">
+                        Exams <span>⌄</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#">
+                            WAEC
+                        </a>
+                        <a href="#">
+                            NECO
+                        </a>
+                        <a href="#">
+                            NABTEB
+                        </a>
+                        <a href="#">
+                            GCE
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#">
+                        Universities <span>⌄</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#">
+                            Federal Universities
+                        </a>
+                        <a href="#">
+                            State Universities
+                        </a>
+                        <a href="#">
+                            Private Universities
+                        </a>
+                        <a href="#">
+                            Polytechnics
+                        </a>
+                        <a href="#">
+                            Colleges of Education
+                        </a>
+                    </div>
+                </div>
+                <a href="#">
+                    Admissions
+                </a>
+                <a href="#">
+                    Resources
+                </a>
+                <a
+                    href="#"
+                    class="services-link"
+                >
+                    MOLAS Services
+                </a>
+            </nav>
+            <button
+                type="button"
+                class="mobile-menu-btn"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+        </div>
+    </header>
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+    <main class="all-news-page">
+        <div class="container">
+            <header class="all-news-header">
+                <span class="small-label">
+                    MOLAS EDUCATION
+                </span>
+                <h1>
+                    Education News
+                </h1>
+                <p>
+                    Stay updated with the latest Nigerian
+                    education news, admission updates,
+                    examination news and academic developments.
+                </p>
+            </header>
+            <section
+                class="all-news-grid"
+                id="all-news-grid"
+            >
+                <div class="all-news-loading">
+                    Loading latest education news...
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- =====================================================
+         BACK TO TOP
+    ===================================================== -->
+    <button
+        class="molas-top"
+        id="topButton"
+        aria-label="Back to top"
+    >
+        ↑
+    </button>
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="brand-main">
+                    MOLAS
+                </span>
+                <p>
+                    Educational Consults & Global Limited
+                </p>
+                <span>
+                    Your source for Nigerian education news,
+                    admissions and academic support.
+                </span>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Explore
+                </h3>
+                <a href="news.html">
+                    Education News
+                </a>
+                <a href="#">
+                    JAMB
+                </a>
+                <a href="#">
+                    WAEC
+                </a>
+                <a href="#">
+                    NECO
+                </a>
+                <a href="#">
+                    Universities
+                </a>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Services
+                </h3>
+                <a href="#">
+                    Online Classes
+                </a>
+                <a href="#">
+                    Admission Processing
+                </a>
+                <a href="#">
+                    JAMB Services
+                </a>
+                <a href="#">
+                    Result Checking
+                </a>
+                <a href="#">
+                    Consultancy
+                </a>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Contact
+                </h3>
+                <a href="#">
+                    Contact MOLAS
+                </a>
+                <a href="#">
+                    WhatsApp
+                </a>
+                <a href="#">
+                    Email Us
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>
+                © 2026 MOLAS Educational Consults & Global Limited.
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- =====================================================
+         SUPABASE
+    ===================================================== -->
+    <script type="module">
+        import {
+            createClient
+        } from
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+        const SUPABASE_URL =
+            "https://eidnzebqyxcpxbykybch.supabase.co";
+        const SUPABASE_KEY =
+            "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
+        const supabase =
+            createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+        const grid =
+            document.querySelector(
+                "#all-news-grid"
+            );
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+        function escapeHTML(value) {
+            if (
+                value === null ||
+                value === undefined
+            ) {
+                return "";
+            }
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        /* =====================================================
+           DATE
+        ===================================================== */
+        function formatDate(value) {
+            if (!value) {
+                return "";
+            }
+            const date =
+                new Date(value);
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+                return value;
+            }
+            return date.toLocaleDateString(
+                "en-NG",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+        }
+        /* =====================================================
+           CREATE NEWS CARD
+        ===================================================== */
+        function createNewsCard(
+            article,
+            index
+        ) {
+            const title =
+                escapeHTML(
+                    article.title ||
+                    "Education News"
+                );
+            const excerpt =
+                escapeHTML(
+                    article.excerpt ||
+                    article.content ||
+                    ""
+                );
+            const category =
+                escapeHTML(
+                    article.category ||
+                    "NEWS"
+                );
+            const source =
+                escapeHTML(
+                    article.source ||
+                    "MOLAS"
+                );
+            const date =
+                formatDate(
+                    article.published_at ||
+                    article.created_at
+                );
+            const image =
+                article.image_url
+                    ? String(
+                        article.image_url
+                    ).trim()
+                    : "";
+            const isBento =
+                index < 4;
+            const card =
+                document.createElement("a");
+            card.href =
+                `article.html?id=${encodeURIComponent(
+                    article.id
+                )}`;
+            card.className =
+                isBento
+                    ? "all-news-card bento-card"
+                    : "all-news-card stacked-card";
+            const imageHTML =
+                image
+                    ? `
+                        <div
+                            class="all-news-image"
+                        >
+                            <img
+                                src="${escapeHTML(image)}"
+                                alt="${title}"
+                                loading="lazy"
+                                onerror="this.style.display='none';"
+                            >
+                            <span>
+                                ${category}
+                            </span>
+                        </div>
+                    `
+                    : `
+                        <div
+                            class="all-news-image"
+                        >
+                            <span>
+                                ${category}
+                            </span>
+                        </div>
+                    `;
+            card.innerHTML = `
+                ${imageHTML}
+                <div
+                    class="all-news-content"
+                >
+                    <div
+                        class="all-news-meta"
+                    >
+                        <span>
+                            ${source}
+                        </span>
+                        <span>
+                            •
+                        </span>
+                        <time>
+                            ${date}
+                        </time>
+                    </div>
+                    <h2>
+                        ${title}
+                    </h2>
+                    <p>
+                        ${excerpt}
+                    </p>
+                    <span
+                        class="all-news-read"
+                    >
+                        Read More →
+                    </span>
+                </div>
+            `;
+            return card;
+        }
+        /* =====================================================
+           LOAD ALL NEWS
+        ===================================================== */
+        async function loadAllNews() {
+            if (!grid) return;
+            try {
+                const {
+                    data,
+                    error
+                } = await supabase
+                    .from("news")
+                    .select(`
+                        id,
+                        created_at,
+                        title,
+                        excerpt,
+                        content,
+                        category,
+                        image_url,
+                        source,
+                        published_at,
+                        status
+                    `)
+                    .order(
+                        "published_at",
+                        {
+                            ascending: false,
+                            nullsFirst: false
+                        }
+                    );
+                if (error) {
+                    throw error;
+                }
+                const news =
+                    (data || []).filter(
+                        article => {
+                            const status =
+                                String(
+                                    article.status ||
+                                    ""
+                                ).toLowerCase();
+                            return (
+                                !status ||
+                                status === "published"
+                            );
+                        }
+                    );
+                grid.innerHTML = "";
+                if (!news.length) {
+                    grid.innerHTML = `
+                        <div
+                            class="all-news-empty"
+                        >
+                            <h2>
+                                No Education News Yet
+                            </h2>
+                            <p>
+                                Check back soon for
+                                the latest updates.
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+                news.forEach(
+                    (article, index) => {
+                        grid.appendChild(
+                            createNewsCard(
+                                article,
+                                index
+                            )
+                        );
+                    }
+                );
+            } catch (error) {
+                console.error(
+                    "MOLAS ALL NEWS ERROR:",
+                    error
+                );
+                grid.innerHTML = `
+                    <div
+                        class="all-news-error"
+                    >
+                        <h2>
+                            Education News Is
+                            Temporarily Unavailable
+                        </h2>
+                        <p>
+                            Please refresh the page
+                            and try again.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        /* =====================================================
+           BACK TO TOP
+        ===================================================== */
+        const topButton =
+            document.querySelector(
+                "#topButton"
+            );
+        if (topButton) {
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (
+                        window.scrollY > 500
+                    ) {
+                        topButton.classList.add(
+                            "show"
+                        );
+                    } else {
+                        topButton.classList.remove(
+                            "show"
+                        );
+                    }
+                },
+                {
+                    passive: true
+                }
+            );
+            topButton.addEventListener(
+                "click",
+                () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }
+            );
+        }
+        /* =====================================================
+           START
+        ===================================================== */
+        loadAllNews();
+    </script>
+</body>
+</html>

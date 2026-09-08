@@ -1,0 +1,624 @@
+/* =========================================================
+   MOLAS EDUCATION NEWS
+   CLEAN • COMPACT • NORMAL
+   Mobile • Tablet • Desktop
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.all-news-page {
+    background: #F1F6FC;
+    min-height: 100vh;
+    padding: 32px 0 55px;
+}
+
+.all-news-page .container {
+    width: 92%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.all-news-header {
+    margin-bottom: 20px;
+}
+
+.all-news-header .small-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #3B72B8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+
+.all-news-header h1 {
+    margin: 0;
+    color: #101B4D;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.all-news-header p {
+    max-width: 620px;
+    margin: 7px 0 0;
+    color: #667085;
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   NEWS GRID
+========================================================= */
+
+.all-news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   ALL NEWS CARD
+========================================================= */
+
+.all-news-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 0;
+
+    width: 100%;
+    min-height: 145px;
+
+    overflow: hidden;
+
+    background: #FFFFFF;
+    border: 1px solid #E5ECF5;
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    box-shadow: 0 2px 8px rgba(16, 27, 77, 0.04);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.all-news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 27, 77, 0.08);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.all-news-image {
+    position: relative;
+    width: 100%;
+    height: 145px;
+    overflow: hidden;
+    background: #E7EFF9;
+}
+
+.all-news-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.all-news-image > span {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 7px;
+
+    background: #EAF3FF;
+    color: #3972B5;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: .03em;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.all-news-content {
+    min-width: 0;
+    padding: 16px 17px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.all-news-content h2 {
+    margin: 3px 0 5px;
+
+    color: #17427F;
+
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.all-news-content p {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: .76rem;
+    line-height: 1.45;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.all-news-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+
+    margin-bottom: 2px;
+
+    color: #98A2B3;
+
+    font-size: 7px;
+    line-height: 1.2;
+}
+
+.all-news-meta span:first-child {
+    color: #55739A;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   READ MORE
+========================================================= */
+
+.all-news-read {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-top: 6px;
+
+    color: #3972B5;
+
+    font-size: 7px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   LOADING / EMPTY / ERROR
+========================================================= */
+
+.all-news-loading,
+.all-news-empty,
+.all-news-error {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #667085;
+
+    background: #FFFFFF;
+    border: 1px solid #E5ECF5;
+    border-radius: 13px;
+}
+
+.all-news-loading h2,
+.all-news-empty h2,
+.all-news-error h2 {
+    margin: 0 0 7px;
+    color: #101B4D;
+    font-size: 1.1rem;
+}
+
+.all-news-loading p,
+.all-news-empty p,
+.all-news-error p {
+    margin: 0;
+    font-size: .82rem;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1101px) {
+
+    .all-news-page {
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+
+    .all-news-page .container {
+        max-width: 1040px;
+    }
+
+    .all-news-grid {
+        gap: 12px;
+    }
+
+    .all-news-card {
+        grid-template-columns: 205px minmax(0, 1fr);
+        min-height: 150px;
+    }
+
+    .all-news-image {
+        height: 150px;
+    }
+
+    .all-news-content {
+        padding: 16px 19px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .all-news-page {
+        padding-top: 28px;
+        padding-bottom: 50px;
+    }
+
+    .all-news-page .container {
+        width: 91%;
+        max-width: 900px;
+    }
+
+    .all-news-grid {
+        gap: 10px;
+    }
+
+    .all-news-card {
+        grid-template-columns: 175px minmax(0, 1fr);
+        min-height: 135px;
+    }
+
+    .all-news-image {
+        height: 135px;
+    }
+
+    .all-news-content {
+        padding: 14px 16px;
+    }
+
+    .all-news-content h2 {
+        font-size: .95rem;
+    }
+
+    .all-news-content p {
+        font-size: .73rem;
+    }
+}
+
+
+/* =========================================================
+   MOBILE — MATCH COMPACT CARD STYLE
+========================================================= */
+
+@media (max-width: 768px) and (orientation: portrait) {
+
+    .all-news-page {
+        padding: 22px 0 45px;
+    }
+
+    .all-news-page .container {
+        width: 94%;
+        max-width: none;
+    }
+
+
+    /* -----------------------------------------
+       Header
+    ----------------------------------------- */
+
+    .all-news-header {
+        margin-bottom: 14px;
+    }
+
+    .all-news-header .small-label {
+        margin-bottom: 4px;
+        font-size: 7px;
+    }
+
+    .all-news-header h1 {
+        font-size: 1.55rem;
+    }
+
+    .all-news-header p {
+        margin-top: 5px;
+        font-size: .72rem;
+        line-height: 1.45;
+    }
+
+
+    /* -----------------------------------------
+       Grid
+    ----------------------------------------- */
+
+    .all-news-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+
+    /* -----------------------------------------
+       Compact horizontal card
+    ----------------------------------------- */
+
+    .all-news-card {
+        grid-template-columns: 120px minmax(0, 1fr);
+
+        min-height: 125px;
+
+        border-radius: 11px;
+    }
+
+
+    /* -----------------------------------------
+       Image
+    ----------------------------------------- */
+
+    .all-news-image {
+        width: 120px;
+        height: 125px;
+    }
+
+    .all-news-image > span {
+        top: 0;
+        left: 0;
+
+        padding: 4px 6px;
+
+        border-radius: 0 0 4px 0;
+
+        font-size: 6px;
+    }
+
+
+    /* -----------------------------------------
+       Content
+    ----------------------------------------- */
+
+    .all-news-content {
+        padding: 10px 11px;
+    }
+
+    .all-news-content h2 {
+        margin: 3px 0 4px;
+
+        font-size: .82rem;
+        line-height: 1.3;
+    }
+
+    .all-news-content p {
+        font-size: .65rem;
+        line-height: 1.4;
+
+        -webkit-line-clamp: 2;
+    }
+
+
+    /* -----------------------------------------
+       Meta
+    ----------------------------------------- */
+
+    .all-news-meta {
+        gap: 4px;
+        margin-bottom: 1px;
+
+        font-size: 6px;
+    }
+
+
+    /* -----------------------------------------
+       Read More
+    ----------------------------------------- */
+
+    .all-news-read {
+        margin-top: 4px;
+        font-size: 6.5px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) and (orientation: portrait) {
+
+    .all-news-page .container {
+        width: 95%;
+    }
+
+    .all-news-grid {
+        gap: 8px;
+    }
+
+    .all-news-card {
+        grid-template-columns: 108px minmax(0, 1fr);
+        min-height: 115px;
+    }
+
+    .all-news-image {
+        width: 108px;
+        height: 115px;
+    }
+
+    .all-news-content {
+        padding: 9px 10px;
+    }
+
+    .all-news-content h2 {
+        font-size: .77rem;
+    }
+
+    .all-news-content p {
+        font-size: .61rem;
+    }
+
+    .all-news-meta {
+        font-size: 5.5px;
+    }
+
+    .all-news-read {
+        font-size: 6px;
+    }
+}
+
+
+/* =========================================================
+   NEWS PAGE — MOBILE 2 COLUMN CARD DESIGN
+========================================================= */
+
+@media (max-width: 600px) {
+    
+    .all-news-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        align-items: stretch !important;
+    }
+    
+    .all-news-card,
+    .all-news-card.bento-card,
+    .all-news-card.stacked-card {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 245px !important;
+        min-height: 245px !important;
+        overflow: hidden !important;
+        border-radius: 16px !important;
+    }
+    
+    /* IMAGE */
+    .all-news-card .all-news-image {
+        position: relative !important;
+        width: 100% !important;
+        height: 135px !important;
+        min-height: 135px !important;
+        flex: 0 0 135px !important;
+        overflow: hidden !important;
+    }
+    
+    .all-news-card .all-news-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+    
+    /* CATEGORY ON IMAGE */
+    .all-news-card .all-news-image>span {
+        position: absolute !important;
+        left: 8px !important;
+        bottom: 8px !important;
+        font-size: 7px !important;
+        padding: 4px 7px !important;
+        border-radius: 999px !important;
+    }
+    
+    /* CONTENT */
+    .all-news-card .all-news-content {
+        flex: 1 !important;
+        min-width: 0 !important;
+        padding: 9px 10px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+    
+    .all-news-card .all-news-meta {
+        margin-bottom: 4px !important;
+        font-size: 7px !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+    }
+    
+    .all-news-card .all-news-content h2 {
+        margin: 0 !important;
+        font-size: 12px !important;
+        line-height: 1.25 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+    
+    .all-news-card .all-news-content p {
+        display: none !important;
+    }
+    
+    .all-news-card .all-news-read {
+        margin-top: auto !important;
+        padding-top: 5px !important;
+        font-size: 8px !important;
+    }
+    
+}
+
+
+
+/* REMOVE CATEGORY PILL FROM NEWS CARD IMAGES */
+
+.all-news-card .all-news-image>span {
+    display: none !important;
+}

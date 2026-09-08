@@ -860,10 +860,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                                 this.style.display='none';
                             "
                         >
+                       
+   
 
-                        <span>
-                            ${category}
-                        </span>
+                       
+                            
+
 
                     </div>
 
@@ -929,49 +931,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     /* =====================================================
        DISPLAY NEWS
     ===================================================== */
-
-    function displayNews(news) {
-
-        if (!newsFeed) {
-            return;
-        }
-
-
-        newsFeed.innerHTML = "";
-
-
-        if (!news.length) {
-
-            newsFeed.innerHTML = `
-
-                <div class="news-loading">
-
-                    No news available yet.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        news.forEach(article => {
-
-            const card =
-                createNewsCard(article);
-
-            newsFeed.appendChild(
-                card
-            );
-
-        });
-
-
-        setupRevealAnimations();
-
+function displayNews(news) {
+    if (!newsFeed) return;
+    
+    newsFeed.innerHTML = "";
+    
+    if (!news.length) {
+        newsFeed.innerHTML = `
+            <div class="news-loading">
+                No news available yet.
+            </div>
+        `;
+        return;
     }
+    
+    /* ================================
+       6 BENTO NEWS CARDS
+    ================================= */
+    const newsTrack = document.createElement("div");
+    newsTrack.className = "news-track";
+    
+    news.slice(0, 10).forEach(article => {
+        newsTrack.appendChild(createNewsCard(article));
+    });
+    
+    newsFeed.appendChild(newsTrack);
+    
+    
+    /* ================================
+       2 NORMAL NEWS CARDS
+    ================================= */
+    const newsRest = document.createElement("div");
+    newsRest.className = "news-rest";
+    
+    news.slice(10, 12).forEach(article => {
+        newsRest.appendChild(createNewsCard(article));
+    });
+    
+    if (newsRest.children.length) {
+        newsFeed.appendChild(newsRest);
+    }
+    
+    setupRevealAnimations();
+}
 
 
     /* =====================================================
@@ -1060,7 +1062,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
             displayNews(
-                allNews
+                allNews.slice(0, 12)
             );
 
 
@@ -1146,9 +1148,9 @@ function createJambNewsCard(article) {
                             loading="lazy"
                         >
 
-                        <span>
-                            JAMB
-                        </span>
+                        
+                           
+                       
 
                     </div>
                 `
@@ -1167,10 +1169,6 @@ function createJambNewsCard(article) {
         <div class="jamb-news-content">
 
             <div class="jamb-news-meta">
-
-                <span>
-                    JAMB
-                </span>
 
                 <time>
                     ${date}
@@ -3875,4 +3873,855 @@ resourceDeck.addEventListener(
 
 
 
+/* =========================================================
+   MOLAS LIVE HERO
+   NEWS + JAMB NEWS + ADMISSION ALERTS
+========================================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const track = document.getElementById("hero-carousel-track");
+    const dotsBox = document.getElementById("hero-carousel-dots");
+    const carousel = document.getElementById("hero-carousel");
+
+    const prevBtn = document.querySelector(".hero-prev");
+    const nextBtn = document.querySelector(".hero-next");
+
+    if (!track || !dotsBox || !carousel) return;
+
+
+    /* =====================================================
+       SUPABASE
+    ===================================================== */
+
+    const SUPABASE_URL =
+        "https://eidnzebqyxcpxbykybch.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
+
+
+    let slides = [];
+    let currentSlide = 0;
+    let autoPlay = null;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+
+    /* =====================================================
+       FETCH
+    ===================================================== */
+
+    async function getTable(table, limit = 6) {
+
+        try {
+
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/${table}` +
+                `?select=*` +
+                `&order=published_at.desc` +
+                `&limit=${limit}`,
+                {
+                    headers: {
+                        apikey: SUPABASE_KEY,
+                        Authorization:
+                            `Bearer ${SUPABASE_KEY}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                console.warn(
+                    `Hero could not load ${table}`
+                );
+                return [];
+            }
+
+            const data = await response.json();
+
+            return Array.isArray(data) ? data : [];
+
+        } catch (error) {
+
+            console.warn(
+                `Hero ${table} error:`,
+                error
+            );
+
+            return [];
+        }
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* =====================================================
+       CLEAN TEXT
+    ===================================================== */
+
+    function cleanText(value) {
+
+        if (!value) return "";
+
+        return String(value)
+            .replace(/<[^>]*>/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
+
+    /* =====================================================
+       SHORTEN
+    ===================================================== */
+
+    function shorten(value, length = 150) {
+
+        const text = cleanText(value);
+
+        if (text.length <= length) {
+            return text;
+        }
+
+        return text
+            .substring(0, length)
+            .trim() + "...";
+    }
+
+
+    /* =====================================================
+       DATE
+    ===================================================== */
+
+    function formatDate(value) {
+
+        if (!value) return "";
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return "";
+        }
+
+        return date.toLocaleDateString(
+            "en-NG",
+            {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }
+        );
+    }
+
+
+    /* =====================================================
+       NORMALIZE NEWS
+    ===================================================== */
+
+    function makeNews(item) {
+
+        return {
+
+            id: item.id,
+
+            source: "news",
+
+            label:
+                item.breaking
+                    ? "Molas"
+                    : "EDUCATION NEWS",
+
+            date:
+                item.published_at ||
+                item.created_at,
+
+            category:
+                item.category ||
+                "EDUCATION",
+
+            title:
+                item.title ||
+                "Latest Education Update",
+
+            excerpt:
+                item.excerpt ||
+                item.content ||
+                "",
+
+            image:
+                item.image_url ||
+                "",
+
+            link:
+                `article.html?id=${encodeURIComponent(
+                    item.id
+                )}`,
+
+            priority:
+                item.breaking ? 3 :
+                item.featured ? 2 :
+                1
+        };
+    }
+
+
+    /* =====================================================
+       NORMALIZE JAMB
+    ===================================================== */
+
+    function makeJamb(item) {
+
+        return {
+
+            id: item.id,
+
+            source: "jamb_news",
+
+            label:
+                item.breaking
+                    ? "Molas"
+                    : "JAMB UPDATE",
+
+            date:
+                item.published_at ||
+                item.created_at,
+
+            category:
+                "JAMB / UTME",
+
+            title:
+                item.title ||
+                "Latest JAMB Update",
+
+            excerpt:
+                item.excerpt ||
+                item.content ||
+                "",
+
+            image:
+                item.image_url ||
+                "",
+
+            link:
+                `article.html?id=${encodeURIComponent(
+                    item.id
+                )}`,
+
+            priority:
+                item.breaking ? 3 :
+                item.featured ? 2 :
+                1
+        };
+    }
+
+
+    /* =====================================================
+       NORMALIZE ADMISSION
+    ===================================================== */
+
+function makeAdmission(item) {
+    return {
+        id: item.id,
+        source: "admission_alerts",
+        
+        label: item.status || "ADMISSION ALERT",
+        
+        date: item.published_at || item.created_at,
+        
+        category: item.admission_type || "ADMISSIONS",
+        
+        title: item.title || "Admission Update",
+        
+        excerpt: item.excerpt || item.content || "",
+        
+        image: item.image_url || "",
+        
+        link: `admission.html?id=${encodeURIComponent(item.id)}`,
+        
+        priority: item.featured ? 2 : 1
+    };
+}
+
+
+    /* =====================================================
+       LOAD HERO
+    ===================================================== */
+
+    async function loadHero() {
+
+        showLoading();
+
+
+        const [
+            news,
+            jamb,
+            admissions
+        ] = await Promise.all([
+
+            getTable("news"),
+
+            getTable("jamb_news"),
+
+            getTable("admission_alerts")
+
+        ]);
+
+
+        const newsItems =
+            news.map(makeNews);
+
+        const jambItems =
+            jamb.map(makeJamb);
+
+        const admissionItems =
+            admissions.map(makeAdmission);
+
+
+        /* =================================================
+           MIX THE THREE SOURCES
+        ================================================= */
+
+        slides = [];
+
+        const maxLength = Math.max(
+            newsItems.length,
+            jambItems.length,
+            admissionItems.length
+        );
+
+
+        for (
+            let i = 0;
+            i < maxLength;
+            i++
+        ) {
+
+            if (newsItems[i]) {
+                slides.push(newsItems[i]);
+            }
+
+            if (jambItems[i]) {
+                slides.push(jambItems[i]);
+            }
+
+            if (admissionItems[i]) {
+                slides.push(admissionItems[i]);
+            }
+        }
+
+
+        /* =================================================
+           PRIORITY
+        ================================================= */
+
+        slides.sort((a, b) => {
+
+            if (
+                b.priority !==
+                a.priority
+            ) {
+                return b.priority -
+                    a.priority;
+            }
+
+            const dateA =
+                new Date(a.date).getTime() || 0;
+
+            const dateB =
+                new Date(b.date).getTime() || 0;
+
+            return dateB - dateA;
+        });
+
+
+        /* =================================================
+           LIMIT HERO
+        ================================================= */
+
+        slides =
+            slides.slice(0, 9);
+
+
+        if (!slides.length) {
+
+            showEmpty();
+
+            return;
+        }
+
+
+        currentSlide = 0;
+
+        renderSlides();
+
+        startAutoPlay();
+    }
+
+
+    /* =====================================================
+       RENDER
+    ===================================================== */
+    function renderSlides() {
+        track.innerHTML = "";
+        dotsBox.innerHTML = "";
+        slides.forEach(
+            (item, index) => {
+                const slide =
+                    document.createElement("div");
+                slide.className =
+                    "hero-slide";
+                /* =========================================
+                   IMAGE
+           ========================================= */
+
+                if (item.image) {
+
+                    slide.style.backgroundImage =
+                        `
+                        linear-gradient(
+                            90deg,
+                            rgba(8,18,53,0.98) 0%,
+                            rgba(8,18,53,0.92) 45%,
+                            rgba(8,18,53,0.55) 100%
+                        ),
+                        url("${item.image}")
+                        `;
+
+                    slide.style.backgroundSize =
+                        "cover";
+
+                    slide.style.backgroundPosition =
+                        "center";
+                }
+
+
+                /* =========================================
+                   CONTENT
+                ========================================= */
+
+                slide.innerHTML = `
+
+                    <div class="hero-slide-inner">
+
+                        
+
+                           <div class="hero-slide-top">
+
+    <span class="hero-slide-category">
+        ${escapeHTML(
+            item.label
+        )}
+    </span>
+
+</div>
+                                
+                            
+
+                          
+                              
+
+                       
+
+
+                        <div class="hero-slide-source">
+
+                            ${escapeHTML(
+                                item.category
+                            )}
+
+                        </div>
+
+
+                        <h2>
+                            ${escapeHTML(
+                                cleanText(
+                                    item.title
+                                )
+                            )}
+                        </h2>
+
+
+                        <p>
+                            ${escapeHTML(
+                                shorten(
+                                    item.excerpt,
+                                    155
+                                )
+                            )}
+                        </p>
+
+
+                        <a
+                            href="${escapeHTML(
+                                item.link
+                            )}"
+                            class="hero-slide-link"
+                        >
+                            Read Update →
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                track.appendChild(slide);
+
+
+                /* =========================================
+                   DOT
+                ========================================= */
+
+                const dot =
+                    document.createElement("button");
+
+                dot.type = "button";
+
+                dot.className =
+                    "hero-carousel-dot" +
+                    (
+                        index === 0
+                            ? " active"
+                            : ""
+                    );
+
+                dot.setAttribute(
+                    "aria-label",
+                    `Go to update ${index + 1}`
+                );
+
+
+                dot.addEventListener(
+                    "click",
+                    () => {
+
+                        goToSlide(index);
+
+                        restartAutoPlay();
+
+                    }
+                );
+
+
+                dotsBox.appendChild(dot);
+
+            }
+        );
+
+
+        updatePosition();
+    }
+
+
+    /* =====================================================
+       POSITION
+    ===================================================== */
+
+    function updatePosition() {
+
+        track.style.transform =
+            `translateX(-${currentSlide * 100}%)`;
+
+
+        const dots =
+            dotsBox.querySelectorAll(
+                ".hero-carousel-dot"
+            );
+
+
+        dots.forEach(
+            (dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       GO TO
+    ===================================================== */
+
+    function goToSlide(index) {
+
+        if (!slides.length) return;
+
+        currentSlide =
+            (index + slides.length) %
+            slides.length;
+
+        updatePosition();
+    }
+
+
+    /* =====================================================
+       NEXT
+    ===================================================== */
+
+    function nextSlide() {
+
+        goToSlide(
+            currentSlide + 1
+        );
+    }
+
+
+    /* =====================================================
+       PREVIOUS
+    ===================================================== */
+
+    function previousSlide() {
+
+        goToSlide(
+            currentSlide - 1
+        );
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    if (nextBtn) {
+
+        nextBtn.addEventListener(
+            "click",
+            () => {
+
+                nextSlide();
+
+                restartAutoPlay();
+
+            }
+        );
+    }
+
+
+    if (prevBtn) {
+
+        prevBtn.addEventListener(
+            "click",
+            () => {
+
+                previousSlide();
+
+                restartAutoPlay();
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       TOUCH SWIPE
+    ===================================================== */
+
+    carousel.addEventListener(
+        "touchstart",
+        event => {
+
+            touchStartX =
+                event.changedTouches[0]
+                    .screenX;
+
+        },
+        { passive: true }
+    );
+
+
+    carousel.addEventListener(
+        "touchend",
+        event => {
+
+            touchEndX =
+                event.changedTouches[0]
+                    .screenX;
+
+            const distance =
+                touchEndX -
+                touchStartX;
+
+
+            if (
+                Math.abs(distance) < 45
+            ) {
+                return;
+            }
+
+
+            if (distance < 0) {
+
+                nextSlide();
+
+            } else {
+
+                previousSlide();
+
+            }
+
+
+            restartAutoPlay();
+
+        },
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       AUTO PLAY
+    ===================================================== */
+
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+
+        if (slides.length <= 1) {
+            return;
+        }
+
+
+        autoPlay =
+            setInterval(
+                nextSlide,
+                2000
+            );
+    }
+
+
+    function stopAutoPlay() {
+
+        if (autoPlay) {
+
+            clearInterval(autoPlay);
+
+            autoPlay = null;
+        }
+    }
+
+
+    function restartAutoPlay() {
+
+        startAutoPlay();
+    }
+
+
+    /* =====================================================
+       PAUSE ON DESKTOP HOVER
+    ===================================================== */
+
+    carousel.addEventListener(
+        "mouseenter",
+        stopAutoPlay
+    );
+
+
+    carousel.addEventListener(
+        "mouseleave",
+        startAutoPlay
+    );
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    function showLoading() {
+
+        track.innerHTML = `
+
+            <div class="hero-slide hero-slide-loading">
+
+                <span class="hero-slide-category">
+                    MOLAS
+                </span>
+
+                <h2>
+                    Loading latest education updates...
+                </h2>
+
+                <p>
+                    Bringing you the latest Nigerian
+                    education and admission information.
+                </p>
+
+            </div>
+
+        `;
+
+        dotsBox.innerHTML = "";
+    }
+
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
+    function showEmpty() {
+
+        track.innerHTML = `
+
+            <div class="hero-slide hero-slide-loading">
+
+                <span class="hero-slide-category">
+                    MOLAS
+                </span>
+
+                <h2>
+                    Latest education updates
+                </h2>
+
+                <p>
+                    New education, JAMB and admission
+                    updates will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        dotsBox.innerHTML = "";
+    }
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ===================================================== */
+
+    loadHero();
+
+
+    /* =====================================================
+       REFRESH EVERY 10 MINUTES
+    ===================================================== */
+
+    setInterval(
+        loadHero,
+        10 * 60 * 1000
+    );
+
+});
