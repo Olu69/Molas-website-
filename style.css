@@ -1843,32 +1843,32 @@ button {
 
 .service-card:nth-child(1) {
     grid-column: span 3;
-    background: #E7F3FA;
+    background: #B8D9EA;
 }
 
 .service-card:nth-child(2) {
     grid-column: span 3;
-    background: #DDF7FF;
+    background: #D1B4A8;
 }
 
 .service-card:nth-child(3) {
     grid-column: span 2;
-    background: #F3EFE7;
+    background: #E5DED0;
 }
 
 .service-card:nth-child(4) {
     grid-column: span 2;
-    background: #E9EEFA;
+    background: #C1CDE8;
 }
 
 .service-card:nth-child(5) {
     grid-column: span 2;
-    background: #E8F6F8;
+    background: #B8DDE2;
 }
 
 .service-card:nth-child(6) {
     grid-column: 2 / 6;
-    background: #EDE6DA;
+    background: #D8CBB8;
 }
 
 .service-card:hover {
@@ -2570,7 +2570,7 @@ button {
 ========================================================= */
 
 .resource-card:nth-child(1) .resource-visual-card {
-    background: var(--navy);
+    background: #008000;
 }
 
 .resource-card:nth-child(2) .resource-visual-card {
@@ -2578,7 +2578,7 @@ button {
 }
 
 .resource-card:nth-child(3) .resource-visual-card {
-    background: var(--brand-cyan);
+    background: #722F37;
     color: var(--navy);
 }
 

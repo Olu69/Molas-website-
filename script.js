@@ -1157,10 +1157,9 @@ function createJambNewsCard(article) {
                 : `
                     <div class="jamb-news-image">
 
-                        <span>
-                            JAMB
-                        </span>
-
+                        
+                          
+                        
                     </div>
                 `
         }
