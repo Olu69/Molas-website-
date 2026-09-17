@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             SUPABASE_URL,
             SUPABASE_KEY
         );
+
         window.molasSupabase = supabase;
 
     } catch (error) {
@@ -42,11 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     /* =====================================================
        MOLAS ANIMATION + IMAGE STYLES
-       
-       IMPORTANT:
-       This script does NOT create or change any global
-       red color. Homepage colors remain controlled by
-       your existing CSS variables.
     ===================================================== */
 
     const style =
@@ -54,629 +50,330 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     style.textContent = `
 
-        /* =================================================
-           PAGE FADE
-        ================================================= */
-
         body {
-
             opacity: 0;
-
-            transition:
-                opacity .8s ease;
-
+            transition: opacity .8s ease;
         }
-
 
         body.molas-ready {
-
             opacity: 1;
-
         }
-
-
-        /* =================================================
-           BRAND
-        ================================================= */
 
         .brand {
-
             display: flex;
-
             flex-direction: column;
-
             align-items: flex-start;
-
             position: relative;
-
         }
 
-
         .brand-main {
-
             position: relative;
-
             display: inline-block;
-
             opacity: 0;
-
-            transform:
-                translateX(-40px)
-                scale(.94);
-
+            transform: translateX(-40px) scale(.94);
             letter-spacing: 6px;
-
             animation:
                 molasLogoIn
                 1.4s
                 cubic-bezier(.16,1,.3,1)
                 .2s
                 forwards;
-
         }
 
-
         .brand-sub {
-
             display: block;
-
             margin-top: -5px;
-
             opacity: 0;
-
-            transform:
-                translateY(8px);
-
+            transform: translateY(8px);
             letter-spacing: .09em;
-
             animation:
                 molasSubIn
                 1s
                 cubic-bezier(.16,1,.3,1)
                 .9s
                 forwards;
-
         }
 
-
         .brand::after {
-
             content: "";
-
             position: absolute;
-
             left: 0;
-
             bottom: -3px;
-
             width: 100%;
-
             height: 1.5px;
-
-            background:
-                var(--brown);
-
-            transform:
-                scaleX(0);
-
-            transform-origin:
-                left center;
-
+            background: var(--brown);
+            transform: scaleX(0);
+            transform-origin: left center;
             animation:
                 molasLineIn
                 1.2s
                 cubic-bezier(.16,1,.3,1)
                 1.3s
                 forwards;
-
         }
-
-
-        /* =================================================
-           LOGO ANIMATION
-        ================================================= */
 
         @keyframes molasLogoIn {
 
             0% {
-
                 opacity: 0;
-
                 transform:
                     translateX(-40px)
                     scale(.94);
-
                 letter-spacing: 6px;
-
             }
 
             60% {
-
                 opacity: 1;
-
                 transform:
                     translateX(5px)
                     scale(1.02);
-
                 letter-spacing: -1px;
-
             }
 
             100% {
-
                 opacity: 1;
-
                 transform:
                     translateX(0)
                     scale(1);
-
                 letter-spacing: -1px;
-
             }
 
         }
-
 
         @keyframes molasSubIn {
 
             0% {
-
                 opacity: 0;
-
-                transform:
-                    translateY(8px);
-
+                transform: translateY(8px);
             }
 
             100% {
-
                 opacity: 1;
-
-                transform:
-                    translateY(0);
-
+                transform: translateY(0);
             }
 
         }
-
 
         @keyframes molasLineIn {
 
             0% {
-
-                transform:
-                    scaleX(0);
-
+                transform: scaleX(0);
             }
 
             100% {
-
-                transform:
-                    scaleX(1);
-
+                transform: scaleX(1);
             }
 
         }
 
-
-        /* =================================================
-           REVEAL ANIMATION
-        ================================================= */
-
         .molas-reveal {
-
             opacity: 0;
-
             transform:
                 translateY(70px)
                 scale(.97);
-
-            filter:
-                blur(5px);
-
+            filter: blur(5px);
             transition:
                 opacity 1.35s cubic-bezier(.16,1,.3,1),
                 transform 1.35s cubic-bezier(.16,1,.3,1),
                 filter 1.35s cubic-bezier(.16,1,.3,1);
-
             transition-delay:
                 var(--molas-delay, 0ms);
-
             will-change:
                 opacity,
                 transform,
                 filter;
-
         }
 
-
         .molas-reveal.molas-visible {
-
             opacity: 1;
-
             transform:
                 translateY(0)
                 scale(1);
-
-            filter:
-                blur(0);
-
+            filter: blur(0);
         }
-
-
-        /* =================================================
-           CARDS
-        ================================================= */
 
         .news-card,
         .university-card,
         .service-card {
-
             transition:
                 transform .45s cubic-bezier(.16,1,.3,1),
                 box-shadow .45s ease,
                 border-color .35s ease;
-
         }
-
 
         .news-card:hover,
         .university-card:hover,
         .service-card:hover {
-
-            transform:
-                translateY(-6px);
-
+            transform: translateY(-6px);
             box-shadow:
                 0 18px 40px
                 rgba(50,35,25,.12);
-
         }
-
-
-        /* =================================================
-           NEWS IMAGE
-        ================================================= */
 
         .news-image {
-
             position: relative;
-
             overflow: hidden;
-
         }
 
-
         .news-image img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
-
             display: block;
-
             transition:
                 transform .6s
                 cubic-bezier(.16,1,.3,1);
-
         }
-
 
         .news-card:hover
         .news-image img {
-
-            transform:
-                scale(1.05);
-
+            transform: scale(1.05);
         }
 
-
         .news-image::after {
-
             content: "";
-
             position: absolute;
-
             inset: 0;
-
             background:
                 linear-gradient(
                     135deg,
                     rgba(7,92,58,.25),
                     rgba(112,69,47,.18)
                 );
-
             pointer-events: none;
-
         }
-
 
         .news-image span {
-
             position: absolute;
-
             z-index: 2;
-
         }
 
-
-        /* =================================================
-           SEARCH
-        ================================================= */
-
         .search-box {
-
             transition:
                 transform .35s ease,
                 box-shadow .35s ease,
                 border-color .35s ease;
-
         }
 
-
         .search-box.search-active {
-
-            transform:
-                translateY(-3px);
-
-            border-color:
-                var(--brown);
-
+            transform: translateY(-3px);
+            border-color: var(--brown);
             box-shadow:
                 0 15px 35px
                 rgba(50,35,25,.12);
-
         }
-
-
-        /* =================================================
-           HEADER
-        ================================================= */
 
         .site-header {
-
-            transition:
-                box-shadow .4s ease;
-
+            transition: box-shadow .4s ease;
         }
 
-
         .site-header.header-active {
-
             box-shadow:
                 0 8px 28px
                 rgba(40,30,20,.12);
-
         }
 
-
-        /* =================================================
-           BACK TO TOP / SCROLL BUTTON
-           
-           Uses the existing homepage --brown.
-           No red variable is introduced.
-        ================================================= */
-
         .molas-top {
-
             position: fixed;
-
             right: 22px;
-
             bottom: 22px;
-
             width: 46px;
-
             height: 46px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border: none;
-
             border-radius: 10px;
-
-            background:
-                var(--brown);
-
-            color:
-                #ffffff;
-
+            background: var(--brown);
+            color: #ffffff;
             font-size: 20px;
-
             line-height: 1;
-
             cursor: pointer;
-
             opacity: 0;
-
             visibility: hidden;
-
             pointer-events: none;
-
-            transform:
-                translateY(15px);
-
+            transform: translateY(15px);
             transition:
                 opacity .35s ease,
                 visibility .35s ease,
                 transform .35s ease,
                 background-color .25s ease;
-
             z-index: 99999;
-
-            -webkit-tap-highlight-color:
-                transparent;
-
-            touch-action:
-                manipulation;
-
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
-
 
         .molas-top.show {
-
             opacity: 1;
-
-            visibility:
-                visible;
-
-            pointer-events:
-                auto;
-
-            transform:
-                translateY(0);
-
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
         }
-
 
         .molas-top:hover {
-
-            background:
-                var(--brown);
-
-            transform:
-                translateY(-4px);
-
+            background: var(--brown);
+            transform: translateY(-4px);
         }
 
-
         .molas-top:active {
-
             transform:
                 translateY(-1px)
                 scale(.96);
-
         }
-
 
         .molas-top:focus {
-
             outline: none;
-
         }
-
-
-        /* =================================================
-           LOADING
-        ================================================= */
 
         .news-loading {
-
-            padding:
-                40px 20px;
-
-            text-align:
-                center;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
         }
-
-
-        /* =================================================
-           ERROR
-           
-           Uses neutral homepage colors.
-           NO RED.
-        ================================================= */
 
         .news-error {
-
-            padding:
-                30px 20px;
-
-            text-align:
-                center;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
         }
-
-
-        /* =================================================
-           RESOURCE DRAGGING
-        ================================================= */
 
         #resource-deck.is-dragging {
-
-            cursor:
-                grabbing;
-
+            cursor: grabbing;
         }
-
 
         #resource-deck {
-
-            touch-action:
-                pan-y;
-
+            touch-action: pan-y;
         }
 
-
-        /* =================================================
-           RESOURCE CARDS
-        ================================================= */
-
         .resource-card {
-
             will-change:
                 transform,
                 opacity;
-
             transition:
                 transform .65s cubic-bezier(.16,1,.3,1),
                 opacity .55s ease;
-
         }
-
 
         #resource-deck.is-dragging
         .resource-card {
-
-            transition:
-                none;
-
+            transition: none;
         }
-
-
-        /* =================================================
-           MOBILE
-        ================================================= */
 
         @media (max-width: 640px) {
 
             .molas-top {
-
                 right: 16px;
-
                 bottom:
                     calc(
                         16px +
                         env(safe-area-inset-bottom)
                     );
-
                 width: 42px;
-
                 height: 42px;
-
                 border-radius: 10px;
-
                 font-size: 18px;
-
             }
 
         }
@@ -704,9 +401,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ===================================================== */
 
     const newsFeed =
-        document.querySelector(
-            ".news-feed"
-        );
+        document.querySelector(".news-feed");
 
     let allNews = [];
 
@@ -750,38 +445,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             value === null ||
             value === undefined
         ) {
-
             return "";
-
         }
 
         return String(value)
-
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
 
@@ -792,9 +464,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function createNewsCard(article) {
 
         const articleElement =
-            document.createElement(
-                "article"
-            );
+            document.createElement("article");
 
         articleElement.className =
             "news-card";
@@ -802,12 +472,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         articleElement.dataset.newsId =
             article.id;
 
-
         const title =
-            escapeHTML(
-                article.title
-            );
-
+            escapeHTML(article.title);
 
         const excerpt =
             escapeHTML(
@@ -816,13 +482,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ""
             );
 
-
         const category =
             escapeHTML(
                 article.category ||
                 "NEWS"
             );
-
 
         const source =
             escapeHTML(
@@ -830,29 +494,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "MOLAS"
             );
 
-
         const date =
             formatDate(
                 article.published_at ||
                 article.created_at
             );
 
-
         const image =
             article.image_url
-                ? String(
-                    article.image_url
-                ).trim()
+                ? String(article.image_url).trim()
                 : "";
-
 
         const imageHTML =
             image
-
                 ? `
-
                     <div class="news-image">
-
                         <img
                             src="${escapeHTML(image)}"
                             alt="${title}"
@@ -861,29 +517,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                                 this.style.display='none';
                             "
                         >
-                       
-   
-
-                       
-                            
-
-
                     </div>
-
                 `
-
                 : `
-
                     <div class="news-image">
-
                         <span>
                             ${category}
                         </span>
-
                     </div>
-
                 `;
-
 
         articleElement.innerHTML = `
 
@@ -923,7 +565,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         `;
 
-
         return articleElement;
 
     }
@@ -932,49 +573,67 @@ document.addEventListener("DOMContentLoaded", async () => {
     /* =====================================================
        DISPLAY NEWS
     ===================================================== */
-function displayNews(news) {
-    if (!newsFeed) return;
-    
-    newsFeed.innerHTML = "";
-    
-    if (!news.length) {
-        newsFeed.innerHTML = `
-            <div class="news-loading">
-                No news available yet.
-            </div>
-        `;
-        return;
+
+    function displayNews(news) {
+
+        if (!newsFeed) return;
+
+        newsFeed.innerHTML = "";
+
+        if (!news.length) {
+
+            newsFeed.innerHTML = `
+                <div class="news-loading">
+                    No news available yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        const newsTrack =
+            document.createElement("div");
+
+        newsTrack.className =
+            "news-track";
+
+        news.slice(0, 10).forEach(article => {
+
+            newsTrack.appendChild(
+                createNewsCard(article)
+            );
+
+        });
+
+        newsFeed.appendChild(
+            newsTrack
+        );
+
+        const newsRest =
+            document.createElement("div");
+
+        newsRest.className =
+            "news-rest";
+
+        news.slice(10, 12).forEach(article => {
+
+            newsRest.appendChild(
+                createNewsCard(article)
+            );
+
+        });
+
+        if (newsRest.children.length) {
+
+            newsFeed.appendChild(
+                newsRest
+            );
+
+        }
+
+        setupRevealAnimations();
+
     }
-    
-    /* ================================
-       6 BENTO NEWS CARDS
-    ================================= */
-    const newsTrack = document.createElement("div");
-    newsTrack.className = "news-track";
-    
-    news.slice(0, 10).forEach(article => {
-        newsTrack.appendChild(createNewsCard(article));
-    });
-    
-    newsFeed.appendChild(newsTrack);
-    
-    
-    /* ================================
-       2 NORMAL NEWS CARDS
-    ================================= */
-    const newsRest = document.createElement("div");
-    newsRest.className = "news-rest";
-    
-    news.slice(10, 12).forEach(article => {
-        newsRest.appendChild(createNewsCard(article));
-    });
-    
-    if (newsRest.children.length) {
-        newsFeed.appendChild(newsRest);
-    }
-    
-    setupRevealAnimations();
-}
 
 
     /* =====================================================
@@ -987,22 +646,14 @@ function displayNews(news) {
             !supabase ||
             !newsFeed
         ) {
-
             return;
-
         }
 
-
         newsFeed.innerHTML = `
-
             <div class="news-loading">
-
                 Loading latest news...
-
             </div>
-
         `;
-
 
         try {
 
@@ -1010,9 +661,7 @@ function displayNews(news) {
                 data,
                 error
             } = await supabase
-
                 .from("news")
-
                 .select(`
                     id,
                     created_at,
@@ -1028,7 +677,6 @@ function displayNews(news) {
                     breaking,
                     status
                 `)
-
                 .order(
                     "published_at",
                     {
@@ -1037,11 +685,9 @@ function displayNews(news) {
                     }
                 );
 
-
             if (error) {
                 throw error;
             }
-
 
             allNews =
                 (data || [])
@@ -1050,9 +696,7 @@ function displayNews(news) {
                     const status =
                         String(
                             article.status || ""
-                        )
-                        .toLowerCase();
-
+                        ).toLowerCase();
 
                     return (
                         !status ||
@@ -1061,11 +705,9 @@ function displayNews(news) {
 
                 });
 
-
             displayNews(
                 allNews.slice(0, 12)
             );
-
 
             setupBreakingNews(
                 allNews
@@ -1078,267 +720,216 @@ function displayNews(news) {
                 error
             );
 
-
             newsFeed.innerHTML = `
-
                 <div class="news-error">
-
                     Unable to load news right now.
-
                 </div>
-
             `;
 
         }
 
     }
-/* =====================================================
-   HOMEPAGE JAMB NEWS
-===================================================== */
-
-const jambNewsGrid =
-    document.querySelector("#jamb-news-grid");
 
 
-function createJambNewsCard(article) {
-    
-    const card =
-        document.createElement("article");
-    
-    card.className =
-        "jamb-news-card";
-    
-    
-    const title =
-        escapeHTML(
-            article.title
+    /* =====================================================
+       HOMEPAGE JAMB NEWS
+    ===================================================== */
+
+    const jambNewsGrid =
+        document.querySelector(
+            "#jamb-news-grid"
         );
-    
-    
-    const excerpt =
-        escapeHTML(
-            article.excerpt ||
-            article.content ||
-            ""
-        );
-    
-    
-    const date =
-        formatDate(
-            article.published_at ||
-            article.created_at
-        );
-    
-    
-    const image =
-        article.image_url ?
-        String(article.image_url).trim() :
-        "";
-    
-    
-    card.innerHTML = `
-
-        ${
-            image
-                ? `
-                    <div class="jamb-news-image">
-
-                        <img
-                            src="${escapeHTML(image)}"
-                            alt="${title}"
-                            loading="lazy"
-                        >
-
-                        
-                           
-                       
-
-                    </div>
-                `
-                : `
-                    <div class="jamb-news-image">
-
-                        
-                          
-                        
-                    </div>
-                `
-        }
 
 
-        <div class="jamb-news-content">
+    function createJambNewsCard(article) {
 
-            <div class="jamb-news-meta">
+        const card =
+            document.createElement("article");
 
-                <time>
-                    ${date}
-                </time>
+        card.className =
+            "jamb-news-card";
 
-            </div>
+        const title =
+            escapeHTML(article.title);
 
-
-            <h3>
-                ${title}
-            </h3>
-
-
-            <p>
-                ${excerpt}
-            </p>
-
-
-            <a
-                href="jamb-news-article.html?id=${encodeURIComponent(article.id)}"
-                class="jamb-news-read"
-            >
-                Read JAMB Update →
-            </a>
-
-        </div>
-
-    `;
-    
-    
-    return card;
-    
-}
-
-
-async function loadHomepageJambNews() {
-    
-    if (
-        !supabase ||
-        !jambNewsGrid
-    ) {
-        
-        return;
-        
-    }
-    
-    
-    jambNewsGrid.innerHTML = `
-
-        <div class="jamb-news-loading">
-
-            Loading latest JAMB updates...
-
-        </div>
-
-    `;
-    
-    
-    try {
-        
-        const {
-            data,
-            error
-        } = await supabase
-            
-            .from("jamb_news")
-            
-            .select(`
-                id,
-                created_at,
-                title,
-                excerpt,
-                content,
-                image_url,
-                source,
-                source_url,
-                published_at,
-                featured,
-                breaking,
-                status
-            `)
-            
-            .order(
-                "published_at",
-                {
-                    ascending: false,
-                    nullsFirst: false
-                }
-            )
-            
-            .limit(3);
-        
-        
-        if (error) {
-            throw error;
-        }
-        
-        
-        const jambNews =
-            (data || [])
-            .filter(article => {
-                
-                const status =
-                    String(
-                        article.status || ""
-                    )
-                    .toLowerCase();
-                
-                
-                return (
-                    !status ||
-                    status === "published"
-                );
-                
-            });
-        
-        
-        if (!jambNews.length) {
-            
-            jambNewsGrid.innerHTML = `
-
-                <div class="jamb-news-loading">
-
-                    No JAMB updates available yet.
-
-                </div>
-
-            `;
-            
-            return;
-            
-        }
-        
-        
-        jambNewsGrid.innerHTML = "";
-        
-        
-        jambNews.forEach(article => {
-            
-            jambNewsGrid.appendChild(
-                createJambNewsCard(article)
+        const excerpt =
+            escapeHTML(
+                article.excerpt ||
+                article.content ||
+                ""
             );
-            
-        });
-        
-        
-        setupRevealAnimations();
-        
-        
-    } catch (error) {
-        
-        console.error(
-            "MOLAS HOMEPAGE JAMB NEWS ERROR:",
-            error
-        );
-        
-        
-        jambNewsGrid.innerHTML = `
 
-            <div class="jamb-news-loading">
+        const date =
+            formatDate(
+                article.published_at ||
+                article.created_at
+            );
 
-                Unable to load JAMB updates right now.
+        const image =
+            article.image_url
+                ? String(article.image_url).trim()
+                : "";
+
+        card.innerHTML = `
+
+            ${
+                image
+                    ? `
+                        <div class="jamb-news-image">
+
+                            <img
+                                src="${escapeHTML(image)}"
+                                alt="${title}"
+                                loading="lazy"
+                            >
+
+                        </div>
+                    `
+                    : `
+                        <div class="jamb-news-image"></div>
+                    `
+            }
+
+            <div class="jamb-news-content">
+
+                <div class="jamb-news-meta">
+
+                    <time>
+                        ${date}
+                    </time>
+
+                </div>
+
+                <h3>
+                    ${title}
+                </h3>
+
+                <p>
+                    ${excerpt}
+                </p>
+
+                <a
+                    href="jamb-news-article.html?id=${encodeURIComponent(article.id)}"
+                    class="jamb-news-read"
+                >
+                    Read JAMB Update →
+                </a>
 
             </div>
 
         `;
-        
+
+        return card;
+
     }
-    
-}
+
+
+    async function loadHomepageJambNews() {
+
+        if (
+            !supabase ||
+            !jambNewsGrid
+        ) {
+            return;
+        }
+
+        jambNewsGrid.innerHTML = `
+            <div class="jamb-news-loading">
+                Loading latest JAMB updates...
+            </div>
+        `;
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabase
+                .from("jamb_news")
+                .select(`
+                    id,
+                    created_at,
+                    title,
+                    excerpt,
+                    content,
+                    image_url,
+                    source,
+                    source_url,
+                    published_at,
+                    featured,
+                    breaking,
+                    status
+                `)
+                .order(
+                    "published_at",
+                    {
+                        ascending: false,
+                        nullsFirst: false
+                    }
+                )
+                .limit(3);
+
+            if (error) {
+                throw error;
+            }
+
+            const jambNews =
+                (data || [])
+                .filter(article => {
+
+                    const status =
+                        String(
+                            article.status || ""
+                        ).toLowerCase();
+
+                    return (
+                        !status ||
+                        status === "published"
+                    );
+
+                });
+
+            if (!jambNews.length) {
+
+                jambNewsGrid.innerHTML = `
+                    <div class="jamb-news-loading">
+                        No JAMB updates available yet.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+            jambNewsGrid.innerHTML = "";
+
+            jambNews.forEach(article => {
+
+                jambNewsGrid.appendChild(
+                    createJambNewsCard(article)
+                );
+
+            });
+
+            setupRevealAnimations();
+
+        } catch (error) {
+
+            console.error(
+                "MOLAS HOMEPAGE JAMB NEWS ERROR:",
+                error
+            );
+
+            jambNewsGrid.innerHTML = `
+                <div class="jamb-news-loading">
+                    Unable to load JAMB updates right now.
+                </div>
+            `;
+
+        }
+
+    }
+
 
     /* =====================================================
        BREAKING NEWS
@@ -1351,18 +942,15 @@ async function loadHomepageJambNews() {
                 ".ticker-content"
             );
 
-
         if (!ticker) {
             return;
         }
-
 
         const breakingNews =
             news.filter(
                 article =>
                     article.breaking === true
             );
-
 
         if (!breakingNews.length) {
 
@@ -1372,24 +960,16 @@ async function loadHomepageJambNews() {
 
         }
 
-
         ticker.innerHTML =
             breakingNews
-
                 .slice(0, 8)
-
                 .map(article => `
-
                     <span>
-
                         ${escapeHTML(
                             article.title
                         )}
-
                     </span>
-
                 `)
-
                 .join("");
 
     }
@@ -1411,22 +991,14 @@ async function loadHomepageJambNews() {
             !supabase ||
             !admissionAlertsList
         ) {
-
             return;
-
         }
 
-
         admissionAlertsList.innerHTML = `
-
             <div class="news-loading">
-
                 Loading admission alerts...
-
             </div>
-
         `;
-
 
         try {
 
@@ -1434,9 +1006,7 @@ async function loadHomepageJambNews() {
                 data,
                 error
             } = await supabase
-
                 .from("admission_alerts")
-
                 .select(`
                     id,
                     title,
@@ -1451,7 +1021,6 @@ async function loadHomepageJambNews() {
                     published_at,
                     featured
                 `)
-
                 .order(
                     "published_at",
                     {
@@ -1459,14 +1028,11 @@ async function loadHomepageJambNews() {
                         nullsFirst: false
                     }
                 )
-                
                 .limit(2);
-
 
             if (error) {
                 throw error;
             }
-
 
             if (
                 !data ||
@@ -1474,22 +1040,16 @@ async function loadHomepageJambNews() {
             ) {
 
                 admissionAlertsList.innerHTML = `
-
                     <div class="news-loading">
-
                         No admission alerts available.
-
                     </div>
-
                 `;
 
                 return;
 
             }
 
-
             admissionAlertsList.innerHTML = "";
-
 
             data.forEach(
                 (alert, index) => {
@@ -1499,10 +1059,8 @@ async function loadHomepageJambNews() {
                             "div"
                         );
 
-
                     item.className =
                         "admission-alert-item";
-
 
                     item.innerHTML = `
 
@@ -1512,19 +1070,15 @@ async function loadHomepageJambNews() {
                         >
 
                             <span class="alert-number">
-
                                 ${index + 1}.
-
                             </span>
 
                             <span class="alert-info">
 
                                 <strong>
-
                                     ${escapeHTML(
                                         alert.title
                                     )}
-
                                 </strong>
 
                             </span>
@@ -1532,7 +1086,6 @@ async function loadHomepageJambNews() {
                         </a>
 
                     `;
-
 
                     admissionAlertsList.appendChild(
                         item
@@ -1548,15 +1101,10 @@ async function loadHomepageJambNews() {
                 error
             );
 
-
             admissionAlertsList.innerHTML = `
-
                 <div class="news-error">
-
                     Unable to load admission alerts.
-
                 </div>
-
             `;
 
         }
@@ -1567,124 +1115,112 @@ async function loadHomepageJambNews() {
     /* =====================================================
        ADMISSION STATUS
     ===================================================== */
-    const admissionStatusBox =document.querySelector(".status-box");
+
+    const admissionStatusBox =
+        document.querySelector(
+            ".status-box"
+        );
+
 
     async function loadAdmissionStatus() {
-    
-    if (!supabase || !admissionStatusBox) {
-        return;
-    }
-    
-    try {
-        
-        const {
-            data,
-            error
-        } = await supabase
-            .from("admission_status")
-            .select(`
-                id,
-                ongoing_text,
-                lists_text,
-                deadline_text,
-                updated_at
-            `)
-            .order("updated_at", {
-                ascending: false
-            })
-            .limit(1)
-            .maybeSingle();
-        
-        if (error) {
-    
-    admissionStatusBox.innerHTML = `
-        <div style="
-            padding:20px;
-            font-size:13px;
-            color:#111;
-        ">
-            Supabase error:<br>
-            ${escapeHTML(error.message)}
-        </div>
-    `;
-    
-    return;
-}
-        
-        if (!data) {
-    
-    admissionStatusBox.innerHTML = `
-        <div style="
-            padding:20px;
-            font-size:13px;
-            color:#111;
-        ">
-            No admission status record found.
-        </div>
-    `;
-    
-    return;
-}
-        
-        
-        /* =========================================
-           FIND THE THREE TEXT ELEMENTS DIRECTLY
-        ========================================== */
-        
-        const statusTexts =
-            admissionStatusBox.querySelectorAll(
-                ".status-text"
+
+        if (
+            !supabase ||
+            !admissionStatusBox
+        ) {
+            return;
+        }
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabase
+                .from("admission_status")
+                .select(`
+                    id,
+                    ongoing_text,
+                    lists_text,
+                    deadline_text,
+                    updated_at
+                `)
+                .order(
+                    "updated_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(1)
+                .maybeSingle();
+
+            if (error) {
+
+                admissionStatusBox.innerHTML = `
+                    <div style="
+                        padding:20px;
+                        font-size:13px;
+                        color:#111;
+                    ">
+                        Supabase error:<br>
+                        ${escapeHTML(error.message)}
+                    </div>
+                `;
+
+                return;
+            }
+
+            if (!data) {
+
+                admissionStatusBox.innerHTML = `
+                    <div style="
+                        padding:20px;
+                        font-size:13px;
+                        color:#111;
+                    ">
+                        No admission status record found.
+                    </div>
+                `;
+
+                return;
+            }
+
+            const statusTexts =
+                admissionStatusBox.querySelectorAll(
+                    ".status-text"
+                );
+
+            if (statusTexts[0]) {
+
+                statusTexts[0].textContent =
+                    data.ongoing_text || "";
+
+            }
+
+            if (statusTexts[1]) {
+
+                statusTexts[1].textContent =
+                    data.lists_text || "";
+
+            }
+
+            if (statusTexts[2]) {
+
+                statusTexts[2].textContent =
+                    data.deadline_text || "";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "MOLAS ADMISSION STATUS ERROR:",
+                error
             );
-        
-        
-        /* =========================================
-           ONGOING
-        ========================================== */
-        
-        if (statusTexts[0]) {
-            
-            statusTexts[0].textContent =
-                data.ongoing_text || "";
-            
+
         }
-        
-        
-        /* =========================================
-           ADMISSION LISTS
-        ========================================== */
-        
-        if (statusTexts[1]) {
-            
-            statusTexts[1].textContent =
-                data.lists_text || "";
-            
-        }
-        
-        
-        /* =========================================
-           DEADLINE
-        ========================================== */
-        
-        if (statusTexts[2]) {
-            
-            statusTexts[2].textContent =
-                data.deadline_text || "";
-            
-        }
-        
-    } catch (error) {
-        
-        console.error(
-            "MOLAS ADMISSION STATUS ERROR:",
-            error
-        );
-        
+
     }
-    
-}
-       
-
-
 
 
     /* =====================================================
@@ -1706,7 +1242,6 @@ async function loadHomepageJambNews() {
 
             );
 
-
         revealTargets.forEach(
             (element, index) => {
 
@@ -1715,20 +1250,15 @@ async function loadHomepageJambNews() {
                         "molas-visible"
                     )
                 ) {
-
                     return;
-
                 }
-
 
                 element.classList.add(
                     "molas-reveal"
                 );
 
-
                 const delay =
                     (index % 4) * 180;
-
 
                 element.style.setProperty(
                     "--molas-delay",
@@ -1737,7 +1267,6 @@ async function loadHomepageJambNews() {
 
             }
         );
-
 
         if (
             "IntersectionObserver"
@@ -1762,7 +1291,6 @@ async function loadHomepageJambNews() {
                                             "molas-visible"
                                         );
 
-
                                     observer.unobserve(
                                         entry.target
                                     );
@@ -1773,16 +1301,12 @@ async function loadHomepageJambNews() {
                         );
 
                     },
-
                     {
                         threshold: .08,
-
                         rootMargin:
                             "0px 0px -60px 0px"
                     }
-
                 );
-
 
             revealTargets.forEach(
                 element => {
@@ -1821,8 +1345,6 @@ async function loadHomepageJambNews() {
 
     /* =====================================================
        MOBILE NAVIGATION
-       
-       ☰ ALWAYS REMAINS ☰
     ===================================================== */
 
     const menuButton =
@@ -1830,12 +1352,10 @@ async function loadHomepageJambNews() {
             ".mobile-menu-btn"
         );
 
-
     const mainNav =
         document.querySelector(
             ".main-nav"
         );
-
 
     const navDropdowns =
         document.querySelectorAll(
@@ -1843,21 +1363,15 @@ async function loadHomepageJambNews() {
         );
 
 
-    /* =====================================================
-       CLOSE MOBILE NAV
-    ===================================================== */
-
     function closeMobileNav() {
 
         if (!mainNav) {
             return;
         }
 
-
         mainNav.classList.remove(
             "show"
         );
-
 
         navDropdowns.forEach(
             dropdown => {
@@ -1872,10 +1386,6 @@ async function loadHomepageJambNews() {
     }
 
 
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
-
     if (
         menuButton &&
         mainNav
@@ -1886,15 +1396,12 @@ async function loadHomepageJambNews() {
             event => {
 
                 event.preventDefault();
-
                 event.stopPropagation();
-
 
                 const isOpen =
                     mainNav.classList.contains(
                         "show"
                     );
-
 
                 if (isOpen) {
 
@@ -1912,10 +1419,6 @@ async function loadHomepageJambNews() {
         );
 
 
-        /* =================================================
-           NAV LINKS
-        ================================================= */
-
         mainNav
             .querySelectorAll("a")
             .forEach(link => {
@@ -1929,14 +1432,12 @@ async function loadHomepageJambNews() {
                                 ".nav-dropdown"
                             );
 
-
                         const isDropdownTrigger =
                             parentDropdown &&
                             parentDropdown
                                 .querySelector(
                                     ":scope > a"
                                 ) === link;
-
 
                         if (
                             isDropdownTrigger &&
@@ -1946,7 +1447,6 @@ async function loadHomepageJambNews() {
                             return;
 
                         }
-
 
                         if (
                             window.innerWidth <= 800
@@ -1961,10 +1461,6 @@ async function loadHomepageJambNews() {
 
             });
 
-
-        /* =================================================
-           NAV BUTTONS
-        ================================================= */
 
         mainNav
             .querySelectorAll("button")
@@ -1988,10 +1484,6 @@ async function loadHomepageJambNews() {
             });
 
 
-        /* =================================================
-           CLICK OUTSIDE
-        ================================================= */
-
         document.addEventListener(
             "click",
             event => {
@@ -1999,43 +1491,30 @@ async function loadHomepageJambNews() {
                 if (
                     window.innerWidth > 800
                 ) {
-
                     return;
-
                 }
-
 
                 if (
                     mainNav.contains(
                         event.target
                     )
                 ) {
-
                     return;
-
                 }
-
 
                 if (
                     menuButton.contains(
                         event.target
                     )
                 ) {
-
                     return;
-
                 }
-
 
                 closeMobileNav();
 
             }
         );
 
-
-        /* =================================================
-           SCROLL CLOSES MOBILE MENU
-        ================================================= */
 
         window.addEventListener(
             "scroll",
@@ -2056,10 +1535,6 @@ async function loadHomepageJambNews() {
         );
 
 
-        /* =================================================
-           DROPDOWNS
-        ================================================= */
-
         navDropdowns.forEach(
             dropdown => {
 
@@ -2068,11 +1543,9 @@ async function loadHomepageJambNews() {
                         ":scope > a"
                     );
 
-
                 if (!trigger) {
                     return;
                 }
-
 
                 trigger.addEventListener(
                     "click",
@@ -2081,16 +1554,11 @@ async function loadHomepageJambNews() {
                         if (
                             window.innerWidth > 800
                         ) {
-
                             return;
-
                         }
 
-
                         event.preventDefault();
-
                         event.stopPropagation();
-
 
                         navDropdowns.forEach(
                             other => {
@@ -2107,7 +1575,6 @@ async function loadHomepageJambNews() {
 
                             }
                         );
-
 
                         dropdown.classList.toggle(
                             "open"
@@ -2177,7 +1644,6 @@ async function loadHomepageJambNews() {
             ".search-box"
         );
 
-
     if (searchBox) {
 
         const input =
@@ -2185,12 +1651,10 @@ async function loadHomepageJambNews() {
                 "input"
             );
 
-
         const button =
             searchBox.querySelector(
                 "button"
             );
-
 
         if (input) {
 
@@ -2204,7 +1668,6 @@ async function loadHomepageJambNews() {
 
                 }
             );
-
 
             input.addEventListener(
                 "blur",
@@ -2226,12 +1689,10 @@ async function loadHomepageJambNews() {
                 return;
             }
 
-
             const query =
                 input.value
                     .trim()
                     .toLowerCase();
-
 
             if (!query) {
 
@@ -2243,32 +1704,21 @@ async function loadHomepageJambNews() {
 
             }
 
-
             const results =
                 allNews.filter(
                     article => {
 
                         const searchableText =
                             [
-
                                 article.title,
-
                                 article.excerpt,
-
                                 article.content,
-
                                 article.category,
-
                                 article.source
-
                             ]
-
                             .filter(Boolean)
-
                             .join(" ")
-
                             .toLowerCase();
-
 
                         return searchableText
                             .includes(query);
@@ -2276,11 +1726,9 @@ async function loadHomepageJambNews() {
                     }
                 );
 
-
             displayNews(
                 results
             );
-
 
             if (
                 results.length &&
@@ -2292,17 +1740,11 @@ async function loadHomepageJambNews() {
                         ".news-card"
                     );
 
-
                 if (firstCard) {
 
                     firstCard.scrollIntoView({
-
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "center"
-
+                        behavior: "smooth",
+                        block: "center"
                     });
 
                 }
@@ -2364,433 +1806,371 @@ async function loadHomepageJambNews() {
     }
 
 
+    /* =====================================================
+       QUICK FILTERS
+    ===================================================== */
 
-      /* =====================================================
-   QUICK FILTERS
-===================================================== */
-
-const quickFilterButtons =
-    document.querySelectorAll(
-        ".quick-filters button"
-    );
+    const quickFilterButtons =
+        document.querySelectorAll(
+            ".quick-filters button"
+        );
 
 
-quickFilterButtons.forEach(button => {
+    quickFilterButtons.forEach(button => {
 
-    button.addEventListener(
-        "click",
-        async () => {
+        button.addEventListener(
+            "click",
+            async () => {
 
-            /* =========================================
-               ACTIVE BUTTON
-            ========================================== */
+                quickFilterButtons.forEach(btn => {
 
-            quickFilterButtons.forEach(btn => {
+                    btn.classList.remove(
+                        "active"
+                    );
 
-                btn.classList.remove(
+                });
+
+                button.classList.add(
                     "active"
                 );
 
-            });
+                const filter =
+                    button.dataset.filter ||
+                    button.textContent
+                        .trim()
+                        .toLowerCase();
 
-            button.classList.add(
-                "active"
-            );
-
-
-            /* =========================================
-               GET FILTER
-            ========================================== */
-
-            const filter =
-                button.dataset.filter ||
-                button.textContent
-                    .trim()
-                    .toLowerCase();
-
-
-            /* =========================================
-               JAMB UTME
-            ========================================== */
-
-            if (
-                filter === "JAMB" ||
-                filter.toLowerCase() === "jamb utme"
-            ) {
-
-                displayNews(
-                    allNews.filter(article => {
-
-                        const category =
-                            String(
-                                article.category || ""
-                            ).toLowerCase();
-
-                        return (
-                            category.includes("jamb") ||
-                            category.includes("utme")
-                        );
-
-                    })
-                );
-
-                return;
-            }
-
-
-            /* =========================================
-               POST-UTME
-            ========================================== */
-
-            if (
-                filter === "POST-UTME" ||
-                filter.toLowerCase() === "post-utme"
-            ) {
-
-                displayNews(
-                    allNews.filter(article => {
-
-                        const category =
-                            String(
-                                article.category || ""
-                            ).toLowerCase();
-
-                        const text =
-                            [
-                                article.title,
-                                article.excerpt,
-                                article.content
-                            ]
-                            .filter(Boolean)
-                            .join(" ")
-                            .toLowerCase();
-
-                        return (
-                            category.includes("post-utme") ||
-                            category.includes("post utme") ||
-                            text.includes("post-utme") ||
-                            text.includes("post utme")
-                        );
-
-                    })
-                );
-
-                return;
-            }
-
-
-            /* =========================================
-               WAEC / NECO
-            ========================================== */
-
-            if (
-                filter === "WAEC-NECO" ||
-                filter.toLowerCase() === "waec / neco"
-            ) {
-
-                displayNews(
-                    allNews.filter(article => {
-
-                        const category =
-                            String(
-                                article.category || ""
-                            ).toLowerCase();
-
-                        const text =
-                            [
-                                article.title,
-                                article.excerpt,
-                                article.content
-                            ]
-                            .filter(Boolean)
-                            .join(" ")
-                            .toLowerCase();
-
-                        return (
-                            category.includes("waec") ||
-                            category.includes("neco") ||
-                            text.includes("waec") ||
-                            text.includes("neco")
-                        );
-
-                    })
-                );
-
-                return;
-            }
-
-
-            /* =========================================
-               DIRECT ENTRY
-            ========================================== */
-
-            if (
-                filter === "DIRECT-ENTRY" ||
-                filter.toLowerCase() === "direct entry"
-            ) {
-
-                displayNews(
-                    allNews.filter(article => {
-
-                        const category =
-                            String(
-                                article.category || ""
-                            ).toLowerCase();
-
-                        const text =
-                            [
-                                article.title,
-                                article.excerpt,
-                                article.content
-                            ]
-                            .filter(Boolean)
-                            .join(" ")
-                            .toLowerCase();
-
-                        return (
-                            category.includes("direct") ||
-                            text.includes("direct entry")
-                        );
-
-                    })
-                );
-
-                return;
-            }
-
-
-            /* =========================================
-               ADMISSION LISTS
-            ========================================== */
-
-            if (
-                filter === "ADMISSION-LIST" ||
-                filter.toLowerCase() === "admission lists"
-            ) {
 
                 if (
-                    !supabase ||
-                    !newsFeed
+                    filter === "JAMB" ||
+                    filter.toLowerCase() === "jamb utme"
                 ) {
+
+                    displayNews(
+                        allNews.filter(article => {
+
+                            const category =
+                                String(
+                                    article.category || ""
+                                ).toLowerCase();
+
+                            return (
+                                category.includes("jamb") ||
+                                category.includes("utme")
+                            );
+
+                        })
+                    );
+
                     return;
+
                 }
 
 
-                newsFeed.innerHTML = `
+                if (
+                    filter === "POST-UTME" ||
+                    filter.toLowerCase() === "post-utme"
+                ) {
 
-                    <div class="news-loading">
+                    displayNews(
+                        allNews.filter(article => {
 
-                        Loading admission lists...
+                            const category =
+                                String(
+                                    article.category || ""
+                                ).toLowerCase();
 
-                    </div>
+                            const text =
+                                [
+                                    article.title,
+                                    article.excerpt,
+                                    article.content
+                                ]
+                                .filter(Boolean)
+                                .join(" ")
+                                .toLowerCase();
 
-                `;
-
-
-                try {
-
-                    const {
-                        data,
-                        error
-                    } = await supabase
-
-                        .from("admission_alerts")
-
-                        .select(`
-                            id,
-                            title,
-                            university,
-                            admission_type,
-                            status,
-                            deadline,
-                            excerpt,
-                            image_url,
-                            published_at,
-                            created_at
-                        `)
-
-                        .ilike(
-                            "admission_type",
-                            "%list%"
-                        )
-
-                        .order(
-                            "published_at",
-                            {
-                                ascending: false,
-                                nullsFirst: false
-                            }
-                        );
-
-
-                    if (error) {
-                        throw error;
-                    }
-
-
-                    if (
-                        !data ||
-                        !data.length
-                    ) {
-
-                        newsFeed.innerHTML = `
-
-                            <div class="news-loading">
-
-                                No admission lists available yet.
-
-                            </div>
-
-                        `;
-
-                        return;
-
-                    }
-
-
-                    newsFeed.innerHTML = "";
-
-
-                    data.forEach(admission => {
-
-                        const card =
-                            document.createElement(
-                                "article"
+                            return (
+                                category.includes("post-utme") ||
+                                category.includes("post utme") ||
+                                text.includes("post-utme") ||
+                                text.includes("post utme")
                             );
 
+                        })
+                    );
 
-                        card.className =
-                            "news-card";
+                    return;
 
-
-                        card.innerHTML = `
-
-                            ${
-                                admission.image_url
-                                    ? `
-                                        <div class="news-image">
-
-                                            <img
-                                                src="${escapeHTML(
-                                                    admission.image_url
-                                                )}"
-                                                alt="${escapeHTML(
-                                                    admission.title
-                                                )}"
-                                                loading="lazy"
-                                            >
-
-                                            <span>
-                                                ADMISSION LIST
-                                            </span>
-
-                                        </div>
-                                      `
-                                    : `
-                                        <div class="news-image">
-
-                                            <span>
-                                                ADMISSION LIST
-                                            </span>
-
-                                        </div>
-                                      `
-                            }
+                }
 
 
-                            <div class="news-content">
+                if (
+                    filter === "WAEC-NECO" ||
+                    filter.toLowerCase() === "waec / neco"
+                ) {
 
-                                <div class="news-meta">
+                    displayNews(
+                        allNews.filter(article => {
 
-                                    <span>
+                            const category =
+                                String(
+                                    article.category || ""
+                                ).toLowerCase();
+
+                            const text =
+                                [
+                                    article.title,
+                                    article.excerpt,
+                                    article.content
+                                ]
+                                .filter(Boolean)
+                                .join(" ")
+                                .toLowerCase();
+
+                            return (
+                                category.includes("waec") ||
+                                category.includes("neco") ||
+                                text.includes("waec") ||
+                                text.includes("neco")
+                            );
+
+                        })
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    filter === "DIRECT-ENTRY" ||
+                    filter.toLowerCase() === "direct entry"
+                ) {
+
+                    displayNews(
+                        allNews.filter(article => {
+
+                            const category =
+                                String(
+                                    article.category || ""
+                                ).toLowerCase();
+
+                            const text =
+                                [
+                                    article.title,
+                                    article.excerpt,
+                                    article.content
+                                ]
+                                .filter(Boolean)
+                                .join(" ")
+                                .toLowerCase();
+
+                            return (
+                                category.includes("direct") ||
+                                text.includes("direct entry")
+                            );
+
+                        })
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    filter === "ADMISSION-LIST" ||
+                    filter.toLowerCase() === "admission lists"
+                ) {
+
+                    if (
+                        !supabase ||
+                        !newsFeed
+                    ) {
+                        return;
+                    }
+
+                    newsFeed.innerHTML = `
+                        <div class="news-loading">
+                            Loading admission lists...
+                        </div>
+                    `;
+
+                    try {
+
+                        const {
+                            data,
+                            error
+                        } = await supabase
+                            .from("admission_alerts")
+                            .select(`
+                                id,
+                                title,
+                                university,
+                                admission_type,
+                                status,
+                                deadline,
+                                excerpt,
+                                image_url,
+                                published_at,
+                                created_at
+                            `)
+                            .ilike(
+                                "admission_type",
+                                "%list%"
+                            )
+                            .order(
+                                "published_at",
+                                {
+                                    ascending: false,
+                                    nullsFirst: false
+                                }
+                            );
+
+                        if (error) {
+                            throw error;
+                        }
+
+                        if (
+                            !data ||
+                            !data.length
+                        ) {
+
+                            newsFeed.innerHTML = `
+                                <div class="news-loading">
+                                    No admission lists available yet.
+                                </div>
+                            `;
+
+                            return;
+
+                        }
+
+                        newsFeed.innerHTML = "";
+
+                        data.forEach(admission => {
+
+                            const card =
+                                document.createElement(
+                                    "article"
+                                );
+
+                            card.className =
+                                "news-card";
+
+                            card.innerHTML = `
+
+                                ${
+                                    admission.image_url
+                                        ? `
+                                            <div class="news-image">
+
+                                                <img
+                                                    src="${escapeHTML(
+                                                        admission.image_url
+                                                    )}"
+                                                    alt="${escapeHTML(
+                                                        admission.title
+                                                    )}"
+                                                    loading="lazy"
+                                                >
+
+                                                <span>
+                                                    ADMISSION LIST
+                                                </span>
+
+                                            </div>
+                                          `
+                                        : `
+                                            <div class="news-image">
+
+                                                <span>
+                                                    ADMISSION LIST
+                                                </span>
+
+                                            </div>
+                                          `
+                                }
+
+                                <div class="news-content">
+
+                                    <div class="news-meta">
+
+                                        <span>
+                                            ${escapeHTML(
+                                                admission.university ||
+                                                "University Admission"
+                                            )}
+                                        </span>
+
+                                        <time>
+                                            ${formatDate(
+                                                admission.published_at ||
+                                                admission.created_at
+                                            )}
+                                        </time>
+
+                                    </div>
+
+                                    <h3>
                                         ${escapeHTML(
-                                            admission.university ||
-                                            "University Admission"
+                                            admission.title ||
+                                            "Admission List Update"
                                         )}
-                                    </span>
+                                    </h3>
 
-                                    <time>
-                                        ${formatDate(
-                                            admission.published_at ||
-                                            admission.created_at
+                                    <p>
+                                        ${escapeHTML(
+                                            admission.excerpt ||
+                                            "Latest admission list update."
                                         )}
-                                    </time>
+                                    </p>
+
+                                    <a
+                                        href="admission.html?id=${encodeURIComponent(
+                                            admission.id
+                                        )}"
+                                        class="read-more"
+                                    >
+                                        View Admission →
+                                    </a>
 
                                 </div>
 
+                            `;
 
-                                <h3>
-                                    ${escapeHTML(
-                                        admission.title ||
-                                        "Admission List Update"
-                                    )}
-                                </h3>
+                            newsFeed.appendChild(
+                                card
+                            );
 
+                        });
 
-                                <p>
-                                    ${escapeHTML(
-                                        admission.excerpt ||
-                                        "Latest admission list update."
-                                    )}
-                                </p>
+                        setupRevealAnimations();
 
+                    } catch (error) {
 
-                                <a
-                                    href="admission.html?id=${encodeURIComponent(
-                                        admission.id
-                                    )}"
-                                    class="read-more"
-                                >
-                                    View Admission →
-                                </a>
-
-                            </div>
-
-                        `;
-
-
-                        newsFeed.appendChild(
-                            card
+                        console.error(
+                            "MOLAS ADMISSION LIST FILTER ERROR:",
+                            error
                         );
 
-                    });
+                        newsFeed.innerHTML = `
+                            <div class="news-error">
+                                Unable to load admission lists right now.
+                            </div>
+                        `;
 
+                    }
 
-                    setupRevealAnimations();
-
-
-                } catch (error) {
-
-                    console.error(
-                        "MOLAS ADMISSION LIST FILTER ERROR:",
-                        error
-                    );
-
-
-                    newsFeed.innerHTML = `
-
-                        <div class="news-error">
-
-                            Unable to load admission lists right now.
-
-                        </div>
-
-                    `;
+                    return;
 
                 }
 
-                return;
             }
+        );
 
-        }
-    );
-
-});
-
-
-   
-        
-        
+    });
 
 
     /* =====================================================
@@ -2806,31 +2186,25 @@ quickFilterButtons.forEach(button => {
                     ".read-more"
                 );
 
-
             if (readMore) {
                 return;
             }
-
 
             const card =
                 event.target.closest(
                     ".news-card"
                 );
 
-
             if (!card) {
                 return;
             }
 
-
             const id =
                 card.dataset.newsId;
-
 
             if (!id) {
                 return;
             }
-
 
             window.location.href =
                 `article.html?id=${encodeURIComponent(id)}`;
@@ -2847,7 +2221,6 @@ quickFilterButtons.forEach(button => {
         document.querySelector(
             ".site-header"
         );
-
 
     if (header) {
 
@@ -2870,25 +2243,13 @@ quickFilterButtons.forEach(button => {
 
 
     /* =====================================================
-       BACK TO TOP / SCROLL BUTTON
-       
-       Completely rebuilt so it works reliably on:
-       • iPhone
-       • Android
-       • Desktop
-       • Safari
-       • Chrome
+       BACK TO TOP
     ===================================================== */
 
     let topButton =
         document.querySelector(
             ".molas-top"
         );
-
-
-    /* ---------------------------------------------
-       CREATE ONLY IF IT DOESN'T ALREADY EXIST
-    --------------------------------------------- */
 
     if (!topButton) {
 
@@ -2923,10 +2284,6 @@ quickFilterButtons.forEach(button => {
     }
 
 
-    /* ---------------------------------------------
-       SHOW / HIDE BUTTON
-    --------------------------------------------- */
-
     function updateTopButton() {
 
         const scrollPosition =
@@ -2935,7 +2292,6 @@ quickFilterButtons.forEach(button => {
             document.documentElement.scrollTop ||
             document.body.scrollTop ||
             0;
-
 
         if (
             scrollPosition > 350
@@ -2956,10 +2312,6 @@ quickFilterButtons.forEach(button => {
     }
 
 
-    /* ---------------------------------------------
-       SCROLL LISTENER
-    --------------------------------------------- */
-
     window.addEventListener(
         "scroll",
         updateTopButton,
@@ -2969,49 +2321,25 @@ quickFilterButtons.forEach(button => {
     );
 
 
-    /* ---------------------------------------------
-       INITIAL CHECK
-    --------------------------------------------- */
-
     updateTopButton();
 
-
-    /* ---------------------------------------------
-       CLICK
-    --------------------------------------------- */
 
     topButton.addEventListener(
         "click",
         event => {
 
             event.preventDefault();
-
             event.stopPropagation();
-
-
-            /*
-             * Modern browsers
-             */
 
             try {
 
                 window.scrollTo({
-
                     top: 0,
-
                     left: 0,
-
                     behavior: "smooth"
-
                 });
 
-            }
-
-            catch (error) {
-
-                /*
-                 * Fallback
-                 */
+            } catch (error) {
 
                 window.scrollTo(
                     0,
@@ -3024,27 +2352,17 @@ quickFilterButtons.forEach(button => {
     );
 
 
-    /* ---------------------------------------------
-       iOS SAFARI FALLBACK
-    --------------------------------------------- */
-
     topButton.addEventListener(
         "touchend",
         event => {
 
             event.preventDefault();
-
             event.stopPropagation();
 
-
             window.scrollTo({
-
                 top: 0,
-
                 left: 0,
-
                 behavior: "smooth"
-
             });
 
         },
@@ -3063,61 +2381,41 @@ quickFilterButtons.forEach(button => {
             "#resource-deck"
         );
 
-
     const resourceCards =
         resourceDeck
-
             ? Array.from(
                 resourceDeck.querySelectorAll(
                     ".resource-card"
                 )
             )
-
             : [];
-
 
     const resourceDots =
         document.querySelectorAll(
             ".resource-dot"
         );
 
-
     const resourcePrev =
         document.querySelector(
             ".resource-prev"
         );
-
 
     const resourceNext =
         document.querySelector(
             ".resource-next"
         );
 
-
     let resourceIndex = 0;
-
     let resourceStartX = 0;
-
     let resourceStartY = 0;
-
     let resourceIsDragging = false;
-
     let resourceCurrentX = 0;
 
-
-    /* =====================================================
-       RESOURCE DECK
-    ===================================================== */
 
     if (
         resourceDeck &&
         resourceCards.length
     ) {
-
-
-        /* =================================================
-           UPDATE RESOURCE DECK
-        ================================================= */
 
         function updateResourceDeck(
             newIndex
@@ -3126,13 +2424,11 @@ quickFilterButtons.forEach(button => {
             const total =
                 resourceCards.length;
 
-
             resourceIndex =
                 (
                     newIndex +
                     total
                 ) % total;
-
 
             resourceCards.forEach(
                 (card, index) => {
@@ -3140,7 +2436,6 @@ quickFilterButtons.forEach(button => {
                     let position =
                         index -
                         resourceIndex;
-
 
                     if (
                         position >
@@ -3152,7 +2447,6 @@ quickFilterButtons.forEach(button => {
 
                     }
 
-
                     if (
                         position <
                         -total / 2
@@ -3163,15 +2457,12 @@ quickFilterButtons.forEach(button => {
 
                     }
 
-
                     card.classList.remove(
                         "active",
                         "resource-prev-card",
                         "resource-next-card"
                     );
 
-
-                    /* ACTIVE */
 
                     if (
                         position === 0
@@ -3195,9 +2486,6 @@ quickFilterButtons.forEach(button => {
 
                     }
 
-
-                    /* NEXT */
-
                     else if (
                         position === 1
                     ) {
@@ -3220,9 +2508,6 @@ quickFilterButtons.forEach(button => {
 
                     }
 
-
-                    /* SECOND NEXT */
-
                     else if (
                         position === 2
                     ) {
@@ -3240,9 +2525,6 @@ quickFilterButtons.forEach(button => {
                             "translate3d(62px,34px,-60px) rotateY(-7deg) scale(.92)";
 
                     }
-
-
-                    /* PREVIOUS */
 
                     else if (
                         position === -1
@@ -3266,9 +2548,6 @@ quickFilterButtons.forEach(button => {
 
                     }
 
-
-                    /* OTHER */
-
                     else {
 
                         card.style.zIndex =
@@ -3289,8 +2568,6 @@ quickFilterButtons.forEach(button => {
             );
 
 
-            /* DOTS */
-
             resourceDots.forEach(
                 (dot, index) => {
 
@@ -3298,12 +2575,10 @@ quickFilterButtons.forEach(button => {
                         index ===
                         resourceIndex;
 
-
                     dot.classList.toggle(
                         "active",
                         active
                     );
-
 
                     dot.setAttribute(
                         "aria-selected",
@@ -3318,10 +2593,6 @@ quickFilterButtons.forEach(button => {
         }
 
 
-        /* =================================================
-           NEXT
-        ================================================= */
-
         function nextResource() {
 
             updateResourceDeck(
@@ -3331,10 +2602,6 @@ quickFilterButtons.forEach(button => {
         }
 
 
-        /* =================================================
-           PREVIOUS
-        ================================================= */
-
         function previousResource() {
 
             updateResourceDeck(
@@ -3343,10 +2610,6 @@ quickFilterButtons.forEach(button => {
 
         }
 
-
-        /* =================================================
-           BUTTONS
-        ================================================= */
 
         if (resourceNext) {
 
@@ -3368,10 +2631,6 @@ quickFilterButtons.forEach(button => {
         }
 
 
-        /* =================================================
-           DOTS
-        ================================================= */
-
         resourceDots.forEach(
             (dot, index) => {
 
@@ -3388,262 +2647,214 @@ quickFilterButtons.forEach(button => {
 
             }
         );
-/* =================================================
-   TOUCH START
-================================================= */
 
-let resourceSwipeDirection = null;
 
-resourceDeck.addEventListener(
-    "touchstart",
-    event => {
-        
-        if (
-            !event.touches ||
-            !event.touches.length
-        ) {
-            return;
-        }
-        
-        resourceStartX =
-            event.touches[0].clientX;
-        
-        resourceStartY =
-            event.touches[0].clientY;
-        
-        resourceCurrentX =
-            resourceStartX;
-        
-        resourceSwipeDirection =
+        let resourceSwipeDirection =
             null;
-        
-        resourceIsDragging =
-            false;
-        
-    },
-    {
-        passive: true
-    }
-);
 
 
-/* =================================================
-   TOUCH MOVE
-================================================= */
+        resourceDeck.addEventListener(
+            "touchstart",
+            event => {
 
-resourceDeck.addEventListener(
-    "touchmove",
-    event => {
-        
-        if (
-            !event.touches ||
-            !event.touches.length
-        ) {
-            return;
-        }
-        
-        const currentX =
-            event.touches[0].clientX;
-        
-        const currentY =
-            event.touches[0].clientY;
-        
-        const deltaX =
-            currentX -
-            resourceStartX;
-        
-        const deltaY =
-            currentY -
-            resourceStartY;
-        
-        
-        /* -----------------------------------------
-           WAIT UNTIL THE USER HAS MOVED ENOUGH
-        ----------------------------------------- */
-        
-        if (
-            !resourceSwipeDirection &&
-            (
-                Math.abs(deltaX) > 10 ||
-                Math.abs(deltaY) > 10
-            )
-        ) {
-            
-            /* -------------------------------------
-               VERTICAL = NORMAL PAGE SCROLL
-            ------------------------------------- */
-            
-            if (
-                Math.abs(deltaY) >
-                Math.abs(deltaX)
-            ) {
-                
+                if (
+                    !event.touches ||
+                    !event.touches.length
+                ) {
+                    return;
+                }
+
+                resourceStartX =
+                    event.touches[0].clientX;
+
+                resourceStartY =
+                    event.touches[0].clientY;
+
+                resourceCurrentX =
+                    resourceStartX;
+
                 resourceSwipeDirection =
-                    "vertical";
-                
+                    null;
+
                 resourceIsDragging =
                     false;
-                
-                return;
-                
+
+            },
+            {
+                passive: true
             }
-            
-            
-            /* -------------------------------------
-               HORIZONTAL = CARD SWIPE
-            ------------------------------------- */
-            
-            resourceSwipeDirection =
-                "horizontal";
-            
-            resourceIsDragging =
-                true;
-            
-            resourceDeck.classList.add(
-                "is-dragging"
-            );
-            
-        }
-        
-        
-        /* -----------------------------------------
-           IGNORE NORMAL VERTICAL SCROLL
-        ----------------------------------------- */
-        
-        if (
-            resourceSwipeDirection !==
-            "horizontal"
-        ) {
-            
-            return;
-            
-        }
-        
-        
-        resourceCurrentX =
-            currentX;
-        
-        
-        const activeCard =
-            resourceCards[
-                resourceIndex
-            ];
-        
-        
-        if (
-            activeCard
-        ) {
-            
-            const rotate =
-                deltaX * .035;
-            
-            const moveY =
-                Math.abs(deltaX) * .02;
-            
-            
-            activeCard.style.transform =
-                `
-                translate3d(
-                    ${deltaX}px,
-                    ${moveY}px,
-                    0
-                )
-                rotateY(${rotate}deg)
-                scale(1)
-                `;
-            
-        }
-        
-    },
-    {
-        passive: true
-    }
-);
-
-
-/* =================================================
-   TOUCH END
-================================================= */
-
-resourceDeck.addEventListener(
-    "touchend",
-    () => {
-        
-        /* -----------------------------------------
-           NORMAL PAGE SCROLL
-           DO NOTHING
-        ----------------------------------------- */
-        
-        if (
-            resourceSwipeDirection !==
-            "horizontal"
-        ) {
-            
-            resourceSwipeDirection =
-                null;
-            
-            resourceIsDragging =
-                false;
-            
-            return;
-            
-        }
-        
-        
-        resourceIsDragging =
-            false;
-        
-        
-        resourceDeck.classList.remove(
-            "is-dragging"
         );
-        
-        
-        const deltaX =
-            resourceCurrentX -
-            resourceStartX;
-        
-        
-        const threshold =
-            65;
-        
-        
-        if (
-            deltaX < -threshold
-        ) {
-            
-            nextResource();
-            
-        }
-        
-        else if (
-            deltaX > threshold
-        ) {
-            
-            previousResource();
-            
-        }
-        
-        else {
-            
-            updateResourceDeck(
-                resourceIndex
-            );
-            
-        }
-        
-        
-        resourceSwipeDirection =
-            null;
-        
-    },
-    {
-        passive: true
-    }
-);
-       /* =================================================
-           MOUSE DOWN
-        ================================================= */
+
+
+        resourceDeck.addEventListener(
+            "touchmove",
+            event => {
+
+                if (
+                    !event.touches ||
+                    !event.touches.length
+                ) {
+                    return;
+                }
+
+                const currentX =
+                    event.touches[0].clientX;
+
+                const currentY =
+                    event.touches[0].clientY;
+
+                const deltaX =
+                    currentX -
+                    resourceStartX;
+
+                const deltaY =
+                    currentY -
+                    resourceStartY;
+
+                if (
+                    !resourceSwipeDirection &&
+                    (
+                        Math.abs(deltaX) > 10 ||
+                        Math.abs(deltaY) > 10
+                    )
+                ) {
+
+                    if (
+                        Math.abs(deltaY) >
+                        Math.abs(deltaX)
+                    ) {
+
+                        resourceSwipeDirection =
+                            "vertical";
+
+                        resourceIsDragging =
+                            false;
+
+                        return;
+
+                    }
+
+                    resourceSwipeDirection =
+                        "horizontal";
+
+                    resourceIsDragging =
+                        true;
+
+                    resourceDeck.classList.add(
+                        "is-dragging"
+                    );
+
+                }
+
+                if (
+                    resourceSwipeDirection !==
+                    "horizontal"
+                ) {
+                    return;
+                }
+
+                resourceCurrentX =
+                    currentX;
+
+                const activeCard =
+                    resourceCards[
+                        resourceIndex
+                    ];
+
+                if (activeCard) {
+
+                    const rotate =
+                        deltaX * .035;
+
+                    const moveY =
+                        Math.abs(deltaX) * .02;
+
+                    activeCard.style.transform =
+                        `
+                        translate3d(
+                            ${deltaX}px,
+                            ${moveY}px,
+                            0
+                        )
+                        rotateY(${rotate}deg)
+                        scale(1)
+                        `;
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        resourceDeck.addEventListener(
+            "touchend",
+            () => {
+
+                if (
+                    resourceSwipeDirection !==
+                    "horizontal"
+                ) {
+
+                    resourceSwipeDirection =
+                        null;
+
+                    resourceIsDragging =
+                        false;
+
+                    return;
+
+                }
+
+                resourceIsDragging =
+                    false;
+
+                resourceDeck.classList.remove(
+                    "is-dragging"
+                );
+
+                const deltaX =
+                    resourceCurrentX -
+                    resourceStartX;
+
+                const threshold =
+                    65;
+
+                if (
+                    deltaX < -threshold
+                ) {
+
+                    nextResource();
+
+                }
+
+                else if (
+                    deltaX > threshold
+                ) {
+
+                    previousResource();
+
+                }
+
+                else {
+
+                    updateResourceDeck(
+                        resourceIndex
+                    );
+
+                }
+
+                resourceSwipeDirection =
+                    null;
+
+            },
+            {
+                passive: true
+            }
+        );
+
 
         resourceDeck.addEventListener(
             "mousedown",
@@ -3653,23 +2864,17 @@ resourceDeck.addEventListener(
                     event.target.closest("a") ||
                     event.target.closest("button")
                 ) {
-
                     return;
-
                 }
-
 
                 resourceStartX =
                     event.clientX;
 
-
                 resourceCurrentX =
                     resourceStartX;
 
-
                 resourceIsDragging =
                     true;
-
 
                 resourceDeck.classList.add(
                     "is-dragging"
@@ -3679,10 +2884,6 @@ resourceDeck.addEventListener(
         );
 
 
-        /* =================================================
-           MOUSE MOVE
-        ================================================= */
-
         window.addEventListener(
             "mousemove",
             event => {
@@ -3690,34 +2891,25 @@ resourceDeck.addEventListener(
                 if (
                     !resourceIsDragging
                 ) {
-
                     return;
-
                 }
-
 
                 resourceCurrentX =
                     event.clientX;
 
-
                 const deltaX =
                     resourceCurrentX -
                     resourceStartX;
-
 
                 const activeCard =
                     resourceCards[
                         resourceIndex
                     ];
 
-
-                if (
-                    activeCard
-                ) {
+                if (activeCard) {
 
                     const rotate =
                         deltaX * .025;
-
 
                     activeCard.style.transform =
                         `
@@ -3736,10 +2928,6 @@ resourceDeck.addEventListener(
         );
 
 
-        /* =================================================
-           MOUSE UP
-        ================================================= */
-
         window.addEventListener(
             "mouseup",
             () => {
@@ -3747,29 +2935,22 @@ resourceDeck.addEventListener(
                 if (
                     !resourceIsDragging
                 ) {
-
                     return;
-
                 }
-
 
                 resourceIsDragging =
                     false;
-
 
                 resourceDeck.classList.remove(
                     "is-dragging"
                 );
 
-
                 const deltaX =
                     resourceCurrentX -
                     resourceStartX;
 
-
                 const threshold =
                     80;
-
 
                 if (
                     deltaX < -threshold
@@ -3799,10 +2980,6 @@ resourceDeck.addEventListener(
         );
 
 
-        /* =================================================
-           KEYBOARD
-        ================================================= */
-
         resourceDeck.setAttribute(
             "tabindex",
             "0"
@@ -3822,7 +2999,6 @@ resourceDeck.addEventListener(
 
                 }
 
-
                 if (
                     event.key ===
                     "ArrowLeft"
@@ -3836,13 +3012,7 @@ resourceDeck.addEventListener(
         );
 
 
-        /* =================================================
-           INITIAL RESOURCE STATE
-        ================================================= */
-
-        updateResourceDeck(
-            0
-        );
+        updateResourceDeck(0);
 
     }
 
@@ -3852,24 +3022,16 @@ resourceDeck.addEventListener(
     ===================================================== */
 
     await loadNews();
-    
+
     await loadHomepageJambNews();
 
     await loadAdmissionAlerts();
 
     await loadAdmissionStatus();
-    
-    
-
-
-    /* =====================================================
-       INITIAL REVEAL
-    ===================================================== */
 
     setupRevealAnimations();
 
 });
-
 
 
 
@@ -3880,19 +3042,39 @@ resourceDeck.addEventListener(
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const track = document.getElementById("hero-carousel-track");
-    const dotsBox = document.getElementById("hero-carousel-dots");
-    const carousel = document.getElementById("hero-carousel");
+    const track =
+        document.getElementById(
+            "hero-carousel-track"
+        );
 
-    const prevBtn = document.querySelector(".hero-prev");
-    const nextBtn = document.querySelector(".hero-next");
+    const dotsBox =
+        document.getElementById(
+            "hero-carousel-dots"
+        );
 
-    if (!track || !dotsBox || !carousel) return;
+    const carousel =
+        document.getElementById(
+            "hero-carousel"
+        );
 
+    const prevBtn =
+        document.querySelector(
+            ".hero-prev"
+        );
 
-    /* =====================================================
-       SUPABASE
-    ===================================================== */
+    const nextBtn =
+        document.querySelector(
+            ".hero-next"
+        );
+
+    if (
+        !track ||
+        !dotsBox ||
+        !carousel
+    ) {
+        return;
+    }
+
 
     const SUPABASE_URL =
         "https://eidnzebqyxcpxbykybch.supabase.co";
@@ -3909,38 +3091,44 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchEndX = 0;
 
 
-    /* =====================================================
-       FETCH
-    ===================================================== */
-
-    async function getTable(table, limit = 6) {
+    async function getTable(
+        table,
+        limit = 6
+    ) {
 
         try {
 
-            const response = await fetch(
-                `${SUPABASE_URL}/rest/v1/${table}` +
-                `?select=*` +
-                `&order=published_at.desc` +
-                `&limit=${limit}`,
-                {
-                    headers: {
-                        apikey: SUPABASE_KEY,
-                        Authorization:
-                            `Bearer ${SUPABASE_KEY}`
+            const response =
+                await fetch(
+                    `${SUPABASE_URL}/rest/v1/${table}` +
+                    `?select=*` +
+                    `&order=published_at.desc` +
+                    `&limit=${limit}`,
+                    {
+                        headers: {
+                            apikey: SUPABASE_KEY,
+                            Authorization:
+                                `Bearer ${SUPABASE_KEY}`
+                        }
                     }
-                }
-            );
+                );
 
             if (!response.ok) {
+
                 console.warn(
                     `Hero could not load ${table}`
                 );
+
                 return [];
+
             }
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
-            return Array.isArray(data) ? data : [];
+            return Array.isArray(data)
+                ? data
+                : [];
 
         } catch (error) {
 
@@ -3950,13 +3138,11 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             return [];
+
         }
+
     }
 
-
-    /* =====================================================
-       ESCAPE HTML
-    ===================================================== */
 
     function escapeHTML(value) {
 
@@ -3973,12 +3159,9 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+
     }
 
-
-    /* =====================================================
-       CLEAN TEXT
-    ===================================================== */
 
     function cleanText(value) {
 
@@ -3988,38 +3171,43 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/<[^>]*>/g, "")
             .replace(/\s+/g, " ")
             .trim();
+
     }
 
 
-    /* =====================================================
-       SHORTEN
-    ===================================================== */
+    function shorten(
+        value,
+        length = 150
+    ) {
 
-    function shorten(value, length = 150) {
+        const text =
+            cleanText(value);
 
-        const text = cleanText(value);
-
-        if (text.length <= length) {
+        if (
+            text.length <= length
+        ) {
             return text;
         }
 
         return text
             .substring(0, length)
             .trim() + "...";
+
     }
 
-
-    /* =====================================================
-       DATE
-    ===================================================== */
 
     function formatDate(value) {
 
         if (!value) return "";
 
-        const date = new Date(value);
+        const date =
+            new Date(value);
 
-        if (Number.isNaN(date.getTime())) {
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
             return "";
         }
 
@@ -4031,12 +3219,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 year: "numeric"
             }
         );
+
     }
 
-
-    /* =====================================================
-       NORMALIZE NEWS
-    ===================================================== */
 
     function makeNews(item) {
 
@@ -4081,13 +3266,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.breaking ? 3 :
                 item.featured ? 2 :
                 1
+
         };
+
     }
 
-
-    /* =====================================================
-       NORMALIZE JAMB
-    ===================================================== */
 
     function makeJamb(item) {
 
@@ -4131,46 +3314,62 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.breaking ? 3 :
                 item.featured ? 2 :
                 1
+
         };
+
     }
 
 
-    /* =====================================================
-       NORMALIZE ADMISSION
-    ===================================================== */
+    function makeAdmission(item) {
 
-function makeAdmission(item) {
-    return {
-        id: item.id,
-        source: "admission_alerts",
-        
-        label: item.status || "ADMISSION ALERT",
-        
-        date: item.published_at || item.created_at,
-        
-        category: item.admission_type || "ADMISSIONS",
-        
-        title: item.title || "Admission Update",
-        
-        excerpt: item.excerpt || item.content || "",
-        
-        image: item.image_url || "",
-        
-        link: `admission.html?id=${encodeURIComponent(item.id)}`,
-        
-        priority: item.featured ? 2 : 1
-    };
-}
+        return {
 
+            id: item.id,
 
-    /* =====================================================
-       LOAD HERO
-    ===================================================== */
+            source:
+                "admission_alerts",
+
+            label:
+                item.status ||
+                "ADMISSION ALERT",
+
+            date:
+                item.published_at ||
+                item.created_at,
+
+            category:
+                item.admission_type ||
+                "ADMISSIONS",
+
+            title:
+                item.title ||
+                "Admission Update",
+
+            excerpt:
+                item.excerpt ||
+                item.content ||
+                "",
+
+            image:
+                item.image_url ||
+                "",
+
+            link:
+                `admission.html?id=${encodeURIComponent(
+                    item.id
+                )}`,
+
+            priority:
+                item.featured ? 2 : 1
+
+        };
+
+    }
+
 
     async function loadHero() {
 
         showLoading();
-
 
         const [
             news,
@@ -4197,17 +3396,14 @@ function makeAdmission(item) {
             admissions.map(makeAdmission);
 
 
-        /* =================================================
-           MIX THE THREE SOURCES
-        ================================================= */
-
         slides = [];
 
-        const maxLength = Math.max(
-            newsItems.length,
-            jambItems.length,
-            admissionItems.length
-        );
+        const maxLength =
+            Math.max(
+                newsItems.length,
+                jambItems.length,
+                admissionItems.length
+            );
 
 
         for (
@@ -4217,46 +3413,54 @@ function makeAdmission(item) {
         ) {
 
             if (newsItems[i]) {
-                slides.push(newsItems[i]);
+                slides.push(
+                    newsItems[i]
+                );
             }
 
             if (jambItems[i]) {
-                slides.push(jambItems[i]);
+                slides.push(
+                    jambItems[i]
+                );
             }
 
             if (admissionItems[i]) {
-                slides.push(admissionItems[i]);
+                slides.push(
+                    admissionItems[i]
+                );
             }
+
         }
 
 
-        /* =================================================
-           PRIORITY
-        ================================================= */
+        slides.sort(
+            (a, b) => {
 
-        slides.sort((a, b) => {
+                if (
+                    b.priority !==
+                    a.priority
+                ) {
 
-            if (
-                b.priority !==
-                a.priority
-            ) {
-                return b.priority -
-                    a.priority;
+                    return (
+                        b.priority -
+                        a.priority
+                    );
+
+                }
+
+                const dateA =
+                    new Date(a.date)
+                        .getTime() || 0;
+
+                const dateB =
+                    new Date(b.date)
+                        .getTime() || 0;
+
+                return dateB - dateA;
+
             }
+        );
 
-            const dateA =
-                new Date(a.date).getTime() || 0;
-
-            const dateB =
-                new Date(b.date).getTime() || 0;
-
-            return dateB - dateA;
-        });
-
-
-        /* =================================================
-           LIMIT HERO
-        ================================================= */
 
         slides =
             slides.slice(0, 9);
@@ -4267,6 +3471,7 @@ function makeAdmission(item) {
             showEmpty();
 
             return;
+
         }
 
 
@@ -4275,24 +3480,28 @@ function makeAdmission(item) {
         renderSlides();
 
         startAutoPlay();
+
     }
 
 
-    /* =====================================================
-       RENDER
-    ===================================================== */
     function renderSlides() {
+
         track.innerHTML = "";
+
         dotsBox.innerHTML = "";
+
+
         slides.forEach(
             (item, index) => {
+
                 const slide =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
+
                 slide.className =
                     "hero-slide";
-                /* =========================================
-                   IMAGE
-           ========================================= */
+
 
                 if (item.image) {
 
@@ -4312,35 +3521,25 @@ function makeAdmission(item) {
 
                     slide.style.backgroundPosition =
                         "center";
+
                 }
 
-
-                /* =========================================
-                   CONTENT
-                ========================================= */
 
                 slide.innerHTML = `
 
                     <div class="hero-slide-inner">
 
-                        
+                        <div class="hero-slide-top">
 
-                           <div class="hero-slide-top">
+                            <span class="hero-slide-category">
 
-    <span class="hero-slide-category">
-        ${escapeHTML(
-            item.label
-        )}
-    </span>
+                                ${escapeHTML(
+                                    item.label
+                                )}
 
-</div>
-                                
-                            
+                            </span>
 
-                          
-                              
-
-                       
+                        </div>
 
 
                         <div class="hero-slide-source">
@@ -4353,21 +3552,25 @@ function makeAdmission(item) {
 
 
                         <h2>
+
                             ${escapeHTML(
                                 cleanText(
                                     item.title
                                 )
                             )}
+
                         </h2>
 
 
                         <p>
+
                             ${escapeHTML(
                                 shorten(
                                     item.excerpt,
                                     155
                                 )
                             )}
+
                         </p>
 
 
@@ -4377,7 +3580,9 @@ function makeAdmission(item) {
                             )}"
                             class="hero-slide-link"
                         >
+
                             Read Update →
+
                         </a>
 
                     </div>
@@ -4385,17 +3590,18 @@ function makeAdmission(item) {
                 `;
 
 
-                track.appendChild(slide);
+                track.appendChild(
+                    slide
+                );
 
-
-                /* =========================================
-                   DOT
-                ========================================= */
 
                 const dot =
-                    document.createElement("button");
+                    document.createElement(
+                        "button"
+                    );
 
-                dot.type = "button";
+                dot.type =
+                    "button";
 
                 dot.className =
                     "hero-carousel-dot" +
@@ -4423,31 +3629,28 @@ function makeAdmission(item) {
                 );
 
 
-                dotsBox.appendChild(dot);
+                dotsBox.appendChild(
+                    dot
+                );
 
             }
         );
 
 
         updatePosition();
+
     }
 
-
-    /* =====================================================
-       POSITION
-    ===================================================== */
 
     function updatePosition() {
 
         track.style.transform =
             `translateX(-${currentSlide * 100}%)`;
 
-
         const dots =
             dotsBox.querySelectorAll(
                 ".hero-carousel-dot"
             );
-
 
         dots.forEach(
             (dot, index) => {
@@ -4459,52 +3662,45 @@ function makeAdmission(item) {
 
             }
         );
+
     }
 
-
-    /* =====================================================
-       GO TO
-    ===================================================== */
 
     function goToSlide(index) {
 
-        if (!slides.length) return;
+        if (!slides.length) {
+            return;
+        }
 
         currentSlide =
-            (index + slides.length) %
+            (
+                index +
+                slides.length
+            ) %
             slides.length;
 
         updatePosition();
+
     }
 
-
-    /* =====================================================
-       NEXT
-    ===================================================== */
 
     function nextSlide() {
 
         goToSlide(
             currentSlide + 1
         );
+
     }
 
-
-    /* =====================================================
-       PREVIOUS
-    ===================================================== */
 
     function previousSlide() {
 
         goToSlide(
             currentSlide - 1
         );
+
     }
 
-
-    /* =====================================================
-       BUTTONS
-    ===================================================== */
 
     if (nextBtn) {
 
@@ -4518,6 +3714,7 @@ function makeAdmission(item) {
 
             }
         );
+
     }
 
 
@@ -4533,12 +3730,9 @@ function makeAdmission(item) {
 
             }
         );
+
     }
 
-
-    /* =====================================================
-       TOUCH SWIPE
-    ===================================================== */
 
     carousel.addEventListener(
         "touchstart",
@@ -4549,7 +3743,9 @@ function makeAdmission(item) {
                     .screenX;
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 
@@ -4565,15 +3761,15 @@ function makeAdmission(item) {
                 touchEndX -
                 touchStartX;
 
-
             if (
                 Math.abs(distance) < 45
             ) {
                 return;
             }
 
-
-            if (distance < 0) {
+            if (
+                distance < 0
+            ) {
 
                 nextSlide();
 
@@ -4583,33 +3779,31 @@ function makeAdmission(item) {
 
             }
 
-
             restartAutoPlay();
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
-
-    /* =====================================================
-       AUTO PLAY
-    ===================================================== */
 
     function startAutoPlay() {
 
         stopAutoPlay();
 
-
-        if (slides.length <= 1) {
+        if (
+            slides.length <= 1
+        ) {
             return;
         }
-
 
         autoPlay =
             setInterval(
                 nextSlide,
                 2000
             );
+
     }
 
 
@@ -4617,38 +3811,34 @@ function makeAdmission(item) {
 
         if (autoPlay) {
 
-            clearInterval(autoPlay);
+            clearInterval(
+                autoPlay
+            );
 
             autoPlay = null;
+
         }
+
     }
 
 
     function restartAutoPlay() {
 
         startAutoPlay();
+
     }
 
-
-    /* =====================================================
-       PAUSE ON DESKTOP HOVER
-    ===================================================== */
 
     carousel.addEventListener(
         "mouseenter",
         stopAutoPlay
     );
 
-
     carousel.addEventListener(
         "mouseleave",
         startAutoPlay
     );
 
-
-    /* =====================================================
-       LOADING
-    ===================================================== */
 
     function showLoading() {
 
@@ -4674,12 +3864,9 @@ function makeAdmission(item) {
         `;
 
         dotsBox.innerHTML = "";
+
     }
 
-
-    /* =====================================================
-       EMPTY
-    ===================================================== */
 
     function showEmpty() {
 
@@ -4705,19 +3892,12 @@ function makeAdmission(item) {
         `;
 
         dotsBox.innerHTML = "";
+
     }
 
 
-    /* =====================================================
-       INITIAL LOAD
-    ===================================================== */
-
     loadHero();
 
-
-    /* =====================================================
-       REFRESH EVERY 10 MINUTES
-    ===================================================== */
 
     setInterval(
         loadHero,
@@ -4728,107 +3908,240 @@ function makeAdmission(item) {
 
 
 
-  /* =========================================================
+/* =========================================================
    MOLAS BROWSER NOTIFICATIONS
 ========================================================= */
 
-const VAPID_PUBLIC_KEY = "BFpEYAvDlvajPmYgtfe4BZgqOaYC6sWwheTQk_w2JF3DANr8F8VpzJddAz7-OH01tZ6bb3JT69SEGZyUcxtd3Nc";
+const VAPID_PUBLIC_KEY =
+    "BFpEYAvDlvajPmYgtfe4BZgqOaYC6sWwheTQk_w2JF3DANr8F8VpzJddAz7-OH01tZ6bb3JT69SEGZyUcxtd3Nc";
 
-function urlBase64ToUint8Array(base64String) {
-    const padding = "=".repeat(
-        (4 - (base64String.length % 4)) % 4
-    );
 
-    const base64 = (base64String + padding)
-        .replace(/-/g, "+")
-        .replace(/_/g, "/");
+function urlBase64ToUint8Array(
+    base64String
+) {
 
-    const rawData = window.atob(base64);
+    const padding =
+        "=".repeat(
+            (4 - (base64String.length % 4)) % 4
+        );
+
+    const base64 =
+        (base64String + padding)
+            .replace(/-/g, "+")
+            .replace(/_/g, "/");
+
+    const rawData =
+        window.atob(base64);
 
     return Uint8Array.from(
-        [...rawData].map(char => char.charCodeAt(0))
+        [...rawData].map(
+            char => char.charCodeAt(0)
+        )
     );
-}
-
-const notificationButton =
-    document.getElementById("enable-notifications");
-
-if (notificationButton) {
-
-    notificationButton.addEventListener("click", async () => {
-
-        try {
-
-            if (!("Notification" in window)) {
-                alert("Notifications are not supported on this browser.");
-                return;
-            }
-
-            const permission =
-                await Notification.requestPermission();
-
-            if (permission !== "granted") {
-                notificationButton.textContent =
-                    "Notifications not enabled";
-                return;
-            }
-
-            const registration =
-                await navigator.serviceWorker.register(
-                    "/service-worker.js"
-                );
-
-            const subscription =
-                await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey:
-                        urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-                });
-                const { error } = await window.molasSupabase
-    .from("notification_subscribers")
-                .upsert({
-                    push_subscription: subscription.toJSON(),
-                    push_enabled: true,
-                    updated_at: new Date().toISOString()
-                });
-
-            if (error) {
-                console.error(
-                    "Notification subscription error:",
-                    error
-                );
-
-                notificationButton.textContent =
-                    "Try again";
-
-                return;
-            }
-
-            notificationButton.textContent =
-                "Notifications enabled ✓";
-
-        } catch (error) {
-    
-    console.error(
-        "Browser notification error:",
-        error
-    );
-    
-    alert(
-        "Notification error:\n\n" +
-        error.name +
-        "\n\n" +
-        error.message
-    );
-    
-    notificationButton.textContent =
-        "Try again";
-}
-
-  
 
 }
 
-  
-  
 
+/* =========================================================
+   WAIT FOR PAGE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const notificationButton =
+            document.getElementById(
+                "enable-notifications"
+            );
+
+
+        if (!notificationButton) {
+            return;
+        }
+
+
+        notificationButton.addEventListener(
+            "click",
+            async () => {
+
+                try {
+
+                    /* =====================================
+                       BROWSER CHECK
+                    ===================================== */
+
+                    if (
+                        !("Notification" in window)
+                    ) {
+
+                        alert(
+                            "Notifications are not supported on this browser."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =====================================
+                       SUPABASE CHECK
+                    ===================================== */
+
+                    if (
+                        !window.molasSupabase
+                    ) {
+
+                        alert(
+                            "MOLAS connection is not ready. Please refresh the page and try again."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =====================================
+                       REQUEST PERMISSION
+                    ===================================== */
+
+                    const permission =
+                        await Notification.requestPermission();
+
+
+                    if (
+                        permission !== "granted"
+                    ) {
+
+                        notificationButton.textContent =
+                            "Notifications not enabled";
+
+                        return;
+
+                    }
+
+
+                    /* =====================================
+                       SERVICE WORKER
+                    ===================================== */
+
+                    const registration =
+                        await navigator.serviceWorker.register(
+                            "/service-worker.js"
+                        );
+
+
+                    /* =====================================
+                       GET EXISTING SUBSCRIPTION
+                    ===================================== */
+
+                    let subscription =
+                        await registration.pushManager
+                            .getSubscription();
+
+
+                    /* =====================================
+                       CREATE SUBSCRIPTION
+                    ===================================== */
+
+                    if (!subscription) {
+
+                        subscription =
+                            await registration.pushManager
+                                .subscribe({
+
+                                    userVisibleOnly:
+                                        true,
+
+                                    applicationServerKey:
+                                        urlBase64ToUint8Array(
+                                            VAPID_PUBLIC_KEY
+                                        )
+
+                                });
+
+                    }
+
+
+                    /* =====================================
+                       SAVE SUBSCRIPTION
+                    ===================================== */
+
+                    const {
+                        error
+                    } =
+                        await window.molasSupabase
+                            .from(
+                                "notification_subscribers"
+                            )
+                            .insert({
+
+                                push_subscription:
+                                    subscription.toJSON(),
+
+                                push_enabled:
+                                    true,
+
+                                updated_at:
+                                    new Date()
+                                        .toISOString()
+
+                            });
+
+
+                    /* =====================================
+                       DATABASE ERROR
+                    ===================================== */
+
+                    if (error) {
+
+                        console.error(
+                            "Notification subscription error:",
+                            error
+                        );
+
+                        alert(
+                            "Supabase notification error:\n\n" +
+                            error.message
+                        );
+
+                        notificationButton.textContent =
+                            "Try again";
+
+                        return;
+
+                    }
+
+
+                    /* =====================================
+                       SUCCESS
+                    ===================================== */
+
+                    notificationButton.textContent =
+                        "Notifications enabled ✓";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Browser notification error:",
+                        error
+                    );
+
+                    alert(
+                        "Notification error:\n\n" +
+                        error.name +
+                        "\n\n" +
+                        error.message
+                    );
+
+                    notificationButton.textContent =
+                        "Try again";
+
+                }
+
+            }
+        );
+
+    }
+);
