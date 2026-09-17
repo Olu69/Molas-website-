@@ -2801,11 +2801,14 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =========================================================
    MOLAS BROWSER NOTIFICATIONS
 ========================================================= */
+
 const VAPID_PUBLIC_KEY =
     "BFnYM1_5qdPHOdO2RApZ1dhUNOaEhqlorzHfJ_UE-VFxKRwYf41M5S0f81DVibtaRjpZK1phGLKw0kclU4XpnUw";
+
 /* =========================================================
    VAPID BASE64 CONVERTER
 ========================================================= */
+
 function urlBase64ToUint8Array(
     base64String
 ) {
@@ -2813,26 +2816,26 @@ function urlBase64ToUint8Array(
         "=".repeat(
             (4 - (base64String.length % 4)) % 4
         );
+
     const base64 =
         (base64String + padding)
             .replace(/-/g, "+")
             .replace(/_/g, "/");
-    /*
-       IMPORTANT:
-       Decode the converted BASE64 string.
-       Do NOT decode base64String here.
-    */
+
     const rawData =
         window.atob(base64);
+
     return Uint8Array.from(
         [...rawData].map(
             char => char.charCodeAt(0)
         )
     );
 }
+
 /* =========================================================
    MOLAS NOTIFICATION SUPPORT CHECK
 ========================================================= */
+
 function molasNotificationsSupported() {
     return (
         "Notification" in window &&
@@ -2840,199 +2843,487 @@ function molasNotificationsSupported() {
         "PushManager" in window
     );
 }
+
 /* =========================================================
-   WAIT FOR PAGE
+   CHECK EXISTING MOLAS NOTIFICATION
 ========================================================= */
+
+async function checkMolasNotificationStatus() {
+
+    const notificationButton =
+        document.getElementById(
+            "enable-notifications"
+        );
+
+    if (!notificationButton) {
+        return;
+    }
+
+    if (
+        !molasNotificationsSupported()
+    ) {
+        return;
+    }
+
+    try {
+
+        /* =====================================
+           REGISTER SERVICE WORKER
+        ===================================== */
+
+        const registration =
+            await navigator.serviceWorker.register(
+                "/service-worker.js"
+            );
+
+        await navigator.serviceWorker.ready;
+
+        /* =====================================
+           CHECK BROWSER PERMISSION
+        ===================================== */
+
+        if (
+            Notification.permission ===
+            "denied"
+        ) {
+            notificationButton.textContent =
+                "Notifications blocked";
+
+            notificationButton.disabled =
+                true;
+
+            return;
+        }
+
+        /* =====================================
+           CHECK EXISTING PUSH SUBSCRIPTION
+        ===================================== */
+
+        let subscription =
+            await registration.pushManager
+                .getSubscription();
+
+        /* =====================================
+           NO SUBSCRIPTION YET
+        ===================================== */
+
+        if (!subscription) {
+
+            if (
+                Notification.permission ===
+                "granted"
+            ) {
+
+                notificationButton.textContent =
+                    "Enable notifications →";
+
+            }
+
+            return;
+        }
+
+        /* =====================================
+           CHECK VAPID KEY
+        ===================================== */
+
+        const existingKey =
+            subscription.options &&
+            subscription.options
+                .applicationServerKey;
+
+        if (
+            existingKey &&
+            existingKey.byteLength
+        ) {
+
+            const currentKey =
+                urlBase64ToUint8Array(
+                    VAPID_PUBLIC_KEY
+                );
+
+            const existingBytes =
+                new Uint8Array(
+                    existingKey
+                );
+
+            let keysMatch =
+                existingBytes.length ===
+                currentKey.length;
+
+            if (keysMatch) {
+
+                for (
+                    let i = 0;
+                    i < currentKey.length;
+                    i++
+                ) {
+
+                    if (
+                        existingBytes[i] !==
+                        currentKey[i]
+                    ) {
+
+                        keysMatch = false;
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            /* =================================
+               OLD VAPID SUBSCRIPTION
+            ================================= */
+
+            if (!keysMatch) {
+
+                try {
+
+                    await subscription.unsubscribe();
+
+                } catch (unsubscribeError) {
+
+                    console.warn(
+                        "Could not remove old MOLAS push subscription:",
+                        unsubscribeError
+                    );
+
+                }
+
+                notificationButton.textContent =
+                    "Enable notifications →";
+
+                return;
+            }
+        }
+
+        /* =====================================
+           ALREADY ENABLED
+        ===================================== */
+
+        notificationButton.textContent =
+            "Notifications enabled ✓";
+
+        notificationButton.disabled =
+            true;
+
+    } catch (error) {
+
+        console.error(
+            "MOLAS notification status check failed:",
+            error
+        );
+
+    }
+}
+
+/* =========================================================
+   ENABLE / CREATE MOLAS NOTIFICATION
+========================================================= */
+
+async function enableMolasNotifications() {
+
+    const notificationButton =
+        document.getElementById(
+            "enable-notifications"
+        );
+
+    if (!notificationButton) {
+        return;
+    }
+
+    try {
+
+        /* =====================================
+           BROWSER CHECK
+        ===================================== */
+
+        if (
+            !molasNotificationsSupported()
+        ) {
+
+            alert(
+                "Push notifications are not supported in this browser. On iPhone or iPad, open MOLAS in Safari, add it to your Home Screen, then open MOLAS from the Home Screen and try again."
+            );
+
+            return;
+        }
+
+        /* =====================================
+           SUPABASE CHECK
+        ===================================== */
+
+        if (
+            !window.molasSupabase
+        ) {
+
+            alert(
+                "MOLAS connection is not ready. Please refresh the page and try again."
+            );
+
+            return;
+        }
+
+        /* =====================================
+           REQUEST PERMISSION ONLY IF NEEDED
+        ===================================== */
+
+        let permission =
+            Notification.permission;
+
+        if (
+            permission !== "granted"
+        ) {
+
+            permission =
+                await Notification.requestPermission();
+
+        }
+
+        if (
+            permission !== "granted"
+        ) {
+
+            notificationButton.textContent =
+                "Notifications not enabled";
+
+            return;
+        }
+
+        /* =====================================
+           SERVICE WORKER
+        ===================================== */
+
+        const registration =
+            await navigator.serviceWorker.register(
+                "/service-worker.js"
+            );
+
+        await navigator.serviceWorker.ready;
+
+        /* =====================================
+           GET EXISTING SUBSCRIPTION
+        ===================================== */
+
+        let subscription =
+            await registration.pushManager
+                .getSubscription();
+
+        /* =====================================
+           CHECK EXISTING VAPID KEY
+        ===================================== */
+
+        if (subscription) {
+
+            const existingKey =
+                subscription.options &&
+                subscription.options
+                    .applicationServerKey;
+
+            if (
+                existingKey &&
+                existingKey.byteLength
+            ) {
+
+                const currentKey =
+                    urlBase64ToUint8Array(
+                        VAPID_PUBLIC_KEY
+                    );
+
+                const existingBytes =
+                    new Uint8Array(
+                        existingKey
+                    );
+
+                let keysMatch =
+                    existingBytes.length ===
+                    currentKey.length;
+
+                if (keysMatch) {
+
+                    for (
+                        let i = 0;
+                        i < currentKey.length;
+                        i++
+                    ) {
+
+                        if (
+                            existingBytes[i] !==
+                            currentKey[i]
+                        ) {
+
+                            keysMatch = false;
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+                if (!keysMatch) {
+
+                    try {
+
+                        await subscription.unsubscribe();
+
+                    } catch (unsubscribeError) {
+
+                        console.warn(
+                            "Could not remove old MOLAS push subscription:",
+                            unsubscribeError
+                        );
+
+                    }
+
+                    subscription = null;
+                }
+            }
+        }
+
+        /* =====================================
+           CREATE NEW SUBSCRIPTION IF NEEDED
+        ===================================== */
+
+        if (!subscription) {
+
+            subscription =
+                await registration.pushManager
+                    .subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey:
+                            urlBase64ToUint8Array(
+                                VAPID_PUBLIC_KEY
+                            )
+                    });
+
+        }
+
+        /* =====================================
+           SAVE SUBSCRIPTION
+        ===================================== */
+
+        const subscriptionData =
+            subscription.toJSON();
+
+        const {
+            error
+        } =
+            await window.molasSupabase
+                .from(
+                    "notification_subscribers"
+                )
+                .insert({
+                    push_subscription:
+                        subscriptionData,
+
+                    push_enabled:
+                        true,
+
+                    updated_at:
+                        new Date()
+                            .toISOString()
+                });
+
+        /* =====================================
+           DATABASE ERROR
+        ===================================== */
+
+        if (error) {
+
+            console.error(
+                "Notification subscription error:",
+                error
+            );
+
+            alert(
+                "Supabase notification error:\n\n" +
+                error.message
+            );
+
+            notificationButton.textContent =
+                "Try again";
+
+            return;
+        }
+
+        /* =====================================
+           SUCCESS
+        ===================================== */
+
+        notificationButton.textContent =
+            "Notifications enabled ✓";
+
+        notificationButton.disabled =
+            true;
+
+    } catch (error) {
+
+        console.error(
+            "Browser notification error:",
+            error
+        );
+
+        alert(
+            "Notification error:\n\n" +
+            error.name +
+            "\n\n" +
+            error.message
+        );
+
+        notificationButton.textContent =
+            "Try again";
+    }
+}
+
+/* =========================================================
+   MOLAS NOTIFICATION STARTUP
+========================================================= */
+
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    async () => {
+
         const notificationButton =
             document.getElementById(
                 "enable-notifications"
             );
+
         if (!notificationButton) {
             return;
         }
+
+        /* =====================================
+           CHECK EXISTING SUBSCRIPTION
+           AUTOMATICALLY
+        ===================================== */
+
+        await checkMolasNotificationStatus();
+
+        /* =====================================
+           BUTTON
+        ===================================== */
+
         notificationButton.addEventListener(
             "click",
-            async () => {
-                try {
-                    /* =====================================
-                       BROWSER CHECK
-                    ===================================== */
-                    if (
-                        !molasNotificationsSupported()
-                    ) {
-                        alert(
-                            "Push notifications are not supported in this browser. On iPhone or iPad, open MOLAS in Safari, add it to your Home Screen, then open MOLAS from the Home Screen and try again."
-                        );
-                        return;
-                    }
-                    /* =====================================
-                       SUPABASE CHECK
-                    ===================================== */
-                    if (
-                        !window.molasSupabase
-                    ) {
-                        alert(
-                            "MOLAS connection is not ready. Please refresh the page and try again."
-                        );
-                        return;
-                    }
-                    /* =====================================
-                       REQUEST PERMISSION
-                    ===================================== */
-                    const permission =
-                        await Notification.requestPermission();
-                    if (
-                        permission !== "granted"
-                    ) {
-                        notificationButton.textContent =
-                            "Notifications not enabled";
-                        return;
-                    }
-                    /* =====================================
-                       SERVICE WORKER
-                    ===================================== */
-                    const registration =
-                        await navigator.serviceWorker.register(
-                            "/service-worker.js"
-                        );
-                    /* =====================================
-                       WAIT FOR SERVICE WORKER
-                    ===================================== */
-                    await navigator.serviceWorker.ready;
-                    /* =====================================
-                       GET EXISTING SUBSCRIPTION
-                    ===================================== */
-                    let subscription =
-                        await registration.pushManager
-                            .getSubscription();
-                    /* =====================================
-                       CHECK EXISTING VAPID KEY
-                    ===================================== */
-                    if (subscription) {
-                        const existingKey =
-                            subscription.options &&
-                            subscription.options
-                                .applicationServerKey;
-                        if (
-                            existingKey &&
-                            existingKey.byteLength
-                        ) {
-                            const currentKey =
-                                urlBase64ToUint8Array(
-                                    VAPID_PUBLIC_KEY
-                                );
-                            const existingBytes =
-                                new Uint8Array(
-                                    existingKey
-                                );
-                            let keysMatch =
-                                existingBytes.length ===
-                                currentKey.length;
-                            if (keysMatch) {
-                                for (
-                                    let i = 0;
-                                    i < currentKey.length;
-                                    i++
-                                ) {
-                                    if (
-                                        existingBytes[i] !==
-                                        currentKey[i]
-                                    ) {
-                                        keysMatch = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!keysMatch) {
-                                try {
-                                    await subscription.unsubscribe();
-                                } catch (unsubscribeError) {
-                                    console.warn(
-                                        "Could not remove old MOLAS push subscription:",
-                                        unsubscribeError
-                                    );
-                                }
-                                subscription = null;
-                            }
-                        }
-                    }
-                    /* =====================================
-                       CREATE SUBSCRIPTION
-                    ===================================== */
-                    if (!subscription) {
-                        subscription =
-                            await registration.pushManager
-                                .subscribe({
-                                    userVisibleOnly:
-                                        true,
-                                    applicationServerKey:
-                                        urlBase64ToUint8Array(
-                                            VAPID_PUBLIC_KEY
-                                        )
-                                });
-                    }
-                    /* =====================================
-                       SAVE SUBSCRIPTION
-                    ===================================== */
-                    const subscriptionData =
-                        subscription.toJSON();
-                    const {
-                        error
-                    } =
-                        await window.molasSupabase
-                            .from(
-                                "notification_subscribers"
-                            )
-                            .insert({
-                                push_subscription:
-                                    subscriptionData,
-                                push_enabled:
-                                    true,
-                                updated_at:
-                                    new Date()
-                                        .toISOString()
-                            });
-                    /* =====================================
-                       DATABASE ERROR
-                    ===================================== */
-                    if (error) {
-                        console.error(
-                            "Notification subscription error:",
-                            error
-                        );
-                        alert(
-                            "Supabase notification error:\n\n" +
-                            error.message
-                        );
-                        notificationButton.textContent =
-                            "Try again";
-                        return;
-                    }
-                    /* =====================================
-                       SUCCESS
-                    ===================================== */
-                    notificationButton.textContent =
-                        "Notifications enabled ✓";
-                    notificationButton.disabled =
-                        true;
-                } catch (error) {
-                    console.error(
-                        "Browser notification error:",
-                        error
-                    );
-                    alert(
-                        "Notification error:\n\n" +
-                        error.name +
-                        "\n\n" +
-                        error.message
-                    );
-                    notificationButton.textContent =
-                        "Try again";
-                }
-            }
+            enableMolasNotifications
         );
+
     }
 );
+  
+
+
+
+
+  
+
+   
+
+   
+
+
+  
+
+ 
