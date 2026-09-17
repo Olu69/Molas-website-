@@ -4145,3 +4145,64 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   TEMPORARY NOTIFICATION TEST
+========================================================= */
+
+async function testMolasNotification() {
+    
+    try {
+        
+        const response = await fetch(
+            "https://eidnzebqyxcpxbykybch.supabase.co/functions/v1/send-notifications",
+            {
+                method: "POST",
+                
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                
+                body: JSON.stringify({
+                    title: "MOLAS Test Notification",
+                    body: "If you received this, MOLAS notifications are working!",
+                    url: "/"
+                })
+            }
+        );
+        
+        const result =
+            await response.json();
+        
+        console.log(
+            "MOLAS notification test:",
+            result
+        );
+        
+        alert(
+            JSON.stringify(
+                result,
+                null,
+                2
+            )
+        );
+        
+    } catch (error) {
+        
+        console.error(
+            "MOLAS notification test error:",
+            error
+        );
+        
+        alert(
+            "Notification test error:\n\n" +
+            error.message
+        );
+        
+    }
+    
+}
+
+
+testMolasNotification();
