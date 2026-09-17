@@ -3913,7 +3913,7 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================================================= */
 
 const VAPID_PUBLIC_KEY =
-    "BFpEYAvDlvajPmYgtfe4BZgqOaYC6sWwheTQk_w2JF3DANr8F8VpzJddAz7-OH01tZ6bb3JT69SEGZyUcxtd3Nc";
+    "BFnYM1_5qdPHOdO2RApZ1dhUNOaEhqlorzHfJ_UE-VFxKRwYf41M5S0f81DVibtaRjpZK1phGLKw0kclU4XpnUw";
 
 
 function urlBase64ToUint8Array(
