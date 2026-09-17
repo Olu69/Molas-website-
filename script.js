@@ -4731,7 +4731,7 @@ function makeAdmission(item) {
    MOLAS BROWSER NOTIFICATIONS
 ========================================================= */
 
-const VAPID_PUBLIC_KEY = "BAK6t5w4_T-1To0bYxr-FsqplvtKXVhllYKvB-Thjh5iIfMsUlQlRLVT1SZhGw2WXs4P7mEyWh8fACzAcYIgpI0";
+const VAPID_PUBLIC_KEY = "BFpEYAvDlvajPmYgtfe4BZgqOaYC6sWwheTQk_w2JF3DANr8F8VpzJddAz7-OH01tZ6bb3JT69SEGZyUcxtd3Nc";
 
 function urlBase64ToUint8Array(base64String) {
     const padding = "=".repeat(
