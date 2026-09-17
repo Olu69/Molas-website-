@@ -4204,5 +4204,3 @@ async function testMolasNotification() {
     
 }
 
-
-testMolasNotification();
