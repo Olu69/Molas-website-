@@ -3931,7 +3931,7 @@ function urlBase64ToUint8Array(
             .replace(/_/g, "/");
 
     const rawData =
-        window.atob(base64);
+        window.atob(base64String);
 
     return Uint8Array.from(
         [...rawData].map(
@@ -3972,11 +3972,13 @@ document.addEventListener(
                     ===================================== */
 
                     if (
-                        !("Notification" in window)
+                        !("Notification" in window) ||
+                        !("serviceWorker" in navigator) ||
+                        !("PushManager" in window)
                     ) {
 
                         alert(
-                            "Notifications are not supported on this browser."
+                            "Push notifications are not supported in this browser. Please open MOLAS in a supported browser."
                         );
 
                         return;
@@ -4203,4 +4205,3 @@ async function testMolasNotification() {
     }
     
 }
-
