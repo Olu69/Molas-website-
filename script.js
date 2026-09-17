@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             SUPABASE_URL,
             SUPABASE_KEY
         );
+        window.molasSupabase = supabase;
 
     } catch (error) {
 
@@ -4783,9 +4784,8 @@ if (notificationButton) {
                     applicationServerKey:
                         urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
                 });
-
-            const { error } = await supabase
-                .from("notification_subscribers")
+                const { error } = await window.molasSupabase
+    .from("notification_subscribers")
                 .upsert({
                     push_subscription: subscription.toJSON(),
                     push_enabled: true,
@@ -4808,17 +4808,24 @@ if (notificationButton) {
                 "Notifications enabled ✓";
 
         } catch (error) {
+    
+    console.error(
+        "Browser notification error:",
+        error
+    );
+    
+    alert(
+        "Notification error:\n\n" +
+        error.name +
+        "\n\n" +
+        error.message
+    );
+    
+    notificationButton.textContent =
+        "Try again";
+}
 
-            console.error(
-                "Browser notification error:",
-                error
-            );
-
-            notificationButton.textContent =
-                "Try again";
-        }
-
-    });
+  
 
 }
 
