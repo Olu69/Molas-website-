@@ -336,10 +336,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 touchEndY - touchStartY;
 
 
-            /*
-               Ignore mostly vertical gestures.
-            */
-
             if (
                 Math.abs(horizontalDistance) <=
                 Math.abs(verticalDistance)
@@ -347,10 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-
-            /*
-               Ignore very small movements.
-            */
 
             if (
                 Math.abs(horizontalDistance) <
@@ -360,40 +352,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /*
-               Swipe LEFT
-               → NEXT IMAGE
-            */
-
             if (
                 horizontalDistance < 0
             ) {
 
                 showNextGalleryImage();
 
-            }
-
-
-            /*
-               Swipe RIGHT
-               → PREVIOUS IMAGE
-            */
-
-            else {
+            } else {
 
                 showPreviousGalleryImage();
 
             }
 
 
-            /* RESET */
-
             touchStartX = 0;
-
             touchStartY = 0;
-
             touchEndX = 0;
-
             touchEndY = 0;
         }
     }
@@ -442,8 +416,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        /* IMAGE */
-
         image.src =
             item.image_url || "";
 
@@ -452,24 +424,15 @@ document.addEventListener("DOMContentLoaded", () => {
             "MOLAS Learning Centre";
 
 
-        /* TITLE */
-
         title.textContent =
             item.title ||
             "MOLAS Learning Centre";
 
 
-        /* DESCRIPTION */
-
         description.textContent =
             item.caption ||
             "";
 
-
-        /*
-           Hide description completely
-           when there is no caption.
-        */
 
         if (item.caption) {
 
@@ -483,8 +446,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /* COUNTER */
 
         counter.textContent =
             `${currentGalleryIndex + 1} / ${galleryImages.length}`;
@@ -787,8 +748,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        LOAD CENTRE GALLERY
-       ALL IMAGES COME FROM:
-       learning_centre_gallery
     ===================================================== */
 
     async function loadGallery() {
@@ -864,8 +823,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /* SAVE ALL PHOTOS FOR MODAL */
-
             galleryImages =
                 data;
 
@@ -930,8 +887,6 @@ document.addEventListener("DOMContentLoaded", () => {
             "programme-card";
 
 
-        /* IMAGE */
-
         if (programme.image_url) {
 
             const imageContainer =
@@ -967,16 +922,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* BODY */
-
         const body =
             document.createElement("div");
 
         body.className =
             "programme-card-body";
 
-
-        /* CATEGORY */
 
         if (programme.category) {
 
@@ -997,8 +948,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* NAME */
-
         const title =
             document.createElement("h3");
 
@@ -1011,8 +960,6 @@ document.addEventListener("DOMContentLoaded", () => {
             title
         );
 
-
-        /* DESCRIPTION */
 
         if (programme.description) {
 
@@ -1029,8 +976,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /* SCHEDULE */
 
         if (programme.schedule) {
 
@@ -1050,8 +995,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /* BUTTON */
 
         const button =
             document.createElement("a");
@@ -1168,8 +1111,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-
-            /* RESET SELECT */
 
             if (programmeSelect) {
 
@@ -1489,7 +1430,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         /*
            Map will be connected after
            the actual MOLAS centre location
@@ -1586,6 +1526,691 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
+       VISION • MISSION • CORE VALUES
+       CONTINUOUS LINE-BY-LINE REVEAL
+
+       Vision stays visible.
+       Mission stays visible.
+       Core values stay visible.
+
+       Everything clears ONLY after the
+       entire sequence has finished.
+    ===================================================== */
+
+    function setupValuesAnimation() {
+
+        const valuesSection =
+            document.querySelector(
+                ".molas-values-section"
+            );
+
+        if (!valuesSection) {
+            return;
+        }
+
+
+        const vision =
+            valuesSection.querySelector(
+                ".molas-vision"
+            );
+
+        const mission =
+            valuesSection.querySelector(
+                ".molas-mission"
+            );
+
+        const coreValues =
+            valuesSection.querySelectorAll(
+                ".core-value"
+            );
+
+
+        if (
+            !vision ||
+            !mission ||
+            !coreValues.length
+        ) {
+            return;
+        }
+
+
+        /* =================================================
+           RESPECT REDUCED MOTION
+        ================================================= */
+
+        if (
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        ) {
+            return;
+        }
+
+
+        /* =================================================
+           ANIMATION CSS
+        ================================================= */
+
+        const style =
+            document.createElement("style");
+
+        style.textContent = `
+
+            .molas-values-section
+            .value-animation-card {
+
+                opacity: 0;
+
+                transition:
+                    opacity 0.8s ease;
+
+            }
+
+
+            .molas-values-section
+            .value-animation-card.is-active {
+
+                opacity: 1;
+
+            }
+
+
+            .molas-values-section
+            .line-reveal {
+
+                display: block;
+
+                opacity: 0;
+
+                transform:
+                    translateY(12px);
+
+                transition:
+                    opacity 0.65s ease,
+                    transform 0.65s ease;
+
+            }
+
+
+            .molas-values-section
+            .line-reveal.is-visible {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        `;
+
+        document.head.appendChild(style);
+
+
+        /* =================================================
+           WAIT
+        ================================================= */
+
+        function wait(milliseconds) {
+
+            return new Promise(resolve => {
+
+                setTimeout(
+                    resolve,
+                    milliseconds
+                );
+
+            });
+
+        }
+
+
+        /* =================================================
+           CREATE REAL VISUAL LINES
+        ================================================= */
+
+        function createLines(element) {
+
+            if (!element) {
+                return [];
+            }
+
+
+            const text =
+                element.textContent.trim();
+
+
+            element.textContent = "";
+
+
+            const words =
+                text.split(/\s+/);
+
+
+            const wordSpans = [];
+
+
+            words.forEach(
+                word => {
+
+                    const span =
+                        document.createElement(
+                            "span"
+                        );
+
+                    span.textContent =
+                        word;
+
+
+                    span.style.display =
+                        "inline";
+
+
+                    element.appendChild(
+                        span
+                    );
+
+
+                    element.appendChild(
+                        document.createTextNode(
+                            " "
+                        )
+                    );
+
+
+                    wordSpans.push(
+                        span
+                    );
+
+                }
+            );
+
+
+            /*
+               Force browser layout.
+            */
+
+            element.offsetHeight;
+
+
+            const lines = [];
+
+            let currentLine = [];
+
+            let currentTop = null;
+
+
+            wordSpans.forEach(
+                span => {
+
+                    const top =
+                        span.offsetTop;
+
+
+                    if (
+                        currentTop === null
+                    ) {
+
+                        currentTop =
+                            top;
+
+                    }
+
+
+                    if (
+                        top !== currentTop
+                    ) {
+
+                        if (
+                            currentLine.length
+                        ) {
+
+                            lines.push(
+                                currentLine
+                            );
+
+                        }
+
+
+                        currentLine = [];
+
+                        currentTop =
+                            top;
+
+                    }
+
+
+                    currentLine.push(
+                        span
+                    );
+
+                }
+            );
+
+
+            if (
+                currentLine.length
+            ) {
+
+                lines.push(
+                    currentLine
+                );
+
+            }
+
+
+            /*
+               Replace temporary words
+               with line elements.
+            */
+
+            element.textContent = "";
+
+
+            const lineElements = [];
+
+
+            lines.forEach(
+                lineWords => {
+
+                    const line =
+                        document.createElement(
+                            "span"
+                        );
+
+                    line.className =
+                        "line-reveal";
+
+
+                    line.textContent =
+                        lineWords
+                            .map(
+                                word =>
+                                    word.textContent
+                            )
+                            .join(" ");
+
+
+                    element.appendChild(
+                        line
+                    );
+
+
+                    lineElements.push(
+                        line
+                    );
+
+                }
+            );
+
+
+            return lineElements;
+        }
+
+
+        /* =================================================
+           REVEAL LINES
+        ================================================= */
+
+        async function revealLines(
+            lines,
+            delay = 220
+        ) {
+
+            for (
+                const line of lines
+            ) {
+
+                line.classList.add(
+                    "is-visible"
+                );
+
+
+                await wait(
+                    delay
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           PREPARE ALL TEXT
+        ================================================= */
+
+        const animatedParts = [];
+
+
+        function prepareCard(
+            card,
+            selectors
+        ) {
+
+            selectors.forEach(
+                selector => {
+
+                    const element =
+                        card.querySelector(
+                            selector
+                        );
+
+
+                    if (!element) {
+                        return;
+                    }
+
+
+                    const originalText =
+                        element.textContent.trim();
+
+
+                    const lines =
+                        createLines(
+                            element
+                        );
+
+
+                    animatedParts.push({
+                        element,
+                        originalText,
+                        lines
+                    });
+
+                }
+            );
+
+        }
+
+
+        prepareCard(
+            vision,
+            [
+                "h3",
+                "p"
+            ]
+        );
+
+
+        prepareCard(
+            mission,
+            [
+                "h3",
+                "p"
+            ]
+        );
+
+
+        coreValues.forEach(
+            card => {
+
+                prepareCard(
+                    card,
+                    [
+                        "h4",
+                        "p"
+                    ]
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           CARD HELPERS
+        ================================================= */
+
+        function activateCard(card) {
+
+            card.classList.add(
+                "value-animation-card"
+            );
+
+            card.classList.add(
+                "is-active"
+            );
+
+        }
+
+
+        function hideCard(card) {
+
+            card.classList.remove(
+                "is-active"
+            );
+
+        }
+
+
+        /* =================================================
+           RESET EVERYTHING
+        ================================================= */
+
+        function resetAnimation() {
+
+            animatedParts.forEach(
+                part => {
+
+                    part.lines.forEach(
+                        line => {
+
+                            line.classList.remove(
+                                "is-visible"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            hideCard(
+                vision
+            );
+
+            hideCard(
+                mission
+            );
+
+
+            coreValues.forEach(
+                card => {
+
+                    hideCard(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           REVEAL ONE CARD
+        ================================================= */
+
+        async function revealCard(
+            card,
+            delayBetweenLines = 220
+        ) {
+
+            activateCard(
+                card
+            );
+
+
+            const parts =
+                animatedParts.filter(
+                    part =>
+                        card.contains(
+                            part.element
+                        )
+                );
+
+
+            /*
+               Small pause before
+               the text begins.
+            */
+
+            await wait(
+                450
+            );
+
+
+            for (
+                const part of parts
+            ) {
+
+                await revealLines(
+                    part.lines,
+                    delayBetweenLines
+                );
+
+
+                await wait(
+                    300
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           INITIAL STATE
+        ================================================= */
+
+        vision.classList.add(
+            "value-animation-card"
+        );
+
+        mission.classList.add(
+            "value-animation-card"
+        );
+
+
+        coreValues.forEach(
+            card => {
+
+                card.classList.add(
+                    "value-animation-card"
+                );
+
+            }
+        );
+
+
+        resetAnimation();
+
+
+        /* =================================================
+           CONTINUOUS SEQUENCE
+        ================================================= */
+
+        async function runValuesAnimation() {
+
+            while (true) {
+
+                /* -----------------------------------------
+                   START
+                ----------------------------------------- */
+
+                resetAnimation();
+
+
+                await wait(
+                    1000
+                );
+
+
+                /* -----------------------------------------
+                   VISION
+                   STAYS VISIBLE
+                ----------------------------------------- */
+
+                await revealCard(
+                    vision,
+                    200
+                );
+
+
+                await wait(
+                    700
+                );
+
+
+                /* -----------------------------------------
+                   MISSION
+                   VISION STAYS
+                ----------------------------------------- */
+
+                await revealCard(
+                    mission,
+                    200
+                );
+
+
+                await wait(
+                    700
+                );
+
+
+                /* -----------------------------------------
+                   CORE VALUES
+                   EVERYTHING STAYS
+                ----------------------------------------- */
+
+                for (
+                    const card of coreValues
+                ) {
+
+                    await revealCard(
+                        card,
+                        180
+                    );
+
+
+                    await wait(
+                        450
+                    );
+
+                }
+
+
+                /* -----------------------------------------
+                   EVERYTHING IS NOW VISIBLE
+                ----------------------------------------- */
+
+                await wait(
+                    15000
+                );
+
+
+                /* -----------------------------------------
+                   ONE FULL RESET
+                ----------------------------------------- */
+
+                resetAnimation();
+
+
+                await wait(
+                    1200
+                );
+
+            }
+
+        }
+
+
+        runValuesAnimation();
+
+    }
+
+
+    /* =====================================================
        INITIALISE
     ===================================================== */
 
@@ -1594,5 +2219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadProgrammes();
 
     setupMap();
+
+    setupValuesAnimation();
 
 });

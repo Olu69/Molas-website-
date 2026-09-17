@@ -1563,3 +1563,223 @@ h3 {
     }
     
 }
+
+
+/* =========================================================
+   MOLAS VISION, MISSION & CORE VALUES
+========================================================= */
+
+.molas-values-section {
+    padding: 100px 0;
+    background: var(--surface);
+}
+
+.molas-values-section .section-heading {
+    max-width: 760px;
+    margin-bottom: 55px;
+}
+
+/* =========================================================
+   VISION & MISSION
+========================================================= */
+
+.molas-values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.molas-value-card {
+    padding: 42px;
+    border-radius: var(--radius-large);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* VISION */
+
+.molas-value-card.molas-vision {
+    background: var(--cream);
+    color: var(--text);
+}
+
+/* MISSION */
+
+.molas-value-card.molas-mission {
+    background: var(--cream);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+/* NUMBER */
+
+.value-number {
+    display: block;
+    margin-bottom: 30px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: 0.1em;
+}
+
+/* LABEL */
+
+.value-label {
+    display: block;
+    margin-bottom: 14px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    color: var(--green);
+}
+
+/* MAIN STATEMENT */
+
+.molas-value-card h3 {
+    max-width: 500px;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    color: #762944;
+    font-style: italic;
+    letter-spacing: -0.02em;
+}
+
+/* DESCRIPTION / STATEMENT */
+
+.molas-value-card p {
+    max-width: 600px;
+    margin-top: 22px;
+    
+    color: #762944;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+/* =========================================================
+   CORE VALUES
+========================================================= */
+
+.core-values {
+    margin-top: 80px;
+}
+
+.core-values-heading {
+    margin-bottom: 35px;
+}
+
+.core-values-heading .value-label {
+    margin-bottom: 8px;
+}
+
+.core-values-heading h3 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-large);
+    background: var(--border);
+}
+
+.core-value {
+    min-height: 210px;
+    padding: 30px;
+    background: var(--cream);
+}
+
+.core-value>span {
+    display: block;
+    margin-bottom: 22px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--green);
+}
+
+.core-value h4 {
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: #762944;
+}
+
+.core-value p {
+    max-width: 320px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.molas-value-card:hover {
+    transform: translateY(-4px);
+    
+    box-shadow:
+        0 18px 40px rgba(50, 40, 30, 0.08);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 680px) {
+    
+    .molas-values-section {
+        padding: 65px 0;
+    }
+    
+    .molas-values-section .section-heading {
+        margin-bottom: 35px;
+    }
+    
+    .molas-values-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
+    .molas-value-card {
+        padding: 30px 24px;
+        border-radius: 22px;
+    }
+    
+    .value-number {
+        margin-bottom: 24px;
+    }
+    
+    .molas-value-card h3 {
+        font-size: 1.65rem;
+    }
+    
+    .molas-value-card p {
+        margin-top: 18px;
+        font-size: 0.88rem;
+    }
+    
+    .core-values {
+        margin-top: 55px;
+    }
+    
+    .core-values-grid {
+        grid-template-columns: 1fr;
+        border-radius: 20px;
+    }
+    
+    .core-value {
+        min-height: auto;
+        padding: 26px 24px;
+    }
+}
+
+
