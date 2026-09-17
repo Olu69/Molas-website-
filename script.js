@@ -4724,3 +4724,104 @@ function makeAdmission(item) {
     );
 
 });
+
+
+
+  /* =========================================================
+   MOLAS BROWSER NOTIFICATIONS
+========================================================= */
+
+const VAPID_PUBLIC_KEY = "BAK6t5w4_T-1To0bYxr-FsqplvtKXVhllYKvB-Thjh5iIfMsUlQlRLVT1SZhGw2WXs4P7mEyWh8fACzAcYIgpI0";
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = "=".repeat(
+        (4 - (base64String.length % 4)) % 4
+    );
+
+    const base64 = (base64String + padding)
+        .replace(/-/g, "+")
+        .replace(/_/g, "/");
+
+    const rawData = window.atob(base64);
+
+    return Uint8Array.from(
+        [...rawData].map(char => char.charCodeAt(0))
+    );
+}
+
+const notificationButton =
+    document.getElementById("enable-notifications");
+
+if (notificationButton) {
+
+    notificationButton.addEventListener("click", async () => {
+
+        try {
+
+            if (!("Notification" in window)) {
+                alert("Notifications are not supported on this browser.");
+                return;
+            }
+
+            const permission =
+                await Notification.requestPermission();
+
+            if (permission !== "granted") {
+                notificationButton.textContent =
+                    "Notifications not enabled";
+                return;
+            }
+
+            const registration =
+                await navigator.serviceWorker.register(
+                    "/service-worker.js"
+                );
+
+            const subscription =
+                await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey:
+                        urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                });
+
+            const { error } = await supabase
+                .from("notification_subscribers")
+                .upsert({
+                    push_subscription: subscription.toJSON(),
+                    push_enabled: true,
+                    updated_at: new Date().toISOString()
+                });
+
+            if (error) {
+                console.error(
+                    "Notification subscription error:",
+                    error
+                );
+
+                notificationButton.textContent =
+                    "Try again";
+
+                return;
+            }
+
+            notificationButton.textContent =
+                "Notifications enabled ✓";
+
+        } catch (error) {
+
+            console.error(
+                "Browser notification error:",
+                error
+            );
+
+            notificationButton.textContent =
+                "Try again";
+        }
+
+    });
+
+}
+
+  
+  
+
