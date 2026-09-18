@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Scholarship Details — MOLAS Educational Consults
+    </title>
+
+    <meta
+        name="description"
+        content="View full scholarship details, eligibility, requirements, benefits and application information."
+    >
+
+    <link
+        rel="stylesheet"
+        href="scholarship.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="scholarship-detail-header">
+
+        <div class="scholarship-detail-header-inner">
+
+            <a
+                href="scholarships.html"
+                class="scholarship-detail-brand"
+                aria-label="Back to Scholarships"
+            >
+                <img
+                    src="molas.png"
+                    alt="MOLAS Educational Consults"
+                >
+            </a>
+
+            <a
+                href="scholarships.html"
+                class="scholarship-detail-back"
+            >
+                ← Scholarships
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+        <!-- =================================================
+             LOADING
+        ================================================== -->
+
+        <div
+            class="scholarship-detail-loading"
+            id="scholarship-detail-loading"
+        >
+
+            <div class="loading-ring"></div>
+
+            <p>
+                Loading scholarship details...
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        <section
+            class="scholarship-detail-error"
+            id="scholarship-detail-error"
+            hidden
+        >
+
+            <div class="detail-error-icon">
+                🔎
+            </div>
+
+            <h1>
+                Scholarship not found
+            </h1>
+
+            <p>
+                We couldn't find the scholarship you're looking for.
+                It may have been removed or the link may be incorrect.
+            </p>
+
+            <a
+                href="scholarships.html"
+                class="detail-error-button"
+            >
+                ← Back to Scholarships
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             SCHOLARSHIP DETAILS
+        ================================================== -->
+
+        <section
+            class="scholarship-detail-section"
+            id="scholarship-detail"
+            hidden
+        >
+
+            <div class="scholarship-detail-container">
+
+                <!-- =========================================
+                     HERO
+                ========================================== -->
+
+                <div class="scholarship-detail-hero">
+
+                    <div class="scholarship-detail-image">
+
+                        <img
+                            id="detail-image"
+                            src=""
+                            alt="Scholarship opportunity"
+                        >
+
+                        <span
+                            class="scholarship-detail-status"
+                            id="detail-status"
+                        >
+                            Open
+                        </span>
+
+                    </div>
+
+
+                    <div class="scholarship-detail-intro">
+
+                        <span
+                            class="detail-eyebrow"
+                        >
+                            SCHOLARSHIP OPPORTUNITY
+                        </span>
+
+                        <h1
+                            id="detail-title"
+                        >
+                            Scholarship Title
+                        </h1>
+
+                        <p
+                            class="detail-provider"
+                            id="detail-provider"
+                        >
+                            Provider
+                        </p>
+
+                        <p
+                            class="detail-description"
+                            id="detail-description"
+                        >
+                            Scholarship description.
+                        </p>
+
+
+                        <!-- META -->
+
+                        <div class="detail-meta">
+
+                            <div class="detail-meta-item">
+
+                                <span>
+                                    Level
+                                </span>
+
+                                <strong
+                                    id="detail-level"
+                                >
+                                    Undergraduate
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-meta-item">
+
+                                <span>
+                                    Location
+                                </span>
+
+                                <strong
+                                    id="detail-location"
+                                >
+                                    Nigeria
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-meta-item">
+
+                                <span>
+                                    Deadline
+                                </span>
+
+                                <strong
+                                    id="detail-deadline"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     FULL DETAILS
+                ========================================== -->
+
+                <div class="scholarship-detail-content">
+
+
+                    <!-- ELIGIBILITY -->
+
+                    <section class="detail-content-section">
+
+                        <span class="detail-section-label">
+                            ELIGIBILITY
+                        </span>
+
+                        <h2>
+                            Who can apply?
+                        </h2>
+
+                        <div
+                            class="detail-rich-text"
+                            id="detail-eligibility"
+                        >
+                            —
+                        </div>
+
+                    </section>
+
+
+                    <!-- REQUIREMENTS -->
+
+                    <section class="detail-content-section">
+
+                        <span class="detail-section-label">
+                            REQUIREMENTS
+                        </span>
+
+                        <h2>
+                            What you need
+                        </h2>
+
+                        <div
+                            class="detail-rich-text"
+                            id="detail-requirements"
+                        >
+                            —
+                        </div>
+
+                    </section>
+
+
+                    <!-- BENEFITS -->
+
+                    <section class="detail-content-section">
+
+                        <span class="detail-section-label">
+                            BENEFITS
+                        </span>
+
+                        <h2>
+                            What the scholarship offers
+                        </h2>
+
+                        <div
+                            class="detail-rich-text"
+                            id="detail-benefits"
+                        >
+                            —
+                        </div>
+
+                    </section>
+
+
+                    <!-- APPLICATION -->
+
+                    <section class="detail-application">
+
+                        <div>
+
+                            <span class="detail-section-label">
+                                APPLICATION
+                            </span>
+
+                            <h2>
+                                Ready to apply?
+                            </h2>
+
+                            <p>
+                                Review the scholarship information
+                                carefully before submitting your
+                                application.
+                            </p>
+
+                        </div>
+
+                        <a
+                            id="detail-application-link"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="detail-apply-button"
+                        >
+                            Apply Now →
+                        </a>
+
+                    </section>
+
+
+                    <!-- BACK -->
+
+                    <a
+                        href="scholarships.html"
+                        class="detail-back-button"
+                    >
+                        ← Back to Scholarship
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="scholarship-detail-footer">
+
+        <div class="scholarship-detail-footer-inner">
+
+            <p>
+                © 2026 MOLAS Educational Consults & Global Limited.
+                All rights reserved.
+            </p>
+
+            <a href="scholarships.html">
+                Scholarships
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="scholarship.js"></script>
+
+</body>
+</html>

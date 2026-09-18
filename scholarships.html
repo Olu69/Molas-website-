@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>
+        Scholarship Opportunities — MOLAS Educational Consults
+    </title>
+    <meta
+        name="description"
+        content="Discover scholarship opportunities for Nigerian students, including undergraduate, postgraduate and international scholarships."
+    >
+    <link
+        rel="stylesheet"
+        href="scholarships.css"
+    >
+</head>
+<body>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header class="scholarship-header">
+        <div class="scholarship-header-inner">
+            <a
+                href="index.html"
+                class="scholarship-brand"
+                aria-label="MOLAS Home"
+            >
+                <img
+                    src="molas.png"
+                    alt="MOLAS Educational Consults"
+                >
+            </a>
+            <nav class="scholarship-nav">
+                <a
+                    href="index.html"
+                    class="scholarship-nav-link"
+                >
+                    Home
+                </a>
+                <a
+                    href="jamb-resources.html"
+                    class="scholarship-nav-link"
+                >
+                    JAMB
+                </a>
+                <a
+                    href="waec.html"
+                    class="scholarship-nav-link"
+                >
+                    WAEC
+                </a>
+                <a
+                    href="universities.html"
+                    class="scholarship-nav-link"
+                >
+                    Universities
+                </a>
+                <a
+                    href="admissions.html"
+                    class="scholarship-nav-link"
+                >
+                    Admissions
+                </a>
+                <a
+                    href="scholarships.html"
+                    class="scholarship-nav-link active"
+                >
+                    Scholarships
+                </a>
+            </nav>
+            <a
+                href="index.html"
+                class="scholarship-back-home"
+            >
+                ← Back to MOLAS
+            </a>
+            <button
+                type="button"
+                class="scholarship-menu-toggle"
+                aria-label="Open menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <main>
+        <section class="scholarship-hero">
+            <div class="scholarship-hero-inner">
+                <div class="scholarship-hero-content">
+                    <span class="scholarship-eyebrow">
+                        MOLAS SCHOLARSHIP HUB
+                    </span>
+                    <h1>
+                        Find opportunities
+                        <span>
+                            worth applying for.
+                        </span>
+                    </h1>
+                    <p>
+                        Explore scholarship opportunities for Nigerian
+                        students and discover funding options that match
+                        your academic level, location and goals.
+                    </p>
+                    <div class="scholarship-search">
+                        <input
+                            type="search"
+                            id="scholarship-search"
+                            placeholder="Search scholarships..."
+                            aria-label="Search scholarships"
+                        >
+                        <button
+                            type="button"
+                            id="scholarship-search-button"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <!-- HERO VISUAL -->
+                <div class="scholarship-hero-visual">
+                    <div
+                        class="hero-circle hero-circle-one"
+                    ></div>
+                    <div
+                        class="hero-circle hero-circle-two"
+                    ></div>
+                    <div class="hero-opportunity-card">
+                        <div class="opportunity-card-top">
+                            <span class="opportunity-label">
+                                FEATURED
+                            </span>
+                            <span class="opportunity-dot"></span>
+                        </div>
+                        <div class="opportunity-icon">
+                            🎓
+                        </div>
+                        <span class="opportunity-small">
+                            SCHOLARSHIP OPPORTUNITY
+                        </span>
+                        <h2>
+                            Your Next Opportunity
+                        </h2>
+                        <p>
+                            Discover scholarships that could help
+                            support your academic journey.
+                        </p>
+                        <div class="opportunity-bottom">
+                            <span>
+                                Explore opportunities
+                            </span>
+                            <span>
+                                →
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             SCHOLARSHIP CATEGORIES
+        ================================================== -->
+        <section class="scholarship-categories-section">
+            <div class="scholarship-container">
+                <div class="section-heading">
+                    <span class="section-eyebrow">
+                        EXPLORE
+                    </span>
+                    <h2>
+                        Find what fits you.
+                    </h2>
+                    <p>
+                        Browse scholarships based on your academic
+                        level and the type of opportunity you are
+                        looking for.
+                    </p>
+                </div>
+                <div class="category-grid">
+                    <button
+                        type="button"
+                        class="category-card"
+                        data-category="undergraduate"
+                    >
+                        <span class="category-icon">
+                            🎓
+                        </span>
+                        <strong>
+                            Undergraduate
+                        </strong>
+                        <span>
+                            Opportunities for undergraduate students.
+                        </span>
+                        <b>
+                            
+                        </b>
+                    </button>
+                    <button
+                        type="button"
+                        class="category-card"
+                        data-category="postgraduate"
+                    >
+                        <span class="category-icon">
+                            🎓
+                        </span>
+                        <strong>
+                            Postgraduate
+                        </strong>
+                        <span>
+                            Funding opportunities for advanced study.
+                        </span>
+                        <b>
+
+                        </b>
+                    </button>
+                    <button
+                        type="button"
+                        class="category-card"
+                        data-category="nigerian"
+                    >
+                        <span class="category-icon">
+                            🇳🇬
+                        </span>
+                        <strong>
+                            Nigerian Scholarships
+                        </strong>
+                        <span>
+                            Opportunities available to Nigerian students.
+                        </span>
+                        <b>
+
+                        </b>
+                    </button>
+                    <button
+                        type="button"
+                        class="category-card"
+                        data-category="international"
+                    >
+                        <span class="category-icon">
+                            🌍
+                        </span>
+                        <strong>
+                            International
+                        </strong>
+                        <span>
+                            Scholarships and opportunities abroad.
+                        </span>
+                        <b>
+
+                        </b>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             FEATURED SCHOLARSHIPS
+        ================================================== -->
+        <section class="featured-scholarships-section">
+            <div class="scholarship-container">
+                <div class="section-heading">
+                    <span class="section-eyebrow">
+                        FEATURED
+                    </span>
+                    <h2>
+                        Opportunities worth exploring.
+                    </h2>
+                    <p>
+                        Explore selected scholarship opportunities
+                        available through the MOLAS Scholarship Hub.
+                    </p>
+                </div>
+                <div
+                    class="featured-scholarship-grid"
+                    id="featured-scholarship-grid"
+                >
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             SCHOLARSHIP DIRECTORY
+        ================================================== -->
+        <section
+            class="scholarship-directory-section"
+            id="scholarships"
+        >
+            <div class="scholarship-container">
+                <div class="section-heading">
+                    <span class="section-eyebrow">
+                        SCHOLARSHIP DIRECTORY
+                    </span>
+                    <h2>
+                        Explore all opportunities.
+                    </h2>
+                    <p>
+                        Search and filter available scholarships
+                        to find opportunities that match your needs.
+                    </p>
+                </div>
+                <!-- FILTER BUTTONS -->
+                <div class="scholarship-filter-bar">
+                    <button
+                        type="button"
+                        class="scholarship-filter-button active"
+                        data-category="all"
+                    >
+                        All
+                    </button>
+                    <button
+                        type="button"
+                        class="scholarship-filter-button"
+                        data-category="undergraduate"
+                    >
+                        Undergraduate
+                    </button>
+                    <button
+                        type="button"
+                        class="scholarship-filter-button"
+                        data-category="postgraduate"
+                    >
+                        Postgraduate
+                    </button>
+                    <button
+                        type="button"
+                        class="scholarship-filter-button"
+                        data-category="nigerian"
+                    >
+                        Nigerian
+                    </button>
+                    <button
+                        type="button"
+                        class="scholarship-filter-button"
+                        data-category="international"
+                    >
+                        International
+                    </button>
+                </div>
+                <!-- DIRECTORY TOOLS -->
+                <div class="scholarship-directory-tools">
+                    <div class="scholarship-results">
+                        <span id="scholarship-count">
+                            0 scholarships
+                        </span>
+                    </div>
+                    <select
+                        id="scholarship-level-filter"
+                        aria-label="Filter by study level"
+                    >
+                        <option value="all">
+                            All Levels
+                        </option>
+                        <option value="undergraduate">
+                            Undergraduate
+                        </option>
+                        <option value="postgraduate">
+                            Postgraduate
+                        </option>
+                    </select>
+                    <select
+                        id="scholarship-status-filter"
+                        aria-label="Filter by scholarship status"
+                    >
+                        <option value="all">
+                            All Statuses
+                        </option>
+                        <option value="open">
+                            Open
+                        </option>
+                        <option value="closing-soon">
+                            Closing Soon
+                        </option>
+                        <option value="closed">
+                            Closed
+                        </option>
+                    </select>
+                </div>
+                <!-- SCHOLARSHIP RESULTS -->
+                <div
+                    class="scholarship-grid"
+                    id="scholarship-grid"
+                >
+                </div>
+                <!-- LOADING -->
+                <div
+                    class="scholarship-loading"
+                    id="scholarship-loading"
+                >
+                    <div class="loading-ring"></div>
+                </div>
+                <!-- EMPTY -->
+                <div
+                    class="scholarship-empty"
+                    id="scholarship-empty"
+                    hidden
+                >
+                    <div class="empty-icon">
+                        🔎
+                    </div>
+                    <h3>
+                        No scholarships found
+                    </h3>
+                    <p>
+                        Try changing your search or filters to
+                        find other scholarship opportunities.
+                    </p>
+                    <button
+                        type="button"
+                        id="clear-scholarship-filters"
+                    >
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             SCHOLARSHIP GUIDE
+        ================================================== -->
+        <section class="scholarship-guide-section">
+            <div class="scholarship-container">
+                <div class="section-heading">
+                    <span class="section-eyebrow">
+                        SCHOLARSHIP GUIDE
+                    </span>
+                    <h2>
+                        Apply with confidence.
+                    </h2>
+                    <p>
+                        Learn how to find opportunities, check your
+                        eligibility, and submit stronger scholarship
+                        applications.
+                    </p>
+                </div>
+                <div class="scholarship-guide-grid">
+                    <!-- FIND SCHOLARSHIPS -->
+                    <a
+                        href="scholarship-guide-find.html"
+                        class="guide-card"
+                    >
+                        <span class="guide-number">
+                            01
+                        </span>
+                        <span class="guide-icon">
+                            ⌕
+                        </span>
+                        <span class="guide-card-content">
+                            <strong>
+                                Find Scholarships
+                            </strong>
+                            <span>
+                                Discover where to find genuine
+                                scholarship opportunities and
+                                how to search effectively.
+                            </span>
+                        </span>
+                        <span class="guide-arrow">
+                            →
+                        </span>
+                    </a>
+                    <!-- CHECK ELIGIBILITY -->
+                    <a
+                        href="scholarship-guide-eligibility.html"
+                        class="guide-card"
+                    >
+                        <span class="guide-number">
+                            02
+                        </span>
+                        <span class="guide-icon">
+                            ✓
+                        </span>
+                        <span class="guide-card-content">
+                            <strong>
+                                Check Eligibility
+                            </strong>
+                            <span>
+                                Understand scholarship requirements
+                                and make sure an opportunity is
+                                suitable for you.
+                            </span>
+                        </span>
+                        <span class="guide-arrow">
+                            →
+                        </span>
+                    </a>
+                    <!-- APPLY CORRECTLY -->
+                    <a
+                        href="scholarship-guide-apply.html"
+                        class="guide-card"
+                    >
+                        <span class="guide-number">
+                            03
+                        </span>
+                        <span class="guide-icon">
+                            ↗
+                        </span>
+                        <span class="guide-card-content">
+                            <strong>
+                                Apply Correctly
+                            </strong>
+                            <span>
+                                Follow the right steps, prepare your
+                                documents, and avoid common
+                                application mistakes.
+                            </span>
+                        </span>
+                        <span class="guide-arrow">
+                            →
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             STUDENT RESOURCES
+        ================================================== -->
+        <section class="student-resources-section">
+            <div class="scholarship-container">
+                <div class="section-heading">
+                    <span class="section-eyebrow">
+                        MOLAS STUDENT RESOURCES
+                    </span>
+                    <h2>
+                        Keep learning.
+                    </h2>
+                </div>
+                <div class="student-resource-grid">
+                    <a
+                        href="jamb-resources.html"
+                        class="student-resource-card"
+                    >
+                        <span class="student-resource-icon">
+                            📚
+                        </span>
+                        <div>
+                            <strong>
+                                JAMB Resources
+                            </strong>
+                            <span>
+                                Study materials and preparation tools.
+                            </span>
+                        </div>
+                        <b>
+                            →
+                        </b>
+                    </a>
+                    <a
+                        href="waec.html"
+                        class="student-resource-card"
+                    >
+                        <span class="student-resource-icon">
+                            📝
+                        </span>
+                        <div>
+                            <strong>
+                                WAEC Resources
+                            </strong>
+                            <span>
+                                Resources for WAEC candidates.
+                            </span>
+                        </div>
+                        <b>
+                            →
+                        </b>
+                    </a>
+                    <a
+                        href="universities.html"
+                        class="student-resource-card"
+                    >
+                        <span class="student-resource-icon">
+                            🎓
+                        </span>
+                        <div>
+                            <strong>
+                                Universities
+                            </strong>
+                            <span>
+                                Explore Nigerian universities.
+                            </span>
+                        </div>
+                        <b>
+                            →
+                        </b>
+                    </a>
+                    <a
+                        href="admissions.html"
+                        class="student-resource-card"
+                    >
+                        <span class="student-resource-icon">
+                            📋
+                        </span>
+                        <div>
+                            <strong>
+                                Admissions
+                            </strong>
+                            <span>
+                                Admission updates and opportunities.
+                            </span>
+                        </div>
+                        <b>
+                            →
+                        </b>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             FINAL CTA
+        ================================================== -->
+        <section class="scholarship-final-cta">
+            <div class="final-cta-content">
+                <span class="section-eyebrow">
+                    MOLAS SCHOLARSHIP HUB
+                </span>
+                <h2>
+                    Your next opportunity could be here.
+                </h2>
+                <p>
+                    Explore the scholarship directory and find
+                    opportunities that match your academic journey.
+                </p>
+                <a
+                    href="#scholarships"
+                    class="final-cta-button"
+                >
+                    Explore Scholarships
+                </a>
+            </div>
+        </section>
+    </main>
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="scholarship-footer">
+        <div class="scholarship-footer-inner">
+            <div class="scholarship-footer-brand">
+                <div class="footer-brand-main">
+                    MOLAS
+                </div>
+                <p>
+                    Educational Consults & Global Limited
+                </p>
+                <p class="footer-brand-note">
+                    Helping students discover educational
+                    opportunities, resources and useful
+                    admission information.
+                </p>
+            </div>
+            <div class="scholarship-footer-column">
+                <h4>
+                    SCHOLARSHIPS
+                </h4>
+                <a href="#scholarships">
+                    Scholarship Directory
+                </a>
+                <a href="scholarship-guide-find.html">
+                    Find Scholarships
+                </a>
+                <a href="scholarship-guide-eligibility.html">
+                    Check Eligibility
+                </a>
+                <a href="scholarship-guide-apply.html">
+                    Apply Correctly
+                </a>
+            </div>
+            <div class="scholarship-footer-column">
+                <h4>
+                    MOLAS RESOURCES
+                </h4>
+                <a href="jamb-resources.html">
+                    JAMB
+                </a>
+                <a href="waec.html">
+                    WAEC
+                </a>
+                <a href="universities.html">
+                    Universities
+                </a>
+                <a href="admissions.html">
+                    Admissions
+                </a>
+            </div>
+            <div class="scholarship-footer-column">
+                <h4>
+                    MOLAS
+                </h4>
+                <a href="index.html">
+                    Home
+                </a>
+                <a href="universities.html">
+                    University Hub
+                </a>
+                <a href="admissions.html">
+                    Admission Updates
+                </a>
+            </div>
+            <div class="scholarship-footer-column">
+                <h4>
+                    QUICK LINKS
+                </h4>
+                <a href="#scholarships">
+                    Browse Scholarships
+                </a>
+                <a href="#scholarships">
+                    Search Opportunities
+                </a>
+                <a href="index.html">
+                    Back to MOLAS
+                </a>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="scholarship-footer-bottom">
+            <p>
+                © 2026 MOLAS Educational Consults & Global Limited.
+                All rights reserved.
+            </p>
+            <a href="index.html">
+                ← Back to MOLAS
+            </a>
+        </div>
+    </footer>
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script src="scholarships.js"></script>
+</body>
+</html>
