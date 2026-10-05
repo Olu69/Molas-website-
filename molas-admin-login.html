@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MOLAS Educational Consults & Global Limited admin login."
+    >
+
+    <title>MOLAS Admin | Login</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Admin Login CSS -->
+    <link
+        rel="stylesheet"
+        href="molas-admin-login.css"
+    >
+</head>
+
+<body class="molas-admin-login-page">
+
+    <main class="molas-admin-login">
+
+        <div class="molas-admin-login-card">
+
+            <div class="molas-admin-brand">
+                <img
+                    src="molas.png"
+                    alt="MOLAS Educational Consults & Global Limited"
+                >
+            </div>
+
+            <div class="molas-admin-heading">
+                <span class="molas-admin-label">
+                    MOLAS ADMIN
+                </span>
+
+                <h1>Welcome back.</h1>
+
+                <p>
+                    Sign in to manage conversations
+                    and respond to visitors.
+                </p>
+            </div>
+
+            <form
+                class="molas-admin-login-form"
+                id="molas-admin-login-form"
+            >
+
+                <div class="molas-admin-field">
+
+                    <label for="admin-email">
+                        Email Address
+                    </label>
+
+                    <div class="molas-admin-input-wrap">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="admin-email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="molas-admin-field">
+
+                    <label for="admin-password">
+                        Password
+                    </label>
+
+                    <div class="molas-admin-input-wrap">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="admin-password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="molas-admin-password-toggle"
+                            id="molas-admin-password-toggle"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="molas-admin-login-button"
+                    id="molas-admin-login-button"
+                >
+                    <span>Sign In</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <p
+                    class="molas-admin-login-error"
+                    id="molas-admin-login-error"
+                    role="alert"
+                ></p>
+
+            </form>
+
+            <div class="molas-admin-login-footer">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Authorized MOLAS administrators only</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Admin Login JS -->
+    <script src="molas-admin-login.js"></script>
+
+</body>
+
+</html>

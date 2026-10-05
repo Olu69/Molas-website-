@@ -403,13 +403,33 @@
         ====================================================== */
 
         const params =
-            new URLSearchParams(
-                window.location.search
-            );
+    new URLSearchParams(
+        window.location.search
+    );
 
+const articleId =
+    params.get("id");
 
-        const articleId =
-            params.get("id");
+let articleSlug =
+    params.get("slug");
+
+/* If there is no slug in the query string,
+   get it from the clean URL path. */
+if (!articleSlug) {
+
+    const pathParts =
+        window.location.pathname
+            .split("/")
+            .filter(Boolean);
+
+    if (
+        pathParts.length > 0 &&
+        !pathParts[pathParts.length - 1].includes(".html")
+    ) {
+        articleSlug =
+            pathParts[pathParts.length - 1];
+    }
+}            
 
 
         const container =
@@ -578,7 +598,8 @@
                         category,
                         image_url,
                         published_at,
-                        created_at
+                        created_at,
+                        slug
                     `)
 
                     .neq(
@@ -630,14 +651,10 @@
 
 
                         return `
-
-                            <a
-                                href="article.html?id=${encodeURIComponent(
-                                    article.id
-                                )}"
-                                class="related-card"
-                            >
-
+                        <a
+    href="/${encodeURIComponent(article.slug)}"
+    class="related-card"
+>
                                 <div
                                     class="related-image"
                                     style="${image}"
@@ -713,7 +730,7 @@
                NO ARTICLE ID
             ================================================== */
 
-            if (!articleId) {
+            if (!articleId && !articleSlug) {
 
                 container.innerHTML = `
 
@@ -751,35 +768,44 @@
                    GET ARTICLE
                 ================================================== */
 
-                const {
-                    data,
-                    error
-                } = await supabase
+                let endpoint = `${SUPABASE_URL}/rest/v1/news?select=id,created_at,title,content,excerpt,category,image_url,source,source_url,published_at,featured,breaking,status,slug&limit=1`;
 
-                    .from("news")
+if (articleSlug) {
+    endpoint += `&slug=eq.${encodeURIComponent(articleSlug)}`;
+} else if (articleId) {
+    endpoint += `&id=eq.${encodeURIComponent(articleId)}`;
+} else {
+    throw new Error("No article identifier provided");
+}
 
-                    .select(`
-                        id,
-                        created_at,
-                        title,
-                        content,
-                        excerpt,
-                        category,
-                        image_url,
-                        source,
-                        source_url,
-                        published_at,
-                        featured,
-                        breaking,
-                        status
-                    `)
+const response = await fetch(
+    endpoint,
+    {
+        method: "GET",
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Content-Type": "application/json"
+        }
+    }
+);
 
-                    .eq(
-                        "id",
-                        articleId
-                    )
+if (!response.ok) {
+    const errorText = await response.text();
 
-                    .single();
+    throw new Error(
+        `Supabase error ${response.status}: ${errorText}`
+    );
+}
+
+const records = await response.json();
+
+const data =
+    Array.isArray(records) && records.length > 0
+        ? records[0]
+        : null;
+
+const error = null;
+                    
 
 
 

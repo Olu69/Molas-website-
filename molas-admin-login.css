@@ -1,0 +1,580 @@
+/* =====================================================
+   MOLAS ADMIN LOGIN
+===================================================== */
+
+:root {
+    --navy: #101B4D;
+    --navy-dark: #0B143A;
+
+    --purple: #6E3FA3;
+    --purple-dark: #543080;
+    --purple-soft: #F3EEFA;
+
+    --cyan: #18BFFF;
+    --cyan-dark: #079DD8;
+    --cyan-soft: #EAF9FF;
+
+    --pale-blue: #F3FAFD;
+
+    --cream: #F3EFE7;
+    --cream-dark: #E9E1D4;
+
+    --charcoal: #172033;
+    --text: #273044;
+    --muted: #6F7788;
+    --light-text: #8A91A0;
+
+    --white: #FFFFFF;
+    --border: #E7E9EE;
+
+    --radius-medium: 18px;
+    --radius-large: 26px;
+    --radius-apple: 30px;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text);
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(110, 63, 163, 0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(24, 191, 255, 0.10),
+            transparent 30%
+        ),
+        var(--pale-blue);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.molas-admin-login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 24px;
+}
+
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.molas-admin-login-card {
+    width: 100%;
+    max-width: 470px;
+
+    padding: 46px 44px 38px;
+
+    background: var(--white);
+
+    border: 1px solid rgba(231, 233, 238, 0.9);
+
+    border-radius: var(--radius-apple);
+
+    box-shadow:
+        0 24px 70px rgba(16, 27, 77, 0.09),
+        0 6px 20px rgba(16, 27, 77, 0.04);
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.molas-admin-brand {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 34px;
+}
+
+.molas-admin-brand img {
+    display: block;
+
+    width: auto;
+    height: 62px;
+
+    max-width: 210px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.molas-admin-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.molas-admin-label {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: var(--purple);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.molas-admin-heading h1 {
+    margin-bottom: 10px;
+
+    color: var(--navy);
+
+    font-size: clamp(30px, 4vw, 38px);
+    font-weight: 800;
+
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+}
+
+.molas-admin-heading p {
+    max-width: 350px;
+
+    margin: 0 auto;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.molas-admin-login-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.molas-admin-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.molas-admin-field label {
+    color: var(--charcoal);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INPUT WRAPPER
+===================================================== */
+
+.molas-admin-input-wrap {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.molas-admin-input-wrap > i {
+    position: absolute;
+    left: 16px;
+
+    color: var(--light-text);
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+.molas-admin-input-wrap input {
+    width: 100%;
+    min-height: 52px;
+
+    padding: 0 48px 0 45px;
+
+    color: var(--charcoal);
+
+    background: #FBFCFE;
+
+    border: 1px solid var(--border);
+    border-radius: 15px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.molas-admin-input-wrap input::placeholder {
+    color: #A2A8B4;
+}
+
+.molas-admin-input-wrap input:focus {
+    background: var(--white);
+
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 4px rgba(110, 63, 163, 0.09);
+}
+
+
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
+
+.molas-admin-password-toggle {
+    position: absolute;
+    right: 12px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.molas-admin-password-toggle:hover {
+    background: var(--purple-soft);
+    color: var(--purple);
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+.molas-admin-login-button {
+    width: 100%;
+    min-height: 54px;
+
+    margin-top: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: 0;
+    border-radius: 15px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.molas-admin-login-button:hover {
+    background: var(--purple);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 25px rgba(110, 63, 163, 0.18);
+}
+
+.molas-admin-login-button:active {
+    transform: translateY(0);
+}
+
+.molas-admin-login-button i {
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.molas-admin-login-error {
+    min-height: 20px;
+
+    margin-top: -6px;
+
+    color: #B42318;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   SECURITY FOOTER
+===================================================== */
+
+.molas-admin-login-footer {
+    margin-top: 30px;
+    padding-top: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--light-text);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+.molas-admin-login-footer i {
+    color: var(--cyan-dark);
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .molas-admin-login-page {
+        padding: 30px 20px;
+    }
+
+    .molas-admin-login-card {
+        max-width: 500px;
+
+        padding: 40px 34px 34px;
+    }
+
+    .molas-admin-brand {
+        margin-bottom: 30px;
+    }
+
+    .molas-admin-brand img {
+        height: 58px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .molas-admin-login-page {
+        align-items: center;
+
+        padding: 24px 16px;
+    }
+
+    .molas-admin-login-card {
+        padding: 34px 24px 28px;
+
+        border-radius: 24px;
+    }
+
+    .molas-admin-brand {
+        margin-bottom: 26px;
+    }
+
+    .molas-admin-brand img {
+        height: 54px;
+        max-width: 190px;
+    }
+
+    .molas-admin-heading {
+        margin-bottom: 26px;
+    }
+
+    .molas-admin-heading h1 {
+        font-size: 30px;
+    }
+
+    .molas-admin-heading p {
+        font-size: 13px;
+    }
+
+    .molas-admin-login-form {
+        gap: 18px;
+    }
+
+    .molas-admin-input-wrap input {
+        min-height: 52px;
+        font-size: 16px;
+    }
+
+    .molas-admin-login-button {
+        min-height: 52px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .molas-admin-login-page {
+        padding: 18px 12px;
+    }
+
+    .molas-admin-login-card {
+        padding: 30px 20px 25px;
+
+        border-radius: 22px;
+    }
+
+    .molas-admin-brand img {
+        height: 48px;
+    }
+
+    .molas-admin-heading h1 {
+        font-size: 27px;
+    }
+
+    .molas-admin-heading p {
+        font-size: 12.5px;
+    }
+
+    .molas-admin-field label {
+        font-size: 12px;
+    }
+
+    .molas-admin-login-footer {
+        font-size: 10px;
+    }
+
+}
+
+
+/* =====================================================
+   LANDSCAPE PHONES
+===================================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .molas-admin-login-page {
+        padding: 20px;
+    }
+
+    .molas-admin-login-card {
+        padding: 28px 34px;
+    }
+
+    .molas-admin-brand {
+        margin-bottom: 18px;
+    }
+
+    .molas-admin-brand img {
+        height: 45px;
+    }
+
+    .molas-admin-heading {
+        margin-bottom: 18px;
+    }
+
+    .molas-admin-heading h1 {
+        font-size: 27px;
+    }
+
+    .molas-admin-heading p {
+        display: none;
+    }
+
+    .molas-admin-login-form {
+        gap: 14px;
+    }
+
+    .molas-admin-input-wrap input {
+        min-height: 46px;
+    }
+
+    .molas-admin-login-button {
+        min-height: 48px;
+    }
+
+    .molas-admin-login-footer {
+        margin-top: 18px;
+        padding-top: 14px;
+    }
+
+}

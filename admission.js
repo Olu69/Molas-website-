@@ -45,14 +45,47 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         
-const {
-    data,
-    error
-} = await supabase
-    .from("admission_alerts")
-    .select("*")
-    .eq("id", Number(admissionId))
-    .maybeSingle();
+let data = null;
+let error = null;
+
+try {
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/admission_alerts?select=*&id=eq.${encodeURIComponent(admissionId)}&limit=1`,
+        {
+            method: "GET",
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Content-Type": "application/json"
+            }
+        }
+    );
+
+    if (!response.ok) {
+
+        const errorText =
+            await response.text();
+
+        throw new Error(
+            `Supabase error ${response.status}: ${errorText}`
+        );
+
+    }
+
+    const records =
+        await response.json();
+
+    data =
+        Array.isArray(records) &&
+        records.length > 0
+            ? records[0]
+            : null;
+
+} catch (fetchError) {
+
+    error = fetchError;
+
+}
             
             
             

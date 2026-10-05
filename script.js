@@ -378,6 +378,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             "news-card";
         articleElement.dataset.newsId =
             article.id;
+            articleElement.dataset.newsSlug =
+    article.slug || "";
         const title =
             escapeHTML(article.title);
         const excerpt =
@@ -443,11 +445,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p>
                     ${excerpt}
                 </p>
-                <a
-                    href="article.html?id=${encodeURIComponent(article.id)}"
-                    class="read-more"
-                    data-news-id="${escapeHTML(article.id)}"
-                >
+              <a
+    href="/${encodeURIComponent(article.slug)}"
+    class="read-more"
+    data-news-id="${escapeHTML(article.id)}"
+>
                     Read More →
                 </a>
             </div>
@@ -530,7 +532,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     published_at,
                     featured,
                     breaking,
-                    status
+                    status,
+                    slug
                 `)
                 .order(
                     "published_at",
@@ -640,87 +643,90 @@ document.addEventListener("DOMContentLoaded", async () => {
         return card;
     }
     async function loadHomepageJambNews() {
-        if (
-            !supabase ||
-            !jambNewsGrid
-        ) {
-            return;
-        }
-        jambNewsGrid.innerHTML = `
-            <div class="jamb-news-loading">
-                Loading latest JAMB updates...
-            </div>
-        `;
-        try {
-            const {
-                data,
-                error
-            } = await supabase
-                .from("jamb_news")
-                .select(`
-                    id,
-                    created_at,
-                    title,
-                    excerpt,
-                    content,
-                    image_url,
-                    source,
-                    source_url,
-                    published_at,
-                    featured,
-                    breaking,
-                    status
-                `)
-                .order(
-                    "published_at",
-                    {
-                        ascending: false,
-                        nullsFirst: false
+
+    if (!jambNewsGrid) {
+        return;
+    }
+
+    jambNewsGrid.innerHTML = `
+        <div class="jamb-news-loading">
+            Loading latest JAMB updates...
+        </div>
+    `;
+
+    try {
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/jamb_news?select=*&order=published_at.desc&limit=3`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Content-Type": "application/json"
                     }
-                )
-                .limit(3);
-            if (error) {
-                throw error;
-            }
-            const jambNews =
-                (data || [])
-                .filter(article => {
-                    const status =
-                        String(
-                            article.status || ""
-                        ).toLowerCase();
-                    return (
-                        !status ||
-                        status === "published"
-                    );
-                });
-            if (!jambNews.length) {
-                jambNewsGrid.innerHTML = `
-                    <div class="jamb-news-loading">
-                        No JAMB updates available yet.
-                    </div>
-                `;
-                return;
-            }
-            jambNewsGrid.innerHTML = "";
-            jambNews.forEach(article => {
-                jambNewsGrid.appendChild(
-                    createJambNewsCard(article)
-                );
-            });
-            setupRevealAnimations();
-        } catch (error) {
-            console.error(
-                "MOLAS HOMEPAGE JAMB NEWS ERROR:",
-                error
+                }
             );
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                `Supabase error ${response.status}: ${errorText}`
+            );
+        }
+
+        const data =
+            await response.json();
+
+        console.log(
+            "MOLAS HOMEPAGE JAMB NEWS:",
+            data
+        );
+
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
+
             jambNewsGrid.innerHTML = `
                 <div class="jamb-news-loading">
-                    Unable to load JAMB updates right now.
+                    No JAMB updates available yet.
                 </div>
             `;
+
+            return;
         }
+
+        jambNewsGrid.innerHTML = "";
+
+        data.forEach(article => {
+
+            jambNewsGrid.appendChild(
+                createJambNewsCard(article)
+            );
+
+        });
+
+        setupRevealAnimations();
+
+    } catch (error) {
+
+        console.error(
+            "MOLAS HOMEPAGE JAMB NEWS ERROR:",
+            error
+        );
+
+        jambNewsGrid.innerHTML = `
+            <div class="jamb-news-loading">
+                Unable to load JAMB updates right now.
+            </div>
+        `;
     }
+}
     /* =====================================================
        BREAKING NEWS
     ===================================================== */
@@ -760,103 +766,112 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(
             "#admission-alerts-list"
         );
+        function createAdmissionAlertCard(alert) {
+
+    const card = document.createElement("article");
+
+    card.className = "admission-alert-card";
+
+    const title = escapeHTML(
+        alert.title || "Admission Alert"
+    );
+
+    card.innerHTML = `
+        <a
+            href="admission.html?id=${encodeURIComponent(alert.id)}"
+            class="admission-alert-link"
+        >
+            ${title}
+        </a>
+    `;
+
+    return card;
+}
     async function loadAdmissionAlerts() {
-        if (
-            !supabase ||
-            !admissionAlertsList
-        ) {
-            return;
-        }
-        admissionAlertsList.innerHTML = `
-            <div class="news-loading">
-                Loading admission alerts...
-            </div>
-        `;
-        try {
-            const {
-                data,
-                error
-            } = await supabase
-                .from("admission_alerts")
-                .select(`
-                    id,
-                    title,
-                    university,
-                    admission_type,
-                    status,
-                    deadline,
-                    excerpt,
-                    image_url,
-                    source,
-                    source_url,
-                    published_at,
-                    featured
-                `)
-                .order(
-                    "published_at",
-                    {
-                        ascending: false,
-                        nullsFirst: false
+
+    if (!admissionAlertsList) {
+        return;
+    }
+
+    admissionAlertsList.innerHTML = `
+        <div class="admission-alerts-loading">
+            Loading admission alerts...
+        </div>
+    `;
+
+    try {
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/admission_alerts?select=*&order=published_at.desc&limit=2`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Content-Type": "application/json"
                     }
-                )
-                .limit(2);
-            if (error) {
-                throw error;
-            }
-            if (
-                !data ||
-                !data.length
-            ) {
-                admissionAlertsList.innerHTML = `
-                    <div class="news-loading">
-                        No admission alerts available.
-                    </div>
-                `;
-                return;
-            }
-            admissionAlertsList.innerHTML = "";
-            data.forEach(
-                (alert, index) => {
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-                    item.className =
-                        "admission-alert-item";
-                    item.innerHTML = `
-                        <a
-                            href="admission.html?id=${encodeURIComponent(alert.id)}"
-                            class="admission-alert-link"
-                        >
-                            <span class="alert-number">
-                                ${index + 1}.
-                            </span>
-                            <span class="alert-info">
-                                <strong>
-                                    ${escapeHTML(
-                                        alert.title
-                                    )}
-                                </strong>
-                            </span>
-                        </a>
-                    `;
-                    admissionAlertsList.appendChild(
-                        item
-                    );
                 }
             );
-        } catch (error) {
-            console.error(
-                "MOLAS ADMISSION ALERT ERROR:",
-                error
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                `Supabase error ${response.status}: ${errorText}`
             );
+        }
+
+        const data =
+            await response.json();
+
+        console.log(
+            "MOLAS HOMEPAGE ADMISSION ALERTS:",
+            data
+        );
+
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
+
             admissionAlertsList.innerHTML = `
-                <div class="news-error">
-                    Unable to load admission alerts.
+                <div class="admission-alerts-loading">
+                    No admission alerts available yet.
                 </div>
             `;
+
+            return;
         }
-    }
+
+        admissionAlertsList.innerHTML = "";
+
+        data.forEach(alert => {
+
+            admissionAlertsList.appendChild(
+                createAdmissionAlertCard(alert)
+            );
+
+        });
+
+        setupRevealAnimations();
+
+    } catch (error) {
+
+    console.error(
+        "MOLAS ADMISSION ALERTS ERROR:",
+        error
+    );
+
+    admissionAlertsList.innerHTML = `
+        <div class="admission-alerts-loading">
+            ${escapeHTML(error.message || "Unknown error")}
+        </div>
+    `;
+}
+}
     /* =====================================================
        ADMISSION STATUS
     ===================================================== */
@@ -865,81 +880,106 @@ document.addEventListener("DOMContentLoaded", async () => {
             ".status-box"
         );
     async function loadAdmissionStatus() {
-        if (
-            !supabase ||
-            !admissionStatusBox
-        ) {
-            return;
-        }
-        try {
-            const {
-                data,
-                error
-            } = await supabase
-                .from("admission_status")
-                .select(`
-                    id,
-                    ongoing_text,
-                    lists_text,
-                    deadline_text,
-                    updated_at
-                `)
-                .order(
-                    "updated_at",
-                    {
-                        ascending: false
+
+    const admissionStatusBox =
+        document.querySelector(".status-box");
+
+    if (!admissionStatusBox) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/admission_status?select=id,ongoing_text,lists_text,deadline_text,updated_at&order=updated_at.desc&limit=1`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Content-Type": "application/json"
                     }
-                )
-                .limit(1)
-                .maybeSingle();
-            if (error) {
-                admissionStatusBox.innerHTML = `
-                    <div style="
-                        padding:20px;
-                        font-size:13px;
-                        color:#111;
-                    ">
-                        Supabase error:<br>
-                        ${escapeHTML(error.message)}
-                    </div>
-                `;
-                return;
-            }
-            if (!data) {
-                admissionStatusBox.innerHTML = `
-                    <div style="
-                        padding:20px;
-                        font-size:13px;
-                        color:#111;
-                    ">
-                        No admission status record found.
-                    </div>
-                `;
-                return;
-            }
-            const statusTexts =
-                admissionStatusBox.querySelectorAll(
-                    ".status-text"
-                );
-            if (statusTexts[0]) {
-                statusTexts[0].textContent =
-                    data.ongoing_text || "";
-            }
-            if (statusTexts[1]) {
-                statusTexts[1].textContent =
-                    data.lists_text || "";
-            }
-            if (statusTexts[2]) {
-                statusTexts[2].textContent =
-                    data.deadline_text || "";
-            }
-        } catch (error) {
-            console.error(
-                "MOLAS ADMISSION STATUS ERROR:",
-                error
+                }
+            );
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                `Supabase error ${response.status}: ${errorText}`
             );
         }
+
+        const data =
+            await response.json();
+
+        console.log(
+            "MOLAS ADMISSION STATUS:",
+            data
+        );
+
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
+
+            admissionStatusBox.innerHTML = `
+                <div style="
+                    padding:20px;
+                    font-size:13px;
+                    color:#111;
+                ">
+                    No admission status record found.
+                </div>
+            `;
+
+            return;
+        }
+
+        const status =
+            data[0];
+
+        const statusTexts =
+            admissionStatusBox.querySelectorAll(
+                ".status-text"
+            );
+
+        if (statusTexts[0]) {
+            statusTexts[0].textContent =
+                status.ongoing_text || "";
+        }
+
+        if (statusTexts[1]) {
+            statusTexts[1].textContent =
+                status.lists_text || "";
+        }
+
+        if (statusTexts[2]) {
+            statusTexts[2].textContent =
+                status.deadline_text || "";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "MOLAS ADMISSION STATUS ERROR:",
+            error
+        );
+
+        admissionStatusBox.innerHTML = `
+            <div style="
+                padding:20px;
+                font-size:13px;
+                color:#111;
+            ">
+                Unable to load admission status right now.
+            </div>
+        `;
     }
+}
     /* =====================================================
        REVEAL ANIMATIONS
     ===================================================== */
@@ -1643,13 +1683,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!card) {
                 return;
             }
-            const id =
-                card.dataset.newsId;
-            if (!id) {
-                return;
-            }
-            window.location.href =
-                `article.html?id=${encodeURIComponent(id)}`;
+            const slug =
+    card.dataset.newsSlug;
+
+if (!slug) {
+    return;
+}
+
+window.location.href =
+    `/${encodeURIComponent(slug)}`;
         }
     );
     /* =====================================================
@@ -3314,15 +3356,11 @@ document.addEventListener(
 );
   
 
-
-
-
   
 
    
 
    
-
 
   
 

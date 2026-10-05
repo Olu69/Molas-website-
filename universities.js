@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!universityGrid) return;
 
 
-    const UNIVERSITIES_PER_LOAD = 3;
+    const UNIVERSITIES_PER_LOAD = 4;
 
 
     let universities = [];

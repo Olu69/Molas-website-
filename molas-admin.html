@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MOLAS Educational Consults & Global Limited admin dashboard."
+    >
+
+    <title>MOLAS Admin | Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Admin Dashboard CSS -->
+    <link
+        rel="stylesheet"
+        href="molas-admin.css"
+    >
+</head>
+
+<body class="molas-admin-page">
+
+    <!-- =================================================
+         ADMIN HEADER
+    ================================================== -->
+
+    <header class="molas-admin-header">
+
+        <div class="molas-admin-header-inner">
+
+            <a
+                href="index.html"
+                class="molas-admin-brand"
+                aria-label="MOLAS"
+            >
+                <img
+                    src="molas.png"
+                    alt="MOLAS Educational Consults & Global Limited"
+                >
+            </a>
+
+            <div class="molas-admin-header-right">
+
+                <div class="molas-admin-user">
+
+                    <div class="molas-admin-user-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+
+                    <div class="molas-admin-user-info">
+                        <span>Administrator</span>
+
+                        <small id="molas-admin-user-email">
+                            Admin
+                        </small>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="molas-admin-logout"
+                    id="molas-admin-logout"
+                    aria-label="Sign out"
+                >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         MAIN DASHBOARD
+    ================================================== -->
+
+    <main class="molas-admin-main">
+
+        <div class="molas-admin-container">
+
+            <!-- PAGE HEADING -->
+
+            <div class="molas-admin-page-heading">
+
+                <div>
+
+                    <span class="molas-admin-label">
+                        MOLAS ADMIN
+                    </span>
+
+                    <h1>Conversations</h1>
+
+                    <p>
+                        Manage and respond to conversations
+                        from MOLAS visitors.
+                    </p>
+
+                </div>
+
+                <div class="molas-admin-heading-status">
+
+                    <span class="molas-admin-online-dot"></span>
+
+                    <span>Live</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DASHBOARD CONTENT
+            ================================================== -->
+
+            <section class="molas-admin-chat-layout">
+
+
+                <!-- =================================================
+                     CONVERSATION LIST
+                ================================================== -->
+
+                <aside class="molas-admin-conversations">
+
+                    <div class="molas-admin-conversations-header">
+
+                        <div>
+
+                            <h2>Conversations</h2>
+
+                            <span id="molas-conversation-count">
+                                0 conversations
+                            </span>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="molas-admin-refresh"
+                            id="molas-admin-refresh"
+                            aria-label="Refresh conversations"
+                        >
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+
+                    </div>
+
+
+                    <!-- Conversation search -->
+
+                    <div class="molas-admin-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="molas-conversation-search"
+                            placeholder="Search conversations..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- Conversation list -->
+
+                    <div
+                        class="molas-admin-conversation-list"
+                        id="molas-admin-conversation-list"
+                    >
+
+                        <div class="molas-admin-list-empty">
+
+                            <i class="fa-regular fa-comments"></i>
+
+                            <h3>No conversations yet</h3>
+
+                            <p>
+                                New visitor conversations
+                                will appear here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- =================================================
+                     CHAT PANEL
+                ================================================== -->
+
+                <section class="molas-admin-chat-panel">
+
+
+                    <!-- Chat empty state -->
+
+                    <div
+                        class="molas-admin-chat-empty"
+                        id="molas-admin-chat-empty"
+                    >
+
+                        <div class="molas-admin-chat-empty-icon">
+                            <i class="fa-regular fa-comments"></i>
+                        </div>
+
+                        <h2>Select a conversation</h2>
+
+                        <p>
+                            Choose a conversation from the list
+                            to view messages and reply.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Actual conversation -->
+
+                    <div
+                        class="molas-admin-active-chat"
+                        id="molas-admin-active-chat"
+                        hidden
+                    >
+
+                        <!-- Chat header -->
+
+                        <div class="molas-admin-chat-header">
+
+                            <!-- Back to conversations -->
+
+                            <button
+                                type="button"
+                                class="molas-admin-back-to-conversations"
+                                id="molas-admin-back-to-conversations"
+                                aria-label="Back to conversations"
+                            >
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Conversations</span>
+                            </button>
+
+
+                            <div class="molas-admin-chat-visitor">
+
+                                <div
+                                    class="molas-admin-visitor-avatar"
+                                    id="molas-admin-visitor-avatar"
+                                >
+                                    V
+                                </div>
+
+                                <div>
+
+                                    <h2 id="molas-admin-chat-name">
+                                        Visitor
+                                    </h2>
+
+                                    <div class="molas-admin-chat-meta">
+
+                                        <span id="molas-admin-chat-email">
+                                            Email
+                                        </span>
+
+                                        <span class="molas-admin-meta-divider">
+                                            •
+                                        </span>
+
+                                        <span id="molas-admin-chat-topic">
+                                            Topic
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="molas-admin-chat-actions">
+
+                                <span
+                                    class="molas-admin-chat-status"
+                                    id="molas-admin-chat-status"
+                                >
+                                    Open
+                                </span>
+
+                                <button
+                                    type="button"
+                                    class="molas-admin-close-conversation"
+                                    id="molas-admin-close-conversation"
+                                >
+                                    <i class="fa-solid fa-check"></i>
+                                    Close
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Messages -->
+
+                        <div
+                            class="molas-admin-messages"
+                            id="molas-admin-messages"
+                            aria-live="polite"
+                        >
+                        </div>
+
+
+                        <!-- Reply -->
+
+                        <form
+                            class="molas-admin-reply-form"
+                            id="molas-admin-reply-form"
+                        >
+
+                            <div class="molas-admin-reply-input">
+
+                                <input
+                                    type="text"
+                                    id="molas-admin-reply-message"
+                                    name="message"
+                                    placeholder="Write a reply..."
+                                    autocomplete="off"
+                                    required
+                                >
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                id="molas-admin-send-message"
+                                aria-label="Send reply"
+                            >
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =================================================
+         NEW MESSAGE NOTIFICATION
+    ================================================== -->
+
+    <div
+        class="molas-admin-message-notification"
+        id="adminMessageNotification"
+        aria-hidden="true"
+    >
+
+        <div class="molas-admin-notification-icon">
+            <i class="fa-solid fa-comments"></i>
+        </div>
+
+        <div class="molas-admin-notification-content">
+
+            <strong>New message</strong>
+
+            <span id="adminMessageNotificationText">
+                You have a new visitor message.
+            </span>
+
+        </div>
+
+        <button
+            type="button"
+            id="adminMessageNotificationClose"
+            aria-label="Close notification"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         SUPABASE
+    ================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Admin Dashboard JS -->
+    <script src="molas-admin.js"></script>
+
+</body>
+
+</html>

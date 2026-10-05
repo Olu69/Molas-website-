@@ -1,0 +1,1789 @@
+/* =====================================================
+   TALK TO MOLAS
+   PAGE STYLES
+====================================================== */
+
+:root {
+    --navy: #101B4D;
+    --navy-dark: #0B143A;
+
+    --purple: #6E3FA3;
+    --purple-dark: #543080;
+    --purple-soft: #F3EEFA;
+
+    --cyan: #18BFFF;
+    --cyan-dark: #079DD8;
+    --cyan-soft: #EAF9FF;
+
+    --pale-blue: #F3FAFD;
+
+    --cream: #F3EFE7;
+    --cream-dark: #E9E1D4;
+
+    --charcoal: #172033;
+    --text: #273044;
+    --muted: #6F7788;
+    --light-text: #8A91A0;
+
+    --white: #FFFFFF;
+    --border: #E7E9EE;
+
+    --brown: #756052;
+    --breaking: #C97942;
+
+    --container: 1180px;
+
+    --page-padding: 28px;
+
+    --radius-small: 12px;
+    --radius-medium: 18px;
+    --radius-large: 26px;
+    --radius-apple: 30px;
+}
+
+
+/* =====================================================
+   RESET
+====================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+body.talk-page {
+    overflow-x: hidden;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   CONTAINER
+====================================================== */
+
+.talk-container {
+    width: min(
+        calc(100% - (var(--page-padding) * 2)),
+        var(--container)
+    );
+
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADER
+====================================================== */
+
+.talk-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(231, 233, 238, 0.8);
+}
+
+.talk-header-inner {
+    width: min(
+        calc(100% - 56px),
+        1320px
+    );
+
+    min-height: 82px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   LOGO
+====================================================== */
+
+.talk-brand {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.talk-brand img {
+    display: block;
+
+    width: auto;
+    height: 54px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   DESKTOP NAV
+====================================================== */
+
+.talk-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 27px;
+}
+
+.talk-nav > a,
+.talk-nav-dropdown > button {
+    border: none;
+    background: transparent;
+
+    color: var(--charcoal);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.talk-nav > a:hover,
+.talk-nav-dropdown > button:hover {
+    color: var(--purple);
+}
+
+
+/* =====================================================
+   NAV DROPDOWNS
+====================================================== */
+
+.talk-nav-dropdown {
+    position: relative;
+}
+
+.talk-nav-dropdown > button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.talk-nav-dropdown > button i {
+    font-size: 10px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.talk-dropdown-menu {
+    position: absolute;
+
+    top: calc(100% + 16px);
+    left: 50%;
+
+    min-width: 205px;
+
+    padding: 10px;
+
+    transform:
+        translateX(-50%)
+        translateY(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 18px 45px rgba(16, 27, 77, 0.12);
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+}
+
+.talk-nav-dropdown:hover .talk-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+.talk-dropdown-menu a {
+    display: block;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.talk-dropdown-menu a:hover {
+    color: var(--purple);
+    background: var(--purple-soft);
+}
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+====================================================== */
+
+.talk-mobile-menu-btn {
+    display: none;
+
+    width: 44px;
+    height: 44px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--purple-soft);
+    color: var(--purple);
+
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   HERO
+====================================================== */
+
+.talk-hero {
+    padding: 100px 0 85px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pale-blue) 0%,
+            var(--white) 55%,
+            var(--purple-soft) 100%
+        );
+}
+
+.talk-hero .talk-container {
+    text-align: center;
+}
+
+.talk-section-label {
+    display: inline-block;
+
+    color: var(--purple);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.talk-hero h1 {
+    margin-top: 13px;
+
+    color: var(--navy);
+
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.08;
+
+    letter-spacing: -0.04em;
+}
+
+.talk-hero p {
+    max-width: 670px;
+
+    margin: 22px auto 0;
+
+    color: var(--muted);
+
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   CONTACT SECTION
+====================================================== */
+
+.talk-contact-section {
+    padding: 80px 0;
+}
+
+.talk-contact-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   CONTACT CARDS
+====================================================== */
+
+.talk-contact-card {
+    min-height: 320px;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    text-align: left;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-large);
+
+    box-shadow:
+        0 10px 35px rgba(16, 27, 77, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+a.talk-contact-card:hover,
+button.talk-contact-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(110, 63, 163, 0.25);
+
+    box-shadow:
+        0 18px 45px rgba(16, 27, 77, 0.1);
+}
+
+button.talk-contact-card {
+    width: 100%;
+
+    font: inherit;
+    color: inherit;
+}
+
+
+/* =====================================================
+   CONTACT ICON
+====================================================== */
+
+.talk-contact-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    border-radius: 16px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 21px;
+}
+
+.talk-contact-label {
+    color: var(--purple);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.talk-contact-card h2 {
+    margin-top: 8px;
+
+    color: var(--navy);
+
+    font-size: 25px;
+    line-height: 1.25;
+}
+
+.talk-contact-card p {
+    margin-top: 13px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.talk-contact-link {
+    margin-top: auto;
+    padding-top: 22px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--purple);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.talk-contact-link i {
+    font-size: 11px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.talk-contact-card:hover .talk-contact-link i {
+    transform: translateX(4px);
+}
+
+
+/* =====================================================
+   HELP SECTION
+====================================================== */
+
+.talk-help-section {
+    padding: 85px 0 100px;
+
+    background: var(--pale-blue);
+}
+
+.talk-help-heading {
+    text-align: center;
+}
+
+.talk-help-heading h2 {
+    margin-top: 10px;
+
+    color: var(--navy);
+
+    font-size: clamp(30px, 4vw, 45px);
+
+    line-height: 1.15;
+}
+
+.talk-help-heading p {
+    max-width: 590px;
+
+    margin: 14px auto 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+}
+
+.talk-help-grid {
+    max-width: 1000px;
+
+    margin: 38px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.talk-help-topic {
+    min-height: 92px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    background: var(--white);
+
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.talk-help-topic i {
+    color: var(--purple);
+
+    font-size: 19px;
+}
+
+.talk-help-topic:hover {
+    transform: translateY(-3px);
+
+    color: var(--purple);
+
+    border-color: rgba(110, 63, 163, 0.3);
+
+    box-shadow:
+        0 10px 25px rgba(16, 27, 77, 0.07);
+}
+
+
+/* =====================================================
+   START CHAT OVERLAY
+====================================================== */
+
+.molas-chat-start-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    padding: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(11, 20, 58, 0.55);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.molas-chat-start-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =====================================================
+   START CHAT WINDOW
+====================================================== */
+
+.molas-chat-start-window {
+    position: relative;
+
+    width: min(100%, 500px);
+
+    max-height: calc(100vh - 48px);
+
+    overflow-y: auto;
+
+    padding: 34px;
+
+    background: var(--white);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 30px 80px rgba(11, 20, 58, 0.25);
+
+    transform: translateY(15px);
+
+    transition:
+        transform 0.25s ease;
+}
+
+.molas-chat-start-overlay.active
+.molas-chat-start-window {
+    transform: translateY(0);
+}
+
+.molas-chat-start-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--pale-blue);
+
+    color: var(--muted);
+
+    font-size: 15px;
+}
+
+.molas-chat-start-close:hover {
+    color: var(--purple);
+    background: var(--purple-soft);
+}
+
+
+/* =====================================================
+   START CHAT ICON
+====================================================== */
+
+.molas-chat-start-icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 17px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 22px;
+}
+
+.molas-chat-start-label {
+    color: var(--purple);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.molas-chat-start-window h2 {
+    margin-top: 8px;
+
+    color: var(--navy);
+
+    font-size: 29px;
+    line-height: 1.2;
+}
+
+.molas-chat-start-window > p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   START CHAT FORM
+====================================================== */
+
+.molas-chat-start-form {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.molas-chat-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.molas-chat-field label {
+    color: var(--charcoal);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.molas-chat-field input,
+.molas-chat-field select {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 11px 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background: var(--white);
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.molas-chat-field input:focus,
+.molas-chat-field select:focus {
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 3px rgba(110, 63, 163, 0.1);
+}
+
+.molas-chat-field input::placeholder {
+    color: var(--light-text);
+}
+
+
+/* =====================================================
+   START CHAT BUTTON
+====================================================== */
+
+#molas-chat-start-submit {
+    width: 100%;
+
+    min-height: 50px;
+
+    margin-top: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: var(--purple);
+
+    color: var(--white);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#molas-chat-start-submit:hover {
+    background: var(--purple-dark);
+
+    transform: translateY(-1px);
+}
+
+#molas-chat-start-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   START CHAT ERROR
+====================================================== */
+
+.molas-chat-start-error {
+    min-height: 18px;
+
+    color: #B42318;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   LIVE CHAT
+====================================================== */
+
+.molas-live-chat {
+    position: fixed;
+
+    right: 28px;
+    bottom: 28px;
+
+    z-index: 2500;
+
+    width: min(
+        calc(100vw - 40px),
+        430px
+    );
+
+    height: min(
+        680px,
+        calc(100vh - 56px)
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 70px rgba(11, 20, 58, 0.22);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(20px)
+        scale(0.98);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+}
+
+.molas-live-chat.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   LIVE CHAT HEADER
+====================================================== */
+
+.molas-chat-header {
+    min-height: 76px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: var(--navy);
+
+    color: var(--white);
+}
+
+.molas-chat-header-info {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.molas-chat-avatar {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--cyan);
+
+    color: var(--navy);
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.molas-chat-header h2 {
+    color: var(--white);
+
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+#molas-chat-status {
+    display: block;
+
+    margin-top: 2px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 11px;
+}
+
+.molas-chat-close-button {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: var(--white);
+
+    font-size: 15px;
+}
+
+.molas-chat-close-button:hover {
+    background: rgba(255, 255, 255, 0.17);
+}
+
+
+/* =====================================================
+   CHAT MESSAGES
+====================================================== */
+
+.molas-chat-messages {
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    background: #f7f9fc;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* =====================================================
+   MOLAS / ADMIN MESSAGE
+   ALWAYS LEFT
+====================================================== */
+
+.molas-chat-message-admin {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+.molas-chat-message-admin
+.molas-chat-message-bubble {
+    max-width: 78%;
+
+    padding: 11px 14px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius:
+        16px
+        16px
+        16px
+        5px;
+
+    color: var(--text);
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    word-break: break-word;
+
+    box-shadow:
+        0 2px 8px rgba(16, 27, 77, 0.03);
+}
+
+
+/* =====================================================
+   VISITOR MESSAGE
+   ALWAYS RIGHT
+====================================================== */
+
+.molas-chat-message-visitor {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+}
+
+.molas-chat-message-visitor
+.molas-chat-message-bubble {
+    max-width: 78%;
+
+    padding: 11px 14px;
+
+    background: var(--purple);
+
+    border-radius:
+        16px
+        16px
+        5px
+        16px;
+
+    color: var(--white);
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    word-break: break-word;
+
+    box-shadow:
+        0 2px 8px rgba(110, 63, 163, 0.12);
+}
+
+
+/* =====================================================
+   MESSAGE FORM
+====================================================== */
+
+.molas-chat-message-form {
+    min-height: 70px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    background: var(--white);
+
+    border-top: 1px solid var(--border);
+}
+
+.molas-chat-message-form input {
+    min-width: 0;
+    flex: 1;
+
+    min-height: 46px;
+
+    padding: 10px 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background: var(--pale-blue);
+
+    color: var(--text);
+
+    font-size: 16px;
+}
+
+.molas-chat-message-form input:focus {
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 3px rgba(110, 63, 163, 0.08);
+}
+
+.molas-chat-message-form button {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 13px;
+
+    background: var(--purple);
+
+    color: var(--white);
+
+    font-size: 15px;
+}
+
+.molas-chat-message-form button:hover {
+    background: var(--purple-dark);
+}
+
+.molas-chat-message-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   FOOTER
+====================================================== */
+
+.talk-footer {
+    padding: 70px 0 0;
+
+    background: var(--navy);
+
+    color: var(--white);
+}
+
+.talk-footer-inner {
+    width: min(
+        calc(100% - 56px),
+        var(--container)
+    );
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 50px;
+
+    padding-bottom: 55px;
+}
+
+.talk-footer-brand h2 {
+    color: var(--white);
+
+    font-size: 27px;
+    letter-spacing: 0.04em;
+}
+
+.talk-footer-brand p {
+    margin-top: 5px;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 13px;
+}
+
+.talk-footer-brand span {
+    display: block;
+
+    max-width: 300px;
+
+    margin-top: 15px;
+
+    color: rgba(255, 255, 255, 0.6);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.talk-footer-column {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.talk-footer-column h3 {
+    margin-bottom: 5px;
+
+    color: var(--cyan);
+
+    font-size: 13px;
+}
+
+.talk-footer-column a {
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 13px;
+
+    transition:
+        color 0.2s ease;
+}
+
+.talk-footer-column a:hover {
+    color: var(--white);
+}
+
+.talk-footer-bottom {
+    padding: 20px 28px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    text-align: center;
+}
+
+.talk-footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   TABLET
+====================================================== */
+
+@media (max-width: 1050px) {
+
+    .talk-header-inner {
+        width: min(
+            calc(100% - 40px),
+            1320px
+        );
+    }
+
+    .talk-nav {
+        gap: 17px;
+    }
+
+    .talk-nav > a,
+    .talk-nav-dropdown > button {
+        font-size: 13px;
+    }
+
+    .talk-contact-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .talk-help-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .talk-footer-inner {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =====================================================
+   MOBILE NAV
+====================================================== */
+
+@media (max-width: 760px) {
+
+    .talk-header-inner {
+        min-height: 72px;
+
+        width: calc(100% - 32px);
+    }
+
+    .talk-brand img {
+        height: 48px;
+    }
+
+    .talk-mobile-menu-btn {
+        display: flex;
+    }
+
+    .talk-nav {
+        position: absolute;
+
+        top: 72px;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+
+        max-height: calc(100vh - 72px);
+
+        overflow-y: auto;
+
+        padding: 16px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 4px;
+
+        background: var(--white);
+
+        border-top: 1px solid var(--border);
+
+        box-shadow:
+            0 18px 35px rgba(16, 27, 77, 0.1);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .talk-nav.active {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0);
+    }
+
+    .talk-nav > a,
+    .talk-nav-dropdown > button {
+        width: 100%;
+
+        min-height: 48px;
+
+        padding: 11px 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border-radius: 10px;
+
+        font-size: 15px;
+
+        text-align: left;
+    }
+
+    .talk-nav > a:hover,
+    .talk-nav-dropdown > button:hover {
+        background: var(--purple-soft);
+    }
+
+    .talk-nav-dropdown {
+        width: 100%;
+    }
+
+    .talk-dropdown-menu {
+        position: static;
+
+        width: 100%;
+        min-width: 0;
+
+        margin: 0;
+
+        padding: 4px 0 4px 15px;
+
+        display: none;
+
+        transform: none;
+
+        opacity: 1;
+        visibility: visible;
+
+        border: none;
+
+        border-radius: 0;
+
+        box-shadow: none;
+
+        background: transparent;
+    }
+
+    .talk-nav-dropdown.open .talk-dropdown-menu {
+        display: block;
+    }
+
+    .talk-nav-dropdown.open > button i {
+        transform: rotate(180deg);
+    }
+
+    .talk-dropdown-menu a {
+        padding: 10px 12px;
+
+        font-size: 14px;
+    }
+
+    .talk-hero {
+        padding: 75px 0 65px;
+    }
+
+    .talk-hero h1 {
+        font-size: 46px;
+    }
+
+    .talk-hero p {
+        max-width: 580px;
+
+        font-size: 15px;
+    }
+
+    .talk-contact-section {
+        padding: 60px 0;
+    }
+
+    .talk-contact-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .talk-contact-card {
+        min-height: 290px;
+
+        padding: 26px;
+    }
+
+    .talk-help-section {
+        padding: 65px 0 75px;
+    }
+
+    .talk-help-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .molas-live-chat {
+        right: 16px;
+        bottom: 16px;
+
+        width: calc(100vw - 32px);
+
+        height: calc(100vh - 32px);
+
+        max-height: none;
+
+        border-radius: 20px;
+    }
+
+    .molas-chat-messages {
+        padding: 16px;
+    }
+
+    .molas-chat-message-admin
+    .molas-chat-message-bubble,
+    .molas-chat-message-visitor
+    .molas-chat-message-bubble {
+        max-width: 84%;
+
+        font-size: 14px;
+    }
+
+    .talk-footer {
+        padding-top: 55px;
+    }
+
+    .talk-footer-inner {
+        width: calc(100% - 40px);
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        padding-bottom: 40px;
+    }
+
+    .talk-footer-bottom {
+        padding: 18px 20px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONE
+====================================================== */
+
+@media (max-width: 480px) {
+
+    .talk-header-inner {
+        width: calc(100% - 24px);
+    }
+
+    .talk-brand img {
+        height: 44px;
+    }
+
+    .talk-hero {
+        padding: 60px 0 55px;
+    }
+
+    .talk-container {
+        width: calc(100% - 32px);
+    }
+
+    .talk-hero h1 {
+        font-size: 38px;
+    }
+
+    .talk-hero p {
+        margin-top: 17px;
+
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .talk-contact-section {
+        padding: 48px 0;
+    }
+
+    .talk-contact-card {
+        min-height: 270px;
+
+        padding: 23px;
+    }
+
+    .talk-contact-card h2 {
+        font-size: 23px;
+    }
+
+    .talk-contact-card p {
+        font-size: 13px;
+    }
+
+    .talk-help-section {
+        padding: 55px 0 65px;
+    }
+
+    .talk-help-heading h2 {
+        font-size: 32px;
+    }
+
+    .talk-help-heading p {
+        font-size: 14px;
+    }
+
+    .talk-help-grid {
+        grid-template-columns: 1fr;
+
+        margin-top: 28px;
+    }
+
+    .talk-help-topic {
+        min-height: 72px;
+
+        flex-direction: row;
+
+        justify-content: flex-start;
+
+        padding: 16px;
+    }
+
+    .molas-chat-start-overlay {
+        padding: 12px;
+    }
+
+    .molas-chat-start-window {
+        max-height: calc(100vh - 24px);
+
+        padding: 26px 20px;
+
+        border-radius: 21px;
+    }
+
+    .molas-chat-start-window h2 {
+        font-size: 26px;
+    }
+
+    .molas-live-chat {
+        right: 8px;
+        bottom: 8px;
+
+        width: calc(100vw - 16px);
+
+        height: calc(100vh - 16px);
+
+        border-radius: 18px;
+    }
+
+    .molas-chat-header {
+        min-height: 70px;
+
+        padding: 12px 14px;
+    }
+
+    .molas-chat-messages {
+        padding: 14px;
+    }
+
+    .molas-chat-message-admin
+    .molas-chat-message-bubble,
+    .molas-chat-message-visitor
+    .molas-chat-message-bubble {
+        max-width: 88%;
+
+        padding: 10px 12px;
+
+        font-size: 14px;
+    }
+
+    .molas-chat-message-form {
+        min-height: 66px;
+
+        padding: 10px;
+    }
+
+    .molas-chat-message-form input {
+        min-height: 44px;
+
+        padding: 9px 12px;
+    }
+
+    .molas-chat-message-form button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .talk-footer-inner {
+        width: calc(100% - 32px);
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+====================================================== */
+
+@media (max-width: 360px) {
+
+    .talk-hero h1 {
+        font-size: 34px;
+    }
+
+    .talk-contact-card {
+        padding: 20px;
+    }
+
+    .molas-chat-start-window {
+        padding: 24px 17px;
+    }
+
+    .molas-chat-message-admin
+    .molas-chat-message-bubble,
+    .molas-chat-message-visitor
+    .molas-chat-message-bubble {
+        max-width: 91%;
+    }
+}
+
+
+/* =====================================================
+   LANDSCAPE PHONES
+====================================================== */
+
+@media (
+    max-height: 600px
+) and (
+    orientation: landscape
+) {
+
+    .talk-hero {
+        padding: 55px 0;
+    }
+
+    .talk-hero h1 {
+        font-size: 40px;
+    }
+
+    .molas-chat-start-window {
+        max-height: calc(100vh - 20px);
+
+        padding: 22px;
+    }
+
+    .molas-live-chat {
+        height: calc(100vh - 20px);
+
+        bottom: 10px;
+    }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+====================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

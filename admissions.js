@@ -83,18 +83,40 @@ document.addEventListener("DOMContentLoaded", async () => {
            FETCH ADMISSIONS
         ================================================= */
 
-        const {
-            data,
-            error
-        } = await supabase
-            .from("admission_alerts")
-            .select("*")
-            .order(
-                "published_at",
-                {
-                    ascending: false
-                }
-            );
+        let data = null;
+let error = null;
+
+try {
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/admission_alerts?select=*&order=published_at.desc`,
+        {
+            method: "GET",
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Content-Type": "application/json"
+            }
+        }
+    );
+
+    if (!response.ok) {
+
+        const errorText =
+            await response.text();
+
+        throw new Error(
+            `Supabase error ${response.status}: ${errorText}`
+        );
+
+    }
+
+    data = await response.json();
+
+} catch (fetchError) {
+
+    error = fetchError;
+
+}
 
 
         console.log(

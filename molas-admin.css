@@ -1,0 +1,1688 @@
+/* =====================================================
+   MOLAS ADMIN DASHBOARD
+===================================================== */
+
+:root {
+    --navy: #101B4D;
+    --navy-dark: #0B143A;
+
+    --purple: #6E3FA3;
+    --purple-dark: #543080;
+    --purple-soft: #F3EEFA;
+
+    --cyan: #18BFFF;
+    --cyan-dark: #079DD8;
+    --cyan-soft: #EAF9FF;
+
+    --pale-blue: #F3FAFD;
+
+    --cream: #F3EFE7;
+    --cream-dark: #E9E1D4;
+
+    --charcoal: #172033;
+    --text: #273044;
+    --muted: #6F7788;
+    --light-text: #8A91A0;
+
+    --white: #FFFFFF;
+    --border: #E7E9EE;
+
+    --success: #2C9A68;
+    --warning: #D89428;
+    --danger: #B42318;
+
+    --container: 1400px;
+
+    --radius-small: 12px;
+    --radius-medium: 18px;
+    --radius-large: 26px;
+    --radius-apple: 30px;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text);
+    background: var(--pale-blue);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   ADMIN HEADER
+===================================================== */
+
+.molas-admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.molas-admin-header-inner {
+    width: min(var(--container), calc(100% - 48px));
+
+    min-height: 78px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   ADMIN BRAND
+===================================================== */
+
+.molas-admin-brand {
+    display: flex;
+    align-items: center;
+}
+
+.molas-admin-brand img {
+    display: block;
+
+    width: auto;
+    height: 48px;
+
+    max-width: 190px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.molas-admin-header-right {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+
+.molas-admin-user {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.molas-admin-user-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--purple-soft);
+    color: var(--purple);
+
+    font-size: 14px;
+}
+
+.molas-admin-user-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.molas-admin-user-info span {
+    color: var(--charcoal);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.molas-admin-user-info small {
+    max-width: 220px;
+
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.molas-admin-logout {
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--white);
+
+    color: var(--text);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.molas-admin-logout:hover {
+    background: var(--purple-soft);
+
+    border-color: rgba(110, 63, 163, 0.20);
+
+    color: var(--purple);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.molas-admin-main {
+    width: 100%;
+
+    padding: 42px 0 50px;
+}
+
+.molas-admin-container {
+    width: min(var(--container), calc(100% - 48px));
+
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   PAGE HEADING
+===================================================== */
+
+.molas-admin-page-heading {
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.molas-admin-label {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: var(--purple);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+}
+
+.molas-admin-page-heading h1 {
+    margin-bottom: 6px;
+
+    color: var(--navy);
+
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.03em;
+}
+
+.molas-admin-page-heading p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.molas-admin-heading-status {
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid rgba(44, 154, 104, 0.15);
+    border-radius: 12px;
+
+    background: rgba(44, 154, 104, 0.07);
+
+    color: var(--success);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.molas-admin-online-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow:
+        0 0 0 4px rgba(44, 154, 104, 0.10);
+}
+
+
+/* =====================================================
+   CHAT LAYOUT
+===================================================== */
+
+.molas-admin-chat-layout {
+    width: 100%;
+
+    height: calc(100vh - 190px);
+
+    min-height: 560px;
+    max-height: 850px;
+
+    display: grid;
+
+    grid-template-columns: 370px minmax(0, 1fr);
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-large);
+
+    box-shadow:
+        0 18px 55px rgba(16, 27, 77, 0.06);
+}
+
+
+/* =====================================================
+   CONVERSATIONS
+===================================================== */
+
+.molas-admin-conversations {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #FBFCFE;
+
+    border-right: 1px solid var(--border);
+}
+
+.molas-admin-conversations-header {
+    min-height: 78px;
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.molas-admin-conversations-header h2 {
+    margin-bottom: 3px;
+
+    color: var(--navy);
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.molas-admin-conversations-header span {
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+.molas-admin-refresh {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: var(--white);
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.molas-admin-refresh:hover {
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    transform: rotate(20deg);
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.molas-admin-search {
+    position: relative;
+
+    margin: 14px 16px;
+}
+
+.molas-admin-search > i {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--light-text);
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+.molas-admin-search input {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 14px 0 38px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background: var(--white);
+
+    color: var(--charcoal);
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.molas-admin-search input::placeholder {
+    color: #A2A8B4;
+}
+
+.molas-admin-search input:focus {
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 4px rgba(110, 63, 163, 0.07);
+}
+
+
+/* =====================================================
+   CONVERSATION LIST
+===================================================== */
+
+.molas-admin-conversation-list {
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+}
+
+.molas-admin-conversation-list::-webkit-scrollbar,
+.molas-admin-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.molas-admin-conversation-list::-webkit-scrollbar-thumb,
+.molas-admin-messages::-webkit-scrollbar-thumb {
+    background: #D9DDE5;
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   EMPTY LIST
+===================================================== */
+
+.molas-admin-list-empty {
+    min-height: 260px;
+
+    padding: 30px 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.molas-admin-list-empty > i {
+    margin-bottom: 14px;
+
+    color: #B5BBC7;
+
+    font-size: 28px;
+}
+
+.molas-admin-list-empty h3 {
+    margin-bottom: 5px;
+
+    color: var(--charcoal);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.molas-admin-list-empty p {
+    max-width: 220px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   CONVERSATION ITEM
+===================================================== */
+
+.molas-admin-conversation-item {
+    width: 100%;
+
+    padding: 15px 18px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border: 0;
+    border-bottom: 1px solid #EEF0F4;
+
+    background: transparent;
+
+    text-align: left;
+
+    transition:
+        background 0.2s ease;
+}
+
+.molas-admin-conversation-item:hover {
+    background: var(--white);
+}
+
+.molas-admin-conversation-item.active {
+    background: var(--purple-soft);
+
+    box-shadow:
+        inset 3px 0 0 var(--purple);
+}
+
+.molas-admin-conversation-avatar {
+    flex: 0 0 auto;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.molas-admin-conversation-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.molas-admin-conversation-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.molas-admin-conversation-name {
+    overflow: hidden;
+
+    color: var(--charcoal);
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-conversation-time {
+    flex: 0 0 auto;
+
+    color: var(--light-text);
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.molas-admin-conversation-preview {
+    margin-top: 4px;
+
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-conversation-topic {
+    display: inline-flex;
+
+    margin-top: 6px;
+
+    padding: 3px 7px;
+
+    border-radius: 7px;
+
+    background: var(--cyan-soft);
+
+    color: var(--cyan-dark);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CHAT PANEL
+===================================================== */
+
+.molas-admin-chat-panel {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    background: var(--white);
+}
+
+
+/* =====================================================
+   EMPTY CHAT
+===================================================== */
+
+.molas-admin-chat-empty {
+    width: 100%;
+    height: 100%;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.molas-admin-chat-empty-icon {
+    width: 68px;
+    height: 68px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 25px;
+}
+
+.molas-admin-chat-empty h2 {
+    margin-bottom: 7px;
+
+    color: var(--navy);
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.molas-admin-chat-empty p {
+    max-width: 340px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   ACTIVE CHAT
+===================================================== */
+
+.molas-admin-active-chat {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   CHAT HEADER
+===================================================== */
+
+.molas-admin-chat-header {
+    min-height: 78px;
+
+    padding: 14px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: var(--white);
+}
+
+
+/* =====================================================
+   BACK TO CONVERSATIONS
+===================================================== */
+
+.molas-admin-back-to-conversations {
+    display: none;
+
+    flex: 0 0 auto;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--purple);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.molas-admin-back-to-conversations i {
+    font-size: 11px;
+}
+
+.molas-admin-back-to-conversations:hover {
+    color: var(--navy);
+}
+
+
+.molas-admin-chat-visitor {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.molas-admin-visitor-avatar {
+    flex: 0 0 auto;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.molas-admin-chat-visitor h2 {
+    margin-bottom: 3px;
+
+    overflow: hidden;
+
+    color: var(--charcoal);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-chat-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.molas-admin-meta-divider {
+    color: #C4C8D0;
+}
+
+
+/* =====================================================
+   CHAT ACTIONS
+===================================================== */
+
+.molas-admin-chat-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.molas-admin-chat-status {
+    padding: 5px 9px;
+
+    border-radius: 8px;
+
+    background: rgba(44, 154, 104, 0.08);
+
+    color: var(--success);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+}
+
+.molas-admin-close-conversation {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: var(--white);
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.molas-admin-close-conversation:hover {
+    background: var(--cream);
+
+    color: var(--brown);
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.molas-admin-messages {
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FBFCFE 0%,
+            #FFFFFF 100%
+        );
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* =====================================================
+   MESSAGE BUBBLES
+===================================================== */
+
+.molas-admin-message {
+    max-width: min(72%, 560px);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.molas-admin-message.visitor {
+    align-self: flex-start;
+
+    align-items: flex-start;
+}
+
+.molas-admin-message.admin {
+    align-self: flex-end;
+
+    align-items: flex-end;
+}
+
+.molas-admin-message-bubble {
+    padding: 11px 14px;
+
+    border-radius: 16px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+.molas-admin-message.visitor .molas-admin-message-bubble {
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-bottom-left-radius: 5px;
+
+    color: var(--text);
+}
+
+.molas-admin-message.admin .molas-admin-message-bubble {
+    background: var(--navy);
+
+    color: var(--white);
+
+    border-bottom-right-radius: 5px;
+}
+
+.molas-admin-message-time {
+    padding: 0 3px;
+
+    color: var(--light-text);
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   REPLY AREA
+===================================================== */
+
+.molas-admin-reply-form {
+    min-height: 76px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    border-top: 1px solid var(--border);
+
+    background: var(--white);
+}
+
+.molas-admin-reply-input {
+    flex: 1;
+}
+
+.molas-admin-reply-input input {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: #FBFCFE;
+
+    color: var(--charcoal);
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.molas-admin-reply-input input::placeholder {
+    color: #A2A8B4;
+}
+
+.molas-admin-reply-input input:focus {
+    background: var(--white);
+
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 4px rgba(110, 63, 163, 0.07);
+}
+
+.molas-admin-reply-form > button {
+    flex: 0 0 auto;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 14px;
+
+    background: var(--purple);
+
+    color: var(--white);
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.molas-admin-reply-form > button:hover {
+    background: var(--navy);
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.molas-admin-message-notification {
+    position: fixed;
+
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 500;
+
+    width: min(360px, calc(100vw - 32px));
+
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 18px 45px rgba(16, 27, 77, 0.14);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+}
+
+.molas-admin-message-notification.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.molas-admin-notification-icon {
+    flex: 0 0 auto;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: var(--cyan-soft);
+
+    color: var(--cyan-dark);
+
+    font-size: 15px;
+}
+
+.molas-admin-notification-content {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.molas-admin-notification-content strong {
+    color: var(--charcoal);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.molas-admin-notification-content span {
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-message-notification > button {
+    flex: 0 0 auto;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--light-text);
+
+    font-size: 12px;
+}
+
+.molas-admin-message-notification > button:hover {
+    background: #F3F4F6;
+
+    color: var(--charcoal);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .molas-admin-chat-layout {
+        grid-template-columns:
+            320px minmax(0, 1fr);
+    }
+
+    .molas-admin-conversation-item {
+        padding: 14px;
+    }
+
+    .molas-admin-chat-header {
+        padding: 14px 16px;
+    }
+
+    .molas-admin-messages {
+        padding: 20px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 760px) {
+
+    .molas-admin-header-inner {
+        width:
+            min(
+                calc(100% - 32px),
+                var(--container)
+            );
+
+        min-height: 68px;
+    }
+
+    .molas-admin-brand img {
+        height: 42px;
+    }
+
+    .molas-admin-header-right {
+        gap: 10px;
+    }
+
+    .molas-admin-user-info {
+        display: none;
+    }
+
+    .molas-admin-user-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .molas-admin-logout {
+        width: 38px;
+        height: 38px;
+
+        min-height: 38px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .molas-admin-logout span {
+        display: none;
+    }
+
+    .molas-admin-main {
+        padding: 28px 0 30px;
+    }
+
+    .molas-admin-container {
+        width:
+            min(
+                calc(100% - 28px),
+                var(--container)
+            );
+    }
+
+    .molas-admin-page-heading {
+        margin-bottom: 20px;
+
+        align-items: flex-start;
+    }
+
+    .molas-admin-page-heading h1 {
+        font-size: 30px;
+    }
+
+    .molas-admin-page-heading p {
+        font-size: 12px;
+    }
+
+    .molas-admin-heading-status {
+        min-height: 34px;
+
+        padding: 0 10px;
+
+        font-size: 10px;
+    }
+
+    .molas-admin-chat-layout {
+        height: calc(100vh - 155px);
+
+        min-height: 540px;
+
+        display: block;
+
+        overflow: hidden;
+
+        border-radius: 22px;
+    }
+
+    .molas-admin-conversations {
+        width: 100%;
+        height: 100%;
+
+        border-right: 0;
+    }
+
+    .molas-admin-chat-panel {
+        display: none;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .molas-admin-chat-layout.chat-open
+    .molas-admin-conversations {
+        display: none;
+    }
+
+    .molas-admin-chat-layout.chat-open
+    .molas-admin-chat-panel {
+        display: block;
+    }
+
+    .molas-admin-conversations-header {
+        min-height: 68px;
+    }
+
+    .molas-admin-search {
+        margin: 12px;
+    }
+
+
+    /* ---------------------------------------------
+       BACK TO CONVERSATIONS
+    --------------------------------------------- */
+
+    .molas-admin-back-to-conversations {
+        display: flex;
+    }
+
+
+    .molas-admin-chat-header {
+        min-height: 72px;
+
+        padding: 12px;
+    }
+
+    .molas-admin-chat-visitor {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .molas-admin-chat-actions {
+        flex: 0 0 auto;
+
+        gap: 6px;
+    }
+
+    .molas-admin-chat-status {
+        display: none;
+    }
+
+    .molas-admin-close-conversation {
+        width: 34px;
+        height: 34px;
+
+        min-height: 34px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .molas-admin-close-conversation {
+        font-size: 0;
+    }
+
+    .molas-admin-close-conversation i {
+        font-size: 11px;
+    }
+
+    .molas-admin-messages {
+        padding: 18px 14px;
+    }
+
+    .molas-admin-message {
+        max-width: 84%;
+    }
+
+    .molas-admin-reply-form {
+        min-height: 68px;
+
+        padding: 10px;
+    }
+
+    .molas-admin-reply-input input {
+        height: 48px;
+    }
+
+    .molas-admin-reply-form > button {
+        width: 48px;
+        height: 48px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .molas-admin-header-inner {
+        width: calc(100% - 24px);
+    }
+
+    .molas-admin-brand img {
+        height: 38px;
+    }
+
+    .molas-admin-main {
+        padding-top: 22px;
+    }
+
+    .molas-admin-container {
+        width: calc(100% - 20px);
+    }
+
+    .molas-admin-page-heading h1 {
+        font-size: 27px;
+    }
+
+    .molas-admin-page-heading p {
+        font-size: 11px;
+    }
+
+    .molas-admin-heading-status span:last-child {
+        display: none;
+    }
+
+    .molas-admin-heading-status {
+        width: 30px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .molas-admin-chat-layout {
+        min-height: 500px;
+
+        border-radius: 19px;
+    }
+
+    .molas-admin-conversations-header {
+        padding: 15px;
+    }
+
+    .molas-admin-conversations-header h2 {
+        font-size: 14px;
+    }
+
+    .molas-admin-conversation-item {
+        padding: 13px;
+    }
+
+    .molas-admin-conversation-avatar {
+        width: 37px;
+        height: 37px;
+
+        font-size: 11px;
+    }
+
+    .molas-admin-conversation-name {
+        font-size: 12px;
+    }
+
+    .molas-admin-conversation-preview {
+        font-size: 10px;
+    }
+
+    .molas-admin-chat-header {
+        gap: 10px;
+    }
+
+    .molas-admin-back-to-conversations {
+        gap: 5px;
+
+        font-size: 10px;
+    }
+
+    .molas-admin-back-to-conversations i {
+        font-size: 10px;
+    }
+
+    .molas-admin-chat-visitor {
+        gap: 8px;
+    }
+
+    .molas-admin-visitor-avatar {
+        width: 37px;
+        height: 37px;
+    }
+
+    .molas-admin-chat-visitor h2 {
+        font-size: 12px;
+    }
+
+    .molas-admin-chat-meta {
+        font-size: 9px;
+    }
+
+    .molas-admin-message-bubble {
+        padding: 10px 12px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* =====================================================
+   LANDSCAPE PHONES
+===================================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .molas-admin-header-inner {
+        min-height: 60px;
+    }
+
+    .molas-admin-brand img {
+        height: 38px;
+    }
+
+    .molas-admin-main {
+        padding: 18px 0 20px;
+    }
+
+    .molas-admin-page-heading {
+        margin-bottom: 15px;
+    }
+
+    .molas-admin-page-heading h1 {
+        font-size: 26px;
+    }
+
+    .molas-admin-page-heading p {
+        display: none;
+    }
+
+    .molas-admin-chat-layout {
+        height: calc(100vh - 115px);
+
+        min-height: 400px;
+    }
+
+    .molas-admin-chat-header {
+        min-height: 60px;
+    }
+
+    .molas-admin-messages {
+        padding: 14px;
+    }
+
+    .molas-admin-reply-form {
+        min-height: 62px;
+
+        padding: 7px 10px;
+    }
+
+    .molas-admin-reply-input input,
+    .molas-admin-reply-form > button {
+        height: 46px;
+    }
+
+}
+
+
+/* =====================================================
+   HIDDEN ATTRIBUTE
+===================================================== */
+
+[hidden] {
+    display: none !important;
+}
