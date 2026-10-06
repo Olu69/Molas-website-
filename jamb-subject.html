@@ -469,6 +469,46 @@
 <!-- =====================================================
      JAVASCRIPT
 ====================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+        "https://eidnzebqyxcpxbykybch.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    async function protectJambSubject() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getSession();
+
+
+        if (error || !data.session) {
+
+            window.location.replace(
+                "account.html?resource=jamb"
+            );
+
+            return;
+        }
+
+    }
+
+
+    protectJambSubject();
+
+</script>
 
 <script src="syllabus.js"></script>
 
@@ -478,3 +518,6 @@
 </body>
 
 </html>
+
+
+

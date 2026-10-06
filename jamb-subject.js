@@ -82,7 +82,44 @@ const SUBJECT_INFO = {
     }
 
 };
+/* =========================================================
+   USER ACCESS
+========================================================= */
 
+async function getJambAccess() {
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } = await supabaseClient.auth.getSession();
+
+    if (sessionError || !sessionData.session) {
+        return null;
+    }
+
+
+    const {
+        data: profile,
+        error: profileError
+    } = await supabaseClient
+        .from("profiles")
+        .select("jamb_access")
+        .eq("id", sessionData.session.user.id)
+        .single();
+
+
+    if (profileError || !profile) {
+        console.error(
+            "Profile access error:",
+            profileError
+        );
+
+        return null;
+    }
+
+
+    return profile.jamb_access;
+}
 
 /* =========================================================
    GET SUBJECT FROM URL
@@ -187,6 +224,57 @@ async function loadSyllabus(subjectKey) {
         subjectKey;
 
 
+    /* =====================================================
+       CHECK USER ACCESS
+    ===================================================== */
+
+    const jambAccess =
+        await getJambAccess();
+
+
+    if (!jambAccess) {
+
+        showError(
+            "We could not verify your JAMB access. Please log in again."
+        );
+
+        return;
+    }
+
+
+    /* =====================================================
+       FREE ACCESS RULE
+    ===================================================== */
+
+    const freeSubjects = [
+        "Mathematics",
+        "Use of English"
+    ];
+
+
+    const isPremium =
+        jambAccess === "premium";
+
+
+    const isFreeSubject =
+        freeSubjects.includes(
+            subjectName
+        );
+
+
+    if (
+        !isPremium &&
+        !isFreeSubject
+    ) {
+
+        showPremiumMessage(
+            subjectName
+        );
+
+        return;
+    }
+
+
     try {
 
         const response =
@@ -214,24 +302,24 @@ async function loadSyllabus(subjectKey) {
 
 
         if (!response.ok) {
-    
-    const errorText =
-        await response.text();
-    
-    console.error(
-        "Supabase error:",
-        errorText
-    );
-    
-    showError(
-        errorText
-    );
-    
-    return;
-}
+
+            const errorText =
+                await response.text();
+
+            console.error(
+                "Supabase error:",
+                errorText
+            );
+
+            showError(
+                errorText
+            );
+
+            return;
+        }
 
 
-        const data =
+        let data =
             await response.json();
 
 
@@ -245,7 +333,38 @@ async function loadSyllabus(subjectKey) {
         }
 
 
+        /* =================================================
+           FREE USERS — MAXIMUM 3 TOPICS
+        ================================================= */
+
+        if (!isPremium) {
+
+    data = data
+        .sort((a, b) => {
+
+            const sectionCompare =
+                String(a.section_number)
+                    .localeCompare(
+                        String(b.section_number)
+                    );
+
+            if (sectionCompare !== 0) {
+                return sectionCompare;
+            }
+
+            return (
+                Number(a.topic_number) -
+                Number(b.topic_number)
+            );
+
+        })
+        .slice(0, 3);
+
+}
+
+
         renderSyllabus(data);
+
 
     } catch (error) {
 
@@ -332,7 +451,48 @@ function showError(message) {
 
 }
 
+/* =========================================================
+   PREMIUM CONTENT
+========================================================= */
 
+function showPremiumMessage(subject) {
+
+    const container =
+        document.getElementById(
+            "syllabus-content"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML = `
+
+        <div class="syllabus-no-results">
+
+            <strong>
+                Premium Content
+            </strong>
+
+            <p>
+                The full ${escapeHTML(subject)}
+                syllabus is available with JAMB Premium.
+            </p>
+
+            <a
+                href="account.html?resource=jamb"
+                class="study-note-button"
+            >
+                Upgrade to Premium →
+            </a>
+
+        </div>
+
+    `;
+
+}
 /* =========================================================
    EMPTY STATE
 ========================================================= */

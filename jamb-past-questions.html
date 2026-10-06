@@ -535,9 +535,52 @@
      PAGE JAVASCRIPT
 ====================================================== -->
 
+<script>
+
+    const SUPABASE_URL =
+        "https://eidnzebqyxcpxbykybch.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    async function protectPastQuestions() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getSession();
+
+
+        if (error || !data.session) {
+
+            window.location.replace(
+                "account.html?resource=jamb"
+            );
+
+            return;
+        }
+
+    }
+
+
+    protectPastQuestions();
+
+</script>
+
+
 <script src="jamb-past-questions.js"></script>
 
 
 </body>
 
 </html>
+    
+
+

@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     ${excerpt}
                 </p>
               <a
-    href="/${encodeURIComponent(article.slug)}"
+    href="article.html?slug=${encodeURIComponent(article.slug)}"
     class="read-more"
     data-news-id="${escapeHTML(article.id)}"
 >
@@ -1686,13 +1686,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             const slug =
     card.dataset.newsSlug;
 
-if (!slug) {
+    if (!slug) {
     return;
 }
 
-window.location.href =
-    `/${encodeURIComponent(slug)}`;
-        }
+    window.location.href =
+         `article.html?slug=${encodeURIComponent(slug)}`;
+      }
     );
     /* =====================================================
        HEADER SCROLL
