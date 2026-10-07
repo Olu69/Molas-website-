@@ -10,6 +10,7 @@
     <title>MOLAS Account</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
@@ -175,8 +176,9 @@
             background: #fff;
             outline: none;
 
-            transition: border-color 0.2s ease,
-                        box-shadow 0.2s ease;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .form-group input:focus {
@@ -288,6 +290,7 @@
         }
 
         @media (max-width: 380px) {
+
             body {
                 padding: 16px 12px;
             }
@@ -332,6 +335,7 @@
         }
 
         @media (min-width: 768px) {
+
             body {
                 padding: 30px;
             }
@@ -339,6 +343,7 @@
             .account-wrapper {
                 max-width: 400px;
             }
+
         }
     </style>
 </head>
@@ -846,6 +851,11 @@
 
                 if (data.session) {
 
+                    localStorage.setItem(
+                        "molas_jamb_last_activity",
+                        Date.now().toString()
+                    );
+
                     window.location.href =
                         getResourceDestination();
 
@@ -926,6 +936,11 @@
 
                 if (data.session) {
 
+                    localStorage.setItem(
+                        "molas_jamb_last_activity",
+                        Date.now().toString()
+                    );
+
                     window.location.href =
                         getResourceDestination();
 
@@ -937,22 +952,45 @@
 
         async function checkExistingSession() {
 
-            const {
-                data
-            } = await supabaseClient.auth.getSession();
+    const {
+        data
+    } = await supabaseClient.auth.getSession();
 
 
-            if (data.session) {
-
-                window.location.href =
-                    getResourceDestination();
-
-            }
-
-        }
+    if (!data.session) {
+        return;
+    }
 
 
-        checkExistingSession();
+    const lastActivity =
+        Number(
+            localStorage.getItem(
+                "molas_jamb_last_activity"
+            )
+        );
+
+
+    const JAMB_INACTIVITY_LIMIT =
+        2 * 60 * 1000;
+
+
+    const activityIsActive =
+        lastActivity &&
+        Date.now() - lastActivity <
+        JAMB_INACTIVITY_LIMIT;
+
+
+    if (activityIsActive) {
+
+        window.location.href =
+            getResourceDestination();
+
+    }
+
+}
+
+
+checkExistingSession();
 
     </script>
 

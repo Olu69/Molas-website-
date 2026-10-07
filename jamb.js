@@ -4,60 +4,41 @@
    ---------------------------------------------------------
    JAMB NEWS SOURCE:
    Supabase → public.jamb_news
-
-   IMPORTANT:
-   This is completely separate from the main MOLAS news.
 ========================================================= */
-
-
-/* =========================================================
-   SUPABASE CONFIG
-========================================================= */
-
-const SUPABASE_URL =
-    "https://eidnzebqyxcpxbykybch.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
 
 
 /* =========================================================
    SUPABASE REQUEST
+   ---------------------------------------------------------
+   Uses the Supabase client already created
+   inside jamb.html.
 ========================================================= */
 
 async function supabaseRequest(endpoint) {
 
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/${endpoint}`,
-        {
-            method: "GET",
-
-            headers: {
-                "apikey": SUPABASE_KEY,
-                "Content-Type": "application/json"
-            }
-        }
-    );
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("jamb_news")
+        .select("*")
+        .order("published_at", {
+            ascending: false
+        });
 
 
-    if (!response.ok) {
-
-        const errorText =
-            await response.text();
+    if (error) {
 
         console.error(
             "SUPABASE ERROR:",
-            response.status,
-            errorText
+            error
         );
 
-        throw new Error(
-            `Supabase error ${response.status}: ${errorText}`
-        );
+        throw error;
     }
 
 
-    return await response.json();
+    return data;
 }
 
 
@@ -161,11 +142,6 @@ function setupJambNewsToggle() {
 
 /* =========================================================
    LOAD JAMB NEWS
-   ---------------------------------------------------------
-   ONLY public.jamb_news is used here.
-
-   Nothing is pulled from the main MOLAS
-   news table.
 ========================================================= */
 
 async function loadJambNews() {
@@ -197,14 +173,9 @@ async function loadJambNews() {
         );
 
 
-        /*
-         * IMPORTANT:
-         * Only the jamb_news table is queried.
-         */
-
         const news =
             await supabaseRequest(
-                "jamb_news?select=*&order=published_at.desc"
+                "jamb_news"
             );
 
 
@@ -252,20 +223,15 @@ async function loadJambNews() {
     }
 
 
-    catch (error) {
+catch (error) {
 
-        console.error(
-            "JAMB NEWS LOAD FAILED:",
-            error
-        );
-
-
-        newsList.innerHTML = `
-            <div class="jamb-news-loading">
-                Unable to load JAMB news right now.
-            </div>
-        `;
-    }
+    newsList.innerHTML = `
+        <div class="jamb-news-loading">
+            JAMB NEWS ERROR:
+            ${escapeHTML(error.message || String(error))}
+        </div>
+    `;
+}
 }
 
 
@@ -425,8 +391,6 @@ function createJambNewsCard(article) {
 
 /* =========================================================
    NEWS CARD CLICK
-   ---------------------------------------------------------
-   Opens the individual JAMB news article.
 ========================================================= */
 
 function attachJambNewsLinks() {

@@ -322,7 +322,7 @@ const formattedNumber =
     String(number).padStart(2, "0");
 return `
     <a
-        href="jamb-syllabus-subject.html?subject=${encodeURIComponent(subject.id)}"
+        href="jamb-subject.html?subject=${encodeURIComponent(subject.id)}"
         class="syllabus-subject-card"
         data-subject="${escapeAttribute(subject.id)}"
         data-number="${formattedNumber}"

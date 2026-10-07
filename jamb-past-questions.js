@@ -2,46 +2,23 @@
    MOLAS — JAMB PAST QUESTIONS
    Supabase-powered Past Questions Archive
 
+   ACCESS RULES
+   ---------------------------------------------------------
+   Free:
+   - Mathematics 2025 is free
+   - Other subjects/years are locked
+
+   Premium:
+   - All subjects
+   - All available years
+
    TABLES
    ---------------------------------------------------------
    past_subjects
-   - id
-   - subject_name
-   - subject_code
-   - created_at
-
    past_questions
-   - id
-   - subject_id
-   - exam_year
-   - question_number
-   - question
-   - option_a
-   - option_b
-   - option_c
-   - option_d
-   - correct_answer
-   - explanation
-   - created_at
+   jamb_past_questions_access
+   profiles
 ========================================================= */
-
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-const SUPABASE_URL =
-    "https://eidnzebqyxcpxbykybch.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
 
 
 /* =========================================================
@@ -142,6 +119,10 @@ let currentYear = null;
 
 let testSubmitted = false;
 
+let jambAccess = "free";
+
+let pastQuestionAccess = [];
+
 
 /* =========================================================
    INITIALIZE PAGE
@@ -165,6 +146,24 @@ async function initializePage() {
 
 
     showLoading(
+        "Loading your JAMB access..."
+    );
+
+
+    const accessLoaded =
+        await loadUserAccess();
+
+
+    if (!accessLoaded) {
+
+        hideLoading();
+
+        return;
+
+    }
+
+
+    showLoading(
         "Loading subjects..."
     );
 
@@ -173,6 +172,205 @@ async function initializePage() {
 
 
     hideLoading();
+
+}
+
+
+/* =========================================================
+   LOAD USER ACCESS
+========================================================= */
+
+async function loadUserAccess() {
+
+    try {
+
+        const {
+            data: sessionData,
+            error: sessionError
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (
+            sessionError ||
+            !sessionData ||
+            !sessionData.session
+        ) {
+
+            window.location.replace(
+                "account.html?resource=jamb"
+            );
+
+            return false;
+
+        }
+
+
+        const user =
+            sessionData.session.user;
+
+
+        const {
+            data: profile,
+            error: profileError
+        } =
+            await supabaseClient
+
+                .from("profiles")
+
+ .select(
+    "jamb_past_questions_access"
+)
+
+                .eq(
+                    "id",
+                    user.id
+                )
+
+                .single();
+
+
+        if (profileError) {
+
+            console.error(
+                "PROFILE ACCESS ERROR:",
+                profileError
+            );
+
+
+            showError(
+                "Unable to verify your JAMB access: " +
+                profileError.message
+            );
+
+
+            return false;
+
+        }
+
+
+        jambAccess =
+    profile &&
+    profile.jamb_past_questions_access
+        ? profile.jamb_past_questions_access
+        : "free";
+
+
+        const {
+            data: accessData,
+            error: accessError
+        } =
+            await supabaseClient
+
+                .from("jamb_past_questions_access")
+
+                .select(
+                    "subject_id, exam_year, access_level"
+                );
+
+
+        if (accessError) {
+
+            console.error(
+                "PAST QUESTION ACCESS ERROR:",
+                accessError
+            );
+
+
+            showError(
+                "Unable to load past question access: " +
+                accessError.message
+            );
+
+
+            return false;
+
+        }
+
+
+        pastQuestionAccess =
+            accessData || [];
+
+
+        console.log(
+            "JAMB ACCESS:",
+            jambAccess
+        );
+
+
+        console.log(
+            "PAST QUESTION ACCESS:",
+            pastQuestionAccess
+        );
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "USER ACCESS ERROR:",
+            error
+        );
+
+
+        showError(
+            "Unable to verify your account access."
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   CHECK IF A SUBJECT/YEAR IS AVAILABLE
+========================================================= */
+
+function isYearFree(
+    subjectId,
+    year
+) {
+
+    return pastQuestionAccess.some(
+        item =>
+            String(item.subject_id) ===
+            String(subjectId) &&
+
+            String(item.exam_year) ===
+            String(year) &&
+
+            item.access_level === "free"
+    );
+
+}
+
+
+/* =========================================================
+   CHECK IF USER CAN ACCESS SUBJECT/YEAR
+========================================================= */
+
+function canAccessYear(
+    subjectId,
+    year
+) {
+
+    if (
+    jambAccess === "paid"
+) {
+
+        return true;
+
+    }
+
+
+    return isYearFree(
+        subjectId,
+        year
+    );
 
 }
 
@@ -435,12 +633,27 @@ async function loadYears(
                     );
 
 
+                const accessible =
+                    canAccessYear(
+                        subjectId,
+                        year
+                    );
+
+
                 option.value =
                     year;
 
 
+                option.dataset.access =
+                    accessible
+                        ? "free"
+                        : "premium";
+
+
                 option.textContent =
-                    year;
+                    accessible
+                        ? `${year}`
+                        : `${year} 🔒`;
 
 
                 yearSelect.appendChild(
@@ -477,14 +690,51 @@ yearSelect.addEventListener(
     "change",
     function () {
 
-        startButton.disabled =
-            !subjectSelect.value ||
-            !yearSelect.value;
+        const subjectId =
+            subjectSelect.value;
+
+
+        const year =
+            this.value;
 
 
         clearSelectionMessage();
 
         clearError();
+
+
+        if (
+            !subjectId ||
+            !year
+        ) {
+
+            startButton.disabled =
+                true;
+
+
+            return;
+
+        }
+
+
+        const accessible =
+            canAccessYear(
+                subjectId,
+                year
+            );
+
+
+        startButton.disabled =
+            !accessible;
+
+
+        if (!accessible) {
+
+            showSelectionMessage(
+                "This practice set is Premium Content. Upgrade to Premium to access it."
+            );
+
+        }
 
     }
 );
@@ -535,6 +785,27 @@ async function startPractice() {
         showSelectionMessage(
             "Please select a subject and year."
         );
+
+
+        return;
+
+    }
+
+
+    if (
+        !canAccessYear(
+            subjectId,
+            year
+        )
+    ) {
+
+        showSelectionMessage(
+            "This practice set is Premium Content. Upgrade to Premium to access it."
+        );
+
+
+        startButton.disabled =
+            true;
 
 
         return;

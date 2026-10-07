@@ -103,8 +103,6 @@
 <section class="jamb-hero">
 
 
-    <!-- LEFT -->
-
     <div class="jamb-hero-intro">
 
         <span class="jamb-badge">
@@ -128,12 +126,8 @@
 
 
 
-    <!-- RIGHT -->
-
     <div class="jamb-hero-preview">
 
-
-        <!-- MAIN DASHBOARD -->
 
         <div class="jamb-dashboard">
 
@@ -170,7 +164,7 @@
 
                 <p>
                     Portal &amp; Study Center
-                
+                </p>
 
             </div>
 
@@ -180,11 +174,14 @@
                 <span>
                     Syllabus
                 </span>
-                
-                <a href="jamb-past-questions.html" class="cbt">
-                <span>
-                    CBT
-                </span>
+
+                <a
+                    href="jamb-past-questions.html"
+                    class="cbt"
+                >
+                    <span>
+                        CBT
+                    </span>
                 </a>
 
                 <span>
@@ -196,8 +193,6 @@
         </div>
 
 
-
-        <!-- FLOATING CARD 1 -->
 
         <div class="jamb-floating-card floating-study">
 
@@ -220,8 +215,6 @@
         </div>
 
 
-
-        <!-- FLOATING CARD 2 -->
 
         <div class="jamb-floating-card floating-practice">
 
@@ -285,8 +278,6 @@
     <div class="study-library-grid">
 
 
-        <!-- 01 -->
-
         <a
             href="jamb-syllabus.html"
             class="library-card"
@@ -327,8 +318,6 @@
 
 
 
-        <!-- 02 -->
-
         <a
             href="jamb-past-questions.html"
             class="library-card library-card-dark"
@@ -368,8 +357,6 @@
         </a>
 
 
-
-        <!-- 03 -->
 
         <a
             href="cbt-practice.html"
@@ -718,7 +705,7 @@
 
 
         <a
-            href="#"
+            href="talk-to-molas.html"
             class="service-card service-purple"
         >
 
@@ -894,8 +881,6 @@
 
 
 
-    <!-- JAMB NEWS -->
-
     <div
         class="jamb-news-banner"
         id="jamb-news-banner"
@@ -923,8 +908,6 @@
     </div>
 
 
-
-    <!-- SUPABASE JAMB NEWS -->
 
     <div
         class="jamb-news-list"
@@ -1093,7 +1076,6 @@
 
         <p>
             Study smarter with WAEC resources, past questions, syllabus guides and examination updates designed to keep you prepared.
-           
         </p>
 
     </div>
@@ -1242,9 +1224,11 @@
 <!-- =====================================================
      JAMB JAVASCRIPT
 ====================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
     const SUPABASE_URL =
         "https://eidnzebqyxcpxbykybch.supabase.co";
 
@@ -1257,31 +1241,114 @@
             SUPABASE_KEY
         );
 
-
-    async function protectJambResources() {
-
-        const {
-            data,
-            error
-        } = await supabaseClient.auth.getSession();
+</script>
 
 
-        if (error || !data.session) {
+<script src="jamb-session.js"></script>
 
-            window.location.replace(
-                "account.html?resource=jamb"
+
+<script>
+
+    protectJambResourcePage();
+
+
+    /* =====================================================
+       END JAMB RESOURCE SESSION WHEN LEAVING
+       THE JAMB RESOURCE AREA
+    ====================================================== */
+
+    const jambResourcePages = [
+        "jamb-resources.html",
+        "jamb-syllabus.html",
+        "jamb-subject.html",
+        "jamb-past-questions.html",
+        "cbt-practice.html",
+        "jamb-guides.html"
+    ];
+
+
+    function isJambResourceLink(href) {
+
+        if (!href) {
+            return true;
+        }
+
+
+        if (href.startsWith("#")) {
+            return true;
+        }
+
+
+        if (href.startsWith("javascript:")) {
+            return true;
+        }
+
+
+        const linkUrl =
+            new URL(
+                href,
+                window.location.href
             );
 
-            return;
+
+        if (
+            linkUrl.origin !==
+            window.location.origin
+        ) {
+            return false;
         }
+
+
+        const pageName =
+            linkUrl.pathname
+                .split("/")
+                .pop();
+
+
+        return jambResourcePages.includes(
+            pageName
+        );
 
     }
 
 
-    protectJambResources();
+    document
+        .querySelectorAll("a[href]")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    const href =
+                        link.getAttribute("href");
+
+
+                    if (
+                        isJambResourceLink(href)
+                    ) {
+                        return;
+                    }
+
+
+                    setTimeout(() => {
+    
+    localStorage.removeItem(
+        "molas_jamb_last_activity"
+    );
+    
+}, 0);
+
+                }
+            );
+
+        });
+
 </script>
 
+
 <script src="jamb.js"></script>
+
 
 </body>
 </html>

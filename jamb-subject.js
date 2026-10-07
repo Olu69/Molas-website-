@@ -5,17 +5,6 @@
 
 
 /* =========================================================
-   SUPABASE CONFIG
-========================================================= */
-
-const SUPABASE_URL =
-    "https://eidnzebqyxcpxbykybch.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_Q81zflk66ijoYEpT_pqL1g_S-cSJSpj";
-
-
-/* =========================================================
    SUBJECT INFORMATION
 ========================================================= */
 
@@ -82,6 +71,8 @@ const SUBJECT_INFO = {
     }
 
 };
+
+
 /* =========================================================
    USER ACCESS
 ========================================================= */
@@ -91,9 +82,59 @@ async function getJambAccess() {
     const {
         data: sessionData,
         error: sessionError
-    } = await supabaseClient.auth.getSession();
+    } =
+        await supabaseClient.auth.getSession();
 
-    if (sessionError || !sessionData.session) {
+
+    if (sessionError) {
+
+        showError(
+            "Session error: " +
+            sessionError.message
+        );
+
+        return null;
+    }
+
+
+    if (!sessionData.session) {
+
+        showError(
+            "No active session found."
+        );
+
+        return null;
+    }
+
+
+    const session =
+        sessionData.session;
+
+
+    const {
+        data: userData,
+        error: userError
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (userError) {
+
+        showError(
+            "User error: " +
+            userError.message
+        );
+
+        return null;
+    }
+
+
+    if (!userData.user) {
+
+        showError(
+            "No authenticated user found."
+        );
+
         return null;
     }
 
@@ -101,25 +142,40 @@ async function getJambAccess() {
     const {
         data: profile,
         error: profileError
-    } = await supabaseClient
-        .from("profiles")
-        .select("jamb_access")
-        .eq("id", sessionData.session.user.id)
-        .single();
+    } =
+        await supabaseClient
+            .from("profiles")
+            .select("jamb_syllabus_access")
+            .eq(
+                "id",
+                userData.user.id
+            )
+            .single();
 
 
-    if (profileError || !profile) {
-        console.error(
-            "Profile access error:",
-            profileError
+    if (profileError) {
+
+        showError(
+            "Profile error: " +
+            profileError.message
         );
 
         return null;
     }
 
 
-    return profile.jamb_access;
+    return {
+
+        access:
+    profile.jamb_syllabus_access,
+
+        accessToken:
+            session.access_token
+
+    };
+
 }
+
 
 /* =========================================================
    GET SUBJECT FROM URL
@@ -132,12 +188,13 @@ function getSubjectFromURL() {
             window.location.search
         );
 
+
     return (
         params.get("subject") ||
         "mathematics"
     )
-    .toLowerCase()
-    .trim();
+        .toLowerCase()
+        .trim();
 
 }
 
@@ -151,45 +208,65 @@ function updateSubjectInformation(subjectKey) {
     const info =
         SUBJECT_INFO[subjectKey];
 
+
     if (!info) {
         return;
     }
 
 
     const title =
-        document.getElementById("subject-title");
+        document.getElementById(
+            "subject-title"
+        );
+
 
     const description =
-        document.getElementById("subject-description");
+        document.getElementById(
+            "subject-description"
+        );
+
 
     const name =
-        document.getElementById("subject-name");
+        document.getElementById(
+            "subject-name"
+        );
+
 
     const code =
-        document.getElementById("subject-code");
+        document.getElementById(
+            "subject-code"
+        );
 
 
     if (title) {
+
         title.textContent =
             info.name;
+
     }
 
 
     if (description) {
+
         description.textContent =
             info.description;
+
     }
 
 
     if (name) {
+
         name.textContent =
             info.name;
+
     }
 
 
     if (code) {
+
         code.textContent =
             "JAMB UTME SYLLABUS";
+
     }
 
 
@@ -200,7 +277,7 @@ function updateSubjectInformation(subjectKey) {
 
 
 /* =========================================================
-   LOAD SYLLABUS FROM SUPABASE
+   LOAD SYLLABUS
 ========================================================= */
 
 async function loadSyllabus(subjectKey) {
@@ -225,35 +302,41 @@ async function loadSyllabus(subjectKey) {
 
 
     /* =====================================================
-       CHECK USER ACCESS
+       CHECK ACCESS
     ===================================================== */
 
-    const jambAccess =
+    const jambAccessData =
         await getJambAccess();
 
 
-    if (!jambAccess) {
-
-        showError(
-            "We could not verify your JAMB access. Please log in again."
-        );
-
+    if (!jambAccessData) {
         return;
     }
 
 
+    const jambAccess =
+        jambAccessData.access;
+
+
+    const accessToken =
+        jambAccessData.accessToken;
+
+
     /* =====================================================
-       FREE ACCESS RULE
+       FREE SUBJECTS
     ===================================================== */
 
     const freeSubjects = [
+
         "Mathematics",
+
         "Use of English"
+
     ];
 
 
-    const isPremium =
-        jambAccess === "premium";
+    const isPaid =
+    jambAccess === "paid";
 
 
     const isFreeSubject =
@@ -262,27 +345,34 @@ async function loadSyllabus(subjectKey) {
         );
 
 
+    /* =====================================================
+       SUBJECT LOCK
+    ===================================================== */
+
     if (
-        !isPremium &&
-        !isFreeSubject
-    ) {
+    jambAccess !== "paid" &&
+    !isFreeSubject
+) {
 
-        showPremiumMessage(
-            subjectName
-        );
+    showPremiumMessage(
+        subjectName
+    );
 
-        return;
-    }
+    return;
+}
 
 
     try {
 
         const response =
             await fetch(
+
                 `${SUPABASE_URL}/rest/v1/jamb_syllabus` +
                 `?subject=eq.${encodeURIComponent(subjectName)}` +
                 `&order=section_number.asc,topic_number.asc`,
+
                 {
+
                     method: "GET",
 
                     headers: {
@@ -291,13 +381,15 @@ async function loadSyllabus(subjectKey) {
                             SUPABASE_KEY,
 
                         "Authorization":
-                            `Bearer ${SUPABASE_KEY}`,
+                            `Bearer ${accessToken}`,
 
                         "Content-Type":
                             "application/json"
 
                     }
+
                 }
+
             );
 
 
@@ -306,14 +398,11 @@ async function loadSyllabus(subjectKey) {
             const errorText =
                 await response.text();
 
-            console.error(
-                "Supabase error:",
-                errorText
-            );
 
             showError(
                 errorText
             );
+
 
             return;
         }
@@ -323,7 +412,10 @@ async function loadSyllabus(subjectKey) {
             await response.json();
 
 
-        if (!data || data.length === 0) {
+        if (
+            !data ||
+            data.length === 0
+        ) {
 
             showEmptyState(
                 subjectName
@@ -334,44 +426,56 @@ async function loadSyllabus(subjectKey) {
 
 
         /* =================================================
-           FREE USERS — MAXIMUM 3 TOPICS
+           SORT TOPICS
         ================================================= */
 
-        if (!isPremium) {
+        data.sort(
+            (a, b) => {
 
-    data = data
-        .sort((a, b) => {
-
-            const sectionCompare =
-                String(a.section_number)
-                    .localeCompare(
-                        String(b.section_number)
+                const sectionCompare =
+                    String(
+                        a.section_number
+                    ).localeCompare(
+                        String(
+                            b.section_number
+                        ),
+                        undefined,
+                        {
+                            numeric: true
+                        }
                     );
 
-            if (sectionCompare !== 0) {
-                return sectionCompare;
+
+                if (
+                    sectionCompare !== 0
+                ) {
+
+                    return sectionCompare;
+
+                }
+
+
+                return (
+                    Number(
+                        a.topic_number
+                    ) -
+                    Number(
+                        b.topic_number
+                    )
+                );
+
             }
-
-            return (
-                Number(a.topic_number) -
-                Number(b.topic_number)
-            );
-
-        })
-        .slice(0, 3);
-
-}
-
-
-        renderSyllabus(data);
-
-
-    } catch (error) {
-
-        console.error(
-            "Syllabus loading error:",
-            error
         );
+
+
+        renderSyllabus(
+    data,
+    isPaid
+);
+
+    }
+
+    catch (error) {
 
         showError(
             "Something went wrong while loading the syllabus."
@@ -451,8 +555,9 @@ function showError(message) {
 
 }
 
+
 /* =========================================================
-   PREMIUM CONTENT
+   PREMIUM SUBJECT MESSAGE
 ========================================================= */
 
 function showPremiumMessage(subject) {
@@ -482,7 +587,7 @@ function showPremiumMessage(subject) {
             </p>
 
             <a
-                href="account.html?resource=jamb"
+                href="jamb-upgrade.html"
                 class="study-note-button"
             >
                 Upgrade to Premium →
@@ -493,6 +598,8 @@ function showPremiumMessage(subject) {
     `;
 
 }
+
+
 /* =========================================================
    EMPTY STATE
 ========================================================= */
@@ -515,8 +622,8 @@ function showEmptyState(subject) {
         <div class="syllabus-no-results">
 
             <strong>
-                ${escapeHTML(subject)} syllabus
-                is not available yet.
+                ${escapeHTML(subject)}
+                syllabus is not available yet.
             </strong>
 
             <p>
@@ -535,8 +642,10 @@ function showEmptyState(subject) {
    RENDER SYLLABUS
 ========================================================= */
 
-function renderSyllabus(rows) {
-
+function renderSyllabus(
+    rows,
+    isPaid
+) {
     const container =
         document.getElementById(
             "syllabus-content"
@@ -551,41 +660,50 @@ function renderSyllabus(rows) {
     const sections = {};
 
 
-    rows.forEach(row => {
+    rows.forEach(
+        row => {
 
-        const sectionKey =
-            row.section_number;
+            const sectionKey =
+                row.section_number;
 
 
-        if (!sections[sectionKey]) {
+            if (
+                !sections[sectionKey]
+            ) {
 
-            sections[sectionKey] = {
+                sections[sectionKey] = {
 
-                sectionNumber:
-                    row.section_number,
+                    sectionNumber:
+                        row.section_number,
 
-                sectionTitle:
-                    row.section_title,
+                    sectionTitle:
+                        row.section_title,
 
-                topics: []
+                    topics: []
 
-            };
+                };
+
+            }
+
+
+            sections[
+                sectionKey
+            ].topics.push(
+                row
+            );
 
         }
-
-
-        sections[sectionKey].topics.push(
-            row
-        );
-
-    });
+    );
 
 
     let html = "";
 
 
     Object.values(sections).forEach(
-        (section, sectionIndex) => {
+        (
+            section,
+            sectionIndex
+        ) => {
 
             html += `
 
@@ -627,22 +745,78 @@ function renderSyllabus(rows) {
 
                     </div>
 
-
                     <div class="syllabus-topics">
 
             `;
 
 
-            section.topics.forEach(
-                (topic, topicIndex) => {
+            /* =================================================
+               PREMIUM USER
+            ================================================= */
 
-                    html += renderTopic(
+           if (isPaid) {
+
+                section.topics.forEach(
+                    (
                         topic,
                         topicIndex
-                    );
+                    ) => {
+
+                        html +=
+                            renderTopic(
+                                topic,
+                                topicIndex
+                            );
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               FREE USER
+            ================================================= */
+
+            else {
+
+                const firstThreeTopics =
+                    sectionIndex === 0
+                        ? section.topics.slice(0, 3)
+                        : [];
+
+
+                firstThreeTopics.forEach(
+                    (
+                        topic,
+                        topicIndex
+                    ) => {
+
+                        html +=
+                            renderTopic(
+                                topic,
+                                topicIndex
+                            );
+
+                    }
+                );
+
+
+                const sectionHasLockedContent =
+                    sectionIndex > 0 ||
+                    section.topics.length > 3;
+
+
+                if (
+                    sectionHasLockedContent
+                ) {
+
+                    html +=
+                        renderLockedSection();
 
                 }
-            );
+
+            }
 
 
             html += `
@@ -667,10 +841,13 @@ function renderSyllabus(rows) {
 
 
 /* =========================================================
-   RENDER TOPIC
+   RENDER NORMAL TOPIC
 ========================================================= */
 
-function renderTopic(topic, index) {
+function renderTopic(
+    topic,
+    index
+) {
 
     const contents =
         normalizeArray(
@@ -692,7 +869,6 @@ function renderTopic(topic, index) {
                 topic.topic_number
             )}"
         >
-
 
             <div class="syllabus-topic-header">
 
@@ -732,7 +908,6 @@ function renderTopic(topic, index) {
 
             <div class="syllabus-topic-body">
 
-
                 ${
                     contents.length
                         ? `
@@ -749,13 +924,17 @@ function renderTopic(topic, index) {
                                 <ul>
 
                                     ${contents
-                                        .map(item => `
+                                        .map(
+                                            item => `
 
                                             <li>
-                                                ${escapeHTML(item)}
+                                                ${escapeHTML(
+                                                    item
+                                                )}
                                             </li>
 
-                                        `)
+                                        `
+                                        )
                                         .join("")}
 
                                 </ul>
@@ -783,13 +962,17 @@ function renderTopic(topic, index) {
                                 <ul>
 
                                     ${objectives
-                                        .map(item => `
+                                        .map(
+                                            item => `
 
                                             <li>
-                                                ${escapeHTML(item)}
+                                                ${escapeHTML(
+                                                    item
+                                                )}
                                             </li>
 
-                                        `)
+                                        `
+                                        )
                                         .join("")}
 
                                 </ul>
@@ -800,10 +983,61 @@ function renderTopic(topic, index) {
                         : ""
                 }
 
-
             </div>
 
         </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER LOCKED SECTION
+========================================================= */
+
+function renderLockedSection() {
+
+    return `
+
+        <div class="syllabus-premium-section">
+
+            <div class="syllabus-premium-lock">
+
+                <div class="syllabus-premium-lock-icon">
+                    🔒
+                </div>
+
+
+                <div class="syllabus-premium-lock-content">
+
+                    <span>
+                        PREMIUM CONTENT
+                    </span>
+
+                    <strong>
+                        Unlock the full syllabus
+                    </strong>
+
+                    <p>
+                        Upgrade to JAMB Premium to access
+                        all topics and learning objectives
+                        in this section.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="jamb-upgrade.html"
+                    class="study-note-button"
+                >
+                    Upgrade to Premium →
+                </a>
+
+            </div>
+
+        </div>
 
     `;
 
@@ -834,12 +1068,17 @@ function normalizeArray(value) {
                 JSON.parse(value);
 
 
-            if (Array.isArray(parsed)) {
+            if (
+                Array.isArray(parsed)
+            ) {
+
                 return parsed;
+
             }
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
             return [
                 value
@@ -859,49 +1098,80 @@ function normalizeArray(value) {
    TOPIC INTERACTION
 ========================================================= */
 
-/* =========================================================
-   TOPIC OPEN / CLOSE
-========================================================= */
 function addTopicInteractions() {
-    
-    const topics = document.querySelectorAll(".syllabus-topic");
-    
-    topics.forEach(topic => {
-        
-        const header = topic.querySelector(".syllabus-topic-header");
-        const body = topic.querySelector(".syllabus-topic-body");
-        
-        if (!header || !body) {
-            return;
-        }
-        
-        // Start closed
-        body.style.display = "none";
-        topic.classList.remove("is-open");
-        
-        header.addEventListener("click", function() {
-            
-            const isOpen =
-                body.style.display === "grid";
-            
-            if (isOpen) {
-                
-                // CLOSE
-                body.style.display = "none";
-                topic.classList.remove("is-open");
-                
-            } else {
-                
-                // OPEN
-                body.style.display = "grid";
-                topic.classList.add("is-open");
-                
+
+    const topics =
+        document.querySelectorAll(
+            ".syllabus-topic"
+        );
+
+
+    topics.forEach(
+        topic => {
+
+            const header =
+                topic.querySelector(
+                    ".syllabus-topic-header"
+                );
+
+
+            const body =
+                topic.querySelector(
+                    ".syllabus-topic-body"
+                );
+
+
+            if (!header || !body) {
+                return;
             }
-            
-        });
-        
-    });
-    
+
+
+            body.style.display =
+                "none";
+
+
+            topic.classList.remove(
+                "is-open"
+            );
+
+
+            header.addEventListener(
+                "click",
+                function () {
+
+                    const isOpen =
+                        body.style.display ===
+                        "grid";
+
+
+                    if (isOpen) {
+
+                        body.style.display =
+                            "none";
+
+                        topic.classList.remove(
+                            "is-open"
+                        );
+
+                    }
+
+                    else {
+
+                        body.style.display =
+                            "grid";
+
+                        topic.classList.add(
+                            "is-open"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
 }
 
 
@@ -960,7 +1230,22 @@ document.addEventListener(
     () => {
 
         const subjectKey =
-            getSubjectFromURL();
+            new URLSearchParams(
+                window.location.search
+            )
+                .get("subject")
+                ?.toLowerCase()
+                .trim();
+
+
+        if (!subjectKey) {
+
+            showError(
+                "No JAMB subject was selected."
+            );
+
+            return;
+        }
 
 
         if (
