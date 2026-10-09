@@ -2205,3 +2205,24 @@ select {
     }
 
 }
+
+.past-unlock-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 9px 14px;
+    border: 1px solid rgba(35, 79, 61, 0.18);
+    border-radius: 12px;
+    background: #F7F1E5;
+    color: #234F3D;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.past-unlock-link:hover {
+    background: #EEF3E8;
+    border-color: rgba(35, 79, 61, 0.3);
+}

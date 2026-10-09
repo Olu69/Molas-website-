@@ -16,366 +16,1535 @@
 
     <title>MOLAS Admin | Dashboard</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
     <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-    <!-- Admin Dashboard CSS -->
+    <!-- Admin CSS -->
     <link
         rel="stylesheet"
         href="molas-admin.css"
     >
+
 </head>
 
-<body class="molas-admin-page">
+<body>
 
-    <!-- =================================================
-         ADMIN HEADER
-    ================================================== -->
+    <!-- =====================================================
+         MOBILE SIDEBAR OVERLAY
+    ====================================================== -->
 
-    <header class="molas-admin-header">
+    <div
+        class="molas-admin-sidebar-overlay"
+        id="molas-admin-sidebar-overlay"
+    ></div>
 
-        <div class="molas-admin-header-inner">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="molas-admin-sidebar"
+        id="molas-admin-sidebar"
+    >
+
+        <div class="molas-admin-sidebar-header">
 
             <a
                 href="index.html"
                 class="molas-admin-brand"
-                aria-label="MOLAS"
             >
+
                 <img
                     src="molas.png"
-                    alt="MOLAS Educational Consults & Global Limited"
+                    alt="MOLAS"
                 >
-            </a>
 
-            <div class="molas-admin-header-right">
-
-                <div class="molas-admin-user">
-
-                    <div class="molas-admin-user-icon">
-                        <i class="fa-solid fa-user-shield"></i>
-                    </div>
-
-                    <div class="molas-admin-user-info">
-                        <span>Administrator</span>
-
-                        <small id="molas-admin-user-email">
-                            Admin
-                        </small>
-                    </div>
-
+                <div>
+                    <strong>MOLAS</strong>
+                    <span>Admin Panel</span>
                 </div>
 
-                <button
-                    type="button"
-                    class="molas-admin-logout"
-                    id="molas-admin-logout"
-                    aria-label="Sign out"
-                >
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Sign Out</span>
-                </button>
+            </a>
 
-            </div>
+
+            <button
+                type="button"
+                class="molas-admin-sidebar-close"
+                id="molas-admin-sidebar-close"
+                aria-label="Close menu"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
         </div>
 
-    </header>
+
+        <!-- Navigation -->
+
+        <nav class="molas-admin-navigation">
+
+            <button
+                type="button"
+                class="molas-admin-nav-item active"
+                data-admin-section="dashboard"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Dashboard</span>
+
+            </button>
 
 
-    <!-- =================================================
-         MAIN DASHBOARD
-    ================================================== -->
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="students"
+            >
 
-    <main class="molas-admin-main">
+                <i class="fa-solid fa-user-graduate"></i>
 
-        <div class="molas-admin-container">
+                <span>Students</span>
 
-            <!-- PAGE HEADING -->
+            </button>
 
-            <div class="molas-admin-page-heading">
 
-                <div>
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="payments"
+            >
 
-                    <span class="molas-admin-label">
-                        MOLAS ADMIN
-                    </span>
+                <i class="fa-solid fa-credit-card"></i>
 
-                    <h1>Conversations</h1>
+                <span>Payments</span>
 
-                    <p>
-                        Manage and respond to conversations
-                        from MOLAS visitors.
-                    </p>
+            </button>
 
-                </div>
 
-                <div class="molas-admin-heading-status">
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="jamb"
+            >
 
-                    <span class="molas-admin-online-dot"></span>
+                <i class="fa-solid fa-book-open"></i>
 
-                    <span>Live</span>
+                <span>JAMB Access</span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="content"
+            >
+
+                <i class="fa-solid fa-newspaper"></i>
+
+                <span>Content</span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="messages"
+            >
+
+                <i class="fa-regular fa-comments"></i>
+
+                <span>Messages</span>
+
+                <span
+                    class="molas-admin-nav-badge"
+                    id="molas-admin-message-badge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="molas-admin-nav-item"
+                data-admin-section="settings"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>Settings</span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- Sidebar bottom -->
+
+        <div class="molas-admin-sidebar-bottom">
+
+            <a
+                href="index.html"
+                class="molas-admin-sidebar-link"
+            >
+
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                <span>View Website</span>
+
+            </a>
+
+
+            <button
+                type="button"
+                class="molas-admin-sidebar-link logout"
+                id="molas-admin-logout"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Sign Out</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <div class="molas-admin-app">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="molas-admin-topbar">
+
+            <div class="molas-admin-topbar-left">
+
+                <button
+                    type="button"
+                    class="molas-admin-menu-toggle"
+                    id="molas-admin-menu-toggle"
+                    aria-label="Open menu"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="molas-admin-page-heading">
+
+                    <span>Administration</span>
+
+                    <h1 id="molas-admin-page-title">
+                        Dashboard
+                    </h1>
 
                 </div>
 
             </div>
 
 
-            <!-- =================================================
-                 DASHBOARD CONTENT
-            ================================================== -->
+            <div class="molas-admin-topbar-right">
 
-            <section class="molas-admin-chat-layout">
+                <!-- Global Search -->
+
+                <div class="molas-admin-global-search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="search"
+                        id="molas-admin-global-search"
+                        placeholder="Search..."
+                        autocomplete="off"
+                    >
+
+                </div>
 
 
-                <!-- =================================================
-                     CONVERSATION LIST
-                ================================================== -->
+                <!-- Notification -->
 
-                <aside class="molas-admin-conversations">
+                <button
+                    type="button"
+                    class="molas-admin-icon-button"
+                    id="molas-admin-notification-button"
+                    aria-label="Notifications"
+                >
 
-                    <div class="molas-admin-conversations-header">
+                    <i class="fa-regular fa-bell"></i>
 
-                        <div>
+                    <span
+                        class="molas-admin-notification-dot"
+                        id="molas-admin-notification-dot"
+                    ></span>
 
-                            <h2>Conversations</h2>
+                </button>
 
-                            <span id="molas-conversation-count">
-                                0 conversations
-                            </span>
 
-                        </div>
+                <!-- Profile -->
+
+                <div class="molas-admin-profile">
+
+                    <button
+                        type="button"
+                        class="molas-admin-profile-button"
+                        id="molas-admin-profile-button"
+                    >
+
+                        <span class="molas-admin-profile-avatar">
+                            A
+                        </span>
+
+                        <span class="molas-admin-profile-info">
+
+                            <strong>Administrator</strong>
+
+                            <small id="molas-admin-user-email">
+                                Loading...
+                            </small>
+
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+
+                    <div
+                        class="molas-admin-profile-dropdown"
+                        id="molas-admin-profile-dropdown"
+                    >
 
                         <button
                             type="button"
-                            class="molas-admin-refresh"
-                            id="molas-admin-refresh"
-                            aria-label="Refresh conversations"
+                            id="molas-admin-profile-logout"
                         >
-                            <i class="fa-solid fa-rotate"></i>
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>Sign Out</span>
+
                         </button>
 
                     </div>
 
+                </div>
 
-                    <!-- Conversation search -->
+            </div>
 
-                    <div class="molas-admin-search">
+        </header>
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
 
-                        <input
-                            type="search"
-                            id="molas-conversation-search"
-                            placeholder="Search conversations..."
-                            autocomplete="off"
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="molas-admin-main">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section
+                class="molas-admin-section active"
+                id="molas-admin-section-dashboard"
+                data-section="dashboard"
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Overview
+                        </span>
+
+                        <h2>
+                            Welcome back
+                        </h2>
+
+                        <p>
+                            Here's what is happening across MOLAS.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Statistics -->
+
+                <div class="molas-admin-stat-grid">
+
+
+                    <article class="molas-admin-stat-card">
+
+                        <div class="molas-admin-stat-icon students">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Total Students</span>
+
+                            <strong id="molas-admin-total-students">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="molas-admin-stat-card">
+
+                        <div class="molas-admin-stat-icon payments">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Pending Payments</span>
+
+                            <strong id="molas-admin-total-pending">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="molas-admin-stat-card">
+
+                        <div class="molas-admin-stat-icon access">
+                            <i class="fa-solid fa-unlock"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Active Access</span>
+
+                            <strong id="molas-admin-total-access">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="molas-admin-stat-card">
+
+                        <div class="molas-admin-stat-icon messages">
+                            <i class="fa-regular fa-comments"></i>
+                        </div>
+
+                        <div>
+
+                            <span>New Messages</span>
+
+                            <strong id="molas-admin-total-messages">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- Dashboard lower area -->
+
+                <div class="molas-admin-dashboard-grid">
+
+
+                    <!-- Recent Activity -->
+
+                    <div class="molas-admin-panel">
+
+                        <div class="molas-admin-panel-header">
+
+                            <div>
+
+                                <span class="molas-admin-eyebrow">
+                                    Activity
+                                </span>
+
+                                <h3>
+                                    Recent Activity
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="molas-admin-activity-list"
+                            id="molas-admin-activity-list"
                         >
+
+                            <div class="molas-admin-list-empty">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                                <h3>
+                                    No recent activity
+                                </h3>
+
+                                <p>
+                                    Recent admin activity will appear here.
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
 
-                    <!-- Conversation list -->
+                    <!-- Quick Actions -->
+
+                    <div class="molas-admin-panel">
+
+                        <div class="molas-admin-panel-header">
+
+                            <div>
+
+                                <span class="molas-admin-eyebrow">
+                                    Shortcuts
+                                </span>
+
+                                <h3>
+                                    Quick Actions
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="molas-admin-quick-actions">
+
+                            <button
+                                type="button"
+                                data-admin-section-target="payments"
+                            >
+
+                                <i class="fa-solid fa-credit-card"></i>
+
+                                <span>
+                                    Review Payments
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                data-admin-section-target="students"
+                            >
+
+                                <i class="fa-solid fa-user-graduate"></i>
+
+                                <span>
+                                    View Students
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                data-admin-section-target="jamb"
+                            >
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                                <span>
+                                    JAMB Access
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                data-admin-section-target="messages"
+                            >
+
+                                <i class="fa-regular fa-comments"></i>
+
+                                <span>
+                                    Open Messages
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 STUDENTS
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-students"
+                data-section="students"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Students
+                        </span>
+
+                        <h2>
+                            Students
+                        </h2>
+
+                        <p>
+                            View registered MOLAS users and manage their access.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="molas-admin-panel">
+
+                    <div class="molas-admin-panel-toolbar">
+
+                        <div class="molas-admin-search-box">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="search"
+                                id="molas-admin-student-search"
+                                placeholder="Search students..."
+                            >
+
+                        </div>
+
+                    </div>
+
 
                     <div
-                        class="molas-admin-conversation-list"
-                        id="molas-admin-conversation-list"
+                        class="molas-admin-student-list"
+                        id="molas-admin-student-list"
                     >
 
                         <div class="molas-admin-list-empty">
 
-                            <i class="fa-regular fa-comments"></i>
+                            <i class="fa-solid fa-user-graduate"></i>
 
-                            <h3>No conversations yet</h3>
+                            <h3>
+                                Students will appear here
+                            </h3>
 
                             <p>
-                                New visitor conversations
-                                will appear here.
+                                Registered users will be listed here.
                             </p>
 
                         </div>
 
                     </div>
 
-                </aside>
 
-
-                <!-- =================================================
-                     CHAT PANEL
-                ================================================== -->
-
-                <section class="molas-admin-chat-panel">
-
-
-                    <!-- Chat empty state -->
+                    <!-- Student Details -->
 
                     <div
-                        class="molas-admin-chat-empty"
-                        id="molas-admin-chat-empty"
+                        class="molas-admin-detail-view"
+                        id="molas-admin-student-detail"
+                        hidden
                     >
 
-                        <div class="molas-admin-chat-empty-icon">
-                            <i class="fa-regular fa-comments"></i>
-                        </div>
+                        <button
+                            type="button"
+                            class="molas-admin-back-button"
+                            data-close-detail="students"
+                        >
 
-                        <h2>Select a conversation</h2>
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Back to Students
+
+                        </button>
+
+
+                        <div
+                            id="molas-admin-student-detail-content"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PAYMENTS
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-payments"
+                data-section="payments"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Payments
+                        </span>
+
+                        <h2>
+                            Payments
+                        </h2>
 
                         <p>
-                            Choose a conversation from the list
-                            to view messages and reply.
+                            Review payment submissions and transaction status.
                         </p>
 
                     </div>
 
+                </div>
 
-                    <!-- Actual conversation -->
+
+                <div class="molas-admin-panel">
+
+                    <div class="molas-admin-panel-toolbar">
+
+                        <div class="molas-admin-search-box">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="search"
+                                id="molas-admin-payment-search"
+                                placeholder="Search payments..."
+                            >
+
+                        </div>
+
+                    </div>
+
 
                     <div
-                        class="molas-admin-active-chat"
-                        id="molas-admin-active-chat"
+                        class="molas-admin-payment-list"
+                        id="molas-admin-payment-list"
+                    >
+
+                        <div class="molas-admin-list-empty">
+
+                            <i class="fa-solid fa-receipt"></i>
+
+                            <h3>
+                                Payments will appear here
+                            </h3>
+
+                            <p>
+                                Payment records will be listed here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Payment Details -->
+
+                    <div
+                        class="molas-admin-detail-view"
+                        id="molas-admin-payment-detail"
                         hidden
                     >
 
-                        <!-- Chat header -->
+                        <button
+                            type="button"
+                            class="molas-admin-back-button"
+                            data-close-detail="payments"
+                        >
 
-                        <div class="molas-admin-chat-header">
+                            <i class="fa-solid fa-arrow-left"></i>
 
-                            <!-- Back to conversations -->
+                            Back to Payments
+
+                        </button>
+
+
+                        <div
+                            id="molas-admin-payment-detail-content"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 JAMB ACCESS
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-jamb"
+                data-section="jamb"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            JAMB
+                        </span>
+
+                        <h2>
+                            JAMB Access
+                        </h2>
+
+                        <p>
+                            Review JAMB resource payment orders and access requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="molas-admin-panel">
+
+                    <div class="molas-admin-panel-toolbar">
+
+                        <div>
+
+                            <span class="molas-admin-eyebrow">
+                                Payment Orders
+                            </span>
+
+                            <h3>
+                                JAMB Resource Orders
+                            </h3>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="molas-admin-toolbar-button"
+                            id="jamb-payments-refresh"
+                        >
+
+                            <i class="fa-solid fa-rotate"></i>
+
+                            Refresh
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- JAMB payment list -->
+
+                    <div
+                        id="jamb-payment-list"
+                        class="molas-admin-jamb-payment-list"
+                    >
+
+                        <div class="molas-admin-list-empty">
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            <h3>
+                                Loading payment orders...
+                            </h3>
+
+                            <p>
+                                Please wait.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- JAMB order details -->
+
+                    <div
+                        class="molas-admin-detail-view"
+                        id="molas-admin-jamb-detail"
+                        hidden
+                    >
+
+                        <button
+                            type="button"
+                            class="molas-admin-back-button"
+                            data-close-detail="jamb"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Back to JAMB Access
+
+                        </button>
+
+
+                        <div
+                            id="molas-admin-jamb-detail-content"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONTENT
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-content"
+                data-section="content"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Website Content
+                        </span>
+
+                        <h2>
+                            Content
+                        </h2>
+
+                        <p>
+                            Manage the information published across the MOLAS website.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="molas-admin-content-grid">
+
+
+                    <button
+                        type="button"
+                        class="molas-admin-content-card"
+                        data-content-type="news"
+                    >
+
+                        <div class="molas-admin-content-card-icon">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                News
+                            </h3>
+
+                            <p>
+                                Manage education and JAMB news.
+                            </p>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="molas-admin-content-card"
+                        data-content-type="admission_alerts"
+                    >
+
+                        <div class="molas-admin-content-card-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Admission Alerts
+                            </h3>
+
+                            <p>
+                                Manage admission and screening updates.
+                            </p>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="molas-admin-content-card"
+                        data-content-type="scholarships"
+                    >
+
+                        <div class="molas-admin-content-card-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Scholarships
+                            </h3>
+
+                            <p>
+                                Manage scholarship opportunities.
+                            </p>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="molas-admin-content-card"
+                        data-content-type="university_updates"
+                    >
+
+                        <div class="molas-admin-content-card-icon">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                University Updates
+                            </h3>
+
+                            <p>
+                                Manage university admission updates.
+                            </p>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- Content detail area -->
+
+                <div
+                    class="molas-admin-content-detail"
+                    id="molas-admin-content-detail"
+                    hidden
+                >
+
+                    <button
+                        type="button"
+                        class="molas-admin-back-button"
+                        id="molas-admin-content-back"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Back to Content
+
+                    </button>
+
+
+                    <div
+                        id="molas-admin-content-detail-content"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MESSAGES
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-messages"
+                data-section="messages"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Support
+                        </span>
+
+                        <h2>
+                            Messages
+                        </h2>
+
+                        <p>
+                            Respond to conversations from MOLAS website visitors.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="molas-admin-chat-layout">
+
+
+                    <!-- Conversation list -->
+
+                    <aside class="molas-admin-conversation-sidebar">
+
+                        <div class="molas-admin-conversation-sidebar-header">
+
+                            <div>
+
+                                <h3>
+                                    Conversations
+                                </h3>
+
+                                <span id="molas-conversation-count">
+                                    0 conversations
+                                </span>
+
+                            </div>
+
 
                             <button
                                 type="button"
-                                class="molas-admin-back-to-conversations"
-                                id="molas-admin-back-to-conversations"
-                                aria-label="Back to conversations"
+                                class="molas-admin-chat-refresh"
+                                id="molas-admin-refresh"
+                                aria-label="Refresh conversations"
                             >
-                                <i class="fa-solid fa-arrow-left"></i>
-                                <span>Conversations</span>
+
+                                <i class="fa-solid fa-rotate"></i>
+
                             </button>
 
+                        </div>
 
-                            <div class="molas-admin-chat-visitor">
 
-                                <div
-                                    class="molas-admin-visitor-avatar"
-                                    id="molas-admin-visitor-avatar"
-                                >
-                                    V
-                                </div>
+                        <div class="molas-admin-conversation-search">
 
-                                <div>
+                            <i class="fa-solid fa-magnifying-glass"></i>
 
-                                    <h2 id="molas-admin-chat-name">
-                                        Visitor
-                                    </h2>
+                            <input
+                                type="search"
+                                id="molas-conversation-search"
+                                placeholder="Search conversations..."
+                            >
 
-                                    <div class="molas-admin-chat-meta">
+                        </div>
 
-                                        <span id="molas-admin-chat-email">
+
+                        <div
+                            class="molas-admin-conversation-list"
+                            id="molas-admin-conversation-list"
+                        >
+
+                            <div class="molas-admin-list-empty">
+
+                                <i class="fa-regular fa-comments"></i>
+
+                                <h3>
+                                    Loading conversations...
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+
+                    <!-- Chat panel -->
+
+                    <section class="molas-admin-chat-panel">
+
+
+                        <!-- Empty chat -->
+
+                        <div
+                            class="molas-admin-chat-empty"
+                            id="molas-admin-chat-empty"
+                        >
+
+                            <div class="molas-admin-chat-empty-icon">
+
+                                <i class="fa-regular fa-comments"></i>
+
+                            </div>
+
+                            <h3>
+                                Select a conversation
+                            </h3>
+
+                            <p>
+                                Choose a conversation from the list to view messages.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Active chat -->
+
+                        <div
+                            class="molas-admin-active-chat"
+                            id="molas-admin-active-chat"
+                            hidden
+                        >
+
+
+                            <!-- Chat header -->
+
+                            <div class="molas-admin-chat-header">
+
+
+                                <div class="molas-admin-chat-header-left">
+
+                                    <button
+                                        type="button"
+                                        class="molas-admin-back-to-conversations"
+                                        id="molas-admin-back-to-conversations"
+                                        aria-label="Back to conversations"
+                                    >
+
+                                        <i class="fa-solid fa-arrow-left"></i>
+
+                                    </button>
+
+
+                                    <div
+                                        class="molas-admin-visitor-avatar"
+                                        id="molas-admin-visitor-avatar"
+                                    >
+                                        V
+                                    </div>
+
+
+                                    <div>
+
+                                        <h3
+                                            id="molas-admin-chat-name"
+                                        >
+                                            Visitor
+                                        </h3>
+
+                                        <p
+                                            id="molas-admin-chat-email"
+                                        >
                                             Email
-                                        </span>
+                                        </p>
 
-                                        <span class="molas-admin-meta-divider">
-                                            •
-                                        </span>
-
-                                        <span id="molas-admin-chat-topic">
-                                            Topic
+                                        <span
+                                            id="molas-admin-chat-topic"
+                                        >
+                                            Other
                                         </span>
 
                                     </div>
 
                                 </div>
 
+
+                                <div class="molas-admin-chat-header-actions">
+
+                                    <span
+                                        class="molas-admin-chat-status"
+                                        id="molas-admin-chat-status"
+                                    >
+                                        Open
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="molas-admin-close-conversation"
+                                        id="molas-admin-close-conversation"
+                                    >
+
+                                        <i class="fa-solid fa-check"></i>
+
+                                        Close
+
+                                    </button>
+
+                                </div>
+
                             </div>
 
 
-                            <div class="molas-admin-chat-actions">
+                            <!-- Messages -->
 
-                                <span
-                                    class="molas-admin-chat-status"
-                                    id="molas-admin-chat-status"
-                                >
-                                    Open
-                                </span>
+                            <div
+                                class="molas-admin-messages"
+                                id="molas-admin-messages"
+                            ></div>
+
+
+                            <!-- Reply -->
+
+                            <form
+                                class="molas-admin-reply-form"
+                                id="molas-admin-reply-form"
+                            >
+
+                                <textarea
+                                    id="molas-admin-reply-message"
+                                    placeholder="Write a reply..."
+                                    rows="2"
+                                ></textarea>
+
 
                                 <button
-                                    type="button"
-                                    class="molas-admin-close-conversation"
-                                    id="molas-admin-close-conversation"
+                                    type="submit"
+                                    id="molas-admin-send-message"
+                                    aria-label="Send message"
                                 >
-                                    <i class="fa-solid fa-check"></i>
-                                    Close
+
+                                    <i class="fa-solid fa-paper-plane"></i>
+
                                 </button>
 
-                            </div>
+                            </form>
 
                         </div>
 
+                    </section>
 
-                        <!-- Messages -->
-
-                        <div
-                            class="molas-admin-messages"
-                            id="molas-admin-messages"
-                            aria-live="polite"
-                        >
-                        </div>
-
-
-                        <!-- Reply -->
-
-                        <form
-                            class="molas-admin-reply-form"
-                            id="molas-admin-reply-form"
-                        >
-
-                            <div class="molas-admin-reply-input">
-
-                                <input
-                                    type="text"
-                                    id="molas-admin-reply-message"
-                                    name="message"
-                                    placeholder="Write a reply..."
-                                    autocomplete="off"
-                                    required
-                                >
-
-                            </div>
-
-                            <button
-                                type="submit"
-                                id="molas-admin-send-message"
-                                aria-label="Send reply"
-                            >
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </section>
+                </div>
 
             </section>
 
-        </div>
 
-    </main>
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section
+                class="molas-admin-section"
+                id="molas-admin-section-settings"
+                data-section="settings"
+                hidden
+            >
+
+                <div class="molas-admin-section-header">
+
+                    <div>
+
+                        <span class="molas-admin-eyebrow">
+                            Administration
+                        </span>
+
+                        <h2>
+                            Settings
+                        </h2>
+
+                        <p>
+                            Manage your administrator account and dashboard settings.
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-    <!-- =================================================
-         NEW MESSAGE NOTIFICATION
-    ================================================== -->
+                <div class="molas-admin-settings-grid">
+
+
+                    <div class="molas-admin-panel">
+
+                        <div class="molas-admin-panel-header">
+
+                            <div>
+
+                                <span class="molas-admin-eyebrow">
+                                    Account
+                                </span>
+
+                                <h3>
+                                    Administrator Account
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="molas-admin-setting-row">
+
+                            <div>
+
+                                <span>
+                                    Email
+                                </span>
+
+                                <strong id="molas-admin-settings-email">
+                                    Loading...
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="molas-admin-setting-row">
+
+                            <div>
+
+                                <span>
+                                    Account type
+                                </span>
+
+                                <strong>
+                                    Administrator
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="molas-admin-danger-button"
+                            id="molas-admin-settings-logout"
+                        >
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Sign Out
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="molas-admin-panel">
+
+                        <div class="molas-admin-panel-header">
+
+                            <div>
+
+                                <span class="molas-admin-eyebrow">
+                                    System
+                                </span>
+
+                                <h3>
+                                    Dashboard
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="molas-admin-setting-row">
+
+                            <div>
+
+                                <span>
+                                    Platform
+                                </span>
+
+                                <strong>
+                                    MOLAS Educational Consults
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="molas-admin-setting-row">
+
+                            <div>
+
+                                <span>
+                                    Status
+                                </span>
+
+                                <strong class="molas-admin-status-online">
+                                    System Active
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         MESSAGE NOTIFICATION
+    ====================================================== -->
 
     <div
         class="molas-admin-message-notification"
@@ -384,37 +1553,51 @@
     >
 
         <div class="molas-admin-notification-icon">
-            <i class="fa-solid fa-comments"></i>
+
+            <i class="fa-regular fa-comments"></i>
+
         </div>
+
 
         <div class="molas-admin-notification-content">
 
-            <strong>New message</strong>
+            <strong>
+                New message
+            </strong>
 
-            <span id="adminMessageNotificationText">
-                You have a new visitor message.
-            </span>
+            <p id="adminMessageNotificationText">
+                New visitor message
+            </p>
 
         </div>
+
 
         <button
             type="button"
             id="adminMessageNotificationClose"
             aria-label="Close notification"
         >
+
             <i class="fa-solid fa-xmark"></i>
+
         </button>
 
     </div>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          SUPABASE
-    ================================================== -->
+    ====================================================== -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
-    <!-- Admin Dashboard JS -->
+
+    <!-- =====================================================
+         MOLAS ADMIN JAVASCRIPT
+    ====================================================== -->
+
     <script src="molas-admin.js"></script>
 
 </body>

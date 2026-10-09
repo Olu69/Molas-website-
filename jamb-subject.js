@@ -1,6 +1,6 @@
 /* =========================================================
    MOLAS — JAMB SUBJECT SYLLABUS
-   Supabase REST API
+   Device-Based Paid Access
 ========================================================= */
 
 
@@ -74,107 +74,30 @@ const SUBJECT_INFO = {
 
 
 /* =========================================================
-   USER ACCESS
+   SUBJECTS CURRENTLY AVAILABLE IN DATABASE
 ========================================================= */
 
-async function getJambAccess() {
+const AVAILABLE_SYLLABUS_SUBJECTS = [
 
-    const {
-        data: sessionData,
-        error: sessionError
-    } =
-        await supabaseClient.auth.getSession();
+    "Mathematics",
 
+    "Use of English",
 
-    if (sessionError) {
+    "Biology",
 
-        showError(
-            "Session error: " +
-            sessionError.message
-        );
+    "Chemistry",
 
-        return null;
-    }
+    "Physics"
+
+];
 
 
-    if (!sessionData.session) {
+/* =========================================================
+   DEVICE STORAGE
+========================================================= */
 
-        showError(
-            "No active session found."
-        );
-
-        return null;
-    }
-
-
-    const session =
-        sessionData.session;
-
-
-    const {
-        data: userData,
-        error: userError
-    } =
-        await supabaseClient.auth.getUser();
-
-
-    if (userError) {
-
-        showError(
-            "User error: " +
-            userError.message
-        );
-
-        return null;
-    }
-
-
-    if (!userData.user) {
-
-        showError(
-            "No authenticated user found."
-        );
-
-        return null;
-    }
-
-
-    const {
-        data: profile,
-        error: profileError
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select("jamb_syllabus_access")
-            .eq(
-                "id",
-                userData.user.id
-            )
-            .single();
-
-
-    if (profileError) {
-
-        showError(
-            "Profile error: " +
-            profileError.message
-        );
-
-        return null;
-    }
-
-
-    return {
-
-        access:
-    profile.jamb_syllabus_access,
-
-        accessToken:
-            session.access_token
-
-    };
-
-}
+const JAMB_DEVICE_TOKEN_KEY =
+    "molas_jamb_device_token";
 
 
 /* =========================================================
@@ -277,6 +200,229 @@ function updateSubjectInformation(subjectKey) {
 
 
 /* =========================================================
+   DEVICE TOKEN
+========================================================= */
+
+function getDeviceToken() {
+
+    let token =
+        localStorage.getItem(
+            JAMB_DEVICE_TOKEN_KEY
+        );
+
+
+    if (!token) {
+
+        const randomValues =
+            new Uint8Array(32);
+
+
+        crypto.getRandomValues(
+            randomValues
+        );
+
+
+        token =
+            Array.from(
+                randomValues
+            )
+                .map(
+                    byte =>
+                        byte
+                            .toString(16)
+                            .padStart(2, "0")
+                )
+                .join("");
+
+
+        localStorage.setItem(
+            JAMB_DEVICE_TOKEN_KEY,
+            token
+        );
+
+    }
+
+
+    return token;
+
+}
+
+
+/* =========================================================
+   HASH DEVICE TOKEN
+========================================================= */
+
+async function hashDeviceToken(token) {
+
+    const encoder =
+        new TextEncoder();
+
+
+    const data =
+        encoder.encode(token);
+
+
+    const hashBuffer =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(
+                hashBuffer
+            )
+        );
+
+
+    return hashArray
+        .map(
+            byte =>
+                byte
+                    .toString(16)
+                    .padStart(2, "0")
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   DEVICE NAME
+========================================================= */
+
+function getDeviceName() {
+
+    const userAgent =
+        navigator.userAgent;
+
+
+    if (/iPhone/i.test(userAgent)) {
+        return "iPhone";
+    }
+
+
+    if (/iPad/i.test(userAgent)) {
+        return "iPad";
+    }
+
+
+    if (/Android/i.test(userAgent)) {
+        return "Android device";
+    }
+
+
+    if (/Windows/i.test(userAgent)) {
+        return "Windows device";
+    }
+
+
+    if (/Macintosh/i.test(userAgent)) {
+        return "Mac device";
+    }
+
+
+    return "Web device";
+
+}
+
+
+/* =========================================================
+   REGISTER CURRENT DEVICE
+========================================================= */
+
+async function registerCurrentDevice() {
+
+    const deviceToken =
+        getDeviceToken();
+
+
+    const deviceTokenHash =
+        await hashDeviceToken(
+            deviceToken
+        );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.rpc(
+            "register_jamb_device",
+            {
+                p_device_token_hash:
+                    deviceTokenHash,
+
+                p_device_name:
+                    getDeviceName()
+            }
+        );
+
+
+    if (error) {
+
+        throw new Error(
+            error.message ||
+            "Unable to register this device."
+        );
+
+    }
+
+
+    if (!data) {
+
+        throw new Error(
+            "The device could not be registered."
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   GET CURRENT USER
+========================================================= */
+
+async function getCurrentUser() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (error) {
+
+        throw new Error(
+            error.message ||
+            "Unable to verify your account."
+        );
+
+    }
+
+
+    if (!data.user) {
+
+        throw new Error(
+            "No authenticated user found."
+        );
+
+    }
+
+
+    return data.user;
+
+}
+
+
+/* =========================================================
    LOAD SYLLABUS
 ========================================================= */
 
@@ -302,115 +448,146 @@ async function loadSyllabus(subjectKey) {
 
 
     /* =====================================================
-       CHECK ACCESS
-    ===================================================== */
-
-    const jambAccessData =
-        await getJambAccess();
-
-
-    if (!jambAccessData) {
-        return;
-    }
-
-
-    const jambAccess =
-        jambAccessData.access;
-
-
-    const accessToken =
-        jambAccessData.accessToken;
-
-
-    /* =====================================================
-       FREE SUBJECTS
-    ===================================================== */
-
-    const freeSubjects = [
-
-        "Mathematics",
-
-        "Use of English"
-
-    ];
-
-
-    const isPaid =
-    jambAccess === "paid";
-
-
-    const isFreeSubject =
-        freeSubjects.includes(
-            subjectName
-        );
-
-
-    /* =====================================================
-       SUBJECT LOCK
+       CHECK SUBJECT AVAILABILITY
     ===================================================== */
 
     if (
-    jambAccess !== "paid" &&
-    !isFreeSubject
-) {
+        !AVAILABLE_SYLLABUS_SUBJECTS.includes(
+            subjectName
+        )
+    ) {
 
-    showPremiumMessage(
-        subjectName
-    );
+        showEmptyState(
+            subjectName
+        );
 
-    return;
-}
+        return;
+
+    }
 
 
     try {
 
-        const response =
-            await fetch(
+        /* =================================================
+           CHECK LOGIN
+        ================================================= */
 
-                `${SUPABASE_URL}/rest/v1/jamb_syllabus` +
-                `?subject=eq.${encodeURIComponent(subjectName)}` +
-                `&order=section_number.asc,topic_number.asc`,
+        const {
+            data: sessionData,
+            error: sessionError
+        } =
+            await supabaseClient.auth.getSession();
 
-                {
 
-                    method: "GET",
+        if (sessionError) {
 
-                    headers: {
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Authorization":
-                            `Bearer ${accessToken}`,
-
-                        "Content-Type":
-                            "application/json"
-
-                    }
-
-                }
-
+            throw new Error(
+                sessionError.message
             );
 
-
-        if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-
-            showError(
-                errorText
-            );
-
-
-            return;
         }
 
 
-        let data =
-            await response.json();
+        if (!sessionData.session) {
 
+            window.location.replace(
+                "account.html?resource=jamb"
+            );
+
+            return;
+
+        }
+
+
+        /* =================================================
+           GET USER
+        ================================================= */
+
+        await getCurrentUser();
+
+
+        /* =================================================
+           REGISTER / IDENTIFY DEVICE
+        ================================================= */
+
+        const deviceAccessId =
+            await registerCurrentDevice();
+
+
+        /* =================================================
+           GET SUBJECT SYLLABUS FROM SECURE RPC
+        ================================================= */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "get_jamb_syllabus",
+                {
+                    p_subject:
+                        subjectName,
+
+                    p_device_access_id:
+                        deviceAccessId
+                }
+            );
+
+
+        /* =================================================
+           NO PURCHASE
+        ================================================= */
+
+        if (error) {
+
+            const message =
+                String(
+                    error.message || ""
+                )
+                    .toLowerCase();
+
+
+            if (
+                message.includes(
+                    "has not been purchased"
+                )
+            ) {
+
+                showPremiumMessage(
+                    subjectName
+                );
+
+                return;
+
+            }
+
+
+            if (
+                message.includes(
+                    "invalid device access"
+                )
+            ) {
+
+                showError(
+                    "This device could not be verified. Please try again."
+                );
+
+                return;
+
+            }
+
+
+            throw new Error(
+                error.message ||
+                "Unable to load the syllabus."
+            );
+
+        }
+
+
+        /* =================================================
+           NO SYLLABUS DATA
+        ================================================= */
 
         if (
             !data ||
@@ -422,6 +599,7 @@ async function loadSyllabus(subjectKey) {
             );
 
             return;
+
         }
 
 
@@ -468,16 +646,27 @@ async function loadSyllabus(subjectKey) {
         );
 
 
+        /* =================================================
+           FULL ACCESS
+        ================================================= */
+
         renderSyllabus(
-    data,
-    isPaid
-);
+            data,
+            true
+        );
 
     }
 
     catch (error) {
 
+        console.error(
+            "JAMB syllabus error:",
+            error
+        );
+
+
         showError(
+            error.message ||
             "Something went wrong while loading the syllabus."
         );
 
@@ -557,7 +746,7 @@ function showError(message) {
 
 
 /* =========================================================
-   PREMIUM SUBJECT MESSAGE
+   LOCKED SUBJECT MESSAGE
 ========================================================= */
 
 function showPremiumMessage(subject) {
@@ -573,24 +762,40 @@ function showPremiumMessage(subject) {
     }
 
 
+    const subjectKey =
+        Object.keys(
+            SUBJECT_INFO
+        ).find(
+            key =>
+                SUBJECT_INFO[key].name ===
+                subject
+        );
+
+
+    const upgradeURL =
+        subjectKey
+            ? `jamb-upgrade.html?type=syllabus&subject=${encodeURIComponent(subjectKey)}`
+            : "jamb-upgrade.html";
+
+
     container.innerHTML = `
 
         <div class="syllabus-no-results">
 
             <strong>
-                Premium Content
+                Unlock ${escapeHTML(subject)} Syllabus
             </strong>
 
             <p>
-                The full ${escapeHTML(subject)}
-                syllabus is available with JAMB Premium.
+                Get the complete JAMB ${escapeHTML(subject)}
+                syllabus for ₦500 on this device.
             </p>
 
             <a
-                href="jamb-upgrade.html"
+                href="${upgradeURL}"
                 class="study-note-button"
             >
-                Upgrade to Premium →
+                Unlock for ₦500 →
             </a>
 
         </div>
@@ -646,6 +851,7 @@ function renderSyllabus(
     rows,
     isPaid
 ) {
+
     const container =
         document.getElementById(
             "syllabus-content"
@@ -751,10 +957,10 @@ function renderSyllabus(
 
 
             /* =================================================
-               PREMIUM USER
+               FULLY PAID SUBJECT
             ================================================= */
 
-           if (isPaid) {
+            if (isPaid) {
 
                 section.topics.forEach(
                     (
@@ -770,51 +976,6 @@ function renderSyllabus(
 
                     }
                 );
-
-            }
-
-
-            /* =================================================
-               FREE USER
-            ================================================= */
-
-            else {
-
-                const firstThreeTopics =
-                    sectionIndex === 0
-                        ? section.topics.slice(0, 3)
-                        : [];
-
-
-                firstThreeTopics.forEach(
-                    (
-                        topic,
-                        topicIndex
-                    ) => {
-
-                        html +=
-                            renderTopic(
-                                topic,
-                                topicIndex
-                            );
-
-                    }
-                );
-
-
-                const sectionHasLockedContent =
-                    sectionIndex > 0 ||
-                    section.topics.length > 3;
-
-
-                if (
-                    sectionHasLockedContent
-                ) {
-
-                    html +=
-                        renderLockedSection();
-
-                }
 
             }
 
@@ -986,58 +1147,6 @@ function renderTopic(
             </div>
 
         </article>
-
-    `;
-
-}
-
-
-/* =========================================================
-   RENDER LOCKED SECTION
-========================================================= */
-
-function renderLockedSection() {
-
-    return `
-
-        <div class="syllabus-premium-section">
-
-            <div class="syllabus-premium-lock">
-
-                <div class="syllabus-premium-lock-icon">
-                    🔒
-                </div>
-
-
-                <div class="syllabus-premium-lock-content">
-
-                    <span>
-                        PREMIUM CONTENT
-                    </span>
-
-                    <strong>
-                        Unlock the full syllabus
-                    </strong>
-
-                    <p>
-                        Upgrade to JAMB Premium to access
-                        all topics and learning objectives
-                        in this section.
-                    </p>
-
-                </div>
-
-
-                <a
-                    href="jamb-upgrade.html"
-                    class="study-note-button"
-                >
-                    Upgrade to Premium →
-                </a>
-
-            </div>
-
-        </div>
 
     `;
 
@@ -1230,12 +1339,7 @@ document.addEventListener(
     () => {
 
         const subjectKey =
-            new URLSearchParams(
-                window.location.search
-            )
-                .get("subject")
-                ?.toLowerCase()
-                .trim();
+            getSubjectFromURL();
 
 
         if (!subjectKey) {

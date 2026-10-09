@@ -2,22 +2,16 @@
    MOLAS — JAMB PAST QUESTIONS
    Supabase-powered Past Questions Archive
 
-   ACCESS RULES
+   NEW ACCESS MODEL
    ---------------------------------------------------------
-   Free:
-   - Mathematics 2025 is free
-   - Other subjects/years are locked
-
-   Premium:
-   - All subjects
-   - All available years
-
-   TABLES
-   ---------------------------------------------------------
-   past_subjects
-   past_questions
-   jamb_past_questions_access
-   profiles
+   - One MOLAS account covers the JAMB Hub.
+   - User must be logged in.
+   - Past Questions are ₦1,000 per subject.
+   - Purchasing a subject unlocks all available years
+     for that subject.
+   - Purchase is linked to the user's approved device.
+   - Unpurchased subjects remain locked.
+   - Locked subjects link to jamb-upgrade.html.
 ========================================================= */
 
 
@@ -119,9 +113,37 @@ let currentYear = null;
 
 let testSubmitted = false;
 
-let jambAccess = "free";
 
-let pastQuestionAccess = [];
+/*
+   Current logged-in user
+*/
+let currentUser = null;
+
+
+/*
+   Current registered device
+*/
+let currentDeviceAccessId = null;
+
+
+/*
+   Subjects purchased on this device
+*/
+let purchasedSubjectIds = new Set();
+
+
+/*
+   Device token localStorage key
+*/
+const JAMB_DEVICE_TOKEN_KEY =
+    "molas_jamb_device_token";
+
+
+/*
+   Past Questions price
+*/
+const PAST_QUESTIONS_PRICE =
+    1000;
 
 
 /* =========================================================
@@ -146,7 +168,7 @@ async function initializePage() {
 
 
     showLoading(
-        "Loading your JAMB access..."
+        "Checking your MOLAS account..."
     );
 
 
@@ -184,6 +206,10 @@ async function loadUserAccess() {
 
     try {
 
+        /*
+           Check the existing MOLAS account session.
+        */
+
         const {
             data: sessionData,
             error: sessionError
@@ -197,6 +223,13 @@ async function loadUserAccess() {
             !sessionData.session
         ) {
 
+            /*
+               No account session.
+
+               This is the ONLY place where this page
+               redirects to the account page.
+            */
+
             window.location.replace(
                 "account.html?resource=jamb"
             );
@@ -206,101 +239,59 @@ async function loadUserAccess() {
         }
 
 
-        const user =
+        currentUser =
             sessionData.session.user;
 
 
-        const {
-            data: profile,
-            error: profileError
-        } =
-            await supabaseClient
+        /*
+           Register this device.
 
-                .from("profiles")
+           The database stores only the SHA-256 hash
+           of the device token.
+        */
 
- .select(
-    "jamb_past_questions_access"
-)
-
-                .eq(
-                    "id",
-                    user.id
-                )
-
-                .single();
+        const deviceRegistered =
+            await registerCurrentDevice();
 
 
-        if (profileError) {
-
-            console.error(
-                "PROFILE ACCESS ERROR:",
-                profileError
-            );
-
-
-            showError(
-                "Unable to verify your JAMB access: " +
-                profileError.message
-            );
-
+        if (!deviceRegistered) {
 
             return false;
 
         }
 
 
-        jambAccess =
-    profile &&
-    profile.jamb_past_questions_access
-        ? profile.jamb_past_questions_access
-        : "free";
+        /*
+           Load approved Past Questions purchases
+           belonging to this user and this device.
+        */
+
+        const purchasesLoaded =
+            await loadPurchasedSubjects();
 
 
-        const {
-            data: accessData,
-            error: accessError
-        } =
-            await supabaseClient
-
-                .from("jamb_past_questions_access")
-
-                .select(
-                    "subject_id, exam_year, access_level"
-                );
-
-
-        if (accessError) {
-
-            console.error(
-                "PAST QUESTION ACCESS ERROR:",
-                accessError
-            );
-
-
-            showError(
-                "Unable to load past question access: " +
-                accessError.message
-            );
-
+        if (!purchasesLoaded) {
 
             return false;
 
         }
-
-
-        pastQuestionAccess =
-            accessData || [];
 
 
         console.log(
-            "JAMB ACCESS:",
-            jambAccess
+            "CURRENT USER:",
+            currentUser.id
         );
 
 
         console.log(
-            "PAST QUESTION ACCESS:",
-            pastQuestionAccess
+            "CURRENT DEVICE:",
+            currentDeviceAccessId
+        );
+
+
+        console.log(
+            "PURCHASED SUBJECT IDS:",
+            [...purchasedSubjectIds]
         );
 
 
@@ -315,7 +306,7 @@ async function loadUserAccess() {
 
 
         showError(
-            "Unable to verify your account access."
+            "Unable to verify your MOLAS account."
         );
 
 
@@ -327,30 +318,420 @@ async function loadUserAccess() {
 
 
 /* =========================================================
-   CHECK IF A SUBJECT/YEAR IS AVAILABLE
+   REGISTER CURRENT DEVICE
 ========================================================= */
 
-function isYearFree(
-    subjectId,
-    year
+async function registerCurrentDevice() {
+
+    try {
+
+        const token =
+            await getDeviceToken();
+
+
+        if (!token) {
+
+            showError(
+                "Unable to create your device access."
+            );
+
+
+            return false;
+
+        }
+
+
+        const tokenHash =
+            await hashDeviceToken(
+                token
+            );
+
+
+        const deviceName =
+            getDeviceName();
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "register_jamb_device",
+                {
+                    p_device_token_hash:
+                        tokenHash,
+
+                    p_device_name:
+                        deviceName
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "DEVICE REGISTRATION ERROR:",
+                error
+            );
+
+
+            showError(
+                "Unable to register this device: " +
+                error.message
+            );
+
+
+            return false;
+
+        }
+
+
+        if (!data) {
+
+            showError(
+                "No device access was returned."
+            );
+
+
+            return false;
+
+        }
+
+
+        currentDeviceAccessId =
+            Number(data);
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "DEVICE ERROR:",
+            error
+        );
+
+
+        showError(
+            "Unable to register this device."
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   GET DEVICE TOKEN
+========================================================= */
+
+async function getDeviceToken() {
+
+    let token =
+        localStorage.getItem(
+            JAMB_DEVICE_TOKEN_KEY
+        );
+
+
+    if (token) {
+
+        return token;
+
+    }
+
+
+    /*
+       Generate a secure random device token.
+    */
+
+    if (
+        !window.crypto ||
+        !window.crypto.getRandomValues
+    ) {
+
+        console.error(
+            "Secure random generator unavailable."
+        );
+
+
+        return null;
+
+    }
+
+
+    const bytes =
+        new Uint8Array(32);
+
+
+    window.crypto.getRandomValues(
+        bytes
+    );
+
+
+    token =
+        Array.from(
+            bytes,
+            byte =>
+                byte
+                    .toString(16)
+                    .padStart(2, "0")
+        ).join("");
+
+
+    localStorage.setItem(
+        JAMB_DEVICE_TOKEN_KEY,
+        token
+    );
+
+
+    return token;
+
+}
+
+
+/* =========================================================
+   HASH DEVICE TOKEN
+========================================================= */
+
+async function hashDeviceToken(
+    token
 ) {
 
-    return pastQuestionAccess.some(
-        item =>
-            String(item.subject_id) ===
-            String(subjectId) &&
+    const encoder =
+        new TextEncoder();
 
-            String(item.exam_year) ===
-            String(year) &&
 
-            item.access_level === "free"
+    const data =
+        encoder.encode(
+            token
+        );
+
+
+    const hashBuffer =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(
+                hashBuffer
+            )
+        );
+
+
+    return hashArray
+        .map(
+            byte =>
+                byte
+                    .toString(16)
+                    .padStart(2, "0")
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   DEVICE NAME
+========================================================= */
+
+function getDeviceName() {
+
+    const userAgent =
+        navigator.userAgent || "";
+
+
+    if (
+        /iPhone/i.test(
+            userAgent
+        )
+    ) {
+
+        return "iPhone";
+
+    }
+
+
+    if (
+        /iPad/i.test(
+            userAgent
+        )
+    ) {
+
+        return "iPad";
+
+    }
+
+
+    if (
+        /Android/i.test(
+            userAgent
+        )
+    ) {
+
+        return "Android device";
+
+    }
+
+
+    if (
+        /Windows/i.test(
+            userAgent
+        )
+    ) {
+
+        return "Windows device";
+
+    }
+
+
+    if (
+        /Macintosh/i.test(
+            userAgent
+        )
+    ) {
+
+        return "Mac device";
+
+    }
+
+
+    return "Web browser";
+
+}
+
+
+/* =========================================================
+   LOAD PURCHASED SUBJECTS
+========================================================= */
+
+async function loadPurchasedSubjects() {
+
+    try {
+
+        purchasedSubjectIds =
+            new Set();
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from(
+                    "jamb_subject_purchases"
+                )
+
+                .select(
+                    "subject_id, resource_type, status, device_access_id"
+                )
+
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+
+                .eq(
+                    "resource_type",
+                    "past_questions"
+                )
+
+                .eq(
+                    "status",
+                    "approved"
+                )
+
+                .eq(
+                    "device_access_id",
+                    currentDeviceAccessId
+                );
+
+
+        if (error) {
+
+            console.error(
+                "PURCHASE ACCESS ERROR:",
+                error
+            );
+
+
+            showError(
+                "Unable to load your Past Questions access: " +
+                error.message
+            );
+
+
+            return false;
+
+        }
+
+
+        (data || []).forEach(
+            purchase => {
+
+                if (
+                    purchase.subject_id !== null &&
+                    purchase.subject_id !== undefined
+                ) {
+
+                    purchasedSubjectIds.add(
+                        String(
+                            purchase.subject_id
+                        )
+                    );
+
+                }
+
+            }
+        );
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "PURCHASE LOAD ERROR:",
+            error
+        );
+
+
+        showError(
+            "Unable to check your Past Questions purchases."
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   CHECK SUBJECT ACCESS
+========================================================= */
+
+function hasSubjectAccess(
+    subjectId
+) {
+
+    return purchasedSubjectIds.has(
+        String(subjectId)
     );
 
 }
 
 
 /* =========================================================
-   CHECK IF USER CAN ACCESS SUBJECT/YEAR
+   CHECK YEAR ACCESS
 ========================================================= */
 
 function canAccessYear(
@@ -358,18 +739,14 @@ function canAccessYear(
     year
 ) {
 
-    if (
-    jambAccess === "paid"
-) {
+    /*
+       Once a subject has been purchased,
+       ALL available years for that subject
+       are unlocked.
+    */
 
-        return true;
-
-    }
-
-
-    return isYearFree(
-        subjectId,
-        year
+    return hasSubjectAccess(
+        subjectId
     );
 
 }
@@ -386,20 +763,23 @@ async function loadSubjects() {
         const {
             data,
             error
-        } = await supabaseClient
+        } =
+            await supabaseClient
 
-            .from("past_subjects")
+                .from(
+                    "past_subjects"
+                )
 
-            .select(
-                "id, subject_name, subject_code"
-            )
+                .select(
+                    "id, subject_name, subject_code"
+                )
 
-            .order(
-                "subject_name",
-                {
-                    ascending: true
-                }
-            );
+                .order(
+                    "subject_name",
+                    {
+                        ascending: true
+                    }
+                );
 
 
         if (error) {
@@ -553,25 +933,28 @@ async function loadYears(
         const {
             data,
             error
-        } = await supabaseClient
+        } =
+            await supabaseClient
 
-            .from("past_questions")
+                .from(
+                    "past_questions"
+                )
 
-            .select(
-                "exam_year"
-            )
+                .select(
+                    "exam_year"
+                )
 
-            .eq(
-                "subject_id",
-                subjectId
-            )
+                .eq(
+                    "subject_id",
+                    subjectId
+                )
 
-            .order(
-                "exam_year",
-                {
-                    ascending: false
-                }
-            );
+                .order(
+                    "exam_year",
+                    {
+                        ascending: false
+                    }
+                );
 
 
         if (error) {
@@ -624,6 +1007,12 @@ async function loadYears(
         }
 
 
+        const subjectPurchased =
+            hasSubjectAccess(
+                subjectId
+            );
+
+
         years.forEach(
             year => {
 
@@ -634,10 +1023,7 @@ async function loadYears(
 
 
                 const accessible =
-                    canAccessYear(
-                        subjectId,
-                        year
-                    );
+                    subjectPurchased;
 
 
                 option.value =
@@ -646,8 +1032,8 @@ async function loadYears(
 
                 option.dataset.access =
                     accessible
-                        ? "free"
-                        : "premium";
+                        ? "unlocked"
+                        : "locked";
 
 
                 option.textContent =
@@ -663,6 +1049,21 @@ async function loadYears(
             }
         );
 
+
+        /*
+           Tell the user what is happening
+           when the subject has not been purchased.
+        */
+
+        if (
+            !subjectPurchased
+        ) {
+
+            showUnlockMessage(
+                subjectId
+            );
+
+        }
 
     } catch (error) {
 
@@ -730,14 +1131,109 @@ yearSelect.addEventListener(
 
         if (!accessible) {
 
-            showSelectionMessage(
-                "This practice set is Premium Content. Upgrade to Premium to access it."
+            showUnlockMessage(
+                subjectId
             );
 
         }
 
     }
 );
+
+
+/* =========================================================
+   SHOW UNLOCK MESSAGE
+========================================================= */
+
+function showUnlockMessage(
+    subjectId
+) {
+
+    const subject =
+        subjects.find(
+            item =>
+                String(item.id) ===
+                String(subjectId)
+        );
+
+
+    const subjectName =
+        subject
+            ? subject.subject_name
+            : "this subject";
+
+
+    if (!selectionMessage) {
+
+        return;
+
+    }
+
+
+    selectionMessage.innerHTML = `
+
+        <span>
+            ${escapeHTML(
+                subjectName
+            )} Past Questions are locked.
+            Unlock this subject for ₦${PAST_QUESTIONS_PRICE.toLocaleString()}.
+        </span>
+
+        <a
+            href="jamb-upgrade.html?type=past_questions&subject=${encodeURIComponent(
+                subject
+                    ? getSubjectKey(subject)
+                    : ""
+            )}"
+            class="past-unlock-link"
+        >
+            Unlock ${escapeHTML(
+                subjectName
+            )} →
+        </a>
+
+    `;
+
+
+    selectionMessage.classList.add(
+        "visible"
+    );
+
+}
+
+
+/* =========================================================
+   GET SUBJECT KEY
+========================================================= */
+
+function getSubjectKey(
+    subject
+) {
+
+    if (
+        subject.subject_code
+    ) {
+
+        return String(
+            subject.subject_code
+        )
+            .trim()
+            .toLowerCase();
+
+    }
+
+
+    return String(
+        subject.subject_name
+    )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /\s+/g,
+            "-"
+        );
+
+}
 
 
 /* =========================================================
@@ -792,6 +1288,22 @@ async function startPractice() {
     }
 
 
+    /*
+       Re-check purchase access before
+       allowing the questions to load.
+    */
+
+    const purchasesLoaded =
+        await loadPurchasedSubjects();
+
+
+    if (!purchasesLoaded) {
+
+        return;
+
+    }
+
+
     if (
         !canAccessYear(
             subjectId,
@@ -799,8 +1311,8 @@ async function startPractice() {
         )
     ) {
 
-        showSelectionMessage(
-            "This practice set is Premium Content. Upgrade to Premium to access it."
+        showUnlockMessage(
+            subjectId
         );
 
 
@@ -855,40 +1367,43 @@ async function startPractice() {
         const {
             data,
             error
-        } = await supabaseClient
+        } =
+            await supabaseClient
 
-            .from("past_questions")
+                .from(
+                    "past_questions"
+                )
 
-            .select(`
-                id,
-                subject_id,
-                exam_year,
-                question_number,
-                question,
-                option_a,
-                option_b,
-                option_c,
-                option_d,
-                correct_answer,
-                explanation
-            `)
+                .select(`
+                    id,
+                    subject_id,
+                    exam_year,
+                    question_number,
+                    question,
+                    option_a,
+                    option_b,
+                    option_c,
+                    option_d,
+                    correct_answer,
+                    explanation
+                `)
 
-            .eq(
-                "subject_id",
-                subjectId
-            )
+                .eq(
+                    "subject_id",
+                    subjectId
+                )
 
-            .eq(
-                "exam_year",
-                year
-            )
+                .eq(
+                    "exam_year",
+                    year
+                )
 
-            .order(
-                "question_number",
-                {
-                    ascending: true
-                }
-            );
+                .order(
+                    "question_number",
+                    {
+                        ascending: true
+                    }
+                );
 
 
         console.log(

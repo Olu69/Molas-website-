@@ -1,596 +1,1083 @@
 :root {
-    --cream: #f3efe7;
-    --white: #ffffff;
-    --brown: #5a4638;
-    --brown-light: #756052;
-    --green: #1d8f52;
-    --green-dark: #146d3d;
-    --dark: #172033;
-    --text: #4f4a45;
-    --muted: #77716b;
-    --border: #e2dbd2;
+    --navy: #234F3D;
+    --navy-dark: #17382B;
+    
+    --cyan: #6B8E5A;
+    --cyan-soft: #EEF3E8;
+    
+    --white: #FFFFFF;
+    
+    --pale-blue: #F7F1E5;
+    --charcoal: #2D302B;
+    
+    --cream: #EDE2CF;
+    --brown: #75624F;
+    
+    --border: rgba(35, 79, 61, 0.12);
+    
+    --shadow: 0 14px 35px rgba(56, 45, 30, 0.08);
+    
+    --radius: 24px;
 }
+
 
 * {
     box-sizing: border-box;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
     margin: 0;
-    background: var(--cream);
-    color: var(--text);
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.55;
+
+    background: var(--pale-blue);
+    color: var(--charcoal);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.6;
 }
+
+
+button,
+a {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
 
 a {
     color: inherit;
     text-decoration: none;
 }
 
-/* ================================
+
+
+/* =====================================================
    HEADER
-================================ */
+===================================================== */
 
 .upgrade-header {
-    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.96);
+
     border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(14px);
 }
 
+
 .upgrade-header-inner {
-    width: min(1080px, calc(100% - 40px));
-    min-height: 64px;
-    margin: auto;
+    width: min(1180px, calc(100% - 56px));
+
+    min-height: 76px;
+
+    margin: 0 auto;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
 }
+
 
 .upgrade-brand {
     display: flex;
     flex-direction: column;
-}
 
-.upgrade-brand-main {
-    color: var(--brown);
-    font-size: 17px;
-    font-weight: 700;
     line-height: 1;
 }
 
-.upgrade-brand-sub {
-    margin-top: 3px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 1px;
+
+.upgrade-brand-main {
+    color: var(--navy);
+
+    font-size: 1.2rem;
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
 }
+
+
+.upgrade-brand-sub {
+    margin-top: 5px;
+
+    color: var(--cyan);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
 
 .upgrade-back {
-    color: var(--brown-light);
-    font-size: 12px;
-    font-weight: 600;
+    color: var(--navy);
+
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
-/* ================================
+
+.upgrade-back:hover {
+    color: var(--cyan);
+
+    transform: translateX(-2px);
+}
+
+
+
+/* =====================================================
    MAIN
-================================ */
+===================================================== */
 
 .upgrade-main {
-    width: min(1080px, calc(100% - 40px));
-    margin: auto;
-    padding: 38px 0 55px;
+    width: min(1180px, calc(100% - 56px));
+
+    margin: 0 auto;
+
+    padding: 52px 0 75px;
 }
 
-/* ================================
+
+
+/* =====================================================
    HERO
-================================ */
+===================================================== */
 
 .upgrade-hero {
     display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: 45px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        280px;
+
     align-items: center;
 
-    margin-bottom: 38px;
+    gap: 35px;
+
+    margin-bottom: 50px;
 }
+
+
+.upgrade-hero-content {
+    max-width: 700px;
+}
+
 
 .upgrade-eyebrow,
 .section-eyebrow {
-    display: block;
+    display: inline-block;
 
-    margin-bottom: 8px;
+    color: var(--cyan);
 
-    color: var(--green-dark);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 0.7rem;
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
+
 
 .upgrade-hero h1 {
-    max-width: 600px;
-    margin: 0 0 9px;
+    margin: 10px 0 16px;
 
-    color: var(--brown);
-    font-size: 31px;
-    line-height: 1.15;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    color: var(--navy);
+
+    font-size: clamp(2.1rem, 4.5vw, 3.7rem);
+
+    line-height: 1.06;
+
+    letter-spacing: -0.04em;
 }
+
 
 .upgrade-hero h1 span {
-    color: var(--green-dark);
+    display: block;
+
+    color: var(--cyan);
 }
 
-.upgrade-hero-content p {
-    max-width: 560px;
+
+.upgrade-hero p {
+    max-width: 620px;
+
     margin: 0;
 
-    color: var(--muted);
-    font-size: 13px;
+    color: #626D80;
+
+    font-size: 0.96rem;
 }
+
 
 .upgrade-price-card {
-    padding: 19px 20px;
+    padding: 25px;
 
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 15px;
+    border-radius: 23px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    box-shadow: var(--shadow);
 }
+
 
 .price-label {
     display: block;
 
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 0.8px;
+    color: #9FE7FF;
+
+    font-size: 0.66rem;
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
 }
+
 
 .price {
-    margin: 5px 0 3px;
+    margin: 7px 0 2px;
 
-    color: var(--brown);
-    font-size: 21px;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 900;
+
+    letter-spacing: -0.03em;
 }
+
 
 .price-note {
-    color: var(--muted);
-    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 0.8rem;
 }
 
-/* ================================
-   SECTION HEADING
-================================ */
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.premium-section {
+    margin-top: 62px;
+}
+
 
 .section-heading {
-    margin-bottom: 17px;
+    max-width: 650px;
+
+    margin-bottom: 22px;
 }
+
 
 .section-heading h2 {
-    margin: 0 0 4px;
+    margin: 7px 0 7px;
 
-    color: var(--brown);
-    font-size: 20px;
-    line-height: 1.25;
+    color: var(--navy);
+
+    font-size: clamp(1.5rem, 2.7vw, 2rem);
+
+    line-height: 1.15;
+
+    letter-spacing: -0.025em;
 }
+
 
 .section-heading p {
-    max-width: 650px;
     margin: 0;
 
-    color: var(--muted);
-    font-size: 12px;
+    color: #697386;
+
+    font-size: 0.9rem;
 }
 
-/* ================================
-   PRODUCT GRID
-================================ */
+
+
+/* =====================================================
+   CARD GRID
+   2 CARDS PER ROW EVERYWHERE
+===================================================== */
 
 .premium-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 13px;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
 }
 
-/* ================================
-   PRODUCT CARDS
-================================ */
+
+
+/* =====================================================
+   CARD
+===================================================== */
 
 .premium-card {
+    position: relative;
+
     display: flex;
     flex-direction: column;
 
-    min-height: 220px;
-    padding: 19px;
+    min-width: 0;
+
+    padding: 20px;
 
     background: var(--white);
+
     border: 1px solid var(--border);
-    border-radius: 16px;
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 8px 25px rgba(16, 27, 77, 0.045);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
 }
 
-.premium-card-dark {
-    background: var(--dark);
-    border-color: var(--dark);
+
+/* Remove the unwanted green line */
+
+.premium-card::before,
+.premium-card::after {
+    display: none !important;
+
+    content: none !important;
 }
+
+
+.premium-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(24, 191, 255, 0.3);
+
+    box-shadow:
+        0 14px 32px rgba(16, 27, 77, 0.08);
+}
+
+
+
+/* =====================================================
+   ICON
+===================================================== */
 
 .premium-icon {
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 9px;
+    margin-bottom: 13px;
 
-    background: #f4f0e9;
-    border-radius: 8px;
+    border-radius: 12px;
 
-    font-size: 15px;
+    background: var(--cyan-soft);
+
+    font-size: 1.15rem;
+
+    flex-shrink: 0;
 }
 
-.premium-card-dark .premium-icon {
-    background: rgba(255, 255, 255, 0.1);
-}
 
-.premium-card > span:not(.premium-icon) {
-    color: var(--muted);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
 
-.premium-card-dark > span:not(.premium-icon) {
-    color: rgba(255, 255, 255, 0.55);
-}
+/* =====================================================
+   CARD CONTENT
+===================================================== */
 
 .premium-card h3 {
-    margin: 5px 0 6px;
+    margin: 0 0 7px;
 
-    color: var(--brown);
-    font-size: 16px;
-    line-height: 1.3;
+    color: var(--navy);
+
+    font-size: 1.08rem;
+
+    line-height: 1.2;
 }
 
-.premium-card-dark h3 {
-    color: var(--white);
-}
 
 .premium-card p {
-    margin: 0;
+    margin: 0 0 14px;
 
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.55;
+    color: #687286;
+
+    font-size: 0.8rem;
+
+    line-height: 1.5;
 }
 
-.premium-card-dark p {
-    color: rgba(255, 255, 255, 0.68);
-}
 
-/* ================================
-   PRODUCT PRICE
-================================ */
-
-.product-price {
+.resource-price {
     display: block;
 
-    margin: 14px 0 13px;
+    margin-top: auto;
+    margin-bottom: 13px;
 
-    color: var(--brown);
-    font-size: 19px;
-    line-height: 1;
+    color: var(--navy);
+
+    font-size: 0.98rem;
+    font-weight: 900;
 }
 
-.premium-card-dark .product-price {
-    color: #dfc783;
-}
 
-/* ================================
+
+/* =====================================================
    BUTTON
-================================ */
+===================================================== */
 
 .upgrade-button {
     width: 100%;
 
-    margin-top: auto;
+    min-height: 42px;
+
     padding: 9px 13px;
 
     border: 0;
-    border-radius: 8px;
 
-    background: var(--green);
+    border-radius: 12px;
+
+    background: var(--navy);
+
     color: var(--white);
 
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 800;
 
-    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
-.upgrade-button:hover {
-    background: var(--green-dark);
+
+.upgrade-button:hover:not(:disabled) {
+    background: var(--cyan);
+
+    color: var(--navy);
+
+    transform: translateY(-1px);
 }
 
-.premium-card-dark .upgrade-button {
-    background: #dfc783;
-    color: var(--dark);
+
+.upgrade-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.45;
 }
 
-.premium-card-dark .upgrade-button:hover {
-    background: #c7a45a;
+
+
+/* =====================================================
+   SELECTED CARD
+===================================================== */
+
+.premium-card.selected {
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 10px 30px rgba(24, 191, 255, 0.13);
 }
 
-/* ================================
-   ALL ACCESS PACKAGE
-================================ */
 
-.package-section {
-    margin-top: 27px;
+.premium-card.selected .upgrade-button {
+    background: var(--cyan);
+
+    color: var(--navy);
 }
 
-.package-card {
-    padding: 21px;
 
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.resource-summary {
+    margin-top: 18px;
+
+    padding: 22px 24px;
+
+    background: var(--navy);
+
+    border: 0;
+
+    border-radius: 22px;
+
+    color: var(--white);
+
+    box-shadow: var(--shadow);
 }
+
+
+.resource-summary:hover {
+    transform: none;
+
+    box-shadow: var(--shadow);
+}
+
+
+.resource-summary::before,
+.resource-summary::after {
+    display: none !important;
+
+    content: none !important;
+}
+
+
+.package-heading {
+    margin-bottom: 17px;
+}
+
+
+.package-heading .section-eyebrow {
+    color: #9FE7FF;
+}
+
 
 .package-heading h2 {
-    max-width: 500px;
-    margin: 0 0 7px;
+    margin: 5px 0 4px;
 
-    color: var(--brown);
-    font-size: 19px;
-    line-height: 1.3;
+    color: var(--white);
+
+    font-size: 1.2rem;
+
+    line-height: 1.2;
 }
+
 
 .package-heading p {
-    max-width: 650px;
     margin: 0;
 
-    color: var(--muted);
-    font-size: 12px;
+    color: rgba(255, 255, 255, 0.67);
+
+    font-size: 0.8rem;
 }
 
-/* ================================
-   PACKAGE LIST
-================================ */
-
-.package-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
-
-    margin-top: 17px;
-}
-
-.package-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-
-    padding: 8px 9px;
-
-    background: #faf8f3;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-}
-
-.package-item span {
-    color: var(--green);
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.package-item p {
-    margin: 0;
-
-    color: var(--text);
-    font-size: 10.5px;
-    line-height: 1.35;
-}
-
-/* ================================
-   PACKAGE ACTION
-================================ */
 
 .package-action {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
 
-    margin-top: 18px;
-    padding-top: 17px;
+    padding-top: 16px;
 
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
+
 
 .package-action > div {
     display: flex;
     flex-direction: column;
+
+    gap: 1px;
 }
 
-.package-action span {
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 0.7px;
+
+.package-action > div > span {
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
 }
+
 
 .package-action strong {
-    margin-top: 2px;
+    color: var(--white);
 
-    color: var(--brown);
-    font-size: 20px;
+    font-size: 1.25rem;
+    font-weight: 900;
 }
+
 
 .package-action .upgrade-button {
     width: auto;
-    min-width: 145px;
+
+    min-width: 135px;
+
+    background: var(--cyan);
+
+    color: var(--navy);
 }
 
-/* ================================
+
+
+/* =====================================================
    PAYMENT NOTE
-================================ */
+===================================================== */
 
 .upgrade-note {
     display: flex;
+
     align-items: flex-start;
-    gap: 11px;
 
-    margin-top: 20px;
-    padding: 13px 15px;
+    gap: 13px;
 
-    background: #faf8f3;
-    border-left: 3px solid var(--green);
+    margin-top: 45px;
+
+    padding: 19px 21px;
+
+    background: var(--cream);
+
+    border: 1px solid rgba(117, 96, 82, 0.12);
+
+    border-radius: 20px;
 }
+
 
 .note-icon {
-    font-size: 15px;
-}
-
-.upgrade-note strong {
-    color: var(--brown);
-    font-size: 12px;
-}
-
-.upgrade-note p {
-    margin: 2px 0 0;
-
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* ================================
-   FOOTER
-================================ */
-
-.upgrade-footer {
-    width: min(1080px, calc(100% - 40px));
-    margin: auto;
-    padding: 18px 0;
-
-    border-top: 1px solid var(--border);
+    width: 38px;
+    height: 38px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: var(--white);
+
+    font-size: 1rem;
 }
 
-.upgrade-footer p,
-.upgrade-footer a {
+
+.upgrade-note strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--navy);
+
+    font-size: 0.9rem;
+}
+
+
+.upgrade-note p {
     margin: 0;
 
-    color: var(--muted);
-    font-size: 10px;
+    color: var(--brown);
+
+    font-size: 0.78rem;
+
+    line-height: 1.5;
 }
+
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.upgrade-footer {
+    width: min(1180px, calc(100% - 56px));
+
+    margin: 0 auto;
+
+    padding: 25px 0 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.upgrade-footer p {
+    margin: 0;
+
+    color: #7A8495;
+
+    font-size: 0.74rem;
+}
+
 
 .upgrade-footer a {
-    color: var(--brown-light);
-    font-weight: 600;
+    color: var(--navy);
+
+    font-size: 0.76rem;
+    font-weight: 800;
 }
 
-/* ================================
-   TABLET
-================================ */
 
-@media (max-width: 800px) {
+.upgrade-footer a:hover {
+    color: var(--cyan);
+}
+
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .upgrade-main {
+        width: 92%;
+
+        padding-top: 42px;
+    }
+
+
+    .upgrade-header-inner,
+    .upgrade-footer {
+        width: 92%;
+    }
+
 
     .upgrade-hero {
-        grid-template-columns: 1fr 190px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            245px;
+
         gap: 25px;
     }
 
-    .upgrade-hero h1 {
-        font-size: 27px;
-    }
-
-    .package-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* ================================
-   MOBILE
-================================ */
-
-@media (max-width: 600px) {
-
-    .upgrade-header-inner,
-    .upgrade-main,
-    .upgrade-footer {
-        width: calc(100% - 28px);
-    }
-
-    .upgrade-header-inner {
-        min-height: 60px;
-    }
-
-    .upgrade-brand-main {
-        font-size: 15px;
-    }
-
-    .upgrade-brand-sub {
-        font-size: 8px;
-    }
-
-    .upgrade-back {
-        font-size: 11px;
-    }
-
-    .upgrade-main {
-        padding: 30px 0 42px;
-    }
-
-    .upgrade-hero {
-        grid-template-columns: 1fr;
-        gap: 17px;
-        margin-bottom: 30px;
-    }
-
-    .upgrade-hero h1 {
-        font-size: 25px;
-    }
-
-    .upgrade-hero-content p {
-        font-size: 12px;
-    }
-
-    .upgrade-price-card {
-        padding: 16px;
-    }
 
     .premium-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
     }
+
 
     .premium-card {
-        min-height: 0;
-        padding: 17px;
+        padding: 18px;
     }
 
-    .package-list {
-        grid-template-columns: 1fr;
+}
+
+
+
+/* =====================================================
+   MOBILE
+   STILL 2 CARDS PER ROW
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .upgrade-header-inner {
+        width: 92%;
+
+        min-height: 66px;
     }
+
+
+    .upgrade-brand-main {
+        font-size: 1rem;
+    }
+
+
+    .upgrade-brand-sub {
+        font-size: 0.52rem;
+    }
+
+
+    .upgrade-back {
+        font-size: 0.73rem;
+    }
+
+
+    .upgrade-main {
+        width: 92%;
+
+        padding: 35px 0 50px;
+    }
+
+
+    .upgrade-hero {
+        display: block;
+
+        margin-bottom: 40px;
+    }
+
+
+    .upgrade-hero h1 {
+        font-size: 2.05rem;
+
+        line-height: 1.08;
+    }
+
+
+    .upgrade-hero p {
+        font-size: 0.86rem;
+    }
+
+
+    .upgrade-price-card {
+        margin-top: 22px;
+
+        padding: 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .price {
+        font-size: 1.55rem;
+    }
+
+
+    .premium-section {
+        margin-top: 45px;
+    }
+
+
+    .section-heading {
+        margin-bottom: 18px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 1.45rem;
+    }
+
+
+    .section-heading p {
+        font-size: 0.82rem;
+    }
+
+
+    /*
+       Keep 2 cards per row.
+       Cards are intentionally compact.
+    */
+
+    .premium-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+
+    .premium-card {
+        padding: 15px;
+
+        border-radius: 18px;
+    }
+
+
+    .premium-icon {
+        width: 36px;
+        height: 36px;
+
+        margin-bottom: 10px;
+
+        border-radius: 10px;
+
+        font-size: 1rem;
+    }
+
+
+    .premium-card h3 {
+        font-size: 0.92rem;
+
+        margin-bottom: 6px;
+    }
+
+
+    .premium-card p {
+        margin-bottom: 11px;
+
+        font-size: 0.72rem;
+
+        line-height: 1.45;
+    }
+
+
+    .resource-price {
+        margin-bottom: 10px;
+
+        font-size: 0.88rem;
+    }
+
+
+    .upgrade-button {
+        min-height: 37px;
+
+        padding: 7px 8px;
+
+        border-radius: 10px;
+
+        font-size: 0.68rem;
+    }
+
+
+    .resource-summary {
+        padding: 19px;
+
+        border-radius: 18px;
+    }
+
+
+    .package-heading h2 {
+        font-size: 1.08rem;
+    }
+
+
+    .package-heading p {
+        font-size: 0.75rem;
+    }
+
 
     .package-action {
         align-items: stretch;
+
         flex-direction: column;
     }
+
 
     .package-action .upgrade-button {
         width: 100%;
     }
 
-    .upgrade-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
+
+    .upgrade-note {
+        margin-top: 38px;
+
+        padding: 17px;
+
+        border-radius: 17px;
     }
+
+
+    .upgrade-note p {
+        font-size: 0.74rem;
+    }
+
+
+    .upgrade-footer {
+        width: 92%;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding-bottom: 28px;
+    }
+
+}
+
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .upgrade-main {
+        width: 94%;
+    }
+
+
+    .upgrade-header-inner {
+        width: 94%;
+    }
+
+
+    .upgrade-hero h1 {
+        font-size: 1.85rem;
+    }
+
+
+    .premium-grid {
+        gap: 8px;
+    }
+
+
+    .premium-card {
+        padding: 12px;
+
+        border-radius: 16px;
+    }
+
+
+    .premium-icon {
+        width: 33px;
+        height: 33px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .premium-card h3 {
+        font-size: 0.84rem;
+    }
+
+
+    .premium-card p {
+        font-size: 0.67rem;
+    }
+
+
+    .resource-price {
+        font-size: 0.82rem;
+    }
+
+
+    .upgrade-button {
+        min-height: 34px;
+
+        font-size: 0.63rem;
+    }
+
+}
+
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+
 }

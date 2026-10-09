@@ -1,79 +1,134 @@
-/* =====================================================
+/* =========================================================
    MOLAS ADMIN DASHBOARD
-===================================================== */
+   Responsive styling for mobile, tablet and desktop
+========================================================= */
+
+/* =========================================================
+   1. DESIGN TOKENS
+========================================================= */
 
 :root {
-    --navy: #101B4D;
-    --navy-dark: #0B143A;
+    --admin-navy: #101b4d;
+    --admin-navy-dark: #0a1237;
+    --admin-purple: #635bce;
+    --admin-purple-light: #eeedff;
 
-    --purple: #6E3FA3;
-    --purple-dark: #543080;
-    --purple-soft: #F3EEFA;
+    --admin-cyan: #18bfff;
+    --admin-cyan-light: #e9f8ff;
 
-    --cyan: #18BFFF;
-    --cyan-dark: #079DD8;
-    --cyan-soft: #EAF9FF;
+    --admin-white: #ffffff;
+    --admin-bg: #f4f7fc;
+    --admin-surface: #ffffff;
+    --admin-pale-blue: #f3fafd;
 
-    --pale-blue: #F3FAFD;
+    --admin-text: #172033;
+    --admin-muted: #758096;
+    --admin-border: #e6eaf1;
 
-    --cream: #F3EFE7;
-    --cream-dark: #E9E1D4;
+    --admin-success: #16865c;
+    --admin-success-bg: #e6f7ef;
 
-    --charcoal: #172033;
-    --text: #273044;
-    --muted: #6F7788;
-    --light-text: #8A91A0;
+    --admin-warning: #a66a0a;
+    --admin-warning-bg: #fff5dd;
 
-    --white: #FFFFFF;
-    --border: #E7E9EE;
+    --admin-danger: #c83e4d;
+    --admin-danger-bg: #fff0f1;
 
-    --success: #2C9A68;
-    --warning: #D89428;
-    --danger: #B42318;
+    --admin-radius-sm: 10px;
+    --admin-radius-md: 16px;
+    --admin-radius-lg: 22px;
 
-    --container: 1400px;
+    --admin-sidebar-width: 250px;
+    --admin-topbar-height: 82px;
 
-    --radius-small: 12px;
-    --radius-medium: 18px;
-    --radius-large: 26px;
-    --radius-apple: 30px;
+    --admin-shadow:
+        0 8px 28px rgba(16, 27, 77, 0.045);
+
+    --admin-shadow-hover:
+        0 12px 32px rgba(16, 27, 77, 0.09);
+
+    --admin-transition:
+        180ms ease;
 }
 
 
-/* =====================================================
-   RESET
-===================================================== */
+/* =========================================================
+   2. RESET AND GLOBAL STYLES
+========================================================= */
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 html {
-    width: 100%;
     min-height: 100%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-    width: 100%;
+    margin: 0;
     min-height: 100vh;
+    background: var(--admin-bg);
+    color: var(--admin-text);
 
-    font-family: "Manrope", sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-    color: var(--text);
-    background: var(--pale-blue);
-
+    font-size: 14px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
 }
 
+body,
 button,
-input {
-    font: inherit;
+input,
+textarea,
+select {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+    font-size: inherit;
 }
 
 button {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+button,
+input,
+textarea {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(24, 191, 255, 0.45);
+    outline-offset: 3px;
 }
 
 a {
@@ -81,1323 +136,2767 @@ a {
     text-decoration: none;
 }
 
-
-/* =====================================================
-   ADMIN HEADER
-===================================================== */
-
-.molas-admin-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
-    width: 100%;
-
-    background: rgba(255, 255, 255, 0.96);
-
-    border-bottom: 1px solid var(--border);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-}
-
-.molas-admin-header-inner {
-    width: min(var(--container), calc(100% - 48px));
-
-    min-height: 78px;
-
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 30px;
-}
-
-
-/* =====================================================
-   ADMIN BRAND
-===================================================== */
-
-.molas-admin-brand {
-    display: flex;
-    align-items: center;
-}
-
-.molas-admin-brand img {
+img {
     display: block;
+    max-width: 100%;
+}
 
-    width: auto;
-    height: 48px;
+h1,
+h2,
+h3,
+h4,
+p {
+    margin-top: 0;
+}
 
-    max-width: 190px;
+h1,
+h2,
+h3,
+h4 {
+    color: var(--admin-navy);
+    line-height: 1.25;
+}
 
-    object-fit: contain;
+p {
+    color: var(--admin-muted);
+}
+
+[hidden] {
+    display: none !important;
 }
 
 
-/* =====================================================
-   HEADER RIGHT
-===================================================== */
+/* =========================================================
+   3. APPLICATION LAYOUT
+========================================================= */
 
-.molas-admin-header-right {
-    display: flex;
-    align-items: center;
-
-    gap: 22px;
+.molas-admin-app {
+    min-height: 100vh;
+    margin-left: var(--admin-sidebar-width);
+    min-width: 0;
+    transition: margin-left var(--admin-transition);
 }
-
-.molas-admin-user {
-    display: flex;
-    align-items: center;
-
-    gap: 11px;
-}
-
-.molas-admin-user-icon {
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: var(--purple-soft);
-    color: var(--purple);
-
-    font-size: 14px;
-}
-
-.molas-admin-user-info {
-    display: flex;
-    flex-direction: column;
-
-    gap: 2px;
-}
-
-.molas-admin-user-info span {
-    color: var(--charcoal);
-
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.molas-admin-user-info small {
-    max-width: 220px;
-
-    overflow: hidden;
-
-    color: var(--muted);
-
-    font-size: 11px;
-    font-weight: 500;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-.molas-admin-logout {
-    min-height: 40px;
-
-    padding: 0 15px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    border: 1px solid var(--border);
-    border-radius: 12px;
-
-    background: var(--white);
-
-    color: var(--text);
-
-    font-size: 12px;
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.molas-admin-logout:hover {
-    background: var(--purple-soft);
-
-    border-color: rgba(110, 63, 163, 0.20);
-
-    color: var(--purple);
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
 
 .molas-admin-main {
     width: 100%;
-
-    padding: 42px 0 50px;
-}
-
-.molas-admin-container {
-    width: min(var(--container), calc(100% - 48px));
-
+    max-width: 1600px;
+    min-width: 0;
     margin: 0 auto;
+    padding: 30px;
 }
 
-
-/* =====================================================
-   PAGE HEADING
-===================================================== */
-
-.molas-admin-page-heading {
-    margin-bottom: 28px;
-
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-
-    gap: 30px;
-}
-
-.molas-admin-label {
-    display: inline-block;
-
-    margin-bottom: 8px;
-
-    color: var(--purple);
-
-    font-size: 11px;
-    font-weight: 800;
-
-    letter-spacing: 0.14em;
-
-    text-transform: uppercase;
-}
-
-.molas-admin-page-heading h1 {
-    margin-bottom: 6px;
-
-    color: var(--navy);
-
-    font-size: clamp(30px, 4vw, 40px);
-    font-weight: 800;
-
-    line-height: 1.1;
-
-    letter-spacing: -0.03em;
-}
-
-.molas-admin-page-heading p {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.6;
-}
-
-.molas-admin-heading-status {
-    min-height: 38px;
-
-    padding: 0 14px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    border: 1px solid rgba(44, 154, 104, 0.15);
-    border-radius: 12px;
-
-    background: rgba(44, 154, 104, 0.07);
-
-    color: var(--success);
-
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.molas-admin-online-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: var(--success);
-
-    box-shadow:
-        0 0 0 4px rgba(44, 154, 104, 0.10);
-}
-
-
-/* =====================================================
-   CHAT LAYOUT
-===================================================== */
-
-.molas-admin-chat-layout {
-    width: 100%;
-
-    height: calc(100vh - 190px);
-
-    min-height: 560px;
-    max-height: 850px;
-
-    display: grid;
-
-    grid-template-columns: 370px minmax(0, 1fr);
-
-    overflow: hidden;
-
-    background: var(--white);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius-large);
-
-    box-shadow:
-        0 18px 55px rgba(16, 27, 77, 0.06);
-}
-
-
-/* =====================================================
-   CONVERSATIONS
-===================================================== */
-
-.molas-admin-conversations {
+.molas-admin-section {
+    display: none;
     min-width: 0;
+    width: 100%;
+    animation: admin-section-enter 180ms ease;
+}
+
+.molas-admin-section.active {
+    display: block;
+}
+
+@keyframes admin-section-enter {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   4. SIDEBAR
+========================================================= */
+
+.molas-admin-sidebar {
+    position: fixed;
+    z-index: 1000;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
 
     display: flex;
     flex-direction: column;
 
-    background: #FBFCFE;
+    width: var(--admin-sidebar-width);
+    height: 100vh;
+    height: 100dvh;
 
-    border-right: 1px solid var(--border);
-}
+    padding: 22px 15px 18px;
 
-.molas-admin-conversations-header {
-    min-height: 78px;
+    background:
+        linear-gradient(
+            180deg,
+            #101b4d 0%,
+            #111943 100%
+        );
 
-    padding: 18px 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.molas-admin-conversations-header h2 {
-    margin-bottom: 3px;
-
-    color: var(--navy);
-
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.molas-admin-conversations-header span {
-    color: var(--muted);
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-.molas-admin-refresh {
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    background: var(--white);
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.molas-admin-refresh:hover {
-    background: var(--purple-soft);
-
-    color: var(--purple);
-
-    transform: rotate(20deg);
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.molas-admin-search {
-    position: relative;
-
-    margin: 14px 16px;
-}
-
-.molas-admin-search > i {
-    position: absolute;
-
-    left: 14px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    color: var(--light-text);
-
-    font-size: 12px;
-
-    pointer-events: none;
-}
-
-.molas-admin-search input {
-    width: 100%;
-    height: 42px;
-
-    padding: 0 14px 0 38px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 12px;
-
-    outline: none;
-
-    background: var(--white);
-
-    color: var(--charcoal);
-
-    font-size: 16px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.molas-admin-search input::placeholder {
-    color: #A2A8B4;
-}
-
-.molas-admin-search input:focus {
-    border-color: var(--purple);
-
-    box-shadow:
-        0 0 0 4px rgba(110, 63, 163, 0.07);
-}
-
-
-/* =====================================================
-   CONVERSATION LIST
-===================================================== */
-
-.molas-admin-conversation-list {
-    flex: 1;
-
-    min-height: 0;
-
+    color: var(--admin-white);
+    overflow-x: hidden;
     overflow-y: auto;
-}
 
-.molas-admin-conversation-list::-webkit-scrollbar,
-.molas-admin-messages::-webkit-scrollbar {
-    width: 5px;
-}
-
-.molas-admin-conversation-list::-webkit-scrollbar-thumb,
-.molas-admin-messages::-webkit-scrollbar-thumb {
-    background: #D9DDE5;
-
-    border-radius: 20px;
-}
-
-
-/* =====================================================
-   EMPTY LIST
-===================================================== */
-
-.molas-admin-list-empty {
-    min-height: 260px;
-
-    padding: 30px 24px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-.molas-admin-list-empty > i {
-    margin-bottom: 14px;
-
-    color: #B5BBC7;
-
-    font-size: 28px;
-}
-
-.molas-admin-list-empty h3 {
-    margin-bottom: 5px;
-
-    color: var(--charcoal);
-
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.molas-admin-list-empty p {
-    max-width: 220px;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    line-height: 1.6;
-}
-
-
-/* =====================================================
-   CONVERSATION ITEM
-===================================================== */
-
-.molas-admin-conversation-item {
-    width: 100%;
-
-    padding: 15px 18px;
-
-    display: flex;
-    align-items: flex-start;
-
-    gap: 12px;
-
-    border: 0;
-    border-bottom: 1px solid #EEF0F4;
-
-    background: transparent;
-
-    text-align: left;
-
-    transition:
-        background 0.2s ease;
-}
-
-.molas-admin-conversation-item:hover {
-    background: var(--white);
-}
-
-.molas-admin-conversation-item.active {
-    background: var(--purple-soft);
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
 
     box-shadow:
-        inset 3px 0 0 var(--purple);
+        5px 0 25px rgba(16, 27, 77, 0.06);
 }
 
-.molas-admin-conversation-avatar {
-    flex: 0 0 auto;
-
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: var(--navy);
-
-    color: var(--white);
-
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.molas-admin-conversation-content {
-    min-width: 0;
-
-    flex: 1;
-}
-
-.molas-admin-conversation-top {
+.molas-admin-sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     gap: 10px;
+
+    padding: 3px 7px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.molas-admin-conversation-name {
-    overflow: hidden;
-
-    color: var(--charcoal);
-
-    font-size: 13px;
-    font-weight: 800;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.molas-admin-conversation-time {
-    flex: 0 0 auto;
-
-    color: var(--light-text);
-
-    font-size: 9px;
-    font-weight: 600;
-}
-
-.molas-admin-conversation-preview {
-    margin-top: 4px;
-
-    overflow: hidden;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    line-height: 1.5;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.molas-admin-conversation-topic {
-    display: inline-flex;
-
-    margin-top: 6px;
-
-    padding: 3px 7px;
-
-    border-radius: 7px;
-
-    background: var(--cyan-soft);
-
-    color: var(--cyan-dark);
-
-    font-size: 9px;
-    font-weight: 800;
-}
-
-
-/* =====================================================
-   CHAT PANEL
-===================================================== */
-
-.molas-admin-chat-panel {
-    position: relative;
+.molas-admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
 
     min-width: 0;
-    min-height: 0;
-
-    background: var(--white);
+    flex: 1;
 }
 
+.molas-admin-brand img {
+    width: 49px;
+    height: 49px;
+    flex: 0 0 49px;
 
-/* =====================================================
-   EMPTY CHAT
-===================================================== */
+    object-fit: contain;
+    border-radius: 11px;
+    background: #ffffff;
+    padding: 4px;
+}
 
-.molas-admin-chat-empty {
-    width: 100%;
-    height: 100%;
-
-    padding: 30px;
-
+.molas-admin-brand > div {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+}
 
+.molas-admin-brand strong {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    line-height: 1.35;
+}
+
+.molas-admin-brand span {
+    color: #b8c8f0;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.molas-admin-sidebar-close {
+    display: none;
     align-items: center;
     justify-content: center;
 
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    border: 0;
+    border-radius: 10px;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Sidebar navigation */
+
+.molas-admin-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-top: 25px;
+}
+
+.molas-admin-nav-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    width: 100%;
+    min-height: 47px;
+
+    padding: 11px 13px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    color: #cbd5f0;
+    background: transparent;
+
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        color var(--admin-transition),
+        background var(--admin-transition),
+        border-color var(--admin-transition);
+}
+
+.molas-admin-nav-item > i {
+    width: 19px;
+    flex: 0 0 19px;
+
+    color: #a9b8e6;
+    font-size: 15px;
     text-align: center;
 }
 
-.molas-admin-chat-empty-icon {
-    width: 68px;
-    height: 68px;
+.molas-admin-nav-item > span:first-of-type {
+    min-width: 0;
+    flex: 1;
+}
 
-    margin-bottom: 18px;
+.molas-admin-nav-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.molas-admin-nav-item.active {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(99, 91, 206, 0.48),
+            rgba(24, 191, 255, 0.15)
+        );
+
+    border-color: rgba(143, 193, 255, 0.18);
+}
+
+.molas-admin-nav-item.active > i {
+    color: var(--admin-cyan);
+}
+
+.molas-admin-nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 6px;
+
+    border-radius: 20px;
+    background: var(--admin-cyan);
+    color: var(--admin-navy);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* Sidebar bottom */
+
+.molas-admin-sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin-top: auto;
+    padding-top: 25px;
+}
+
+.molas-admin-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 44px;
+
+    padding: 11px 13px;
+
+    border: 1px solid transparent;
+    border-radius: 11px;
+
+    color: #d5def6;
+    background: transparent;
+
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.molas-admin-sidebar-link i {
+    width: 19px;
+    text-align: center;
+}
+
+.molas-admin-sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+}
+
+.molas-admin-sidebar-link.logout {
+    color: #ffb9c0;
+}
+
+
+/* Mobile overlay */
+
+.molas-admin-sidebar-overlay {
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+
+    display: none;
+
+    background: rgba(7, 15, 43, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+body.admin-sidebar-open {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   5. TOP BAR
+========================================================= */
+
+.molas-admin-topbar {
+    position: sticky;
+    z-index: 100;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    min-height: var(--admin-topbar-height);
+
+    padding: 14px 30px;
+
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--admin-border);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.molas-admin-topbar-left,
+.molas-admin-topbar-right {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.molas-admin-topbar-left {
+    gap: 14px;
+}
+
+.molas-admin-topbar-right {
+    gap: 14px;
+}
+
+.molas-admin-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+
+    color: var(--admin-navy);
+    background: #ffffff;
+    font-size: 17px;
+}
+
+.molas-admin-menu-toggle:hover {
+    background: var(--admin-pale-blue);
+}
+
+.molas-admin-page-heading {
+    min-width: 0;
+}
+
+.molas-admin-page-heading > span {
+    display: block;
+    margin-bottom: 2px;
+
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.molas-admin-page-heading h1 {
+    margin: 0;
+
+    color: var(--admin-navy);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+/* Global search */
+
+.molas-admin-global-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 205px;
+    height: 41px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+
+    background: #f8faff;
+}
+
+.molas-admin-global-search > i,
+.molas-admin-search-box > i {
+    flex: 0 0 auto;
+    color: #8994a9;
+    font-size: 13px;
+}
+
+.molas-admin-global-search input,
+.molas-admin-search-box input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 0;
+
+    border: 0;
+    outline: none;
+
+    color: var(--admin-text);
+    background: transparent;
+
+    font-size: 12px;
+}
+
+.molas-admin-global-search input:focus,
+.molas-admin-search-box input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.molas-admin-global-search:focus-within,
+.molas-admin-search-box:focus-within {
+    border-color: var(--admin-cyan);
+    box-shadow: 0 0 0 3px rgba(24, 191, 255, 0.09);
+}
+
+
+/* Icon button */
+
+.molas-admin-icon-button {
+    position: relative;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 22px;
+    width: 41px;
+    height: 41px;
+    flex: 0 0 41px;
 
-    background: var(--purple-soft);
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
 
-    color: var(--purple);
+    color: var(--admin-navy);
+    background: #ffffff;
 
-    font-size: 25px;
+    font-size: 16px;
 }
 
-.molas-admin-chat-empty h2 {
-    margin-bottom: 7px;
+.molas-admin-icon-button:hover {
+    background: var(--admin-pale-blue);
+}
 
-    color: var(--navy);
+.molas-admin-notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
 
-    font-size: 20px;
+    width: 7px;
+    height: 7px;
+
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+
+    background: var(--admin-cyan);
+}
+
+
+/* Profile */
+
+.molas-admin-profile {
+    position: relative;
+    min-width: 0;
+}
+
+.molas-admin-profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    max-width: 250px;
+    padding: 3px;
+
+    border: 0;
+    border-radius: 12px;
+
+    color: var(--admin-text);
+    background: transparent;
+    text-align: left;
+}
+
+.molas-admin-profile-button:hover {
+    background: #f5f7fc;
+}
+
+.molas-admin-profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 39px;
+    height: 39px;
+    flex: 0 0 39px;
+
+    border-radius: 12px;
+
+    color: #ffffff;
+    background:
+        linear-gradient(
+            140deg,
+            var(--admin-purple),
+            var(--admin-navy)
+        );
+
+    font-size: 15px;
     font-weight: 800;
 }
 
-.molas-admin-chat-empty p {
-    max-width: 340px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-
-/* =====================================================
-   ACTIVE CHAT
-===================================================== */
-
-.molas-admin-active-chat {
-    width: 100%;
-    height: 100%;
-
+.molas-admin-profile-info {
     display: flex;
     flex-direction: column;
+
+    min-width: 0;
+    gap: 1px;
+}
+
+.molas-admin-profile-info strong {
+    overflow: hidden;
+
+    color: var(--admin-navy);
+    font-size: 12px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-profile-info small {
+    display: block;
+    max-width: 160px;
+
+    overflow: hidden;
+
+    color: var(--admin-muted);
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.molas-admin-profile-button > i {
+    color: #8a94a7;
+    font-size: 10px;
+}
+
+.molas-admin-profile-dropdown {
+    position: absolute;
+    z-index: 300;
+    top: calc(100% + 9px);
+    right: 0;
+
+    display: none;
+
+    width: 165px;
+    padding: 7px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 13px;
+
+    background: #ffffff;
+    box-shadow: var(--admin-shadow);
+}
+
+.molas-admin-profile-dropdown.open,
+.molas-admin-profile-dropdown.is-open {
+    display: block;
+}
+
+.molas-admin-profile-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 11px;
+
+    border: 0;
+    border-radius: 8px;
+
+    color: var(--admin-danger);
+    background: transparent;
+    text-align: left;
+    font-size: 12px;
+}
+
+.molas-admin-profile-dropdown button:hover {
+    background: var(--admin-danger-bg);
 }
 
 
-/* =====================================================
-   CHAT HEADER
-===================================================== */
+/* =========================================================
+   6. SECTION HEADERS
+========================================================= */
 
-.molas-admin-chat-header {
-    min-height: 78px;
-
-    padding: 14px 20px;
-
+.molas-admin-section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     gap: 20px;
 
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
 
-    background: var(--white);
+.molas-admin-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--admin-purple);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.molas-admin-section-header h2 {
+    margin-bottom: 7px;
+
+    color: var(--admin-navy);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+}
+
+.molas-admin-section-header p {
+    max-width: 650px;
+    margin-bottom: 0;
+
+    font-size: 13px;
+    line-height: 1.7;
 }
 
 
-/* =====================================================
-   BACK TO CONVERSATIONS
-===================================================== */
+/* =========================================================
+   7. STATISTICS
+========================================================= */
 
-.molas-admin-back-to-conversations {
-    display: none;
+.molas-admin-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
 
-    flex: 0 0 auto;
+    margin-bottom: 25px;
+}
 
+.molas-admin-stat-card {
+    display: flex;
     align-items: center;
+    gap: 14px;
 
-    gap: 7px;
+    min-width: 0;
+    min-height: 112px;
+
+    padding: 20px 18px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-lg);
+
+    background: var(--admin-surface);
+    box-shadow: var(--admin-shadow);
+
+    transition:
+        transform var(--admin-transition),
+        box-shadow var(--admin-transition);
+}
+
+.molas-admin-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--admin-shadow-hover);
+}
+
+.molas-admin-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+
+    border-radius: 14px;
+
+    font-size: 17px;
+}
+
+.molas-admin-stat-icon.students {
+    color: #5d57c8;
+    background: #efedff;
+}
+
+.molas-admin-stat-icon.payments {
+    color: #b47b12;
+    background: #fff4dc;
+}
+
+.molas-admin-stat-icon.access {
+    color: #13865d;
+    background: #e5f8ee;
+}
+
+.molas-admin-stat-icon.messages {
+    color: #1688bc;
+    background: #e4f7ff;
+}
+
+.molas-admin-stat-card > div:last-child {
+    min-width: 0;
+}
+
+.molas-admin-stat-card span {
+    display: block;
+
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.molas-admin-stat-card strong {
+    display: block;
+    margin-top: 5px;
+
+    color: var(--admin-navy);
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   8. PANELS
+========================================================= */
+
+.molas-admin-panel {
+    min-width: 0;
+    padding: 23px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-lg);
+
+    background: var(--admin-surface);
+    box-shadow: var(--admin-shadow);
+}
+
+.molas-admin-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.molas-admin-panel-header h3,
+.molas-admin-panel-toolbar h3 {
+    margin-bottom: 0;
+
+    color: var(--admin-navy);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.molas-admin-panel-header .molas-admin-eyebrow {
+    margin-bottom: 5px;
+}
+
+.molas-admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+    gap: 22px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   9. RECENT ACTIVITY
+========================================================= */
+
+.molas-admin-activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.molas-admin-activity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.molas-admin-activity-item:first-child {
+    padding-top: 0;
+}
+
+.molas-admin-activity-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.molas-admin-activity-item > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.molas-admin-activity-item > div:last-child {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.molas-admin-activity-item strong {
+    overflow-wrap: anywhere;
+
+    color: var(--admin-navy);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.molas-admin-activity-item span,
+.molas-admin-activity-item small {
+    color: var(--admin-muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   10. EMPTY STATES
+========================================================= */
+
+.molas-admin-list-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 170px;
+    padding: 25px 16px;
+
+    color: var(--admin-muted);
+    text-align: center;
+}
+
+.molas-admin-list-empty > i {
+    margin-bottom: 13px;
+
+    color: #8d98b0;
+    font-size: 28px;
+}
+
+.molas-admin-list-empty h3 {
+    margin-bottom: 6px;
+
+    color: var(--admin-navy);
+    font-size: 14px;
+}
+
+.molas-admin-list-empty p {
+    max-width: 340px;
+    margin-bottom: 0;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   11. QUICK ACTIONS
+========================================================= */
+
+.molas-admin-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.molas-admin-quick-actions button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    gap: 13px;
+
+    min-height: 102px;
+    padding: 16px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 15px;
+
+    color: var(--admin-navy);
+    background: #fbfcff;
+
+    text-align: left;
+
+    transition:
+        border-color var(--admin-transition),
+        background var(--admin-transition),
+        transform var(--admin-transition);
+}
+
+.molas-admin-quick-actions button:hover {
+    transform: translateY(-2px);
+
+    border-color: #c9e9fb;
+    background: var(--admin-pale-blue);
+}
+
+.molas-admin-quick-actions button i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    color: var(--admin-purple);
+    background: var(--admin-purple-light);
+    font-size: 14px;
+}
+
+.molas-admin-quick-actions button span {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   12. SEARCH BOXES AND TOOLBARS
+========================================================= */
+
+.molas-admin-panel-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.molas-admin-search-box,
+.molas-admin-conversation-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 370px;
+    min-width: 0;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+
+    background: #fbfcff;
+}
+
+.molas-admin-search-box input,
+.molas-admin-conversation-search input {
+    width: 100%;
+    min-width: 0;
 
     padding: 0;
 
     border: 0;
+    outline: 0;
 
+    color: var(--admin-text);
     background: transparent;
 
-    color: var(--purple);
-
-    font-size: 11px;
-    font-weight: 800;
-
-    white-space: nowrap;
+    font-size: 12px;
 }
 
-.molas-admin-back-to-conversations i {
-    font-size: 11px;
+.molas-admin-toolbar-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 9px 14px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 11px;
+
+    color: var(--admin-navy);
+    background: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+
+    transition:
+        border-color var(--admin-transition),
+        background var(--admin-transition);
 }
 
-.molas-admin-back-to-conversations:hover {
-    color: var(--navy);
+.molas-admin-toolbar-button:hover {
+    border-color: #b9e6fa;
+    background: var(--admin-pale-blue);
 }
 
 
-.molas-admin-chat-visitor {
+/* =========================================================
+   13. STUDENTS, PAYMENTS AND JAMB LISTS
+========================================================= */
+
+.molas-admin-student-list,
+.molas-admin-payment-list,
+.molas-admin-jamb-payment-list {
+    display: flex;
+    flex-direction: column;
+
     min-width: 0;
+}
 
+.molas-admin-student-item,
+.molas-admin-payment-item,
+.molas-admin-jamb-order-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(100px, 0.8fr) auto;
+
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+    padding: 17px 13px;
+
+    border-bottom: 1px solid var(--admin-border);
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: background var(--admin-transition);
+}
+
+.molas-admin-student-item:hover,
+.molas-admin-payment-item:hover,
+.molas-admin-jamb-order-item:hover {
+    background: #f7faff;
+}
+
+.molas-admin-student-item:last-child,
+.molas-admin-payment-item:last-child,
+.molas-admin-jamb-order-item:last-child {
+    border-bottom-color: transparent;
+}
+
+.molas-admin-student-item > div,
+.molas-admin-payment-item > div,
+.molas-admin-jamb-order-item > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    min-width: 0;
+}
+
+.molas-admin-student-item strong,
+.molas-admin-payment-item strong,
+.molas-admin-jamb-order-item strong {
+    overflow-wrap: anywhere;
+
+    color: var(--admin-navy);
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.molas-admin-student-item span,
+.molas-admin-payment-item span,
+.molas-admin-jamb-order-item span {
+    overflow-wrap: anywhere;
+
+    color: var(--admin-muted);
+    font-size: 11px;
+}
+
+.molas-admin-list-avatar {
     display: flex;
     align-items: center;
-
-    gap: 12px;
-}
-
-.molas-admin-visitor-avatar {
-    flex: 0 0 auto;
+    justify-content: center;
 
     width: 42px;
     height: 42px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 13px;
 
-    border-radius: 50%;
+    color: var(--admin-purple);
+    background: var(--admin-purple-light);
 
-    background: var(--navy);
-
-    color: var(--white);
-
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 800;
 }
 
-.molas-admin-chat-visitor h2 {
-    margin-bottom: 3px;
-
-    overflow: hidden;
-
-    color: var(--charcoal);
-
-    font-size: 14px;
-    font-weight: 800;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.molas-admin-student-item {
+    grid-template-columns: 42px minmax(0, 1fr) auto;
 }
 
-.molas-admin-chat-meta {
-    display: flex;
-    align-items: center;
-
-    gap: 6px;
-
-    color: var(--muted);
-
-    font-size: 10px;
-}
-
-.molas-admin-meta-divider {
-    color: #C4C8D0;
-}
-
-
-/* =====================================================
-   CHAT ACTIONS
-===================================================== */
-
-.molas-admin-chat-actions {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-}
-
-.molas-admin-chat-status {
-    padding: 5px 9px;
-
-    border-radius: 8px;
-
-    background: rgba(44, 154, 104, 0.08);
-
-    color: var(--success);
-
-    font-size: 9px;
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.06em;
-}
-
-.molas-admin-close-conversation {
-    min-height: 34px;
-
-    padding: 0 11px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 6px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 9px;
-
-    background: var(--white);
-
-    color: var(--muted);
-
-    font-size: 10px;
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.molas-admin-close-conversation:hover {
-    background: var(--cream);
-
-    color: var(--brown);
-}
-
-
-/* =====================================================
-   MESSAGES
-===================================================== */
-
-.molas-admin-messages {
-    flex: 1;
-
-    min-height: 0;
-
-    padding: 25px;
-
-    overflow-y: auto;
-
-    background:
-        linear-gradient(
-            180deg,
-            #FBFCFE 0%,
-            #FFFFFF 100%
-        );
-
+.molas-admin-student-item > div:nth-child(2) {
     display: flex;
     flex-direction: column;
-
-    gap: 12px;
-}
-
-
-/* =====================================================
-   MESSAGE BUBBLES
-===================================================== */
-
-.molas-admin-message {
-    max-width: min(72%, 560px);
-
-    display: flex;
-    flex-direction: column;
-
     gap: 4px;
 }
 
-.molas-admin-message.visitor {
-    align-self: flex-start;
+.molas-admin-student-item > span {
+    padding: 5px 8px;
 
-    align-items: flex-start;
+    border-radius: 8px;
+    background: var(--admin-pale-blue);
+
+    font-weight: 700;
+    text-align: center;
 }
 
-.molas-admin-message.admin {
-    align-self: flex-end;
-
-    align-items: flex-end;
+.molas-admin-payment-item > div:nth-child(2),
+.molas-admin-jamb-order-item > div:nth-child(2) {
+    text-align: right;
 }
 
-.molas-admin-message-bubble {
-    padding: 11px 14px;
 
-    border-radius: 16px;
+/* =========================================================
+   14. STATUS BADGES
+========================================================= */
+
+.molas-admin-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    justify-self: end;
+
+    width: fit-content;
+    max-width: 100%;
+
+    padding: 6px 10px;
+
+    border: 1px solid transparent;
+    border-radius: 30px;
+
+    background: #f0f2f6;
+    color: #667085;
+
+    font-size: 10px !important;
+    font-weight: 800;
+    line-height: 1.35;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.molas-admin-status-badge.pending {
+    color: var(--admin-warning);
+    background: var(--admin-warning-bg);
+    border-color: #f7e5b7;
+}
+
+.molas-admin-status-badge.approved,
+.molas-admin-status-badge.completed,
+.molas-admin-status-badge.paid,
+.molas-admin-status-badge.active {
+    color: var(--admin-success);
+    background: var(--admin-success-bg);
+    border-color: #c7efdc;
+}
+
+.molas-admin-status-badge.rejected,
+.molas-admin-status-badge.failed,
+.molas-admin-status-badge.cancelled {
+    color: var(--admin-danger);
+    background: var(--admin-danger-bg);
+    border-color: #f7d5d9;
+}
+
+
+/* =========================================================
+   15. DETAIL VIEWS
+========================================================= */
+
+.molas-admin-detail-view {
+    min-width: 0;
+    margin-top: 8px;
+}
+
+.molas-admin-back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 40px;
+    margin-bottom: 20px;
+    padding: 9px 13px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 11px;
+
+    color: var(--admin-navy);
+    background: #ffffff;
 
     font-size: 12px;
-
-    line-height: 1.6;
-
-    word-break: break-word;
+    font-weight: 700;
 }
 
-.molas-admin-message.visitor .molas-admin-message-bubble {
-    background: var(--white);
-
-    border: 1px solid var(--border);
-
-    border-bottom-left-radius: 5px;
-
-    color: var(--text);
+.molas-admin-back-button:hover {
+    background: var(--admin-pale-blue);
+    border-color: #c8eafb;
 }
 
-.molas-admin-message.admin .molas-admin-message-bubble {
-    background: var(--navy);
+.molas-admin-detail-card {
+    min-width: 0;
+    padding: 24px;
 
-    color: var(--white);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-lg);
 
-    border-bottom-right-radius: 5px;
+    background: #ffffff;
+    box-shadow: var(--admin-shadow);
 }
 
-.molas-admin-message-time {
-    padding: 0 3px;
+.molas-admin-detail-card > h3 {
+    margin-bottom: 21px;
 
-    color: var(--light-text);
-
-    font-size: 9px;
-
-    font-weight: 500;
+    color: var(--admin-navy);
+    font-size: 19px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
 }
 
-
-/* =====================================================
-   REPLY AREA
-===================================================== */
-
-.molas-admin-reply-form {
-    min-height: 76px;
-
-    padding: 14px 18px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    border-top: 1px solid var(--border);
-
-    background: var(--white);
+.molas-admin-detail-card > p {
+    font-size: 13px;
+    line-height: 1.7;
 }
 
-.molas-admin-reply-input {
-    flex: 1;
-}
-
-.molas-admin-reply-input input {
-    width: 100%;
-    height: 48px;
-
-    padding: 0 15px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 14px;
-
-    outline: none;
-
-    background: #FBFCFE;
-
-    color: var(--charcoal);
-
-    font-size: 16px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.molas-admin-reply-input input::placeholder {
-    color: #A2A8B4;
-}
-
-.molas-admin-reply-input input:focus {
-    background: var(--white);
-
-    border-color: var(--purple);
-
-    box-shadow:
-        0 0 0 4px rgba(110, 63, 163, 0.07);
-}
-
-.molas-admin-reply-form > button {
-    flex: 0 0 auto;
-
-    width: 48px;
-    height: 48px;
-
+.molas-admin-detail-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 0;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 15px;
 
-    border-radius: 14px;
+    border-radius: 19px;
 
-    background: var(--purple);
+    color: var(--admin-purple);
+    background: var(--admin-purple-light);
 
-    color: var(--white);
-
-    font-size: 14px;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    font-size: 20px;
+    font-weight: 800;
 }
 
-.molas-admin-reply-form > button:hover {
-    background: var(--navy);
+.molas-admin-detail-card > h3 + p {
+    margin-top: -12px;
+    margin-bottom: 24px;
+}
 
+
+/* Details grid */
+
+.molas-admin-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+
+    min-width: 0;
+}
+
+.molas-admin-detail-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+    min-height: 74px;
+
+    padding: 14px 15px;
+
+    border: 1px solid #e9edf5;
+    border-radius: 13px;
+
+    background: #f9fbff;
+}
+
+.molas-admin-detail-grid span {
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.molas-admin-detail-grid strong {
+    color: var(--admin-navy);
+    font-size: 13px;
+    font-weight: 750;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   16. PAYMENT RECEIPTS
+========================================================= */
+
+.molas-admin-receipt {
+    min-width: 0;
+    margin-top: 23px;
+    padding-top: 21px;
+
+    border-top: 1px solid var(--admin-border);
+}
+
+.molas-admin-receipt > p {
+    margin-bottom: 12px;
+
+    color: var(--admin-navy);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.molas-admin-receipt-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 70px;
+
+    padding: 15px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 15px;
+
+    background: #f6f8fc;
+
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+.molas-admin-receipt-preview > img {
+    display: block;
+
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 650px;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.molas-admin-receipt-preview > p {
+    margin: 0 0 12px;
+
+    color: var(--admin-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.molas-admin-receipt-preview > a {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin-top: 12px !important;
+
+    overflow-wrap: anywhere;
+    white-space: normal;
+
+    text-decoration: none;
+}
+
+.molas-admin-receipt-preview > a:hover {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   17. PAYMENT ACTION BUTTONS
+========================================================= */
+
+.molas-admin-detail-actions {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    gap: 12px;
+    flex-wrap: wrap;
+
+    min-width: 0;
+    margin-top: 24px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--admin-border);
+}
+
+.molas-admin-primary-button,
+.molas-admin-danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 145px;
+    min-height: 45px;
+
+    padding: 11px 18px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: center;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    transition:
+        background var(--admin-transition),
+        border-color var(--admin-transition),
+        transform var(--admin-transition);
+}
+
+.molas-admin-primary-button {
+    color: #ffffff;
+    background: var(--admin-navy);
+}
+
+.molas-admin-primary-button:hover:not(:disabled) {
+    background: var(--admin-purple);
+    transform: translateY(-1px);
+}
+
+.molas-admin-danger-button {
+    color: var(--admin-danger);
+    background: #ffffff;
+    border-color: #f0cbd0;
+}
+
+.molas-admin-danger-button:hover:not(:disabled) {
+    color: #ffffff;
+    background: var(--admin-danger);
+    border-color: var(--admin-danger);
     transform: translateY(-1px);
 }
 
 
-/* =====================================================
-   NOTIFICATION
-===================================================== */
+/* =========================================================
+   18. JAMB SUBJECTS
+========================================================= */
 
-.molas-admin-message-notification {
-    position: fixed;
+.molas-admin-order-subjects {
+    margin-top: 23px;
+    padding: 17px;
 
-    right: 24px;
-    bottom: 24px;
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
 
-    z-index: 500;
-
-    width: min(360px, calc(100vw - 32px));
-
-    padding: 15px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-
-    background: var(--white);
-
-    border: 1px solid var(--border);
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 18px 45px rgba(16, 27, 77, 0.14);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: translateY(15px);
-
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease,
-        transform 0.25s ease;
+    background: #fbfcff;
 }
 
-.molas-admin-message-notification.show {
-    opacity: 1;
-    visibility: visible;
+.molas-admin-order-subjects h4 {
+    margin-bottom: 13px;
 
-    transform: translateY(0);
-}
-
-.molas-admin-notification-icon {
-    flex: 0 0 auto;
-
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    background: var(--cyan-soft);
-
-    color: var(--cyan-dark);
-
-    font-size: 15px;
-}
-
-.molas-admin-notification-content {
-    min-width: 0;
-
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 2px;
-}
-
-.molas-admin-notification-content strong {
-    color: var(--charcoal);
-
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 800;
 }
 
-.molas-admin-notification-content span {
-    overflow: hidden;
+.molas-admin-order-subjects > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    color: var(--muted);
+    gap: 12px;
 
-    font-size: 10px;
+    padding: 11px 0;
 
-    line-height: 1.5;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    border-bottom: 1px solid var(--admin-border);
 }
 
-.molas-admin-message-notification > button {
-    flex: 0 0 auto;
+.molas-admin-order-subjects > div:last-child {
+    border-bottom: 0;
+}
 
-    width: 30px;
-    height: 30px;
+.molas-admin-order-subjects > div span {
+    color: var(--admin-muted);
+    font-size: 12px;
+}
 
+.molas-admin-order-subjects > div strong {
+    color: var(--admin-navy);
+    font-size: 12px;
+}
+
+.molas-admin-order-subjects > p {
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   19. CONTENT CARDS
+========================================================= */
+
+.molas-admin-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+
+    margin-bottom: 24px;
+}
+
+.molas-admin-content-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-width: 0;
+    min-height: 118px;
+
+    padding: 20px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 18px;
+
+    color: var(--admin-text);
+    background: #ffffff;
+
+    text-align: left;
+    box-shadow: var(--admin-shadow);
+
+    transition:
+        border-color var(--admin-transition),
+        box-shadow var(--admin-transition),
+        transform var(--admin-transition);
+}
+
+.molas-admin-content-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #c8e9fa;
+    box-shadow: var(--admin-shadow-hover);
+}
+
+.molas-admin-content-card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 0;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
 
-    border-radius: 8px;
+    border-radius: 15px;
 
-    background: transparent;
+    color: var(--admin-purple);
+    background: var(--admin-purple-light);
 
-    color: var(--light-text);
+    font-size: 18px;
+}
 
+.molas-admin-content-card > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+}
+
+.molas-admin-content-card h3 {
+    margin-bottom: 6px;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.molas-admin-content-card p {
+    margin-bottom: 0;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.molas-admin-content-card > i:last-child {
+    flex: 0 0 auto;
+
+    color: #9aa4b7;
     font-size: 12px;
 }
 
-.molas-admin-message-notification > button:hover {
-    background: #F3F4F6;
+.molas-admin-content-detail {
+    min-width: 0;
+}
 
-    color: var(--charcoal);
+/* =========================================================
+20. MESSAGES LAYOUT
+========================================================= */
+
+.molas-admin-chat-layout {
+display: grid;
+grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+min-width: 0;
+min-height: 570px;
+max-height: calc(100vh - 170px);
+overflow: hidden;
+border: 1px solid var(–admin-border);
+border-radius: var(–admin-radius-lg);
+background: #ffffff;
+box-shadow: var(–admin-shadow);
+}
+
+/* =========================================================
+CONVERSATION SIDEBAR — PRESERVED
+========================================================= */
+
+.molas-admin-conversation-sidebar {
+display: flex;
+flex-direction: column;
+min-width: 0;
+min-height: 0;
+border-right: 1px solid var(–admin-border);
+background: #ffffff;
+}
+
+.molas-admin-conversation-sidebar-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+padding: 20px;
+border-bottom: 1px solid var(–admin-border);
+}
+
+.molas-admin-conversation-sidebar-header h3 {
+margin-bottom: 4px;
+font-size: 15px;
+font-weight: 800;
+}
+
+.molas-admin-conversation-sidebar-header span {
+color: var(–admin-muted);
+font-size: 11px;
+}
+
+.molas-admin-chat-refresh {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 37px;
+height: 37px;
+flex: 0 0 37px;
+border: 1px solid var(–admin-border);
+border-radius: 11px;
+color: var(–admin-navy);
+background: #ffffff;
+}
+
+.molas-admin-chat-refresh:hover {
+background: var(–admin-pale-blue);
+}
+
+.molas-admin-conversation-search {
+width: auto;
+max-width: none;
+margin: 14px 14px 10px;
+}
+
+.molas-admin-conversation-list {
+flex: 1;
+min-height: 0;
+overflow-y: auto;
+overscroll-behavior: contain;
+}
+
+.molas-admin-conversation-item {
+display: flex;
+align-items: flex-start;
+gap: 11px;
+min-width: 0;
+padding: 15px;
+border-bottom: 1px solid #eef1f6;
+cursor: pointer;
+transition: background var(–admin-transition);
+}
+
+.molas-admin-conversation-item:hover {
+background: #f7faff;
+}
+
+.molas-admin-conversation-item.active {
+background: #f0f8ff;
+border-left: 3px solid var(–admin-cyan);
+}
+
+.molas-admin-conversation-avatar {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 39px;
+height: 39px;
+flex: 0 0 39px;
+border-radius: 13px;
+color: var(–admin-purple);
+background: var(–admin-purple-light);
+font-size: 12px;
+font-weight: 800;
+}
+
+.molas-admin-conversation-info {
+display: flex;
+flex-direction: column;
+gap: 4px;
+min-width: 0;
+flex: 1;
+}
+
+.molas-admin-conversation-info strong {
+overflow: hidden;
+color: var(–admin-navy);
+font-size: 12px;
+font-weight: 800;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.molas-admin-conversation-info span,
+.molas-admin-conversation-info small {
+overflow: hidden;
+color: var(–admin-muted);
+font-size: 11px;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.molas-admin-conversation-status {
+flex: 0 0 auto;
+color: var(–admin-muted);
+font-size: 9px;
+font-weight: 700;
+}
+
+/* =========================================================
+CHAT PANEL
+========================================================= */
+
+.molas-admin-chat-panel {
+display: flex;
+flex-direction: column;
+min-width: 0;
+min-height: 0;
+overflow: hidden;
+background: #ffffff;
+}
+
+.molas-admin-chat-empty {
+display: flex;
+flex: 1;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 350px;
+padding: 30px;
+text-align: center;
+}
+
+.molas-admin-chat-empty-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 64px;
+height: 64px;
+margin-bottom: 18px;
+border-radius: 21px;
+color: var(–admin-purple);
+background: var(–admin-purple-light);
+font-size: 23px;
+}
+
+.molas-admin-chat-empty h3 {
+margin-bottom: 8px;
+font-size: 17px;
+}
+
+.molas-admin-chat-empty p {
+max-width: 280px;
+margin-bottom: 0;
+font-size: 12px;
+line-height: 1.7;
+}
+
+/* =========================================================
+ACTIVE CHAT
+========================================================= */
+
+.molas-admin-active-chat {
+display: flex;
+flex-direction: column;
+width: 100%;
+min-width: 0;
+min-height: 0;
+height: 100%;
+overflow: hidden;
+background: #ffffff;
+}
+
+.molas-admin-chat-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 14px;
+flex: 0 0 auto;
+padding: 15px 18px;
+border-bottom: 1px solid var(–admin-border);
+background: #ffffff;
+}
+
+.molas-admin-chat-header-left {
+display: flex;
+align-items: center;
+gap: 11px;
+min-width: 0;
+}
+
+.molas-admin-back-to-conversations {
+display: none;
+align-items: center;
+justify-content: center;
+width: 36px;
+height: 36px;
+flex: 0 0 36px;
+border: 1px solid var(–admin-border);
+border-radius: 10px;
+color: var(–admin-navy);
+background: #ffffff;
+}
+
+.molas-admin-visitor-avatar {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 42px;
+height: 42px;
+flex: 0 0 42px;
+border-radius: 14px;
+color: #ffffff;
+background: var(–admin-navy);
+font-size: 13px;
+font-weight: 800;
+}
+
+.molas-admin-chat-header-left > div:last-child {
+min-width: 0;
+}
+
+.molas-admin-chat-header h3 {
+overflow: hidden;
+margin-bottom: 3px;
+font-size: 13px;
+font-weight: 800;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.molas-admin-chat-header p {
+overflow: hidden;
+margin-bottom: 3px;
+font-size: 10px;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.molas-admin-chat-topic {
+display: block;
+overflow: hidden;
+color: var(–admin-purple);
+font-size: 10px;
+font-weight: 700;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.molas-admin-chat-header-actions {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 9px;
+flex: 0 0 auto;
+}
+
+.molas-admin-chat-status {
+padding: 5px 9px;
+border-radius: 20px;
+color: var(–admin-success);
+background: var(–admin-success-bg);
+font-size: 10px;
+font-weight: 800;
+}
+
+.molas-admin-close-conversation {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+min-height: 35px;
+padding: 8px 11px;
+border: 1px solid #cbead9;
+border-radius: 10px;
+color: var(–admin-success);
+background: #ffffff;
+font-size: 10px;
+font-weight: 800;
+}
+
+.molas-admin-close-conversation:hover {
+background: var(–admin-success-bg);
+}
+
+/* =========================================================
+CHAT MESSAGES
+========================================================= */
+
+.molas-admin-messages {
+display: flex;
+flex: 1 1 auto;
+flex-direction: column;
+gap: 16px;
+min-height: 0;
+padding: 22px;
+overflow-x: hidden;
+overflow-y: auto;
+overscroll-behavior: contain;
+scrollbar-width: thin;
+scrollbar-color: #cbd5e1 transparent;
+background:
+radial-gradient(
+circle at top right,
+rgba(24, 191, 255, 0.06),
+transparent 42%
+),
+#f5f8fc;
+}
+
+.molas-admin-message {
+display: flex;
+flex-direction: column;
+width: fit-content;
+max-width: min(78%, 520px);
+min-width: 0;
+}
+
+.molas-admin-message.visitor {
+align-self: flex-start;
+}
+
+.molas-admin-message.admin {
+align-self: flex-end;
+align-items: flex-end;
+}
+
+.molas-admin-message-bubble {
+max-width: 100%;
+padding: 11px 15px;
+border: 1px solid #e3eaf2;
+border-radius: 16px;
+color: var(–admin-text);
+background: #ffffff;
+box-shadow: 0 2px 7px rgba(16, 27, 77, 0.04);
+font-size: 13px;
+line-height: 1.65;
+overflow-wrap: anywhere;
+word-break: normal;
+white-space: pre-wrap;
+}
+
+.molas-admin-message.admin .molas-admin-message-bubble {
+    color: #ffffff !important;
+    background: #101b4d !important;
+    border: 1px solid #101b4d !important;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 3px 9px rgba(16, 27, 77, 0.12);
+}
+
+.molas-admin-message.visitor .molas-admin-message-bubble {
+    border-bottom-left-radius: 5px;
+    text-align: left;
+    padding: 10px 14px;
+    margin-left: 0;
+}
+
+/* =========================================================
+CHAT REPLY BOX
+========================================================= */
+
+.molas-admin-reply-form {
+display: flex;
+align-items: flex-end;
+gap: 10px;
+flex: 0 0 auto;
+padding: 13px 15px;
+border-top: 1px solid var(–admin-border);
+background: #ffffff;
+}
+
+.molas-admin-reply-form textarea {
+display: block;
+flex: 1 1 auto;
+min-width: 0;
+min-height: 44px;
+max-height: 140px;
+padding: 11px 13px;
+resize: vertical;
+border: 1px solid var(–admin-border);
+border-radius: 13px;
+outline: none;
+color: var(–admin-text);
+background: #f8faff;
+font-family: inherit;
+font-size: 13px;
+line-height: 1.55;
+transition:
+border-color 0.2s ease,
+box-shadow 0.2s ease,
+background 0.2s ease;
+}
+
+.molas-admin-reply-form textarea::placeholder {
+color: var(–admin-muted);
+opacity: 0.8;
+}
+
+.molas-admin-reply-form textarea:focus {
+border-color: var(–admin-cyan);
+background: #ffffff;
+box-shadow: 0 0 0 3px rgba(24, 191, 255, 0.10);
+}
+
+.molas-admin-reply-form > button {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 44px;
+height: 44px;
+flex: 0 0 44px;
+border: 0;
+border-radius: 13px;
+color: #ffffff;
+background: var(–admin-navy);
+font-size: 15px;
+cursor: pointer;
+transition:
+background 0.2s ease,
+transform 0.2s ease;
+}
+
+.molas-admin-reply-form > button:hover:not(:disabled) {
+background: var(–admin-purple);
+}
+
+.molas-admin-reply-form > button:active:not(:disabled) {
+transform: scale(0.96);
+}
+
+.molas-admin-reply-form > button:disabled {
+cursor: not-allowed;
+opacity: 0.55;
+}
+/* =========================================================
+   21. SETTINGS
+========================================================= */
+
+.molas-admin-settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    align-items: start;
+}
+
+.molas-admin-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.molas-admin-setting-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.molas-admin-setting-row span {
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.molas-admin-setting-row strong {
+    color: var(--admin-navy);
+    font-size: 12px;
+    font-weight: 750;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.molas-admin-status-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--admin-success) !important;
+}
+
+.molas-admin-status-online::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+    background: #24b47e;
+}
+
+.molas-admin-settings-grid .molas-admin-danger-button {
+    margin-top: 22px;
 }
 
 
-/* =====================================================
-   TABLET
-===================================================== */
+/* =========================================================
+   22. MESSAGE NOTIFICATION
+========================================================= */
 
-@media (max-width: 1000px) {
+.molas-admin-message-notification {
+    position: fixed;
+    z-index: 1500;
 
-    .molas-admin-chat-layout {
-        grid-template-columns:
-            320px minmax(0, 1fr);
-    }
+    right: 22px;
+    bottom: 22px;
 
-    .molas-admin-conversation-item {
-        padding: 14px;
-    }
+    display: flex;
+    align-items: center;
+    gap: 13px;
 
-    .molas-admin-chat-header {
-        padding: 14px 16px;
-    }
+    width: min(390px, calc(100vw - 32px));
+    padding: 16px;
 
-    .molas-admin-messages {
-        padding: 20px;
-    }
+    border: 1px solid var(-admin-border);
+    border-radius: 17px;
 
+    background: #ffffff;
+    box-shadow: 0 18px 55px rgba(16, 27, 77, 0.17);
+}
+
+.molas-admin-notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+    flex: 0 0 43px;
+
+    border-radius: 13px;
+
+    color: var(--admin-purple);
+    background: var(--admin-purple-light);
+
+    font-size: 17px;
+}
+
+.molas-admin-notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.molas-admin-notification-content strong {
+    display: block;
+    margin-bottom: 3px;
+
+    color: var(--admin-navy);
+    font-size: 12px;
+}
+
+.molas-admin-notification-content p {
+    margin-bottom: 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.molas-admin-message-notification > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+
+    border: 0;
+    border-radius: 9px;
+
+    color: var(--admin-muted);
+    background: #f4f6fa;
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================================================
+   23. TABLETS AND SMALL LAPTOPS
+========================================================= */
 
-@media (max-width: 760px) {
-
-    .molas-admin-header-inner {
-        width:
-            min(
-                calc(100% - 32px),
-                var(--container)
-            );
-
-        min-height: 68px;
-    }
-
-    .molas-admin-brand img {
-        height: 42px;
-    }
-
-    .molas-admin-header-right {
-        gap: 10px;
-    }
-
-    .molas-admin-user-info {
-        display: none;
-    }
-
-    .molas-admin-user-icon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .molas-admin-logout {
-        width: 38px;
-        height: 38px;
-
-        min-height: 38px;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-    .molas-admin-logout span {
-        display: none;
+@media (max-width: 1100px) {
+    :root {
+        --admin-sidebar-width: 225px;
     }
 
     .molas-admin-main {
-        padding: 28px 0 30px;
+        padding: 24px;
     }
 
-    .molas-admin-container {
-        width:
-            min(
-                calc(100% - 28px),
-                var(--container)
-            );
+    .molas-admin-topbar {
+        padding-right: 24px;
+        padding-left: 24px;
+        gap: 15px;
     }
 
-    .molas-admin-page-heading {
-        margin-bottom: 20px;
-
-        align-items: flex-start;
+    .molas-admin-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .molas-admin-page-heading h1 {
-        font-size: 30px;
+    .molas-admin-dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 
-    .molas-admin-page-heading p {
-        font-size: 12px;
-    }
-
-    .molas-admin-heading-status {
-        min-height: 34px;
-
-        padding: 0 10px;
-
-        font-size: 10px;
+    .molas-admin-global-search {
+        width: 175px;
     }
 
     .molas-admin-chat-layout {
-        height: calc(100vh - 155px);
+        grid-template-columns: minmax(235px, 290px) minmax(0, 1fr);
+    }
 
-        min-height: 540px;
+    .molas-admin-chat-header {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .molas-admin-chat-header-actions {
+        gap: 6px;
+    }
+
+    .molas-admin-chat-status {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   24. MOBILE AND TABLET NAVIGATION
+========================================================= */
+
+@media (max-width: 800px) {
+    :root {
+        --admin-sidebar-width: 270px;
+        --admin-topbar-height: 70px;
+    }
+
+    .molas-admin-app {
+        margin-left: 0;
+    }
+
+    .molas-admin-sidebar {
+        z-index: 1200;
+
+        width: min(290px, 86vw);
+
+        transform: translateX(-105%);
+        transition: transform 220ms ease;
+
+        box-shadow: 10px 0 35px rgba(8, 16, 48, 0.2);
+    }
+
+    .molas-admin-sidebar.open,
+    .molas-admin-sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .molas-admin-sidebar-close {
+        display: inline-flex;
+    }
+
+    .molas-admin-menu-toggle {
+        display: inline-flex;
+    }
+
+    .molas-admin-topbar {
+        min-height: var(--admin-topbar-height);
+        padding: 12px 20px;
+    }
+
+    .molas-admin-main {
+        padding: 24px 20px;
+    }
+
+    .molas-admin-global-search {
+        width: 165px;
+    }
+
+    .molas-admin-chat-layout {
+        max-height: calc(100dvh - 160px);
+    }
+}
+
+
+/* =========================================================
+   25. MOBILE PAYMENT AND DETAIL LAYOUT
+========================================================= */
+
+@media (max-width: 600px) {
+    .molas-admin-main {
+        padding: 19px 14px 28px;
+    }
+
+    .molas-admin-topbar {
+        gap: 10px;
+        padding: 10px 13px;
+    }
+
+    .molas-admin-topbar-left {
+        gap: 9px;
+    }
+
+    .molas-admin-menu-toggle {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        border-radius: 11px;
+    }
+
+    .molas-admin-page-heading > span {
+        font-size: 9px;
+    }
+
+    .molas-admin-page-heading h1 {
+        font-size: 18px;
+    }
+
+    .molas-admin-topbar-right {
+        gap: 7px;
+    }
+
+    .molas-admin-global-search {
+        display: none;
+    }
+
+    .molas-admin-icon-button {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+        border-radius: 10px;
+    }
+
+    .molas-admin-profile-button {
+        gap: 0;
+    }
+
+    .molas-admin-profile-avatar {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+        border-radius: 11px;
+    }
+
+    .molas-admin-profile-info,
+    .molas-admin-profile-button > i {
+        display: none;
+    }
+
+    .molas-admin-section-header {
+        margin-bottom: 19px;
+    }
+
+    .molas-admin-section-header h2 {
+        font-size: 22px;
+    }
+
+    .molas-admin-section-header p {
+        font-size: 12px;
+    }
+
+    .molas-admin-stat-grid {
+        gap: 11px;
+        margin-bottom: 18px;
+    }
+
+    .molas-admin-stat-card {
+        gap: 10px;
+        min-height: 95px;
+        padding: 14px 11px;
+        border-radius: 16px;
+    }
+
+    .molas-admin-stat-icon {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+        border-radius: 11px;
+        font-size: 14px;
+    }
+
+    .molas-admin-stat-card span {
+        font-size: 10px;
+    }
+
+    .molas-admin-stat-card strong {
+        font-size: 23px;
+    }
+
+    .molas-admin-panel {
+        padding: 16px;
+        border-radius: 17px;
+    }
+
+    .molas-admin-panel-header {
+        margin-bottom: 16px;
+    }
+
+    .molas-admin-panel-header h3,
+    .molas-admin-panel-toolbar h3 {
+        font-size: 15px;
+    }
+
+    .molas-admin-dashboard-grid {
+        gap: 15px;
+    }
+
+    .molas-admin-quick-actions {
+        gap: 9px;
+    }
+
+    .molas-admin-quick-actions button {
+        min-height: 90px;
+        padding: 12px;
+    }
+
+    .molas-admin-activity-item {
+        gap: 10px;
+    }
+
+    .molas-admin-activity-item strong {
+        font-size: 11px;
+    }
+
+    .molas-admin-activity-item span,
+    .molas-admin-activity-item small {
+        font-size: 10px;
+    }
+
+
+    /* Search and toolbar */
+
+    .molas-admin-panel-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .molas-admin-search-box {
+        max-width: none;
+    }
+
+    .molas-admin-toolbar-button {
+        align-self: flex-start;
+    }
+
+
+    /* Payment and JAMB lists */
+
+    .molas-admin-payment-item,
+    .molas-admin-jamb-order-item {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+
+        padding: 14px 7px;
+    }
+
+    .molas-admin-payment-item > div:first-child,
+    .molas-admin-jamb-order-item > div:first-child {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .molas-admin-payment-item > div:nth-child(2),
+    .molas-admin-jamb-order-item > div:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: right;
+    }
+
+    .molas-admin-payment-item > .molas-admin-status-badge,
+    .molas-admin-jamb-order-item > .molas-admin-status-badge {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: start;
+    }
+
+    .molas-admin-student-item {
+        grid-template-columns: 36px minmax(0, 1fr);
+        gap: 10px;
+        padding: 13px 5px;
+    }
+
+    .molas-admin-list-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+    }
+
+    .molas-admin-student-item > span {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+
+    /* Payment detail */
+
+    .molas-admin-detail-card {
+        padding: 17px;
+        border-radius: 17px;
+    }
+
+    .molas-admin-detail-card > h3 {
+        font-size: 17px;
+    }
+
+    .molas-admin-detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .molas-admin-detail-grid > div {
+        min-height: 72px;
+        padding: 11px;
+        border-radius: 11px;
+    }
+
+    .molas-admin-detail-grid span {
+        font-size: 10px;
+    }
+
+    .molas-admin-detail-grid strong {
+        font-size: 11px;
+    }
+
+
+    /* Receipt preview */
+
+    .molas-admin-receipt {
+        margin-top: 19px;
+        padding-top: 17px;
+    }
+
+    .molas-admin-receipt-preview {
+        padding: 9px;
+        border-radius: 12px;
+    }
+
+    .molas-admin-receipt-preview > img {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: none;
+        border-radius: 8px;
+    }
+
+    .molas-admin-receipt-preview > a {
+        width: 100%;
+        min-height: 40px;
+        padding: 10px;
+        font-size: 11px;
+    }
+
+
+    /* Approve and reject buttons */
+
+    .molas-admin-detail-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+
+        margin-top: 20px;
+        padding-top: 17px;
+    }
+
+    .molas-admin-primary-button,
+    .molas-admin-detail-actions .molas-admin-danger-button {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+
+        padding: 10px 8px;
+
+        border-radius: 11px;
+
+        font-size: 11px;
+        line-height: 1.4;
+
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+
+    /* Content */
+
+    .molas-admin-content-grid {
+        gap: 11px;
+    }
+
+    .molas-admin-content-card {
+        align-items: flex-start;
+        gap: 10px;
+
+        min-height: 130px;
+        padding: 13px;
+
+        border-radius: 15px;
+    }
+
+    .molas-admin-content-card-icon {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+        border-radius: 11px;
+        font-size: 14px;
+    }
+
+    .molas-admin-content-card h3 {
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    .molas-admin-content-card p {
+        font-size: 10px;
+    }
+
+    .molas-admin-content-card > i:last-child {
+        display: none;
+    }
+
+
+    /* Settings */
+
+    .molas-admin-settings-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+
+    /* Messages */
+
+    .molas-admin-chat-layout {
+        position: relative;
 
         display: block;
 
-        overflow: hidden;
+        min-height: 520px;
+        max-height: calc(100dvh - 145px);
+        height: calc(100dvh - 145px);
 
-        border-radius: 22px;
+        border-radius: 15px;
     }
 
-    .molas-admin-conversations {
+    .molas-admin-conversation-sidebar {
         width: 100%;
         height: 100%;
 
@@ -1409,280 +2908,274 @@ a {
 
         width: 100%;
         height: 100%;
+        min-height: 0;
     }
 
     .molas-admin-chat-layout.chat-open
-    .molas-admin-conversations {
+    .molas-admin-conversation-sidebar {
         display: none;
     }
 
     .molas-admin-chat-layout.chat-open
     .molas-admin-chat-panel {
-        display: block;
-    }
-
-    .molas-admin-conversations-header {
-        min-height: 68px;
-    }
-
-    .molas-admin-search {
-        margin: 12px;
-    }
-
-
-    /* ---------------------------------------------
-       BACK TO CONVERSATIONS
-    --------------------------------------------- */
-
-    .molas-admin-back-to-conversations {
         display: flex;
     }
 
-
     .molas-admin-chat-header {
-        min-height: 72px;
-
-        padding: 12px;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 10px;
     }
 
-    .molas-admin-chat-visitor {
-        flex: 1;
-
-        min-width: 0;
-    }
-
-    .molas-admin-chat-actions {
-        flex: 0 0 auto;
-
-        gap: 6px;
-    }
-
-    .molas-admin-chat-status {
-        display: none;
-    }
-
-    .molas-admin-close-conversation {
-        width: 34px;
-        height: 34px;
-
-        min-height: 34px;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-    .molas-admin-close-conversation {
-        font-size: 0;
-    }
-
-    .molas-admin-close-conversation i {
-        font-size: 11px;
-    }
-
-    .molas-admin-messages {
-        padding: 18px 14px;
-    }
-
-    .molas-admin-message {
-        max-width: 84%;
-    }
-
-    .molas-admin-reply-form {
-        min-height: 68px;
-
-        padding: 10px;
-    }
-
-    .molas-admin-reply-input input {
-        height: 48px;
-    }
-
-    .molas-admin-reply-form > button {
-        width: 48px;
-        height: 48px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media (max-width: 380px) {
-
-    .molas-admin-header-inner {
-        width: calc(100% - 24px);
-    }
-
-    .molas-admin-brand img {
-        height: 38px;
-    }
-
-    .molas-admin-main {
-        padding-top: 22px;
-    }
-
-    .molas-admin-container {
-        width: calc(100% - 20px);
-    }
-
-    .molas-admin-page-heading h1 {
-        font-size: 27px;
-    }
-
-    .molas-admin-page-heading p {
-        font-size: 11px;
-    }
-
-    .molas-admin-heading-status span:last-child {
-        display: none;
-    }
-
-    .molas-admin-heading-status {
-        width: 30px;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-    .molas-admin-chat-layout {
-        min-height: 500px;
-
-        border-radius: 19px;
-    }
-
-    .molas-admin-conversations-header {
-        padding: 15px;
-    }
-
-    .molas-admin-conversations-header h2 {
-        font-size: 14px;
-    }
-
-    .molas-admin-conversation-item {
-        padding: 13px;
-    }
-
-    .molas-admin-conversation-avatar {
-        width: 37px;
-        height: 37px;
-
-        font-size: 11px;
-    }
-
-    .molas-admin-conversation-name {
-        font-size: 12px;
-    }
-
-    .molas-admin-conversation-preview {
-        font-size: 10px;
-    }
-
-    .molas-admin-chat-header {
-        gap: 10px;
+    .molas-admin-chat-header-left {
+        gap: 7px;
     }
 
     .molas-admin-back-to-conversations {
-        gap: 5px;
-
-        font-size: 10px;
-    }
-
-    .molas-admin-back-to-conversations i {
-        font-size: 10px;
-    }
-
-    .molas-admin-chat-visitor {
-        gap: 8px;
+        display: inline-flex;
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
     }
 
     .molas-admin-visitor-avatar {
-        width: 37px;
-        height: 37px;
-    }
-
-    .molas-admin-chat-visitor h2 {
-        font-size: 12px;
-    }
-
-    .molas-admin-chat-meta {
-        font-size: 9px;
-    }
-
-    .molas-admin-message-bubble {
-        padding: 10px 12px;
-
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        border-radius: 11px;
         font-size: 11px;
     }
 
-}
-
-
-/* =====================================================
-   LANDSCAPE PHONES
-===================================================== */
-
-@media (max-height: 600px) and (orientation: landscape) {
-
-    .molas-admin-header-inner {
-        min-height: 60px;
+    .molas-admin-chat-header h3 {
+        font-size: 12px;
     }
 
-    .molas-admin-brand img {
-        height: 38px;
+    .molas-admin-chat-header p,
+    .molas-admin-chat-topic {
+        max-width: 130px;
+        font-size: 9px;
     }
 
-    .molas-admin-main {
-        padding: 18px 0 20px;
+    .molas-admin-chat-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
     }
 
-    .molas-admin-page-heading {
-        margin-bottom: 15px;
-    }
-
-    .molas-admin-page-heading h1 {
-        font-size: 26px;
-    }
-
-    .molas-admin-page-heading p {
-        display: none;
-    }
-
-    .molas-admin-chat-layout {
-        height: calc(100vh - 115px);
-
-        min-height: 400px;
-    }
-
-    .molas-admin-chat-header {
-        min-height: 60px;
+    .molas-admin-close-conversation {
+        min-height: 32px;
+        padding: 7px 8px;
+        font-size: 9px;
     }
 
     .molas-admin-messages {
-        padding: 14px;
+        gap: 12px;
+        padding: 16px 12px;
     }
+
+    .molas-admin-message {
+        max-width: 88%;
+    }
+
+    .molas-admin-message-bubble {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    border-radius: 14px;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    white-space: pre-wrap;
+}
 
     .molas-admin-reply-form {
+    gap: 8px;
+    padding: 12px;
+    align-items: flex-end;
+    background: #ffffff;
+}
+
+ .molas-admin-reply-form textarea {
+    padding: 11px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 12px;
+    min-height: 44px;
+    max-height: 120px;
+}
+
+   .molas-admin-reply-form > button {
+width: 44px;
+height: 44px;
+flex: 0 0 44px;
+border-radius: 12px;
+font-size: 15px;
+}
+
+
+    /* Notification */
+
+    .molas-admin-message-notification {
+        right: 12px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+        padding: 13px;
+    }
+}
+
+
+/* =========================================================
+   26. VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+    .molas-admin-main {
+        padding-right: 11px;
+        padding-left: 11px;
+    }
+
+    .molas-admin-page-heading h1 {
+        font-size: 16px;
+    }
+
+    .molas-admin-topbar {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .molas-admin-stat-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 120px;
+        padding: 12px;
+    }
+
+    .molas-admin-stat-card strong {
+        font-size: 21px;
+    }
+
+    .molas-admin-panel {
+        padding: 13px;
+    }
+
+    .molas-admin-detail-card {
+        padding: 13px;
+    }
+
+    .molas-admin-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .molas-admin-detail-grid > div {
         min-height: 62px;
-
-        padding: 7px 10px;
     }
 
-    .molas-admin-reply-input input,
-    .molas-admin-reply-form > button {
-        height: 46px;
+    .molas-admin-detail-actions {
+        grid-template-columns: minmax(0, 1fr);
     }
 
+    .molas-admin-primary-button,
+    .molas-admin-detail-actions .molas-admin-danger-button {
+        min-height: 45px;
+        font-size: 12px;
+    }
+
+    .molas-admin-content-card {
+        flex-direction: column;
+        min-height: 145px;
+    }
+
+    .molas-admin-content-card > div:nth-child(2) {
+        width: 100%;
+    }
+
+    .molas-admin-chat-header {
+        flex-wrap: wrap;
+    }
+
+    .molas-admin-chat-header-actions {
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+    }
 }
 
 
-/* =====================================================
-   HIDDEN ATTRIBUTE
-===================================================== */
+/* =========================================================
+   27. LANDSCAPE PHONE LAYOUT
+========================================================= */
 
-[hidden] {
-    display: none !important;
+@media (max-width: 900px) and (orientation: landscape) {
+    .molas-admin-sidebar {
+        padding-top: 13px;
+        padding-bottom: 12px;
+    }
+
+    .molas-admin-sidebar-header {
+        padding-bottom: 13px;
+    }
+
+    .molas-admin-brand img {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .molas-admin-navigation {
+        gap: 3px;
+        margin-top: 13px;
+    }
+
+    .molas-admin-nav-item {
+        min-height: 39px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .molas-admin-sidebar-bottom {
+        padding-top: 13px;
+    }
+
+    .molas-admin-chat-layout {
+        max-height: calc(100dvh - 125px);
+        height: calc(100dvh - 125px);
+    }
 }
+
+
+/* =========================================================
+   28. LARGE DESKTOP SCREENS
+========================================================= */
+
+@media (min-width: 1500px) {
+    .molas-admin-main {
+        padding: 35px;
+    }
+
+    .molas-admin-stat-grid {
+        gap: 20px;
+    }
+
+    .molas-admin-panel {
+        padding: 26px;
+    }
+}
+
+
+/* =========================================================
+   29. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+
