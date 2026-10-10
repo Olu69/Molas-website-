@@ -651,3 +651,301 @@ body {
     }
     
 }
+
+/* =====================================================
+   BANK PAYMENT ACCOUNTS
+====================================================== */
+
+.bank-payment-section {
+    margin-top: 22px;
+    padding: 22px;
+    
+    background: var(--light-green);
+    
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.bank-payment-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    
+    margin-bottom: 22px;
+}
+
+.bank-payment-heading .placeholder-icon {
+    flex-shrink: 0;
+}
+
+.bank-payment-heading h3 {
+    margin: 0 0 6px;
+    
+    color: var(--dark-green);
+    
+    font-size: 1.08rem;
+    line-height: 1.4;
+}
+
+.bank-payment-heading p {
+    margin: 0;
+    
+    color: var(--brown);
+    
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+
+
+/* ACCOUNT CONTAINER */
+
+.bank-accounts-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    
+    gap: 14px;
+}
+
+.bank-accounts-loading {
+    grid-column: 1 / -1;
+    
+    margin: 0;
+    padding: 18px;
+    
+    background: var(--white);
+    
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    
+    color: var(--brown);
+    
+    font-size: 0.88rem;
+}
+
+
+/* INDIVIDUAL BANK CARD */
+
+.bank-account-card {
+    min-width: 0;
+    padding: 20px;
+    
+    background: var(--white);
+    
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    
+    box-shadow: 0 8px 24px rgba(56, 45, 30, 0.04);
+    
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.bank-account-card:hover {
+    border-color: rgba(35, 79, 61, 0.3);
+    
+    box-shadow: 0 12px 28px rgba(56, 45, 30, 0.07);
+}
+
+.bank-account-card.primary-bank-account {
+    border-color: rgba(35, 79, 61, 0.3);
+}
+
+
+/* BANK NAME AND BADGE */
+
+.bank-account-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+    gap: 8px;
+    
+    margin-bottom: 22px;
+}
+
+.bank-account-name {
+    margin: 0;
+    
+    color: var(--dark-green);
+    
+    font-size: 1.08rem;
+    font-weight: 800;
+}
+
+.bank-primary-badge {
+    display: inline-flex;
+    align-items: center;
+    
+    padding: 5px 9px;
+    
+    background: var(--light-green);
+    color: var(--green);
+    
+    border-radius: 999px;
+    
+    font-size: 0.67rem;
+    font-weight: 800;
+}
+
+
+/* ACCOUNT DETAILS */
+
+.bank-detail-label {
+    display: block;
+    
+    margin-bottom: 5px;
+    
+    color: var(--brown);
+    
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.bank-account-holder {
+    margin: 0 0 18px;
+    
+    color: var(--charcoal);
+    
+    font-size: 0.9rem;
+    font-weight: 750;
+    
+    overflow-wrap: anywhere;
+}
+
+.bank-account-number-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    gap: 10px;
+    
+    padding: 11px;
+    
+    background: var(--cream);
+    
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.bank-account-number {
+    min-width: 0;
+    
+    color: var(--dark-green);
+    
+    font-size: 1rem;
+    font-weight: 850;
+    letter-spacing: 0.035em;
+    
+    overflow-wrap: anywhere;
+}
+
+
+/* COPY BUTTON */
+
+.bank-copy-button {
+    flex-shrink: 0;
+    
+    padding: 9px 11px;
+    
+    background: var(--green);
+    color: var(--white);
+    
+    border: 0;
+    border-radius: 9px;
+    
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 750;
+    
+    cursor: pointer;
+    
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.bank-copy-button:hover {
+    background: var(--dark-green);
+    
+    transform: translateY(-1px);
+}
+
+.bank-copy-button:focus-visible {
+    outline: 3px solid var(--muted-green);
+    outline-offset: 3px;
+}
+
+
+/* PAYMENT REMINDER */
+
+.bank-payment-reminder {
+    margin: 18px 0 0;
+    padding-top: 15px;
+    
+    border-top: 1px solid rgba(35, 79, 61, 0.12);
+    
+    color: var(--brown);
+    
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+
+/* TABLET AND SMALLER SCREENS */
+
+@media (max-width: 650px) {
+    
+    .bank-accounts-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .bank-account-card {
+        padding: 18px;
+    }
+    
+}
+
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+    
+    .bank-payment-section {
+        padding: 16px;
+        border-radius: 16px;
+    }
+    
+    .bank-payment-heading {
+        gap: 11px;
+        margin-bottom: 18px;
+    }
+    
+    .bank-payment-heading h3 {
+        font-size: 1rem;
+    }
+    
+    .bank-payment-heading p {
+        font-size: 0.84rem;
+    }
+    
+    .bank-account-card-header {
+        margin-bottom: 18px;
+    }
+    
+    .bank-account-number-row {
+        gap: 8px;
+        padding: 9px;
+    }
+    
+    .bank-account-number {
+        font-size: 0.94rem;
+    }
+    
+    .bank-copy-button {
+        padding: 9px 10px;
+        font-size: 0.72rem;
+    }
+    
+}

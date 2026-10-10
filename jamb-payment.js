@@ -8,6 +8,290 @@ const RECEIPT_BUCKET =
     "jamb-payment-receipts";
 
 
+/* =====================================================
+   LOAD BANK ACCOUNTS FROM SUPABASE
+===================================================== */
+
+async function loadBankAccounts() {
+
+    const container =
+        document.getElementById(
+            "bank-accounts-container"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.textContent =
+        "Loading payment accounts...";
+
+    try {
+
+        const {
+            data: accounts,
+            error
+        } = await supabaseClient
+            .from("payment_bank_accounts")
+            .select(`
+                id,
+                bank_name,
+                account_name,
+                account_number,
+                is_primary,
+                display_order
+            `)
+            .eq("is_active", true)
+            .order("display_order", {
+                ascending: true
+            });
+
+        if (error) {
+            throw error;
+        }
+
+        container.replaceChildren();
+
+        if (!accounts || accounts.length === 0) {
+
+            container.textContent =
+                "Payment accounts are currently unavailable. Please contact MOLAS for assistance.";
+
+            return;
+        }
+
+        accounts.forEach(account => {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "bank-account-card";
+
+            if (account.is_primary) {
+
+                card.classList.add(
+                    "primary-bank-account"
+                );
+            }
+
+
+            const header =
+                document.createElement("div");
+
+            header.className =
+                "bank-account-card-header";
+
+
+            const bankName =
+                document.createElement("h4");
+
+            bankName.className =
+                "bank-account-name";
+
+            bankName.textContent =
+                account.bank_name;
+
+
+            header.appendChild(bankName);
+
+
+            if (account.is_primary) {
+
+                const badge =
+                    document.createElement("span");
+
+                badge.className =
+                    "bank-primary-badge";
+
+                badge.textContent =
+                    "Recommended";
+
+                header.appendChild(badge);
+            }
+
+
+            const accountNameLabel =
+                document.createElement("span");
+
+            accountNameLabel.className =
+                "bank-detail-label";
+
+            accountNameLabel.textContent =
+                "Account Name";
+
+
+            const accountName =
+                document.createElement("p");
+
+            accountName.className =
+                "bank-account-holder";
+
+            accountName.textContent =
+                account.account_name;
+
+
+            const numberLabel =
+                document.createElement("span");
+
+            numberLabel.className =
+                "bank-detail-label";
+
+            numberLabel.textContent =
+                "Account Number";
+
+
+            const numberRow =
+                document.createElement("div");
+
+            numberRow.className =
+                "bank-account-number-row";
+
+
+            const accountNumber =
+                document.createElement("strong");
+
+            accountNumber.className =
+                "bank-account-number";
+
+            accountNumber.textContent =
+                account.account_number;
+
+
+            const copyButton =
+                document.createElement("button");
+
+            copyButton.type =
+                "button";
+
+            copyButton.className =
+                "bank-copy-button";
+
+            copyButton.textContent =
+                "Copy Number";
+
+
+            copyButton.addEventListener(
+                "click",
+                async function () {
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            account.account_number
+                        );
+
+                        copyButton.textContent =
+                            "Copied!";
+
+                    } catch (error) {
+
+                        const temporaryInput =
+                            document.createElement("textarea");
+
+                        temporaryInput.value =
+                            account.account_number;
+
+                        temporaryInput.style.position =
+                            "fixed";
+
+                        temporaryInput.style.opacity =
+                            "0";
+
+                        document.body.appendChild(
+                            temporaryInput
+                        );
+
+                        temporaryInput.select();
+
+                        let copied = false;
+
+                        try {
+
+                            copied =
+                                document.execCommand("copy");
+
+                        } catch (copyError) {
+
+                            console.error(
+                                "Copy failed:",
+                                copyError
+                            );
+                        }
+
+                        temporaryInput.remove();
+
+                        if (copied) {
+
+                            copyButton.textContent =
+                                "Copied!";
+
+                        } else {
+
+                            copyButton.textContent =
+                                "Copy failed";
+
+                        }
+                    }
+
+                    setTimeout(() => {
+
+                        copyButton.textContent =
+                            "Copy Number";
+
+                    }, 2000);
+                }
+            );
+
+
+            numberRow.appendChild(
+                accountNumber
+            );
+
+            numberRow.appendChild(
+                copyButton
+            );
+
+
+            card.appendChild(header);
+
+            card.appendChild(
+                accountNameLabel
+            );
+
+            card.appendChild(
+                accountName
+            );
+
+            card.appendChild(
+                numberLabel
+            );
+
+            card.appendChild(
+                numberRow
+            );
+
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load bank accounts:",
+            error
+        );
+
+        container.textContent =
+            "Unable to load payment accounts. Please refresh the page or contact MOLAS.";
+    }
+}
+
+
+/* =====================================================
+   LOAD PAYMENT ORDER
+===================================================== */
+
 async function loadPaymentOrder() {
 
     const resourceElement =
@@ -120,6 +404,7 @@ async function loadPaymentOrder() {
 
 
     const resourceNames = {
+
         syllabus:
             "JAMB Syllabus",
 
@@ -132,9 +417,7 @@ async function loadPaymentOrder() {
 
 
     resourceElement.textContent =
-        resourceNames[
-            order.order_type
-        ] ||
+        resourceNames[order.order_type] ||
         order.order_type;
 
 
@@ -145,9 +428,7 @@ async function loadPaymentOrder() {
             );
 
 
-    if (
-        subjectIds.length
-    ) {
+    if (subjectIds.length) {
 
         const {
             data: subjects,
@@ -164,7 +445,7 @@ async function loadPaymentOrder() {
                 );
 
 
-        if (!subjectError) {
+        if (!subjectError && subjects) {
 
             subjectsElement.textContent =
                 subjects
@@ -192,7 +473,9 @@ async function loadPaymentOrder() {
             ? "Approved"
             : order.status === "rejected"
                 ? "Rejected"
-                : "Pending";
+                : order.status === "pending"
+                    ? "Pending"
+                    : "Submitted";
 
 
     setupPaymentSubmission(
@@ -201,6 +484,10 @@ async function loadPaymentOrder() {
     );
 }
 
+
+/* =====================================================
+   PAYMENT SUBMISSION
+===================================================== */
 
 function setupPaymentSubmission(
     order,
@@ -238,9 +525,7 @@ function setupPaymentSubmission(
     }
 
 
-    if (
-        order.status !== "pending"
-    ) {
+    if (order.status !== "pending") {
 
         submitButton.disabled =
             true;
@@ -314,9 +599,7 @@ function setupPaymentSubmission(
                 5 * 1024 * 1024;
 
 
-            if (
-                receiptFile.size > maxSize
-            ) {
+            if (receiptFile.size > maxSize) {
 
                 showPaymentMessage(
                     messageElement,
@@ -352,17 +635,13 @@ function setupPaymentSubmission(
                 } =
                     await supabaseClient
                         .storage
-                        .from(
-                            RECEIPT_BUCKET
-                        )
+                        .from(RECEIPT_BUCKET)
                         .upload(
                             filePath,
                             receiptFile,
                             {
-                                cacheControl:
-                                    "3600",
-                                upsert:
-                                    false
+                                cacheControl: "3600",
+                                upsert: false
                             }
                         );
 
@@ -381,14 +660,9 @@ function setupPaymentSubmission(
                         .rpc(
                             "submit_jamb_payment_order",
                             {
-                                p_order_id:
-                                    order.id,
-
-                                p_payment_reference:
-                                    reference,
-
-                                p_receipt_url:
-                                    filePath
+                                p_order_id: order.id,
+                                p_payment_reference: reference,
+                                p_receipt_url: filePath
                             }
                         );
 
@@ -462,6 +736,10 @@ function setupPaymentSubmission(
 }
 
 
+/* =====================================================
+   PAYMENT MESSAGE
+===================================================== */
+
 function showPaymentMessage(
     element,
     message
@@ -476,7 +754,18 @@ function showPaymentMessage(
 }
 
 
+/* =====================================================
+   INITIALIZE PAYMENT PAGE
+===================================================== */
+
 document.addEventListener(
     "DOMContentLoaded",
-    loadPaymentOrder
+    async function () {
+
+        await Promise.all([
+            loadBankAccounts(),
+            loadPaymentOrder()
+        ]);
+
+    }
 );

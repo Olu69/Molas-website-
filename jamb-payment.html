@@ -193,24 +193,51 @@
 
 
 
-        <!-- =================================================
-             PAYMENT AREA
-        ================================================== -->
+<!-- =================================================
+     BANK PAYMENT INSTRUCTIONS
+================================================== -->
 
-       <div class="payment-placeholder">
-    <div class="placeholder-icon">💳</div>
+<section class="bank-payment-section">
 
-    <div>
-        <h3>Payment instructions</h3>
+    <div class="bank-payment-heading">
 
-        <p>
-            Make your payment using the payment details
-            provided by MOLAS, then enter your payment
-            reference below and submit your proof of payment.
-        </p>
+        <span class="placeholder-icon">🏦</span>
+
+        <div>
+            <h3>Payment Instructions</h3>
+
+            <p>
+                Transfer the exact amount shown in your
+                order summary to either of the bank
+                accounts below.
+            </p>
+        </div>
+
     </div>
-</div>
 
+
+    <!-- Bank accounts will be loaded from Supabase -->
+
+    <div
+        id="bank-accounts-container"
+        class="bank-accounts-container"
+        aria-live="polite"
+    >
+
+        <p class="bank-accounts-loading">
+            Loading payment accounts...
+        </p>
+
+    </div>
+
+
+    <p class="bank-payment-reminder">
+        Please confirm the account name and number
+        before making your transfer. After payment,
+        enter your payment reference and upload your receipt below.
+    </p>
+
+</section>
 <div class="payment-form">
 
     <div class="form-heading">
